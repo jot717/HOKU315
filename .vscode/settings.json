@@ -1,0 +1,19 @@
+{
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/*.pyc": true,
+    "archive": true,
+    ".web": true
+  },
+  "files.watcherExclude": {
+    "**/__pycache__/**": true,
+    "archive/**": true,
+    ".web/**": true
+  },
+  "search.exclude": {
+    "**/__pycache__": true,
+    "**/*.pyc": true,
+    "archive": true,
+    ".web": true
+  }
+}

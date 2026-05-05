@@ -1,0 +1,4 @@
+# HOKU315 / JOT717 — Python 3.10+ 建議；asyncio 為標準庫無需列出
+python-dotenv>=1.0.0
+supabase>=2.0.0
+reflex>=0.6.0
