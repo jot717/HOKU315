@@ -1,22 +1,28 @@
 # -*- coding: utf-8 -*-
 """
 Task 7 驗收種子資料：
-建立 3~5 個測試 profiles 向量，覆蓋 Safe / Blurred / Blocked 區間。
+
+將 **目前 SUPABASE_ACCESS_TOKEN 對應之使用者** 寫入／更新 `profiles.mine_vector`
+（`profiles.id` 必須等於 `auth.users.id`，不可用隨機 UUID）。
 
 用法：
-  python seed_test_users.py
+  SUPABASE_ACCESS_TOKEN="..." python seed_test_users.py
 
 需求：
-  - SUPABASE_URL / SUPABASE_KEY
-  - SUPABASE_ACCESS_TOKEN（作為 current user 參考向量）
+  - SUPABASE_URL / SUPABASE_KEY（種子寫入 profiles；建議 service_role 以利 Admin 查 auth.users）
+  - SUPABASE_ACCESS_TOKEN（JWT，`sub` = user id）
+
+說明：
+  - 以往使用 uuid4 假帳號會違反 FK；現在僅為 **單一真實使用者** 種入占位向量。
+  - 若需配對牆多筆候選，請使用多個真實帳號各跑一次本腳本，或其餘由正式註冊流程建立。
 """
 from __future__ import annotations
 
 import os
 import sys
-import uuid
 from pathlib import Path
 
+import jwt
 from dotenv import load_dotenv
 
 _root = Path(__file__).resolve().parent
@@ -24,16 +30,34 @@ load_dotenv(_root / ".env", encoding="utf-8-sig")
 load_dotenv(encoding="utf-8-sig")
 
 
-def _clamp01(v: float) -> float:
-    if v < 0.0:
-        return 0.0
-    if v > 1.0:
-        return 1.0
-    return v
+def get_user_id_from_token(token: str) -> str | None:
+    """自 JWT payload 讀取 `sub`（不驗證簽章）。"""
+    try:
+        payload = jwt.decode(token, options={"verify_signature": False})
+        sub = payload.get("sub")
+        if sub is None or str(sub).strip() == "":
+            return None
+        return str(sub).strip()
+    except Exception:
+        return None
 
 
-def _offset(vec: list[float], delta: float) -> list[float]:
-    return [_clamp01(x + delta) for x in vec]
+def auth_user_exists(client, user_id: str, access_token: str) -> bool:
+    """
+    確認 user_id 存在於 auth 使用者庫。
+    優先使用 Admin `get_user_by_id`（需具權限之 key）；
+    失敗則以帶入之 access_token 呼叫 `get_user` 佐證 sub 與列一致。
+    """
+    try:
+        r = client.auth.admin.get_user_by_id(user_id)
+        return getattr(r, "user", None) is not None
+    except Exception:
+        try:
+            r = client.auth.get_user(access_token)
+            u = getattr(r, "user", None) if r else None
+            return u is not None and str(u.id) == str(user_id)
+        except Exception:
+            return False
 
 
 def main() -> int:
@@ -46,34 +70,23 @@ def main() -> int:
         print("SKIP: SUPABASE_ACCESS_TOKEN missing", file=sys.stderr)
         return 0
 
+    user_id = get_user_id_from_token(token)
+    if not user_id:
+        print("SKIP: 無法解析 user_id")
+        return 0
+
     import db_service
 
-    uid = db_service.user_id_from_access_token(token)
-    if not uid:
-        print("SKIP: 無法由 SUPABASE_ACCESS_TOKEN 解析 user id", file=sys.stderr)
+    client = db_service.get_client()
+    if not auth_user_exists(client, user_id, token):
+        print("SKIP: user 不存在於 auth.users")
         return 0
 
     base = db_service.default_profile_placeholder_vector()
-    # 對應 L2 距離約：0.00、0.45（safe）、0.89（blurred）、1.34（blocked）、1.79（blocked+）
-    seeds: list[tuple[str, list[float]]] = [
-        ("self_base", base),
-        ("safe", _offset(base, 0.10)),
-        ("blurred", _offset(base, 0.20)),
-        ("blocked", _offset(base, 0.30)),
-        ("blocked_high", _offset(base, 0.40)),
-    ]
+    db_service.upsert_profile_vector_for_user_id(user_id, base)
 
-    db_service.upsert_profile_vector_for_user_id(uid, base)
-
-    created: list[tuple[str, str]] = [("self", uid)]
-    for tag, vec in seeds[1:]:
-        fake_uid = str(uuid.uuid4())
-        db_service.upsert_profile_vector_for_user_id(fake_uid, vec)
-        created.append((tag, fake_uid))
-
-    print("OK: seeded test users")
-    for tag, sid in created:
-        print(f"  - {tag}: {sid}")
+    n = 1
+    print(f"Successfully upserted {n} users")
     return 0
 
 

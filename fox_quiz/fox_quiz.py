@@ -11,8 +11,10 @@ import db_service
 from fox_quiz.chat_component import chat_page
 from fox_quiz.login_page import login_page
 from fox_quiz.match_wall import MatchWallState, match_wall_page
+from fox_quiz.nav_bar import app_navbar
 from fox_quiz.session_state import SessionState
 from fox_quiz.story_page import story_page
+from fox_quiz.unlocks_page import unlocks_page
 from fox_logic import (
     SOCIAL_MINE_DIMENSIONS,
     VECTOR_DIM,
@@ -178,42 +180,21 @@ def _question_card(index: int, label: str) -> rx.Component:
     )
 
 
-def index() -> rx.Component:
+class RootRedirectState(rx.State):
+    @rx.event
+    async def go_match(self):
+        return rx.redirect("/match")
+
+
+def splash_home() -> rx.Component:
+    return rx.center(rx.spinner(), min_height="100vh", width="100%")
+
+
+def quiz_page() -> rx.Component:
     return rx.box(
         rx.vstack(
+            app_navbar(),
             rx.heading("狐狸性向測驗", size="7", weight="bold"),
-            rx.hstack(
-                rx.link(
-                    "登入／註冊",
-                    href="/login",
-                    size="2",
-                    color="orange",
-                    font_weight="medium",
-                ),
-                rx.link(
-                    "進入對話室（織光譜系）",
-                    href="/chat",
-                    size="2",
-                    color="orange",
-                    font_weight="medium",
-                ),
-                rx.link(
-                    "我的故事",
-                    href="/story",
-                    size="2",
-                    color="orange",
-                    font_weight="medium",
-                ),
-                rx.link(
-                    "配對牆",
-                    href="/match",
-                    size="2",
-                    color="orange",
-                    font_weight="medium",
-                ),
-                spacing="4",
-                flex_wrap="wrap",
-            ),
             rx.text(
                 "共 20 題。拖曳滑桿：越靠右代表你在該情境越容易「踩雷」或感到壓力。",
                 color="gray",
@@ -289,7 +270,8 @@ def index() -> rx.Component:
 
 
 app = rx.App(theme=rx.theme(appearance="light", accent_color="orange"))
-app.add_page(index, title="狐狸性向測驗")
+app.add_page(splash_home, route="/", title="JOT717", on_load=RootRedirectState.go_match)
+app.add_page(quiz_page, route="/quiz", title="狐狸性向測驗")
 app.add_page(login_page, route="/login", title="登入")
 app.add_page(chat_page, route="/chat", title="狐狸對話室")
 app.add_page(
@@ -303,4 +285,10 @@ app.add_page(
     route="/match",
     title="配對牆",
     on_load=MatchWallState.load_match_wall,
+)
+app.add_page(
+    unlocks_page,
+    route="/unlocks",
+    title="解鎖",
+    on_load=SessionState.guard_protected_routes,
 )

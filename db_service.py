@@ -8,6 +8,7 @@ Supabase：lru_cache 單例連線；profiles 向量、user_memories（RAG Lite�
   _MATCH_RPC_THRESHOLD_PARAM -> match_threshold
   user_memories 表與 match_user_memories RPC 見 sql/user_memories.sql
   stories 表見 sql/stories.sql；需使用使用者 JWT + anon key 以通過 RLS
+  user_unlocks 見 sql/user_unlocks.sql
 """
 from __future__ import annotations
 
@@ -46,6 +47,7 @@ _RPC_MEM_COUNT_PARAM = os.getenv("SUPABASE_MATCH_MEMORIES_COUNT_PARAM", "match_c
 _STORIES_TABLE = os.getenv("SUPABASE_STORIES_TABLE", "stories")
 # 與 sql/stories.sql 之 Storage bucket `stories` 對齊；可經 SUPABASE_STORY_IMAGE_BUCKET 覆寫
 _STORY_DEFAULT_BUCKET = os.getenv("SUPABASE_STORY_IMAGE_BUCKET", "stories")
+_UNLOCKS_TABLE = os.getenv("SUPABASE_USER_UNLOCKS_TABLE", "user_unlocks")
 
 # 寫入 stories 時 PostgREST 需帶入使用者 JWT；clients 建議用 anon public key（非 service_role）以正確套用 RLS
 
@@ -464,6 +466,70 @@ def get_user_vector(user_id: str) -> list[float]:
     if not rows:
         raise LookupError(f"找不到 id={user_id!r} 的 {_PROFILES_TABLE} 資料列")
     return _parse_stored_vector(rows[0].get(_VECTOR_COL))
+
+
+def get_profile_vector_via_token(access_token: str) -> list[float] | None:
+    """以 JWT 讀取自己 profile 之向量欄位；無列或無欄位回傳 None。"""
+    uid = user_id_from_access_token(access_token)
+    if not uid:
+        return None
+    cli = get_user_scoped_client(access_token)
+
+    def _op():
+        return cli.table(_PROFILES_TABLE).select(_VECTOR_COL).eq(_ID_COL, uid).limit(1).execute()
+
+    try:
+        res = _retry_on_stale_schema(_op)
+    except Exception:
+        return None
+    rows = getattr(res, "data", None) or []
+    if not rows:
+        return None
+    raw = rows[0].get(_VECTOR_COL)
+    if raw is None:
+        return None
+    try:
+        return _parse_stored_vector(raw)
+    except Exception:
+        return None
+
+
+def profile_has_custom_vector(access_token: str) -> bool:
+    """
+    是否已建立「非占位」向量：與 ensure_user_profile 預設全 0.5 比對，
+    任一維差異 > 1e-3 視為已完成測驗／已寫入自訂向量 → 導向配對牆。
+    """
+    vec = get_profile_vector_via_token(access_token)
+    if vec is None or len(vec) != _DIM:
+        return False
+    ph = default_profile_placeholder_vector()
+    return any(abs(vec[i] - ph[i]) > 1e-3 for i in range(_DIM))
+
+
+def create_unlock(access_token: str, target_user_id: str) -> object:
+    """
+    記錄使用者對 target 的解鎖請求（最小 INSERT）。
+    若設 MOCK_UNLOCK=1 則不落庫（Task 9 占位）。
+    """
+    if (os.getenv("MOCK_UNLOCK") or "").strip() in ("1", "true", "yes"):
+        return {"mock": True}
+
+    uid = user_id_from_access_token(access_token)
+    if not uid:
+        raise ValueError("無效的 access_token，無法解析 user id")
+    tid = str(target_user_id).strip()
+    if not tid:
+        raise ValueError("target_user_id 不可為空")
+    if tid == uid:
+        raise ValueError("不可對自己解鎖")
+
+    row: dict[str, Any] = {"user_id": uid, "target_id": tid}
+
+    def _op():
+        cli = get_user_scoped_client(access_token)
+        return cli.table(_UNLOCKS_TABLE).insert(row).execute()
+
+    return _retry_on_stale_schema(_op)
 
 
 def insert_user_memory(user_id: str, summary: str, embedding: list[float]) -> object:

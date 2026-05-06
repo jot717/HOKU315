@@ -63,7 +63,14 @@ class LoginState(rx.State):
             sess.access_token = token
             sess.refresh_token = data.get("refresh_token", "")
 
-        return rx.redirect("/story")
+        def _route() -> bool:
+            return db_service.profile_has_custom_vector(token)
+
+        try:
+            has_custom = await asyncio.to_thread(_route)
+        except Exception:
+            has_custom = False
+        return rx.redirect("/match" if has_custom else "/story")
 
     @rx.event
     async def submit_signup(self) -> Any:
@@ -107,7 +114,14 @@ class LoginState(rx.State):
             sess.access_token = token
             sess.refresh_token = data.get("refresh_token", "")
 
-        return rx.redirect("/story")
+        def _route() -> bool:
+            return db_service.profile_has_custom_vector(token)
+
+        try:
+            has_custom = await asyncio.to_thread(_route)
+        except Exception:
+            has_custom = False
+        return rx.redirect("/match" if has_custom else "/story")
 
 
 def login_page() -> rx.Component:
@@ -142,7 +156,11 @@ def login_page() -> rx.Component:
                 ),
                 width="100%",
             ),
-            rx.link("← 回測驗首頁", href="/", color="orange", size="2"),
+            rx.hstack(
+                rx.link("← 配對牆", href="/match", color="orange", size="2"),
+                rx.link("測驗", href="/quiz", color="gray", size="2"),
+                spacing="4",
+            ),
             spacing="4",
             max_width="24rem",
             width="100%",

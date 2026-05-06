@@ -13,6 +13,7 @@ import reflex as rx
 from reflex import UploadFile
 
 import db_service
+from fox_quiz.nav_bar import app_navbar
 from fox_quiz.session_state import SessionState
 
 _BG = "linear-gradient(180deg, #fff9f0 0%, #ffe8cc 100%)"
@@ -183,13 +184,7 @@ class StoryState(rx.State):
 def story_page() -> rx.Component:
     return rx.box(
         rx.vstack(
-            rx.hstack(
-                rx.link("← 首頁測驗", href="/", color="orange", weight="medium"),
-                rx.spacer(),
-                rx.button("登出", on_click=SessionState.sign_out, variant="soft", size="2"),
-                width="100%",
-                spacing="4",
-            ),
+            app_navbar(),
             rx.heading("我的故事（Story）", size="6", weight="bold"),
             rx.text(
                 "登入後 Session 會自動帶入 JWT。拖放圖片時系統會 **先上傳至 bucket「stories」**（路徑 "

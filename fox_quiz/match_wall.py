@@ -8,6 +8,7 @@ from typing import Any
 import reflex as rx
 
 import db_service
+from fox_quiz.nav_bar import app_navbar
 from fox_quiz.session_state import SessionState
 
 _BG = "linear-gradient(180deg, #f8fafc 0%, #e0f2fe 100%)"
@@ -20,6 +21,10 @@ class MatchWallState(rx.State):
     blocked_count: int = 0
     loading: bool = False
     error_msg: str = ""
+    unlock_dialog_open: bool = False
+    unlock_target_id: str = ""
+    unlock_dim_label: str = ""
+    unlock_msg: str = ""
 
     @rx.event
     async def load_match_wall(self) -> Any:
@@ -36,7 +41,7 @@ class MatchWallState(rx.State):
             db_service.ensure_user_profile(token)
             rows = db_service.get_safe_matches_current_user(token)
             out: list[dict[str, Any]] = []
-            for r in rows:
+            for i, r in enumerate(rows):
                 path = str(r.get("image_object_path") or "").strip()
                 bucket = str(r.get("image_bucket") or "stories").strip() or "stories"
                 image_url = (
@@ -46,6 +51,7 @@ class MatchWallState(rx.State):
                 )
                 nr = dict(r)
                 nr["image_url"] = image_url
+                nr["card_idx"] = i
                 out.append(nr)
             blocked = int(rows[0].get("blocked_count", 0)) if rows else 0
             return out, blocked
@@ -66,74 +72,180 @@ class MatchWallState(rx.State):
             self.blocked_count = blocked
             self.error_msg = ""
 
+    @rx.event
+    def close_unlock_dialog(self) -> None:
+        self.unlock_dialog_open = False
+        self.unlock_msg = ""
+
+    @rx.event
+    def open_unlock_dialog(self, card_idx: int | list[int]) -> None:
+        idx = int(card_idx[0]) if isinstance(card_idx, (list, tuple)) and card_idx else int(card_idx)
+        if idx < 0 or idx >= len(self.matches):
+            return
+        row = self.matches[idx]
+        if not row.get("is_blurred"):
+            return
+        self.unlock_dialog_open = True
+        self.unlock_target_id = str(row.get("matched_user_id") or "")
+        self.unlock_dim_label = str(row.get("conflict_dim_label") or "")
+        self.unlock_msg = ""
+
+    @rx.event
+    async def submit_unlock_request(self) -> Any:
+        sess = await self.get_state(SessionState)
+        token = (sess.access_token or "").strip()
+        tid = self.unlock_target_id
+
+        def _do():
+            db_service.create_unlock(token, tid)
+
+        try:
+            await asyncio.to_thread(_do)
+            async with self:
+                self.unlock_msg = "解鎖請求已送出（Task 9）。"
+        except Exception as e:
+            async with self:
+                self.unlock_msg = f"解鎖失敗：{e}"
+            return rx.window_alert(str(e))
+
 
 def _match_card(item: dict[str, Any]) -> rx.Component:
     is_blurred = item["is_blurred"]
     distance = item["distance"]
     dim_label = item["conflict_dim_label"]
     image_url = item["image_url"]
-    return rx.card(
-        rx.vstack(
-            rx.cond(
-                is_blurred,
-                rx.image(
-                    src=image_url,
-                    width="100%",
-                    height="180px",
-                    object_fit="cover",
-                    border_radius="12px",
-                    style={"filter": "blur(30px)"},
-                ),
-                rx.image(
-                    src=image_url,
-                    width="100%",
-                    height="180px",
-                    object_fit="cover",
-                    border_radius="12px",
-                ),
-            ),
-            rx.hstack(
-                rx.badge(
-                    rx.text("距離 ", distance),
-                    color_scheme="orange",
-                    variant="surface",
-                ),
-                rx.badge(
-                    rx.cond(is_blurred, "模糊預警", "可見"),
-                    color_scheme=rx.cond(is_blurred, "red", "green"),
-                    variant="soft",
-                ),
+    card_idx = item["card_idx"]
+
+    inner = rx.vstack(
+        rx.cond(
+            is_blurred,
+            rx.image(
+                src=image_url,
                 width="100%",
+                height="180px",
+                object_fit="cover",
+                border_radius="12px",
+                style={"filter": "blur(30px)"},
             ),
-            rx.cond(
-                is_blurred,
-                rx.text(f"預警維度：{dim_label}", size="2", color="red"),
-                rx.text(f"主要落差：{dim_label}", size="2", color="gray"),
+            rx.image(
+                src=image_url,
+                width="100%",
+                height="180px",
+                object_fit="cover",
+                border_radius="12px",
             ),
+        ),
+        rx.hstack(
+            rx.badge(
+                rx.text("距離 ", distance),
+                color_scheme="orange",
+                variant="surface",
+            ),
+            rx.badge(
+                rx.cond(is_blurred, "模糊預警", "可見"),
+                color_scheme=rx.cond(is_blurred, "red", "green"),
+                variant="soft",
+            ),
+            width="100%",
+        ),
+        rx.cond(
+            is_blurred,
+            rx.hstack(rx.text("預警維度：", size="2", color="red"), rx.text(dim_label, size="2", color="red")),
+            rx.hstack(rx.text("主要落差：", size="2", color="gray"), rx.text(dim_label, size="2", color="gray")),
+        ),
+        rx.cond(
+            is_blurred,
+            rx.text("點擊卡片以查看解鎖選項（Task 9）", size="1", color="gray"),
             rx.button(
-                "詳情（Task 8 解鎖）",
-                disabled=is_blurred,
+                "詳情（Task 8）",
                 variant="outline",
                 size="2",
                 width="100%",
+                disabled=True,
             ),
-            spacing="3",
-            width="100%",
-            align_items="start",
+        ),
+        spacing="3",
+        width="100%",
+        align_items="start",
+    )
+
+    return rx.box(
+        rx.cond(
+            is_blurred,
+            rx.box(
+                inner,
+                width="100%",
+                cursor="pointer",
+                on_click=MatchWallState.open_unlock_dialog(card_idx),
+            ),
+            rx.box(inner, width="100%"),
         ),
         width="100%",
     )
 
 
+def _unlock_overlay() -> rx.Component:
+    return rx.cond(
+        MatchWallState.unlock_dialog_open,
+        rx.box(
+            rx.box(
+                rx.vstack(
+                    rx.heading("模糊對象", size="4"),
+                    rx.text(
+                        "此檔案經系統模糊處理；解鎖後可於 Task 8 查看清晰內容與攻略。",
+                        size="2",
+                        color="gray",
+                    ),
+                    rx.hstack(
+                        rx.text("衝突維度：", size="2", weight="bold"),
+                        rx.text(MatchWallState.unlock_dim_label, size="2", weight="bold"),
+                    ),
+                    rx.text(MatchWallState.unlock_msg, size="2", color="orange"),
+                    rx.hstack(
+                        rx.button(
+                            "取消",
+                            variant="outline",
+                            on_click=MatchWallState.close_unlock_dialog,
+                        ),
+                        rx.button(
+                            "解鎖（100 coins）",
+                            color_scheme="orange",
+                            on_click=MatchWallState.submit_unlock_request,
+                        ),
+                        spacing="3",
+                        width="100%",
+                    ),
+                    spacing="3",
+                    width="100%",
+                ),
+                padding="6",
+                background="white",
+                border_radius="12px",
+                max_width="28rem",
+                width="100%",
+                box_shadow="lg",
+            ),
+            position="fixed",
+            top="0",
+            left="0",
+            right="0",
+            bottom="0",
+            background="rgba(0,0,0,0.45)",
+            display="flex",
+            align_items="center",
+            justify_content="center",
+            z_index="9999",
+            padding="4",
+        ),
+        rx.fragment(),
+    )
+
+
 def match_wall_page() -> rx.Component:
     return rx.box(
-        rx.vstack(
-            rx.hstack(
-                rx.link("← 首頁", href="/", color="orange", weight="medium"),
-                rx.spacer(),
-                rx.button("登出", on_click=SessionState.sign_out, variant="soft", size="2"),
-                width="100%",
-            ),
+        rx.fragment(
+            rx.vstack(
+            app_navbar(),
             rx.heading("北極狐配對牆", size="6", weight="bold"),
             rx.card(
                 rx.text(
@@ -180,8 +292,10 @@ def match_wall_page() -> rx.Component:
             ),
             spacing="4",
             width="100%",
-            max_width="40rem",
+            max_width="52rem",
             padding="6",
+            ),
+            _unlock_overlay(),
         ),
         min_height="100vh",
         width="100%",

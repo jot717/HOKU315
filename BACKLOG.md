@@ -4,7 +4,7 @@
 
 每項 **`[DONE]`**（或 MVP 2 各 Task 收口）前須滿足《開發憲法》第三章：**對應測試腳本** + 終端機驗證通過。
 
-**目前**：**MVP 1** — **Task 1–Task 4 為 `[DONE]`**；**Task 5 為 `[REMOVED/INTERNAL_ONLY]`**（見該節）。整合驗收可執行 **`python -m tests.run_all_tests`**（無 Supabase 時雲端段 SKIP，exit 0）。**MVP 2：北極狐壁壘商業化** — **Task 6、6.5 為 `[DONE]`**（Auth／Session 自動化／stories／Storage）；**Task 7–Task 9 為 `[TODO]`**。
+**目前**：**MVP 1** — **Task 1–Task 4 為 `[DONE]`**；**Task 5 為 `[REMOVED/INTERNAL_ONLY]`**（見該節）。整合驗收可執行 **`python -m tests.run_all_tests`**（無 Supabase 時雲端段 SKIP，exit 0）。**MVP 2：北極狐壁壘商業化** — **Task 6、6.5、7、7.5 為 `[DONE]`**；**Task 9、8 為 `[TODO]`**（主線順序：**Task 7 → Task 7.5 → Task 9 → Task 8**）。
 
 ---
 
@@ -21,10 +21,10 @@
 
 ### MVP 2 憲法宣告（避雷 × 測試 × 產品形態）
 
-1. **測試義務**：MVP 2 **每一個 Task（6–9）必須對應至少一個** `tests/` 內可重複執行之腳本（名稱於 Task 內訂明；可沿用／擴充既有檔名）。  
+1. **測試義務**：MVP 2 **每一個 Task（6–9，含 7.5）必須對應至少一個** `tests/` 內可重複執行之腳本（名稱於 Task 內訂明；可沿用／擴充既有檔名）。  
 2. **避雷邏輯形態**：所有「避雷／不合適對象」處理必須是 **「靜默過濾 + 數據呈現」** — 後端完成向量與規則運算，前端以 **看板、計數、卡片狀態、解鎖旗標** 等展示；**嚴禁**再以即時 **聊天室、對話氣泡、問答式客服** 作為核心價值載體（與 Task 5 撤銷一致）。  
 3. **LLM／攻略**：若產出文字，僅限 **結構化攻略、摘要、付費後解鎖內容**，不得回到「自由對話主流程」。
-4. **Session／Auth（憲法級，Task 6.5 起）**：**嚴禁**在產品 UI 要求使用者手動貼上 Access Token。所有需 JWT 之功能（Story、配對牆、付費流等）**僅能**依賴 **`SessionState` 經登入自動取得並持久化之 session**（`rx.LocalStorage` 等）；未登入訪問受保護路由（如 **`/story`**、**`/match`**）一律 **重導向 `/login`**。
+4. **Session／Auth（憲法級，Task 6.5 起）**：**嚴禁**在產品 UI 要求使用者手動貼上 Access Token。所有需 JWT 之功能（Story、配對牆、付費流等）**僅能**依賴 **`SessionState` 經登入自動取得並持久化之 session**（`rx.LocalStorage` 等）；未登入訪問受保護路由（如 **`/story`**、**`/match`**、**`/unlocks`**）一律 **重導向 `/login`**。
 
 ---
 
@@ -80,6 +80,10 @@
 **與 Task 5 切斷**：本 MVP **不以對話室為載體**；價值展現在 **儀表、計數、卡片、解鎖狀態與攻略交付**。  
 **Session**：見 Task 6.5 — 全線功能依自動 Session，禁止手動 Token UI。
 
+### MVP 2 主線順序（對齊交付）
+
+**Task 7（DONE）→ Task 7.5（系統連貫性）→ Task 9（支付解鎖）→ Task 8（AI 防雷報告／核心價值）。**
+
 ---
 
 ### [DONE] Task 6：Auth 與故事發布基礎
@@ -103,7 +107,7 @@
   - **廢除**手動填寫 Access Token 的產品 UI；技術債清理：**已自 `fox_quiz/story_page.py` 移除** access_token 輸入框（見 HOTFIX LOG：去 Token 化查核）。  
   - **Email／密碼登入與註冊**：`fox_quiz/login_page.py`，成功後由 `db_service.auth_sign_in_email_password` / `auth_sign_up_email_password` 取得 token，並呼叫 **`ensure_user_profile`** 與 **`profiles`**／Auth 對齊。  
   - **Session 自動化**：`fox_quiz/session_state.py` 使用 **`rx.LocalStorage`**（鍵 `hok315_supabase_access` / `hok315_supabase_refresh`）持久化 **`access_token`**、**`refresh_token`**。  
-  - **路由保護**：未登入或 token 無效時，**`/story`**、**`/match`** 於 **`on_load`** 執行 **`SessionState.guard_protected_routes`** → **`rx.redirect("/login")`**。  
+  - **路由保護**：未登入或 token 無效時，**`/story`**、**`/match`**、**`/unlocks`** 於 **`on_load`** 執行 **`SessionState.guard_protected_routes`** → **`rx.redirect("/login")`**。  
   - **聯調前置**：部署須執行 **`sql/profiles_rls.sql`**（與 **[HOTFIX-002]**），避免 **42501／23503** 全鏈路崩潰。  
 - **驗收**  
   - `python -m tests.test_auth_flow`：模組匯入／State 欄位煙霧；可選整合：設定 **`AUTH_TEST_EMAIL`**、**`AUTH_TEST_PASSWORD`**（連同 `SUPABASE_URL`、`SUPABASE_KEY`）時驗證登入 → token → `user_id_from_access_token`。  
@@ -112,6 +116,15 @@
 ---
 
 ### [DONE] Task 7：北極狐配對牆與「攔截可視化」
+
+**Status**：`[DONE]`
+
+**Subtasks**
+- RPC **`get_safe_matches`**（`sql/match_logic.sql`）與門檻：**Blocked ≥1.2**、**Blurred ≥0.7**、衝突維度標籤。
+- **`fox_quiz/match_wall.py`** 配對牆 UI、攔截看板、`tests/test_hater_logic.py`。
+
+**DEV LOG**
+- RPC／前端卡片與 Storage 圖片 URL 已串接；離線門檻與可選 RPC 欄位檢查見 **`tests/test_hater_logic.py`**。
 
 - **目標**  
   - 後端 **`sql/match_logic.sql`**：RPC **`get_safe_matches(current_uid uuid)`** 已落地（`distance >= 1.2` 排除、`distance >= 0.7` 標記 `is_blurred=true`、回傳衝突最大維度 index/label 與 `blocked_count`）。  
@@ -127,35 +140,88 @@
 
 ---
 
-### [TODO] Task 8：深度質料解鎖與付費牆
+### [DONE] Task 7.5：系統連貫性
 
-- **目標**  
-  - **點擊解鎖**流程：狀態機（鎖定／已解鎖）、錯誤與重試策略。  
-  - **解鎖後內容**：  
-    - **清晰照片**（非模糊）。  
-    - **AI 生成的「地雷對抗攻略」**（結構化短文／條目式，非聊天室往返）。  
-  - **Stripe**：支付 **預留接口**（Checkout／Session／Webhook 占位與環境變數），確保 **變現路徑可串接**。  
-  - **憲法**：付費與解鎖 API 僅帶 **自動 session** 之 JWT；**禁止**要求使用者貼 token。  
-- **價值展現**  
-  - 使用者為 **可驗證的增量資訊** 付費（清晰影像 + 攻略），而非為「聊天回合」付費。  
-- **測試（必備）**  
-  - `tests/test_unlock_content.py`（建議）：解鎖旗標、攻略欄位 mock／離線斷言。  
-  - `tests/test_stripe_placeholder.py`（建議）：Webhook／session 建立 mock，無真金鑰時 SKIP exit 0。
+**Status**：`[DONE]`
+
+**目標**  
+修復登入後無導向問題，建立主流程（Navbar、登入分流、`/` → 配對牆）。
+
+**Subtasks**
+- **Navbar**：`/story`、`/match`、`/unlocks`（占位）全域導覽；套用 **`story_page`**、**`match_wall`**。
+- **Login redirect**：若 **`profiles.mine_vector` 已非占位（任一維與全 0.5 差異 > 1e-3）** → **`/match`**；否則 → **`/story`**。
+- **Match 設為主頁**：**`/`** 導向 **`/match`**；測驗改為 **`/quiz`**。
+
+**DEV LOG**
+- **2026-05-06**：新增 **`fox_quiz/nav_bar.py`**、**`/unlocks`** 占位頁；**`login_page`** 登入／註冊後依 **`db_service.profile_has_custom_vector`** 分流；**`fox_quiz.py`** 新增 **`splash_home` + `RootRedirectState.go_match`**；**`story_page`** 改用 Navbar。
+- **Task 9 預埋**：**`match_wall`** 模糊卡點擊開啟 overlay dialog、「解鎖（100 coins）」呼叫 **`db_service.create_unlock`**；SQL **`sql/user_unlocks.sql`**。
+
+### FIX: seed 外鍵錯誤（profiles.id）
+- **問題**：使用 `uuid4` 假 `id` 寫入 `profiles`，違反 **`profiles.id` → `auth.users.id`** 外鍵約束。
+- **修正**：**`seed_test_users.py`** 改由 **`SUPABASE_ACCESS_TOKEN`** 以 **`jwt.decode(..., verify_signature=False)`** 取 **`sub`** 作為唯一 **`user_id`**；upsert 前以 **Auth Admin `get_user_by_id`**（或退回 **`get_user(jwt)`**）確認該使用者存在。
+- **結果**：可成功寫入 **`profiles.mine_vector`**，種子可正常運作。
+- **影響**：**match wall** 開始有資料，可進入 UAT；多筆候選需多帳號或註冊補齊，不再以假 UUID 硬塞。
+
+### FIX: get_safe_matches RPC vector parsing 錯誤（核心修復）
+
+- 問題：
+  配對牆報錯 malformed array literal: "0,0,0,..."
+
+- 根本原因：
+  get_safe_matches 使用舊版 string_to_array / ::text 將 vector 當字串處理，
+  與目前 pgvector "[...]" 格式衝突
+
+- 修正：
+  1. 移除所有字串解析邏輯
+  2. 改用 pgvector 原生運算 (vector <-> vector)
+  3. 重寫整個 RPC
+
+- 結果：
+  配對牆恢復正常，distance 計算可用
+
+- 影響範圍：
+  match_wall / 配對核心演算法
 
 ---
 
-### [TODO] Task 9：全量變現流（User Flow）驗收
+### [IN_PROGRESS] Task 9：支付解鎖
 
-- **目標**  
-  - 從 **登入（自動 session）→ 測驗 → 配對／攔截可視化 → 付費解鎖** 的 **完整商業鏈條** 驗收。  
-  - 涵蓋 **SKIP 規則**、**E2E 必要環境變數**、以及 **失敗場景**（無 Auth、無支付、無網路）之可重現行為。  
-  - **憲法**：全鏈 **不得**出現手動 Access Token 輸入；登入態僅來自 **Task 6.5** 管線。  
-- **測試（必備）**  
-  - `tests/test_mvp2_monetization_flow.py`（或等價命名）：可為 **分段 scenario** 或 **單檔多步驟**，須寫入 `tests/` 並可由 **`python -m tests.run_all_tests`** 或文件化之一鍵指令執行。  
-- **價值展現**  
-  - 證明產品敘事為 **避雷決策 + 可視化 + 變現**，而非對話體驗。
+**Status**：`[IN_PROGRESS]`
+
+**Subtasks**
+- 資料：**`sql/user_unlocks.sql`**（`user_id`、`target_id`、`created_at`）；後端 **`db_service.create_unlock`**（支援 **`MOCK_UNLOCK=1`** 不落庫）。
+- 前端：**`match_wall`** 模糊卡 → dialog → 「解鎖（100 coins）」；占位 **`/unlocks`**。
+- **（承接原「全量變現流」驗收）** **`tests/test_mvp2_monetization_flow.py`**（或等價）：分段 scenario／一鍵 **`run_all_tests`**。
+
+**DEV LOG**
+- **2026-05-06**：建立 **`user_unlocks`** DDL、`create_unlock(access_token, target_user_id)`；配對牆解鎖對話框與按鈕行為接通（錯誤時 **`rx.window_alert`**）。
 
 ---
+
+### [TODO] 📌 Task 8：AI 防雷報告（核心價值）
+
+**Status**：`TODO`
+
+### 目標
+對已解鎖對象產出高價值分析，讓用戶「覺得值得付費」
+
+### 輸出內容
+- 衝突維度（20維）
+- 衝突原因解釋（自然語言）
+- 風險等級（低 / 中 / 高）
+- AI 建議（如何相處 or 避雷）
+
+### 觸發條件
+- user 已 unlock 該對象
+
+### 顯示位置
+- match 詳細頁 或 dialog 展開
+
+### DEV LOG
+
+
+---
+
 
 ## 下一階段建議（產品化之後）
 
@@ -163,7 +229,7 @@
 2. **向量記憶**：僅作為 **使用者畫像與攻略上下文**，不驅動前台聊天主流程。  
 3. **Auth、配對、變現**：以 **MVP 2：北極狐壁壘商業化**（Task 6–9）為唯一主線。  
 4. **觀測與成本**：記錄支付與生成成本；`user_memories` 索引見 `sql/user_memories.sql` 註解。  
-5. **E2E**：Playwright 等可選；**Task 9** 為憲法級商業鏈條驗收口。
+5. **E2E**：Playwright 等可選；**Task 9（支付解鎖）+ Task 8（攻略交付）** 為變現鏈驗收口。
 
 ---
 
@@ -182,6 +248,9 @@
 | 2026-05-05 | **[HOTFIX-002]** `profiles` 自動同步（後續擴充：`ensure_user_profile` UPSERT + `sql/profiles_rls.sql`，見 HOTFIX LOG） |
 | 2026-05-05 | **系統全鏈路穩定性**：profiles RLS（42501）、Story FK（23503）、Reflex State（見 HOTFIX LOG 詳述）；Task 6／6.5 維持 **`[DONE]`** |
 | 2026-05-05 | **[HOTFIX-003]** 測驗主流程 async 化（`generate_result`）+ `upsert_user_vector` 強制寫庫 + Story 成功輸出 `DEBUG_URL` |
+| 2026-05-06 | **Task 7.5／9 骨架**：Navbar、`/`→`/match`、`/quiz`、登入向量分流、`user_unlocks` + `create_unlock`、配對牆解鎖 dialog；BACKLOG 主線 **7→7.5→9→8** |
+| 2026-05-06 | **BACKLOG**：還原 **Task 8（AI 防雷報告）** 為獨立條目（目標／輸出／觸發／顯示／DEV LOG 空白）；**Task 9** 未改動；主線順序仍為 **7→7.5→9→8** |
+| 2026-05-06 | **Task 7.5**：**`seed_test_users.py`** 改 JWT `sub` + 確認 **auth.users** 存在，移除假 UUID，修正 **profiles** FK；**`requirements.txt`** 明列 **PyJWT** |
 
 ---
 
