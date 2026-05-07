@@ -17,6 +17,23 @@
 - **前后端契約**：`get_safe_matches` 回傳欄位與 `match_wall` 渲染鍵一致，避免 RPC／UI mismatch（見 `TEST_CHECKLIST.md`）。
 - **測試閘門**：一鍵 `python -m tests.run_all_tests`；無雲端時 SKIP、exit 0。
 
+### Stabilization Sprint (2026-W01)
+
+**Scope**：本 Sprint **僅處理 P0 穩定化**；**禁止**新增 Stripe／coins／成長型功能（見下方 DEV LOG）。
+
+Definition of Done:
+
+* /story 穩定
+* /match 穩定
+* /unlock 穩定
+* 無 malformed array literal
+* 無 Reflex runtime mismatch
+* 無 package dependency crash
+* 無 console error
+* Mobile 可正常使用
+
+任務拆解與核銷見 [`SPRINT_PLAN.md`](SPRINT_PLAN.md)；UAT 勾選見 [`TEST_CHECKLIST.md`](TEST_CHECKLIST.md) 之 **MATCH FLOW UAT**。
+
 ---
 
 ## P1 — CORE FEATURES
@@ -31,7 +48,7 @@
 - **`[WIP]` Task 9**：支付解鎖、`user_unlocks`、`create_unlock`、配對牆解鎖 dialog（含 `MOCK_UNLOCK`）。
 - **`[TODO]` Task 8**：已解鎖對象之 AI 防雷報告（結構化輸出、付費價值）。
 
-**Sprint 對齊**：本週以 [`SPRINT_PLAN.md`](SPRINT_PLAN.md) — **match wall 完整 demo** 為準，逐項勾選並於 [`SPRINT_LOG.md`](SPRINT_LOG.md) 留痕。
+**Sprint 對齊（2026-W01）**：以 [`SPRINT_PLAN.md`](SPRINT_PLAN.md) — **Stabilization**（/story → /match → /unlock）為準；非 P0 項目（Task 8 攻略、Task 9 真實付費串接、成長功能）**暫停至本 Sprint DoD 達成**。每日進度見 [`SPRINT_LOG.md`](SPRINT_LOG.md)。
 
 ---
 
@@ -54,7 +71,11 @@
 
 ## HOTFIX ARCHIVE
 
-此區僅封存已發生之緊急修復與根因類項，避免與進行中需求混線。**不再於此區新增條目時，應同步寫入 `SPRINT_LOG` 或對應 Task DEV LOG。**
+此區僅封存已發生之緊急修復與根因類項，避免與進行中需求混線。**本 Sprint 內每一筆程式面修復仍須同步更新本節與 [`SPRINT_LOG.md`](SPRINT_LOG.md)。**
+
+### 流程備忘（2026-W01 Stabilization）
+
+- **凍結**：Stripe、coins 商品化、P2 成長功能 — 待 P0 Stabilization Sprint **Definition of Done** 達成後再排入 P1／P2。
 
 ### malformed array literal／vector／RPC
 
@@ -100,6 +121,20 @@
 
 **原則**：Task 級交付節奏仍依《開發憲法》：設計 → 開發 → `tests/test_<feature>.py` → 更新本 BACKLOG／衝刺文件。
 
+### DEV LOG — Stabilization Sprint 啟動
+
+* **原因**：
+  近期發生 pgvector / Reflex / package mismatch / runtime crash
+
+* **決策**：
+  暫停新功能開發，優先穩定核心流程
+
+* **範圍**：
+  /story → /match → /unlock
+
+* **暫停**：
+  Stripe / coins / growth feature
+
 ### 編年摘要（搬移自原「變更紀錄」）
 
 | 日期 | 摘要 |
@@ -111,6 +146,8 @@
 | MVP 2 重整 | Task 5 `REMOVED/INTERNAL_ONLY`；北極狐壁壘主線 |
 | Task 6／6.5 `[DONE]` | Storage、RLS、去 Token 化、`guard_protected_routes` |
 | 2026-05-06 | Navbar、`/`→`/match`、`user_unlocks`、`create_unlock`、Task 8 獨立條目、`seed_test_users.py`＋PyJWT |
+| 2026-05-08 | **BACKLOG** 分層（P0–P3 + ARCHIVE + DEV LOG）；Workflow 外掛 SPRINT／TEST／`DEPLOY_LOG` |
+| 2026-05-08 | **Stabilization Sprint (2026-W01)** 啟動：凍結 Stripe／coins／growth；P0 DoD 見 **P0 — STABILIZATION** |
 
 ### Task 級筆記（精簡保留）
 
@@ -121,3 +158,4 @@
 ### 結構調整（本檔）
 
 - **2026-05-08**：BACKLOG 由「連續 HOTFIX 混編」改為 **P0–P3 + HOTFIX ARCHIVE + DEV LOG**；衝刺與測試清單外掛獨立 markdown，以降低 AI 協作與交付混線。
+- **2026-05-08**：啟動 **Stabilization Sprint (2026-W01)**，`SPRINT_PLAN.md`／`TEST_CHECKLIST.md`（MATCH FLOW UAT）對齊；凍結非 P0 新功能直至 DoD。
