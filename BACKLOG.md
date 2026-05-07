@@ -77,6 +77,22 @@ Definition of Done:
 
 - **凍結**：Stripe、coins 商品化、P2 成長功能 — 待 P0 Stabilization Sprint **Definition of Done** 達成後再排入 P1／P2。
 
+### HOTFIX: 移除 Reflex runtime state 版本追蹤
+
+* **問題**：
+  `.states/*.pkl` 被 git 追蹤
+
+* **風險**：
+  runtime cache 汙染與跨機器衝突
+
+* **修正**：
+
+  1. `.gitignore` 加入 `.states/`、`*.pkl`
+  2. `git rm --cached` 移除版本控制（**不刪除**本地檔案）
+
+* **結果**：
+  Reflex runtime state 不再污染 repository
+
 ### malformed array literal／vector／RPC
 
 - **FIX — `get_safe_matches` RPC vector parsing**：舊版 `string_to_array`／`::text` 與 pgvector `"[...]"` 衝突；改為原生 `vector <-> vector`／正確字面量傳参。

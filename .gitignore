@@ -1,6 +1,7 @@
 assets/external/
 .web
-.states
+.states/
+*.pkl
 *.db
 __pycache__/
 *.py[cod]
