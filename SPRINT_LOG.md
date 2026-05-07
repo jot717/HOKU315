@@ -63,3 +63,25 @@
 * RPC response verification
 
 * console clean verification
+
+---
+
+## 2026-05-11
+
+### DONE
+
+* 建立 **`debug_evidence/`** 與 **`debug_evidence/README.md`**（事故目錄、`console.txt`／`network.json`／`backend.txt`／`rpc.sql`／`root_cause.md` 規格）
+
+* 建立 **`DEBUG_POLICY.md`**（P0 HOTFIX 禁止／允許事項）
+
+* 建立 root cause evidence workflow（串接 **`DEBUG_GUIDE.md`** §6–§7）
+
+### BLOCKER
+
+### NEXT
+
+* MATCH FLOW evidence collection
+
+* RPC evidence collection
+
+* runtime incident archive

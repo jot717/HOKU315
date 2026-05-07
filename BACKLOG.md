@@ -1,6 +1,6 @@
 # HOKU315 BACKLOG
 
-**Workflow（AI-native）**：衝刺計畫見 [`SPRINT_PLAN.md`](SPRINT_PLAN.md)、日誌見 [`SPRINT_LOG.md`](SPRINT_LOG.md)；配對牆驗收見 [`TEST_CHECKLIST.md`](TEST_CHECKLIST.md)；資料庫套用軌跡見 [`sql/DEPLOY_LOG.md`](sql/DEPLOY_LOG.md)；**Debug／UAT 證據收集**見 [**`DEBUG_GUIDE.md`**](DEBUG_GUIDE.md)。產品治理仍依根目錄 **`DEVELOPMENT_CONSTITUTION.md`**。
+**Workflow（AI-native）**：衝刺計畫見 [`SPRINT_PLAN.md`](SPRINT_PLAN.md)、日誌見 [`SPRINT_LOG.md`](SPRINT_LOG.md)；配對牆驗收見 [`TEST_CHECKLIST.md`](TEST_CHECKLIST.md)；資料庫套用軌跡見 [`sql/DEPLOY_LOG.md`](sql/DEPLOY_LOG.md)；**Debug／UAT 證據收集**見 [**`DEBUG_GUIDE.md`**](DEBUG_GUIDE.md)；**證據資產化目錄**見 [**`debug_evidence/README.md`**](debug_evidence/README.md)；**AI／P0 patch 約束**見 [**`DEBUG_POLICY.md`**](DEBUG_POLICY.md)。產品治理仍依根目錄 **`DEVELOPMENT_CONSTITUTION.md`**。
 
 狀態約定：`[TODO]` · `[WIP]` · `[DONE]` · **`[REMOVED/INTERNAL_ONLY]`**。
 
@@ -17,6 +17,7 @@
 - **前后端契約**：`get_safe_matches` 回傳欄位與 `match_wall` 渲染鍵一致，避免 RPC／UI mismatch（見 `TEST_CHECKLIST.md`）。
 - **測試閘門**：一鍵 `python -m tests.run_all_tests`；無雲端時 SKIP、exit 0。
 - **除錯 SOP**：HOTFIX／UAT 前先依 [**`DEBUG_GUIDE.md`**](DEBUG_GUIDE.md) 收集 Console／Network／Backend／SQL 證據。
+- **證據資產化**：嚴重／重複性事故將原始證據封存於 **`debug_evidence/YYYY-MM-DD-slug/`**（見 [`debug_evidence/README.md`](debug_evidence/README.md)）；AI patch 遵守 [**`DEBUG_POLICY.md`**](DEBUG_POLICY.md)。
 
 ### Stabilization Sprint (2026-W01)
 
@@ -33,7 +34,7 @@ Definition of Done:
 * 無 console error
 * Mobile 可正常使用
 
-任務拆解與核銷見 [`SPRINT_PLAN.md`](SPRINT_PLAN.md)；UAT 勾選見 [`TEST_CHECKLIST.md`](TEST_CHECKLIST.md) 之 **MATCH FLOW UAT**；除錯證據流見 [`DEBUG_GUIDE.md`](DEBUG_GUIDE.md)。
+任務拆解與核銷見 [`SPRINT_PLAN.md`](SPRINT_PLAN.md)；UAT 勾選見 [`TEST_CHECKLIST.md`](TEST_CHECKLIST.md) 之 **MATCH FLOW UAT**；除錯證據流見 [`DEBUG_GUIDE.md`](DEBUG_GUIDE.md)；事故回放目錄見 [`debug_evidence/README.md`](debug_evidence/README.md)。
 
 ---
 
@@ -92,6 +93,22 @@ Definition of Done:
 * **結果**：
 
   後續 AI／人工修復可依固定流程進行。
+
+### HOTFIX: 建立 debug evidence 資產化
+
+* **問題**：
+
+  缺少事故證據保存，
+  導致 AI 重複修 bug。
+
+* **修正**：
+
+  建立 **`debug_evidence/`**
+  與 **`DEBUG_POLICY.md`**
+
+* **結果**：
+
+  每次事故皆可追蹤與回放。
 
 ### HOTFIX: 移除 Reflex runtime state 版本追蹤
 
@@ -206,6 +223,7 @@ Definition of Done:
 | 2026-05-08 | **Stabilization Sprint (2026-W01)** 啟動：凍結 Stripe／coins／growth；P0 DoD 見 **P0 — STABILIZATION** |
 | 2026-05-09 | **HOTFIX**：Reflex nested `<p>`／`rx.callout` hydration；見 **HOTFIX ARCHIVE** |
 | 2026-05-10 | **流程**：建立 **`DEBUG_GUIDE.md`**（標準除錯證據流＋HOTFIX SOP）；見 **HOTFIX ARCHIVE** |
+| 2026-05-11 | **資產化**：建立 **`debug_evidence/`**、`DEBUG_POLICY.md`；見 **HOTFIX ARCHIVE** |
 
 ### Task 級筆記（精簡保留）
 

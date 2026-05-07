@@ -1,7 +1,12 @@
 # HOKU315 DEBUG GUIDE
 
 本檔為 **Browser／Network／Backend／SQL／優先級／證據流／HOTFIX 流程** 的統一 SOP。  
-所有 **HOTFIX、UAT、AI-assisted Debug** 應先依此收集證據，再修改程式或資料庫。詳見 [`BACKLOG.md`](BACKLOG.md) **HOTFIX ARCHIVE** 與 [`SPRINT_LOG.md`](SPRINT_LOG.md)。
+所有 **HOTFIX、UAT、AI-assisted Debug** 應先依此收集證據，再修改程式或資料庫。
+
+* **證據資產化**：將原始材料寫入 **`debug_evidence/YYYY-MM-DD-slug/`**（見 [`debug_evidence/README.md`](debug_evidence/README.md)）。  
+* **Patch 約束**：見 [**`DEBUG_POLICY.md`**](DEBUG_POLICY.md)。  
+
+詳見 [`BACKLOG.md`](BACKLOG.md) **HOTFIX ARCHIVE** 與 [`SPRINT_LOG.md`](SPRINT_LOG.md)。
 
 ---
 
@@ -153,6 +158,14 @@ LIMIT 5;
 
 於 SQL Editor 可重現與否之一小段結果或錯誤  
 
+### E. 證據資產化（建議 P0／重複事故必做）
+
+將 A–D 之原始輸出依 [**`debug_evidence/README.md`**](debug_evidence/README.md) 存入：
+
+`debug_evidence/YYYY-MM-DD-short-slug/`
+
+並撰寫／更新該目錄之 **`root_cause.md`**（結案後補齊「修正」「驗證」段落）。
+
 ### 禁止（在未佐證下）
 
 * 直接大量「試錯式 patch」  
@@ -163,12 +176,14 @@ LIMIT 5;
 
 ## 7. HOTFIX Workflow
 
-每次 **HOTFIX**：
+每次 **HOTFIX**（遵守 [**`DEBUG_POLICY.md`**](DEBUG_POLICY.md)）：
 
 1. **收集證據**（§6 A–D，依優先級 P0→P1 聚焦）  
-2. **判定層級**：frontend／backend（Python‧Reflex）／RPC／SQL  
-3. **最小修正**並於本地 **`reflex run`** + 對應路由 **UAT**  
-4. **更新文件**：  
-   * [`BACKLOG.md`](BACKLOG.md) — **HOTFIX ARCHIVE**（含問題／根因／修正／結果）  
+2. **資產化**：建立 **`debug_evidence/YYYY-MM-DD-short-slug/`**，置入 `console.txt`／`network.json`／`backend.txt`／`rpc.sql`（若適用）及 **`root_cause.md`** 草稿／完稿（見 [`debug_evidence/README.md`](debug_evidence/README.md)）  
+3. **判定層級**：frontend／backend（Python‧Reflex）／RPC／SQL  
+4. **最小修正**並於本地 **`reflex run`** + 對應路由 **UAT**  
+5. **更新文件**：  
+   * [`BACKLOG.md`](BACKLOG.md) — **HOTFIX ARCHIVE**（含問題／根因／修正／結果；可附證據目錄相對路徑）  
    * [`SPRINT_LOG.md`](SPRINT_LOG.md) — **DONE／BLOCKER／NEXT**  
    * [`TEST_CHECKLIST.md`](TEST_CHECKLIST.md) — 相關勾選項  
+
