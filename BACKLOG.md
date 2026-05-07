@@ -1,6 +1,6 @@
 # HOKU315 BACKLOG
 
-**Workflow（AI-native）**：衝刺計畫見 [`SPRINT_PLAN.md`](SPRINT_PLAN.md)、日誌見 [`SPRINT_LOG.md`](SPRINT_LOG.md)；配對牆驗收見 [`TEST_CHECKLIST.md`](TEST_CHECKLIST.md)；資料庫套用軌跡見 [`sql/DEPLOY_LOG.md`](sql/DEPLOY_LOG.md)。產品治理仍依根目錄 **`DEVELOPMENT_CONSTITUTION.md`**。
+**Workflow（AI-native）**：衝刺計畫見 [`SPRINT_PLAN.md`](SPRINT_PLAN.md)、日誌見 [`SPRINT_LOG.md`](SPRINT_LOG.md)；配對牆驗收見 [`TEST_CHECKLIST.md`](TEST_CHECKLIST.md)；資料庫套用軌跡見 [`sql/DEPLOY_LOG.md`](sql/DEPLOY_LOG.md)；**Debug／UAT 證據收集**見 [**`DEBUG_GUIDE.md`**](DEBUG_GUIDE.md)。產品治理仍依根目錄 **`DEVELOPMENT_CONSTITUTION.md`**。
 
 狀態約定：`[TODO]` · `[WIP]` · `[DONE]` · **`[REMOVED/INTERNAL_ONLY]`**。
 
@@ -16,6 +16,7 @@
 - **環境**：`python-dotenv`、`.env` 與金鑰載入一致；依賴見凍結後之 `requirements.txt`（含 `reflex==0.9.2`、`supabase`、`postgrest`、`python-dotenv`）。
 - **前后端契約**：`get_safe_matches` 回傳欄位與 `match_wall` 渲染鍵一致，避免 RPC／UI mismatch（見 `TEST_CHECKLIST.md`）。
 - **測試閘門**：一鍵 `python -m tests.run_all_tests`；無雲端時 SKIP、exit 0。
+- **除錯 SOP**：HOTFIX／UAT 前先依 [**`DEBUG_GUIDE.md`**](DEBUG_GUIDE.md) 收集 Console／Network／Backend／SQL 證據。
 
 ### Stabilization Sprint (2026-W01)
 
@@ -32,7 +33,7 @@ Definition of Done:
 * 無 console error
 * Mobile 可正常使用
 
-任務拆解與核銷見 [`SPRINT_PLAN.md`](SPRINT_PLAN.md)；UAT 勾選見 [`TEST_CHECKLIST.md`](TEST_CHECKLIST.md) 之 **MATCH FLOW UAT**。
+任務拆解與核銷見 [`SPRINT_PLAN.md`](SPRINT_PLAN.md)；UAT 勾選見 [`TEST_CHECKLIST.md`](TEST_CHECKLIST.md) 之 **MATCH FLOW UAT**；除錯證據流見 [`DEBUG_GUIDE.md`](DEBUG_GUIDE.md)。
 
 ---
 
@@ -76,6 +77,21 @@ Definition of Done:
 ### 流程備忘（2026-W01 Stabilization）
 
 - **凍結**：Stripe、coins 商品化、P2 成長功能 — 待 P0 Stabilization Sprint **Definition of Done** 達成後再排入 P1／P2。
+
+### HOTFIX: 建立標準除錯證據流
+
+* **問題**：
+
+  缺少統一 debug workflow，
+  導致 HOTFIX 容易失控。
+
+* **修正**：
+
+  建立 **`DEBUG_GUIDE.md`**
+
+* **結果**：
+
+  後續 AI／人工修復可依固定流程進行。
 
 ### HOTFIX: 移除 Reflex runtime state 版本追蹤
 
@@ -189,6 +205,7 @@ Definition of Done:
 | 2026-05-08 | **BACKLOG** 分層（P0–P3 + ARCHIVE + DEV LOG）；Workflow 外掛 SPRINT／TEST／`DEPLOY_LOG` |
 | 2026-05-08 | **Stabilization Sprint (2026-W01)** 啟動：凍結 Stripe／coins／growth；P0 DoD 見 **P0 — STABILIZATION** |
 | 2026-05-09 | **HOTFIX**：Reflex nested `<p>`／`rx.callout` hydration；見 **HOTFIX ARCHIVE** |
+| 2026-05-10 | **流程**：建立 **`DEBUG_GUIDE.md`**（標準除錯證據流＋HOTFIX SOP）；見 **HOTFIX ARCHIVE** |
 
 ### Task 級筆記（精簡保留）
 

@@ -41,3 +41,25 @@
 * 驗證 /match console clean
 
 * 驗證 unlock modal 無 hydration error
+
+---
+
+## 2026-05-10
+
+### DONE
+
+* 建立 **`DEBUG_GUIDE.md`**
+
+* 建立標準除錯證據流（Console／Network／Backend／SQL／優先級／禁止事項）
+
+* 建立 HOTFIX workflow（證據 → 分層 → 修正 → UAT → BACKLOG／SPRINT_LOG／TEST_CHECKLIST）
+
+### BLOCKER
+
+### NEXT
+
+* MATCH FLOW UAT
+
+* RPC response verification
+
+* console clean verification
