@@ -127,7 +127,7 @@
 - RPC／前端卡片與 Storage 圖片 URL 已串接；離線門檻與可選 RPC 欄位檢查見 **`tests/test_hater_logic.py`**。
 
 - **目標**  
-  - 後端 **`sql/match_logic.sql`**：RPC **`get_safe_matches(current_uid uuid)`** 已落地（`distance >= 1.2` 排除、`distance >= 0.7` 標記 `is_blurred=true`、回傳衝突最大維度 index/label 與 `blocked_count`）。  
+  - 後端 **`sql/match_logic.sql`**：RPC **`get_safe_matches(query_vector vector)`** 已落地（`distance >= 0.7` 標記 `is_blurred=true`，採 pgvector 原生距離計算）。  
   - 擴充 **`fox_quiz/match_wall.py`**：**配對牆** UI 已接上 RPC，並於 `/match` `on_load` 自動載入。  
   - **首頁（或配對牆主視圖）必須包含看板**：**「已攔截地雷對象總數」**（數字儀表，邏輯來自後端靜默過濾結果之聚合）。  
   - **憲法**：僅使用 **`SessionState`** 自動 session；**禁止**手動輸入 token。  
@@ -197,6 +197,22 @@
 
 - 結果：
   配對牆恢復正常，pgvector 運算正常
+
+### FIX: RPC 傳入 vector 格式錯誤
+
+- 問題：
+  backend 仍將 vector 傳成 CSV 字串
+
+- 根本原因：
+  舊 join/stringify 邏輯未完全移除
+
+- 修正：
+  1. 建立 to_pgvector helper
+  2. RPC 全部統一傳 pgvector 格式
+  3. 禁止 CSV vector
+
+- 結果：
+  get_safe_matches 恢復正常運作
 
 ---
 

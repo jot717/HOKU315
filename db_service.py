@@ -59,9 +59,14 @@ def _normalize_url(raw: str) -> str:
     return s
 
 
+def to_pgvector(vec: list[float]) -> str:
+    """將數值向量轉為 pgvector literal。"""
+    return "[" + ",".join(str(float(x)) for x in vec) + "]"
+
+
 def pg_vector_literal(user_vector: list) -> str:
-    """PostgreSQL / pgvector 文字格式。"""
-    return f"[{','.join(map(str, user_vector))}]"
+    """PostgreSQL / pgvector 文字格式（相容別名）。"""
+    return to_pgvector(user_vector)
 
 
 @lru_cache(maxsize=1)
@@ -580,23 +585,38 @@ def get_matches(user_vector: list, *, match_threshold: float | None = None) -> o
     if len(user_vector) != _DIM:
         raise ValueError(f"vector must have length {_DIM}, got {len(user_vector)}")
     client = get_client()
-    thr = DEFAULT_MATCH_THRESHOLD if match_threshold is None else float(match_threshold)
-    payload = {
-        _MATCH_RPC_VEC_PARAM: pg_vector_literal(user_vector),
-        _MATCH_RPC_THRESHOLD_PARAM: thr,
-    }
-    return client.rpc(_MATCH_RPC, payload).execute()
+    query_vector = to_pgvector(user_vector)
+    print(f"DEBUG_VECTOR = {query_vector}")
+    payload = {_MATCH_RPC_VEC_PARAM: query_vector}
+    try:
+        return client.rpc(_MATCH_RPC, payload).execute()
+    except Exception:
+        if _MATCH_RPC != "get_safe_matches":
+            raise
+        # 相容舊版簽名：get_safe_matches(match_threshold, query_vector)
+        thr = DEFAULT_MATCH_THRESHOLD if match_threshold is None else float(match_threshold)
+        payload[_MATCH_RPC_THRESHOLD_PARAM] = thr
+        return client.rpc(_MATCH_RPC, payload).execute()
 
 
 def get_safe_matches_current_user(access_token: str) -> list[dict[str, Any]]:
-    """以 JWT 呼叫 `get_safe_matches(current_uid uuid)`，回傳配對牆可渲染資料。"""
-    uid = user_id_from_access_token(access_token)
-    if not uid:
-        raise ValueError("無效的 access_token，無法解析 user id")
+    """以 JWT 讀取 profiles.vector 後呼叫 `get_safe_matches(query_vector vector)`。"""
+    query_vec = get_profile_vector_via_token(access_token)
+    if query_vec is None:
+        raise ValueError("找不到當前使用者 vector")
+    query_vector = to_pgvector(query_vec)
+    print(f"DEBUG_VECTOR = {query_vector}")
 
     def _op():
         cli = get_user_scoped_client(access_token)
-        return cli.rpc("get_safe_matches", {"current_uid": uid}).execute()
+        try:
+            return cli.rpc("get_safe_matches", {"query_vector": query_vector}).execute()
+        except Exception:
+            # 相容舊版簽名：get_safe_matches(match_threshold, query_vector)
+            return cli.rpc(
+                "get_safe_matches",
+                {"query_vector": query_vector, "match_threshold": DEFAULT_MATCH_THRESHOLD},
+            ).execute()
 
     res = _retry_on_stale_schema(_op)
     return list(getattr(res, "data", None) or [])

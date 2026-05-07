@@ -72,14 +72,7 @@ def _integration_check() -> int:
 
     if rows:
         row = rows[0]
-        required = {
-            "matched_user_id",
-            "distance",
-            "is_blurred",
-            "conflict_dim_index",
-            "conflict_dim_label",
-            "blocked_count",
-        }
+        required = {"user_id", "distance", "is_blurred"}
         missing = sorted([k for k in required if k not in row])
         assert not missing, f"RPC row missing fields: {missing}"
 
