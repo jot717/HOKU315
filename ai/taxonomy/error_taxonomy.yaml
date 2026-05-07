@@ -1,0 +1,74 @@
+# HOKU315 — AI incident taxonomy (v1 skeleton)
+# Used by ai/diagnosis/root_cause_engine.py
+
+VECTOR_FORMAT_ERROR:
+  symptoms:
+    - malformed array literal from Postgres / PostgREST
+    - RPC rejects vector argument or returns 400 / 5xx on vector params
+    - DEBUG_VECTOR logs show CSV or wrong bracket format vs pgvector literal
+  common_causes:
+    - Client sends float[] or CSV instead of pgvector text literal
+    - Column type mismatch (vector vs text) on profiles
+    - Stale RPC body in Network tab vs deployed sql/match_logic.sql
+  severity: high
+  suggested_actions:
+    - Compare request payload in network.json with to_pgvector / expected "[...]" literal
+    - Verify sql/match_logic.sql and sql/DEPLOY_LOG.md deploy alignment
+    - Re-run RPC in Supabase SQL Editor (rpc.sql in incident folder)
+
+RPC_SIGNATURE_ERROR:
+  symptoms:
+    - PGRST202 / function not found / argument type errors
+    - 404 or schema cache errors right after DDL deploy
+    - Response shape mismatch vs Python caller (KeyError on fields)
+  common_causes:
+    - Undeployed or partial deploy of RPC
+    - PostgREST schema cache not refreshed
+    - Renamed parameters without updating db_service call sites
+  severity: high
+  suggested_actions:
+    - Confirm function exists and signature in Supabase; check DEPLOY_LOG
+    - Warm schema / retry; compare network.json with sql/match_logic.sql
+    - Search db_service for RPC name and align argument names and types
+
+HYDRATION_ERROR:
+  symptoms:
+    - React / Next hydration warnings in console.txt
+    - 'Double-<p> nesting / hydration warnings (e.g. p inside p)'
+    - Mismatch between server-rendered and client DOM
+  common_causes:
+    - Nested paragraph elements from Reflex components (e.g. rx.callout + rx.text)
+    - Conditional rendering differing between SSR and client
+  severity: medium
+  suggested_actions:
+    - Inspect console.txt stack and component tree
+    - Prefer span / as_="span" for text inside block elements; see DEBUG_GUIDE
+    - Reproduce on single route before broad refactors
+
+STATE_DESYNC:
+  symptoms:
+    - ImmutableStateError or state updates outside allowed context
+    - UI shows stale data after async event
+    - Background task mutating state incorrectly
+  common_causes:
+    - Mutating Reflex state without async with self
+    - Long-running work blocking or racing UI updates
+  severity: high
+  suggested_actions:
+    - Read full traceback in backend.txt; locate event handler
+    - Align with Reflex async patterns (see historical HOTFIX in BACKLOG)
+    - Minimize cross-request state assumptions
+
+ASYNC_RUNTIME_ERROR:
+  symptoms:
+    - Traceback mentions asyncio, coroutine, gather, or event loop
+    - Hang or timeout in reflex run output
+    - Unawaited coroutine warnings
+  common_causes:
+    - Missing await on async db or HTTP calls
+    - Mixing sync and async Reflex event handlers incorrectly
+  severity: high
+  suggested_actions:
+    - Trace full stack in backend.txt
+    - Verify all async paths are awaited; check handler signatures
+    - Reproduce with minimal event path before changing architecture

@@ -99,3 +99,19 @@
 * 第一個真實事故演練
 
 * MATCH FLOW incident archive
+
+---
+
+## 2026-05-13
+
+### DONE
+
+* 建立 **AI INCIDENT SYSTEM v1 skeleton**（`ai/`、`replay/`、`docs/`、`tests/regression/`、`scripts/collect_runtime.py`、`scripts/generate_patch_context.py`）
+
+### NEXT
+
+* replay runtime incident
+
+* regression baseline
+
+* root cause classification

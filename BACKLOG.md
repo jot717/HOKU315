@@ -71,6 +71,19 @@ Definition of Done:
 
 ---
 
+## AI INCIDENT SYSTEM v1
+
+端到端骨架：**Observe → Evidence → Replay → Diagnose → Suggest →（Self-heal 預留）**。流程說明見 [`docs/AI_PATCH_FLOW.md`](docs/AI_PATCH_FLOW.md)、回放見 [`docs/REPLAY_GUIDE.md`](docs/REPLAY_GUIDE.md)。
+
+- **Observe**：異常觀測與路由／操作記錄（對齊 [`DEBUG_GUIDE.md`](DEBUG_GUIDE.md)）。
+- **Evidence**：`debug_evidence/`、`scripts/create_incident.py`、`scripts/collect_runtime.py`。
+- **Replay**：`replay/replay_incident.py`（現為 mock）、[`docs/REPLAY_GUIDE.md`](docs/REPLAY_GUIDE.md)。
+- **Diagnose**：`ai/taxonomy/error_taxonomy.yaml`、`python -m ai.diagnosis.root_cause_engine`。
+- **Suggest**：`scripts/generate_patch_context.py`、`ai/prompt_templates/`。
+- **Patch Policy**：`ai/patch_policy/`（占位）、[`DEBUG_POLICY.md`](DEBUG_POLICY.md)、[`docs/AI_PATCH_FLOW.md`](docs/AI_PATCH_FLOW.md)。
+
+---
+
 ## HOTFIX ARCHIVE
 
 此區僅封存已發生之緊急修復與根因類項，避免與進行中需求混線。**本 Sprint 內每一筆程式面修復仍須同步更新本節與 [`SPRINT_LOG.md`](SPRINT_LOG.md)。**
