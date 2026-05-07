@@ -17,6 +17,8 @@ def unlocks_page() -> rx.Component:
                 "此頁為占位：完整支付與攻略交付見 BACKLOG Task 8／Task 9。",
                 size="2",
                 color="gray",
+                as_="span",
+                display="block",
             ),
             spacing="4",
             width="100%",

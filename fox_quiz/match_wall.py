@@ -139,7 +139,12 @@ def _match_card(item: dict[str, Any]) -> rx.Component:
         ),
         rx.hstack(
             rx.badge(
-                rx.text("距離 ", distance),
+                rx.hstack(
+                    rx.text("距離 ", size="2", as_="span"),
+                    rx.text(distance, size="2", as_="span"),
+                    spacing="1",
+                    align_items="center",
+                ),
                 color_scheme="orange",
                 variant="surface",
             ),
@@ -152,12 +157,24 @@ def _match_card(item: dict[str, Any]) -> rx.Component:
         ),
         rx.cond(
             is_blurred,
-            rx.hstack(rx.text("預警維度：", size="2", color="red"), rx.text(dim_label, size="2", color="red")),
-            rx.hstack(rx.text("主要落差：", size="2", color="gray"), rx.text(dim_label, size="2", color="gray")),
+            rx.hstack(
+                rx.text("預警維度：", size="2", color="red", as_="span"),
+                rx.text(dim_label, size="2", color="red", as_="span"),
+            ),
+            rx.hstack(
+                rx.text("主要落差：", size="2", color="gray", as_="span"),
+                rx.text(dim_label, size="2", color="gray", as_="span"),
+            ),
         ),
         rx.cond(
             is_blurred,
-            rx.text("點擊卡片以查看解鎖選項（Task 9）", size="1", color="gray"),
+            rx.text(
+                "點擊卡片以查看解鎖選項（Task 9）",
+                size="1",
+                color="gray",
+                as_="span",
+                display="block",
+            ),
             rx.button(
                 "詳情（Task 8）",
                 variant="outline",
@@ -197,12 +214,20 @@ def _unlock_overlay() -> rx.Component:
                         "此檔案經系統模糊處理；解鎖後可於 Task 8 查看清晰內容與攻略。",
                         size="2",
                         color="gray",
+                        as_="span",
+                        display="block",
                     ),
                     rx.hstack(
-                        rx.text("衝突維度：", size="2", weight="bold"),
-                        rx.text(MatchWallState.unlock_dim_label, size="2", weight="bold"),
+                        rx.text("衝突維度：", size="2", weight="bold", as_="span"),
+                        rx.text(MatchWallState.unlock_dim_label, size="2", weight="bold", as_="span"),
                     ),
-                    rx.text(MatchWallState.unlock_msg, size="2", color="orange"),
+                    rx.text(
+                        MatchWallState.unlock_msg,
+                        size="2",
+                        color="orange",
+                        as_="span",
+                        display="block",
+                    ),
                     rx.hstack(
                         rx.button(
                             "取消",
@@ -254,6 +279,8 @@ def match_wall_page() -> rx.Component:
                     f"守護中：已為您成功攔截 {MatchWallState.blocked_count} 個高風險地雷。",
                     size="3",
                     weight="bold",
+                    as_="span",
+                    display="block",
                 ),
                 width="100%",
                 background="rgba(255, 237, 213, 0.65)",
@@ -290,6 +317,8 @@ def match_wall_page() -> rx.Component:
                     size="2",
                     color="gray",
                     width="100%",
+                    as_="span",
+                    display="block",
                 ),
             ),
             spacing="4",

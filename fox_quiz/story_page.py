@@ -192,6 +192,8 @@ def story_page() -> rx.Component:
                 "`sql/stories.sql`（含 Storage RLS）。",
                 size="2",
                 color="gray",
+                as_="span",
+                display="block",
             ),
             rx.card(
                 rx.vstack(
@@ -208,11 +210,17 @@ def story_page() -> rx.Component:
                         min_height="120px",
                         width="100%",
                     ),
-                    rx.text("圖片（拖放或點擊）— 必填", size="2", weight="bold"),
+                    rx.text(
+                        "圖片（拖放或點擊）— 必填",
+                        size="2",
+                        weight="bold",
+                        as_="span",
+                        display="block",
+                    ),
                     rx.upload(
                         rx.vstack(
                             rx.icon("image", size=32, color="orange"),
-                            rx.text(StoryState.upload_hint, size="1", color="gray"),
+                            rx.text(StoryState.upload_hint, size="1", color="gray", as_="span"),
                         ),
                         id="story_image_upload",
                         border="1px dashed #e8a838",
@@ -223,7 +231,7 @@ def story_page() -> rx.Component:
                         width="100%",
                     ),
                     rx.hstack(
-                        rx.text("或手動檔名", size="1", color="gray"),
+                        rx.text("或手動檔名", size="1", color="gray", as_="span"),
                         rx.input(
                             value=StoryState.image_basename,
                             on_change=StoryState.set_image_basename,
@@ -243,7 +251,14 @@ def story_page() -> rx.Component:
                         size="3",
                         disabled=StoryState.uploading,
                     ),
-                    rx.text(StoryState.status_msg, size="2", color="gray", white_space="pre-wrap"),
+                    rx.text(
+                        StoryState.status_msg,
+                        size="2",
+                        color="gray",
+                        white_space="pre-wrap",
+                        as_="span",
+                        display="block",
+                    ),
                     spacing="3",
                     width="100%",
                 ),

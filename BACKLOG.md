@@ -93,6 +93,29 @@ Definition of Done:
 * **結果**：
   Reflex runtime state 不再污染 repository
 
+### HOTFIX: Reflex nested p hydration warning
+
+* **問題**：
+
+  React hydration warning：
+
+  `<p> cannot be a descendant of <p>`
+
+* **根本原因**：
+
+  `rx.callout` 與 `rx.text` 同時生成 `<p>`
+
+* **修正**：
+
+  1. 移除 nested `rx.text`（`rx.callout` 改傳字符串 + `white_space` 於 `style`）
+  2. 其它易與 Badge／Card／段落上下文衝突之 `rx.text` 改 `as_="span"`
+
+* **結果**：
+
+  hydration warning 消失
+
+  console 恢復正常
+
 ### malformed array literal／vector／RPC
 
 - **FIX — `get_safe_matches` RPC vector parsing**：舊版 `string_to_array`／`::text` 與 pgvector `"[...]"` 衝突；改為原生 `vector <-> vector`／正確字面量傳参。
@@ -102,6 +125,7 @@ Definition of Done:
 
 ### Reflex runtime（async／State）
 
+- **HOTFIX（nested `<p>`）**：`fox_quiz/fox_quiz.py` 之 `rx.callout` 改以字串為唯一子內容；`match_wall`／`login`／`story`／`unlocks` 等處對易巢狀段落的 `rx.text` 設 `as_="span"`。詳見上節 **「HOTFIX: Reflex nested p hydration warning」**。
 - **HOTFIX-001**：`ImmutableStateError`／Story 上傳改非 background、`async with self`。
 - **HOTFIX-003**：測驗 `generate_result` async、`upsert_user_vector`、Story `DEBUG_URL`。
 - **HOTFIX-004**：Story 公開網址除錯與 `rx.image` 優化。
@@ -164,6 +188,7 @@ Definition of Done:
 | 2026-05-06 | Navbar、`/`→`/match`、`user_unlocks`、`create_unlock`、Task 8 獨立條目、`seed_test_users.py`＋PyJWT |
 | 2026-05-08 | **BACKLOG** 分層（P0–P3 + ARCHIVE + DEV LOG）；Workflow 外掛 SPRINT／TEST／`DEPLOY_LOG` |
 | 2026-05-08 | **Stabilization Sprint (2026-W01)** 啟動：凍結 Stripe／coins／growth；P0 DoD 見 **P0 — STABILIZATION** |
+| 2026-05-09 | **HOTFIX**：Reflex nested `<p>`／`rx.callout` hydration；見 **HOTFIX ARCHIVE** |
 
 ### Task 級筆記（精簡保留）
 

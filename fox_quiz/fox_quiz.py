@@ -135,7 +135,7 @@ def _question_card(index: int, label: str) -> rx.Component:
         rx.vstack(
             rx.hstack(
                 rx.badge(f"{index + 1} / {VECTOR_DIM}", variant="soft", color="gray"),
-                rx.text(label, weight="bold", size="3"),
+                rx.text(label, weight="bold", size="3", as_="span"),
                 align="center",
                 spacing="3",
                 width="100%",
@@ -167,9 +167,9 @@ def _question_card(index: int, label: str) -> rx.Component:
                 spacing="3",
             ),
             rx.hstack(
-                rx.text("0 地雷感低", size="1", color="gray"),
+                rx.text("0 地雷感低", size="1", color="gray", as_="span"),
                 rx.spacer(),
-                rx.text("1 地雷感高", size="1", color="gray"),
+                rx.text("1 地雷感高", size="1", color="gray", as_="span"),
                 width="100%",
             ),
             spacing="3",
@@ -199,12 +199,16 @@ def quiz_page() -> rx.Component:
                 "共 20 題。拖曳滑桿：越靠右代表你在該情境越容易「踩雷」或感到壓力。",
                 color="gray",
                 size="2",
+                as_="span",
+                display="block",
             ),
             rx.text(
                 QuizState.live_vector_digest,
                 size="1",
                 color="gray",
                 width="100%",
+                as_="span",
+                display="block",
             ),
             rx.divider(margin_y="4"),
             rx.vstack(
@@ -230,28 +234,20 @@ def quiz_page() -> rx.Component:
                 rx.cond(
                     QuizState.result_is_error,
                     rx.callout(
-                        rx.text(
-                            QuizState.result_preview,
-                            white_space="pre-wrap",
-                            width="100%",
-                            size="2",
-                        ),
+                        QuizState.result_preview,
                         icon="triangle-alert",
                         color="red",
                         margin_top="4",
                         width="100%",
+                        style={"white_space": "pre-wrap"},
                     ),
                     rx.callout(
-                        rx.text(
-                            QuizState.result_preview,
-                            white_space="pre-wrap",
-                            width="100%",
-                            size="2",
-                        ),
+                        QuizState.result_preview,
                         icon="check",
                         color="green",
                         margin_top="4",
                         width="100%",
+                        style={"white_space": "pre-wrap"},
                     ),
                 ),
                 rx.box(),

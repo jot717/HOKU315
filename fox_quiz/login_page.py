@@ -128,7 +128,13 @@ def login_page() -> rx.Component:
     return rx.box(
         rx.vstack(
             rx.heading("登入 JOT717", size="6", weight="bold"),
-            rx.text("使用 Supabase Auth（Email／密碼），成功後 token 存於裝置，不必手動貼上。", size="2", color="gray"),
+            rx.text(
+                "使用 Supabase Auth（Email／密碼），成功後 token 存於裝置，不必手動貼上。",
+                size="2",
+                color="gray",
+                as_="span",
+                display="block",
+            ),
             rx.card(
                 rx.vstack(
                     rx.input(
@@ -150,7 +156,15 @@ def login_page() -> rx.Component:
                         rx.button("註冊", on_click=LoginState.submit_signup, variant="outline", size="3"),
                         spacing="3",
                     ),
-                    rx.text(LoginState.message, size="2", color="red", white_space="pre-wrap"),
+                    rx.text(
+                        LoginState.message,
+                        size="2",
+                        color="red",
+                        white_space="pre-wrap",
+                        as_="span",
+                        display="block",
+                        width="100%",
+                    ),
                     width="100%",
                     spacing="3",
                 ),
