@@ -186,4 +186,11 @@ LIMIT 5;
    * [`BACKLOG.md`](BACKLOG.md) — **HOTFIX ARCHIVE**（含問題／根因／修正／結果；可附證據目錄相對路徑）  
    * [`SPRINT_LOG.md`](SPRINT_LOG.md) — **DONE／BLOCKER／NEXT**  
    * [`TEST_CHECKLIST.md`](TEST_CHECKLIST.md) — 相關勾選項  
+6. **建立 incident 資料夾（標準模板）**（若尚未手動建立）：  
+
+```powershell
+python scripts/create_incident.py short-slug
+```
+
+詳見 [`debug_evidence/README.md`](debug_evidence/README.md) — **建立事故模板**。
 

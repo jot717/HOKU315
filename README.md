@@ -61,6 +61,18 @@ python -m reflex run
 
 ---
 
+## 建立事故模板
+
+HOTFIX／除錯時可一鍵建立標準證據目錄（見 **`DEBUG_GUIDE.md`**、`debug_evidence/README.md`）：
+
+```powershell
+python scripts/create_incident.py match-fail
+```
+
+將產生 `debug_evidence/YYYY-MM-DD-match-fail/`（日期為執行當日）及 `console.txt`、`network.json`、`backend.txt`、`rpc.sql`、`root_cause.md`。
+
+---
+
 ## 數據流示意圖
 
 ```mermaid
@@ -105,4 +117,3 @@ flowchart LR
 ## 依賴
 
 見 **`requirements.txt`**（**`python-dotenv`**、**`supabase`**、**`reflex>=0.6.0`**）。升級 Reflex 後若編譯失敗，請對照官方 migration 調整 `rxconfig`／元件 API。
-# HOKU315

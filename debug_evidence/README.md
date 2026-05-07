@@ -33,6 +33,20 @@ debug_evidence/2026-05-10-match-fail/
 
 ---
 
+## 建立事故模板
+
+於專案根目錄執行：
+
+```powershell
+python scripts/create_incident.py match-fail
+```
+
+將建立 `debug_evidence/YYYY-MM-DD-match-fail/`（日期為執行當日），內含 `console.txt`、`network.json`、`backend.txt`、`rpc.sql`、`root_cause.md` 標準檔案。
+
+可選：`--date YYYY-MM-DD` 指定資料夾日期前綴；`--force` 覆寫已存在目錄（謹慎使用）。
+
+---
+
 ## 每次事故建議檔案（資產化）
 
 ```text

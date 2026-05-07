@@ -85,3 +85,17 @@
 * RPC evidence collection
 
 * runtime incident archive
+
+---
+
+## 2026-05-12
+
+### DONE
+
+* 建立 **Incident Template Generator**（`scripts/create_incident.py`）
+
+### NEXT
+
+* 第一個真實事故演練
+
+* MATCH FLOW incident archive

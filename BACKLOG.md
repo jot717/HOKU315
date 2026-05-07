@@ -110,6 +110,20 @@ Definition of Done:
 
   每次事故皆可追蹤與回放。
 
+### HOTFIX: Incident Template Generator
+
+* **問題**：
+
+  debug_evidence 仍需手動建立。
+
+* **修正**：
+
+  建立 **`scripts/create_incident.py`**。
+
+* **結果**：
+
+  每次事故可快速標準化建立。
+
 ### HOTFIX: 移除 Reflex runtime state 版本追蹤
 
 * **問題**：
