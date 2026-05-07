@@ -50,7 +50,7 @@
 
 ## [DONE] Task 3：向量寫入測試（將測驗結果透過 `db_service` 存入 Supabase）
 
-- **目標**：將測驗產出之 20 維向量經 **`db_service.py`** 寫入 Supabase（`profiles` / `mine_vector`）。  
+- **目標**：將測驗產出之 20 維向量經 **`db_service.py`** 寫入 Supabase（`profiles` / `vector`）。  
 - **驗收**：`python -m tests.test_vector_persistence`（有有效 `DB_TEST_PROFILE_ID` 與 profile 時做讀寫斷言；否則 SKIP exit 0）；`fox_quiz` 之 `submit_quiz` 背景呼叫 `update_user_vector` 並於 UI 顯示成功／錯誤；`db_service.get_user_vector` / `parse_vector_value` 供讀回與測試。
 
 ---
@@ -149,7 +149,7 @@
 
 **Subtasks**
 - **Navbar**：`/story`、`/match`、`/unlocks`（占位）全域導覽；套用 **`story_page`**、**`match_wall`**。
-- **Login redirect**：若 **`profiles.mine_vector` 已非占位（任一維與全 0.5 差異 > 1e-3）** → **`/match`**；否則 → **`/story`**。
+- **Login redirect**：若 **`profiles.vector` 已非占位（任一維與全 0.5 差異 > 1e-3）** → **`/match`**；否則 → **`/story`**。
 - **Match 設為主頁**：**`/`** 導向 **`/match`**；測驗改為 **`/quiz`**。
 
 **DEV LOG**
@@ -159,7 +159,7 @@
 ### FIX: seed 外鍵錯誤（profiles.id）
 - **問題**：使用 `uuid4` 假 `id` 寫入 `profiles`，違反 **`profiles.id` → `auth.users.id`** 外鍵約束。
 - **修正**：**`seed_test_users.py`** 改由 **`SUPABASE_ACCESS_TOKEN`** 以 **`jwt.decode(..., verify_signature=False)`** 取 **`sub`** 作為唯一 **`user_id`**；upsert 前以 **Auth Admin `get_user_by_id`**（或退回 **`get_user(jwt)`**）確認該使用者存在。
-- **結果**：可成功寫入 **`profiles.mine_vector`**，種子可正常運作。
+- **結果**：可成功寫入 **`profiles.vector`**，種子可正常運作。
 - **影響**：**match wall** 開始有資料，可進入 UAT；多筆候選需多帳號或註冊補齊，不再以假 UUID 硬塞。
 
 ### FIX: get_safe_matches RPC vector parsing 錯誤（核心修復）
@@ -181,6 +181,22 @@
 
 - 影響範圍：
   match_wall / 配對核心演算法
+
+### FIX: mine_vector 舊欄位導致 malformed array literal
+
+- 問題：
+  配對牆持續報 malformed array literal
+
+- 根本原因：
+  系統同時存在 mine_vector（舊字串格式）與 vector（新 pgvector）
+
+- 修正：
+  1. 全專案停止使用 mine_vector
+  2. match / RPC 全部統一使用 vector
+  3. 補齊缺失 vector 資料
+
+- 結果：
+  配對牆恢復正常，pgvector 運算正常
 
 ---
 
@@ -305,7 +321,7 @@ Task 6 與 Task 6.5 狀態：**`[DONE]`**（含下列修復後之交付節奏）
 
 **修正範圍（後端 `db_service.py`）**  
 
-- **`ensure_user_profile(access_token)`**（主入口）：以 **`upsert(..., on_conflict=id, ignore_duplicates=True)`** 原子補列 — **無列則插入** `{ id, mine_vector=全 0.5×20 }`；**已存在則不覆寫向量**（避免沖掉測驗寫入）。  
+- **`ensure_user_profile(access_token)`**（主入口）：以 **`upsert(..., on_conflict=id, ignore_duplicates=True)`** 原子補列 — **無列則插入** `{ id, vector=全 0.5×20 }`；**已存在則不覆寫向量**（避免沖掉測驗寫入）。  
 - **`ensure_profile_exists`**：保留為 **別名**，呼叫 **`ensure_user_profile`**。
 
 **修正範圍（應用層）**  

@@ -2,7 +2,7 @@
 Supabase：lru_cache 單例連線；profiles 向量、user_memories（RAG Lite）與 RPC。
 
 預設（可透過環境變數覆寫）：
-  _VECTOR_COL -> mine_vector
+  _VECTOR_COL -> vector
   _MATCH_RPC -> get_safe_matches
   _MATCH_RPC_VEC_PARAM -> query_vector
   _MATCH_RPC_THRESHOLD_PARAM -> match_threshold
@@ -28,7 +28,7 @@ _ROOT = Path(__file__).resolve().parent
 load_dotenv(_ROOT / ".env", encoding="utf-8-sig")
 load_dotenv(encoding="utf-8-sig")
 
-_VECTOR_COL = os.getenv("SUPABASE_PROFILES_VECTOR_COLUMN", "mine_vector")
+_VECTOR_COL = os.getenv("SUPABASE_PROFILES_VECTOR_COLUMN", "vector")
 _MATCH_RPC = os.getenv("SUPABASE_VECTOR_MATCH_RPC", "get_safe_matches")
 _MATCH_RPC_VEC_PARAM = os.getenv("SUPABASE_MATCH_RPC_VEC_PARAM", "query_vector")
 _MATCH_RPC_THRESHOLD_PARAM = os.getenv("SUPABASE_MATCH_RPC_THRESHOLD_PARAM", "match_threshold")

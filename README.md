@@ -22,7 +22,7 @@ pip install -r requirements.txt
 
 | 順序 | 內容 | 說明 |
 |------|------|------|
-| 1 | **既有專案 schema** | 需具備 **`public.profiles`**（含 **`id`** uuid），以及與 `db_service` 對齊之 **`mine_vector`**（或透過環境變數 `SUPABASE_PROFILES_VECTOR_COLUMN` 指定之欄位，預設 `mine_vector`）。向量型別請與 **`pgvector`** / 專案 RPC 約定一致。 |
+| 1 | **既有專案 schema** | 需具備 **`public.profiles`**（含 **`id`** uuid），以及與 `db_service` 對齊之 **`vector`**（或透過環境變數 `SUPABASE_PROFILES_VECTOR_COLUMN` 指定之欄位，預設 `vector`）。向量型別請與 **`pgvector`** / 專案 RPC 約定一致。 |
 | 2 | **`get_safe_matches`**（或 `.env` 內 `SUPABASE_VECTOR_MATCH_RPC` 所設之 RPC） | 供相似向量查詢；`tests/test_db_connection.py` 會在具備憑證時驗證 RPC。 |
 | 3 | **`sql/user_memories.sql`** | 建立 **`user_memories`** 表與 **`match_user_memories`** RPC，啟用 RAG Lite（對話記憶檢索）。執行前請確認 **`user_memories.user_id`** 外鍵可指向既有 **`profiles.id`**。 |
 | 4 | **`sql/stories.sql`** | 建立 **Storage bucket `stories`**、**Storage RLS**（僅讀寫自己 `user_id/` 前綴）、**`public.stories`** 表與 RLS；物件路徑 `user_id/檔名`。 |
@@ -74,7 +74,7 @@ flowchart LR
     GW["llm_gateway.LLMGateway"]
   end
   subgraph DB["Supabase"]
-    P["profiles.mine_vector"]
+    P["profiles.vector"]
     M["user_memories + RPC match_user_memories"]
   end
   Q --> FL

@@ -2,7 +2,7 @@
 """
 Task 7 驗收種子資料：
 
-將 **目前 SUPABASE_ACCESS_TOKEN 對應之使用者** 寫入／更新 `profiles.mine_vector`
+將 **目前 SUPABASE_ACCESS_TOKEN 對應之使用者** 寫入／更新 `profiles.vector`
 （`profiles.id` 必須等於 `auth.users.id`，不可用隨機 UUID）。
 
 用法：

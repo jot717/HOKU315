@@ -50,10 +50,12 @@ class MatchWallState(rx.State):
                     else _PLACEHOLDER_IMG
                 )
                 nr = dict(r)
+                nr["matched_user_id"] = str(r.get("user_id") or "")
+                nr["conflict_dim_label"] = str(r.get("conflict_dim_label") or "待擴充")
                 nr["image_url"] = image_url
                 nr["card_idx"] = i
                 out.append(nr)
-            blocked = int(rows[0].get("blocked_count", 0)) if rows else 0
+            blocked = 0
             return out, blocked
 
         try:
