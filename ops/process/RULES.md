@@ -67,6 +67,12 @@ From repo root:
 python ops/hooks/check_process.py
 ```
 
+Feature backlog + sprint files (see [`ops/gate/EXECUTION_GATE.md`](../gate/EXECUTION_GATE.md)):
+
+```powershell
+python ops/gate/check_flow.py --feature MATCH_FLOW_v1
+```
+
 Regression gate (same as CI intent):
 
 ```powershell
