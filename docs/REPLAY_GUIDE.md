@@ -1,6 +1,6 @@
 # Replay guide — HOKU315
 
-本文件描述 **incident replay** 與 **regression replay** 如何配合 [`debug_evidence/`](../debug_evidence/README.md)、[`replay/replay_incident.py`](../replay/replay_incident.py) 與 AI incident 流程（見 [`AI_PATCH_FLOW.md`](AI_PATCH_FLOW.md)）。
+本文件描述 **incident replay** 與 **regression replay** 如何配合 [`debug_evidence/`](../debug_evidence/README.md)、[`ai/replay/replay_incident.py`](../ai/replay/replay_incident.py)（或根目錄 `replay/` shim）與 AI incident 流程（見 [`AI_PATCH_FLOW.md`](AI_PATCH_FLOW.md)）。
 
 ---
 
@@ -21,7 +21,7 @@
 4. **Mock replay**：  
 
 ```powershell
-python replay/replay_incident.py --incident debug_evidence/YYYY-MM-DD-short-slug
+python -m ai.replay.replay_incident --incident debug_evidence/YYYY-MM-DD-short-slug
 ```
 
 5. **Live replay（未來）**：在隔離環境或 SQL Editor 依 `rpc.sql`／`network.json` 重播；須遵守 `DEBUG_POLICY.md`（禁止未佐證直接改 production SQL）。

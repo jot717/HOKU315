@@ -5,7 +5,7 @@
 | 階段 | 用途 | 本 repo 實作 |
 |------|------|----------------|
 | **A Observation** | 留下時間戳與環境快照 | `python scripts/collect_runtime.py <slug>` 會寫入 **`runtime.json`**（`timestamp` / **`env` 已脫敏**，非草稿腳本之明文 `os.environ`）、並保留 `runtime_collect.json` 等檔 |
-| **B Replay** | 離線確認「有載入快照」 | `python replay/replay_incident.py debug_evidence/YYYY-MM-DD-<slug>`（位置參數等同 `--incident`）；會列出 `runtime.json` 頂層 keys，其餘仍為 mock |
+| **B Replay** | 離線確認「有載入快照」 | `python -m ai.replay.replay_incident debug_evidence/YYYY-MM-DD-<slug>`（位置參數等同 `--incident`）；或 `python replay/replay_incident.py` shim |
 | **C Root cause** | 對 taxonomy 查表 | `python -m ai.diagnosis.root_cause_engine --error-type STATE_DESYNC`；完整事故仍用 `--incident`／`--scan-latest` |
 
 ## 與草稿 bash 的差異（刻意）
@@ -17,7 +17,7 @@
 
 ```powershell
 python scripts/collect_runtime.py match-fail
-python replay/replay_incident.py debug_evidence/2026-05-08-match-fail
+python -m ai.replay.replay_incident debug_evidence/2026-05-08-match-fail
 python -m ai.diagnosis.root_cause_engine --error-type VECTOR_FORMAT_ERROR
 ```
 

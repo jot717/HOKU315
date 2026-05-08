@@ -32,7 +32,7 @@ Observe
 
 ## Replay
 
-- **Mock**：`python replay/replay_incident.py --incident debug_evidence/YYYY-MM-DD-short-slug`（見 [`REPLAY_GUIDE.md`](REPLAY_GUIDE.md)）。  
+- **Mock**：`python -m ai.replay.replay_incident --incident debug_evidence/YYYY-MM-DD-short-slug`（見 [`REPLAY_GUIDE.md`](REPLAY_GUIDE.md)；亦可 `python replay/replay_incident.py` shim）。  
 - **Live**：僅在符合 [`DEBUG_POLICY.md`](../DEBUG_POLICY.md) 的前提下於安全環境重播。
 
 ---

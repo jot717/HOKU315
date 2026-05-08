@@ -108,6 +108,8 @@
 
 * 建立 **AI INCIDENT SYSTEM v1 skeleton**（`ai/`、`replay/`、`docs/`、`tests/regression/`、`scripts/collect_runtime.py`、`scripts/generate_patch_context.py`）
 
+* 建立 **AI-NATIVE REPO LAYERING v1**（[`REPO_ARCHITECTURE.md`](REPO_ARCHITECTURE.md)、`product/`、`ops/`、`ai/replay/`、`ai/incident/README.md`；`scripts`/`tests`/`docs` 仍於 repo 根目錄以相容 pytest／CI）
+
 ### NEXT
 
 * replay runtime incident
