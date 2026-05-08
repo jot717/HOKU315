@@ -81,4 +81,16 @@ On Unix / Git Bash: [`ops/hooks/check_regression.sh`](../hooks/check_regression.
 
 - **Conceptual**: [`DEVELOPMENT_CONSTITUTION.md`](../../DEVELOPMENT_CONSTITUTION.md)
 - **Execution**: [`ops/process/RULES.md`](RULES.md) (this file)
-- **Enforcement**: [`ops/hooks/`](../hooks/)
+- **Enforcement**: [`ops/hooks/`](../hooks/)、[`ops/gate/`](../gate/)（執行閘門）
+
+---
+
+## EXECUTION GATE
+
+Full lifecycle definition and blocking semantics: **[`ops/gate/EXECUTION_GATE.md`](../gate/EXECUTION_GATE.md)**.
+
+Feature spec file check (BACKLOG + SPRINT filenames under `backlog/`):
+
+```powershell
+python ops/gate/check_flow.py --feature MATCH_FLOW_v1
+```

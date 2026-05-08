@@ -19,5 +19,6 @@
 | [`.github/workflows/`](../.github/workflows/) | CI |
 | [`process/`](process/) | 流程規則與模板（[`RULES.md`](process/RULES.md)） |
 | [`hooks/`](hooks/) | 輕量檢查腳本 |
+| [`gate/`](gate/) | 執行閘門（[`EXECUTION_GATE.md`](gate/EXECUTION_GATE.md)、[`check_flow.py`](gate/check_flow.py)） |
 
 詳見 [`REPO_ARCHITECTURE.md`](../REPO_ARCHITECTURE.md)。
