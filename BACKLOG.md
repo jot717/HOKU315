@@ -84,6 +84,18 @@ Definition of Done:
 
 ---
 
+## REGRESSION GATE
+
+所有 **deploy／hotfix** 必須通過：
+
+```powershell
+pytest tests/regression/
+```
+
+未通過 → **禁止部署**。CI 見 [`.github/workflows/regression.yml`](.github/workflows/regression.yml)。細節見 [`tests/regression/README.md`](tests/regression/README.md)。
+
+---
+
 ## HOTFIX ARCHIVE
 
 此區僅封存已發生之緊急修復與根因類項，避免與進行中需求混線。**本 Sprint 內每一筆程式面修復仍須同步更新本節與 [`SPRINT_LOG.md`](SPRINT_LOG.md)。**

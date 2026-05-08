@@ -69,8 +69,8 @@ python -m ai.diagnosis.root_cause_engine --incident debug_evidence/YYYY-MM-DD-sh
 
 ## Regression Test
 
-- **`python -m tests.run_all_tests`**（必跑）。  
-- 未來擴充：**`tests/regression/`**（見該目錄 README）。  
+- **`pytest tests/regression/`**（閘門；見 [`BACKLOG.md`](../BACKLOG.md) **REGRESSION GATE**、[`tests/regression/README.md`](../tests/regression/README.md)、CI **`.github/workflows/regression.yml`**）。  
+- **`python -m tests.run_all_tests`**（亦由 regression 中的 gate 間接必跑）。  
 - 將驗證步驟寫回 incident `root_cause.md`。
 
 ---
