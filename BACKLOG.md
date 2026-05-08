@@ -1,6 +1,6 @@
 # HOKU315 BACKLOG
 
-**Workflow（AI-native）**：衝刺計畫見 [`SPRINT_PLAN.md`](SPRINT_PLAN.md)、日誌見 [`SPRINT_LOG.md`](SPRINT_LOG.md)；配對牆驗收見 [`TEST_CHECKLIST.md`](TEST_CHECKLIST.md)；資料庫套用軌跡見 [`sql/DEPLOY_LOG.md`](sql/DEPLOY_LOG.md)；**Debug／UAT 證據收集**見 [**`DEBUG_GUIDE.md`**](DEBUG_GUIDE.md)；**證據資產化目錄**見 [**`debug_evidence/README.md`**](debug_evidence/README.md)；**AI／P0 patch 約束**見 [**`DEBUG_POLICY.md`**](DEBUG_POLICY.md)；**Repo 分層**見 [**`REPO_ARCHITECTURE.md`**](REPO_ARCHITECTURE.md)；**介面契約**見 [**`ARCHITECTURE_CONTRACT.md`**](ARCHITECTURE_CONTRACT.md)。產品治理仍依根目錄 **`DEVELOPMENT_CONSTITUTION.md`**。
+**Workflow（AI-native）**：衝刺計畫見 [`SPRINT_PLAN.md`](SPRINT_PLAN.md)、日誌見 [`SPRINT_LOG.md`](SPRINT_LOG.md)；配對牆驗收見 [`TEST_CHECKLIST.md`](TEST_CHECKLIST.md)；資料庫套用軌跡見 [`sql/DEPLOY_LOG.md`](sql/DEPLOY_LOG.md)；**Debug／UAT 證據收集**見 [**`DEBUG_GUIDE.md`**](DEBUG_GUIDE.md)；**證據資產化目錄**見 [**`debug_evidence/README.md`**](debug_evidence/README.md)；**AI／P0 patch 約束**見 [**`DEBUG_POLICY.md`**](DEBUG_POLICY.md)；**Repo 分層**見 [**`REPO_ARCHITECTURE.md`**](REPO_ARCHITECTURE.md)；**介面契約**見 [**`ARCHITECTURE_CONTRACT.md`**](ARCHITECTURE_CONTRACT.md)；**流程護欄**見 [**`ops/process/RULES.md`**](ops/process/RULES.md)。產品治理仍依根目錄 **`DEVELOPMENT_CONSTITUTION.md`**。
 
 狀態約定：`[TODO]` · `[WIP]` · `[DONE]` · **`[REMOVED/INTERNAL_ONLY]`**。
 
@@ -134,6 +134,18 @@ pytest tests/regression/
 - **product／ai／ops** 三層入口定義：`product/INTERFACE.md`、`ai/INTERFACE.md`、`ops/INTERFACE.md`
 - **不改程式**，僅建立契約層：[`ARCHITECTURE_CONTRACT.md`](ARCHITECTURE_CONTRACT.md)
 - **系統邊界**與 [`REPO_ARCHITECTURE.md`](REPO_ARCHITECTURE.md) 對齊
+
+---
+
+## PROCESS ENFORCEMENT v1
+
+System-level rules（詳 [`ops/process/RULES.md`](ops/process/RULES.md)）：
+
+- **BACKLOG** 先於實作規劃新功能／可追蹤條目  
+- **SPRINT** 對應可執行衝刺（見 [`SPRINT_PLAN.md`](SPRINT_PLAN.md)、[`SPRINT_LOG.md`](SPRINT_LOG.md)）  
+- **REGRESSION** 通過方視為 DONE 門檻之一（`pytest tests/regression/`）  
+- 工作流：**BACKLOG → SPRINT → IMPLEMENT → TEST → LOG**  
+- 輕量檢查：`python ops/hooks/check_process.py`
 
 ---
 

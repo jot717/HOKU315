@@ -17,5 +17,7 @@
 | [`tests/`](../tests/) | 單元／回歸／`run_all_tests` |
 | [`docs/`](../docs/) | 架構與流程文件 |
 | [`.github/workflows/`](../.github/workflows/) | CI |
+| [`process/`](process/) | 流程規則與模板（[`RULES.md`](process/RULES.md)） |
+| [`hooks/`](hooks/) | 輕量檢查腳本 |
 
 詳見 [`REPO_ARCHITECTURE.md`](../REPO_ARCHITECTURE.md)。

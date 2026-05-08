@@ -112,6 +112,8 @@
 
 * **INTERFACE STABILIZATION v1**：[`ARCHITECTURE_CONTRACT.md`](ARCHITECTURE_CONTRACT.md)、`product/INTERFACE.md`、`ai/INTERFACE.md`、`ops/INTERFACE.md`
 
+* **PROCESS ENFORCEMENT v1**：[`ops/process/RULES.md`](ops/process/RULES.md)、`ops/hooks/check_process.py`
+
 ### NEXT
 
 * replay runtime incident
@@ -119,3 +121,13 @@
 * regression baseline
 
 * root cause classification
+
+---
+
+## PROCESS ENFORCEMENT ACTIVE
+
+All development must follow:
+
+`BACKLOG → SPRINT → IMPLEMENT → TEST → LOG`
+
+Rules: [`ops/process/RULES.md`](ops/process/RULES.md).
