@@ -53,3 +53,10 @@
 - 已建立 **product／ai／ops** 目錄與對照 README。
 - **Replay** 實作已歸位 **`ai/replay/`**；根目錄 **`replay/`** 保留輕量 shim 與說明。
 - **未**搬移 `scripts`／`tests`／`docs` 至 `ops/` 子樹（避免破壞模組路徑與 CI）。
+
+---
+
+## INTERFACE STABILIZATION v1（摘要）
+
+- 各層入口與規則：**[`product/INTERFACE.md`](product/INTERFACE.md)**、**[`ai/INTERFACE.md`](ai/INTERFACE.md)**、**[`ops/INTERFACE.md`](ops/INTERFACE.md)**。
+- 全系統契約：**[`ARCHITECTURE_CONTRACT.md`](ARCHITECTURE_CONTRACT.md)**。

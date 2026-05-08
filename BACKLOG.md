@@ -1,6 +1,6 @@
 # HOKU315 BACKLOG
 
-**Workflow（AI-native）**：衝刺計畫見 [`SPRINT_PLAN.md`](SPRINT_PLAN.md)、日誌見 [`SPRINT_LOG.md`](SPRINT_LOG.md)；配對牆驗收見 [`TEST_CHECKLIST.md`](TEST_CHECKLIST.md)；資料庫套用軌跡見 [`sql/DEPLOY_LOG.md`](sql/DEPLOY_LOG.md)；**Debug／UAT 證據收集**見 [**`DEBUG_GUIDE.md`**](DEBUG_GUIDE.md)；**證據資產化目錄**見 [**`debug_evidence/README.md`**](debug_evidence/README.md)；**AI／P0 patch 約束**見 [**`DEBUG_POLICY.md`**](DEBUG_POLICY.md)；**Repo 分層**見 [**`REPO_ARCHITECTURE.md`**](REPO_ARCHITECTURE.md)。產品治理仍依根目錄 **`DEVELOPMENT_CONSTITUTION.md`**。
+**Workflow（AI-native）**：衝刺計畫見 [`SPRINT_PLAN.md`](SPRINT_PLAN.md)、日誌見 [`SPRINT_LOG.md`](SPRINT_LOG.md)；配對牆驗收見 [`TEST_CHECKLIST.md`](TEST_CHECKLIST.md)；資料庫套用軌跡見 [`sql/DEPLOY_LOG.md`](sql/DEPLOY_LOG.md)；**Debug／UAT 證據收集**見 [**`DEBUG_GUIDE.md`**](DEBUG_GUIDE.md)；**證據資產化目錄**見 [**`debug_evidence/README.md`**](debug_evidence/README.md)；**AI／P0 patch 約束**見 [**`DEBUG_POLICY.md`**](DEBUG_POLICY.md)；**Repo 分層**見 [**`REPO_ARCHITECTURE.md`**](REPO_ARCHITECTURE.md)；**介面契約**見 [**`ARCHITECTURE_CONTRACT.md`**](ARCHITECTURE_CONTRACT.md)。產品治理仍依根目錄 **`DEVELOPMENT_CONSTITUTION.md`**。
 
 狀態約定：`[TODO]` · `[WIP]` · `[DONE]` · **`[REMOVED/INTERNAL_ONLY]`**。
 
@@ -124,6 +124,16 @@ pytest tests/regression/
 - **PRODUCT／AI／OPS** 邏輯分層與目錄對照（見 [`REPO_ARCHITECTURE.md`](REPO_ARCHITECTURE.md)、[`product/`](product/)、[`ops/`](ops/)、[`ai/incident/README.md`](ai/incident/README.md)）。
 - **Replay** 實作歸位 **`ai/replay/`**；根目錄 **`replay/`** 保留 shim。
 - **無搬移** `scripts/`、`tests/`、`docs/`（維持 `pytest`、`python -m tests.*` 與 CI 相容）。
+
+---
+
+## INTERFACE STABILIZATION v1
+
+完成：
+
+- **product／ai／ops** 三層入口定義：`product/INTERFACE.md`、`ai/INTERFACE.md`、`ops/INTERFACE.md`
+- **不改程式**，僅建立契約層：[`ARCHITECTURE_CONTRACT.md`](ARCHITECTURE_CONTRACT.md)
+- **系統邊界**與 [`REPO_ARCHITECTURE.md`](REPO_ARCHITECTURE.md) 對齊
 
 ---
 

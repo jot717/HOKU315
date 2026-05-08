@@ -110,6 +110,8 @@
 
 * 建立 **AI-NATIVE REPO LAYERING v1**（[`REPO_ARCHITECTURE.md`](REPO_ARCHITECTURE.md)、`product/`、`ops/`、`ai/replay/`、`ai/incident/README.md`；`scripts`/`tests`/`docs` 仍於 repo 根目錄以相容 pytest／CI）
 
+* **INTERFACE STABILIZATION v1**：[`ARCHITECTURE_CONTRACT.md`](ARCHITECTURE_CONTRACT.md)、`product/INTERFACE.md`、`ai/INTERFACE.md`、`ops/INTERFACE.md`
+
 ### NEXT
 
 * replay runtime incident
