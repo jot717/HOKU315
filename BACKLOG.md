@@ -79,7 +79,7 @@ Definition of Done:
 - **Evidence**：`debug_evidence/`、`scripts/create_incident.py`、`scripts/collect_runtime.py`。
 - **Replay**：`replay/replay_incident.py`（現為 mock）、[`docs/REPLAY_GUIDE.md`](docs/REPLAY_GUIDE.md)。
 - **Diagnose**：`ai/taxonomy/error_taxonomy.yaml`、`python -m ai.diagnosis.root_cause_engine`。
-- **Suggest**：`scripts/generate_patch_context.py`、`ai/prompt_templates/`。
+- **Suggest**：`scripts/generate_patch_context.py`、`ai/prompt_templates/`；自動化補丁占位：`ai/self_heal/`（見 **[SELF-HEALING SYSTEM v1](#self-healing-system-v1)**）。
 - **Patch Policy**：`ai/patch_policy/`（占位）、[`DEBUG_POLICY.md`](DEBUG_POLICY.md)、[`docs/AI_PATCH_FLOW.md`](docs/AI_PATCH_FLOW.md)。
 
 ### INCIDENT SYSTEM v1-lite
@@ -97,6 +97,23 @@ pytest tests/regression/
 ```
 
 未通過 → **禁止部署**。CI 見 [`.github/workflows/regression.yml`](.github/workflows/regression.yml)。細節見 [`tests/regression/README.md`](tests/regression/README.md)。
+
+等同：`python scripts/run_regression.py`（會呼叫 `python -m pytest tests/regression/`）。
+
+---
+
+## SELF-HEALING SYSTEM v1
+
+能力：
+
+- **Suggest → Patch generation**：`ai/suggestion/suggest_engine.py`（taxonomy）、`ai/self_heal/patch_engine.py`、`ai/self_heal/suggest_bridge.py`
+- **Manual review patch**：`ai/self_heal/apply_patch.py`（僅列印；不自動改檔）
+- **Regression gate（套用前）**：[`tests/regression/`](tests/regression/)，`scripts/run_regression.py`
+- **Learning log**：`ai/self_heal/learning_log.py` → `ai/self_heal/logs/fix_log.json`
+
+狀態：
+
+- **SAFE MODE（無自動 deploy／無自動套用程式 diff）**。細見 [`ai/self_heal/README.md`](ai/self_heal/README.md)。
 
 ---
 

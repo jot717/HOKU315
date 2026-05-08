@@ -57,6 +57,7 @@ python -m ai.diagnosis.root_cause_engine --incident debug_evidence/YYYY-MM-DD-sh
   - `ai/prompt_templates/hotfix_prompt.md`  
   - `ai/prompt_templates/sql_patch_prompt.md`  
   - `ai/prompt_templates/runtime_bug_prompt.md`
+- **Self-healing v1（SAFE MODE）**：taxonomy → 待審 JSON：`python -m ai.self_heal.suggest_bridge STATE_DESYNC`；見 [`ai/self_heal/README.md`](../ai/self_heal/README.md)、[`BACKLOG.md`](../BACKLOG.md) **SELF-HEALING SYSTEM v1**。
 
 ---
 

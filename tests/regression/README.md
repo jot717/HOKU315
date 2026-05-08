@@ -4,7 +4,7 @@
 
 ## 政策（v1）
 
-- 所有 **deploy／hotfix** 合併前必須通過 **`pytest tests/regression/`**（見根目錄 [`BACKLOG.md`](../BACKLOG.md) — **REGRESSION GATE**）。
+- 所有 **deploy／hotfix** 合併前必須通過 **`pytest tests/regression/`**（見根目錄 [`BACKLOG.md`](../BACKLOG.md) — **REGRESSION GATE**）。包裝指令：**`python scripts/run_regression.py`**。
 - CI：GitHub Actions **`.github/workflows/regression.yml`**（push／PR）。
 
 ## `test_core_flows.py`

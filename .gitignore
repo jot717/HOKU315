@@ -13,3 +13,7 @@ __pycache__/
 .env.txt
 .venv/
 venv/
+
+# Self-healing v1 generated artifacts (regenerate locally)
+ai/self_heal/patches/*.json
+ai/self_heal/logs/fix_log.json
