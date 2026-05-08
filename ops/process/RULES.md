@@ -74,3 +74,11 @@ python scripts/run_regression.py
 ```
 
 On Unix / Git Bash: [`ops/hooks/check_regression.sh`](../hooks/check_regression.sh)
+
+---
+
+## SOURCE OF TRUTH
+
+- **Conceptual**: [`DEVELOPMENT_CONSTITUTION.md`](../../DEVELOPMENT_CONSTITUTION.md)
+- **Execution**: [`ops/process/RULES.md`](RULES.md) (this file)
+- **Enforcement**: [`ops/hooks/`](../hooks/)

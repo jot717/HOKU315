@@ -1,6 +1,6 @@
 # HOKU315 開發憲法（DEVELOPMENT_CONSTITUTION）
 
-本文件為本專案之開發原則，與 `BACKLOG.md` 搭配使用；變更架構或流程時應同步修訂本文。
+本文件為本專案之開發原則，與 `BACKLOG.md` 搭配使用；變更架構或流程時應同步修訂本文。**可執行流程與閘門**以 [`ops/process/RULES.md`](ops/process/RULES.md) 為準（見文末「執行說明」）。
 
 ---
 
@@ -53,6 +53,21 @@
 - **正式測試**：置於 **`tests/`**，自根目錄執行 `python -m tests.<模組>`（見 `README.md`）。  
 - **歸檔**：階段性、非正式流程之腳本置於 **`archive/`**（側邊欄預設隱藏，見 `.vscode/settings.json`）。  
 - **編譯產物**：Python 之 `__pycache__`、`.pyc` 由版本庫忽略並在編輯器中隱藏（見 `.gitignore`、`.vscode/settings.json`），避免干擾檔案樹與 diff。
+
+---
+
+## 執行說明（EXECUTION NOTE）
+
+本文為**理念與原則層**之治理說明；**實際可執行規則**（流程、閘門、腳本）以下列為準：
+
+- [`ops/process/RULES.md`](ops/process/RULES.md)
+- [`ops/hooks/`](ops/hooks/)（如 `check_process.py`、`check_regression.sh` / `check_regression.ps1`）
+
+This is **conceptual governance only**.  
+All execution rules are enforced in:
+
+- `ops/process/RULES.md`
+- `ops/hooks/*`
 
 ---
 

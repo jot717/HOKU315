@@ -1,6 +1,6 @@
 # HOKU315 BACKLOG
 
-**Workflow（AI-native）**：衝刺計畫見 [`SPRINT_PLAN.md`](SPRINT_PLAN.md)、日誌見 [`SPRINT_LOG.md`](SPRINT_LOG.md)；配對牆驗收見 [`TEST_CHECKLIST.md`](TEST_CHECKLIST.md)；資料庫套用軌跡見 [`sql/DEPLOY_LOG.md`](sql/DEPLOY_LOG.md)；**Debug／UAT 證據收集**見 [**`DEBUG_GUIDE.md`**](DEBUG_GUIDE.md)；**證據資產化目錄**見 [**`debug_evidence/README.md`**](debug_evidence/README.md)；**AI／P0 patch 約束**見 [**`DEBUG_POLICY.md`**](DEBUG_POLICY.md)；**Repo 分層**見 [**`REPO_ARCHITECTURE.md`**](REPO_ARCHITECTURE.md)；**介面契約**見 [**`ARCHITECTURE_CONTRACT.md`**](ARCHITECTURE_CONTRACT.md)；**流程護欄**見 [**`ops/process/RULES.md`**](ops/process/RULES.md)。產品治理仍依根目錄 **`DEVELOPMENT_CONSTITUTION.md`**。
+**Workflow（AI-native）**：衝刺計畫見 [`SPRINT_PLAN.md`](SPRINT_PLAN.md)、日誌見 [`SPRINT_LOG.md`](SPRINT_LOG.md)；配對牆驗收見 [`TEST_CHECKLIST.md`](TEST_CHECKLIST.md)；資料庫套用軌跡見 [`sql/DEPLOY_LOG.md`](sql/DEPLOY_LOG.md)；**Debug／UAT 證據收集**見 [**`DEBUG_GUIDE.md`**](DEBUG_GUIDE.md)；**證據資產化目錄**見 [**`debug_evidence/README.md`**](debug_evidence/README.md)；**AI／P0 patch 約束**見 [**`DEBUG_POLICY.md`**](DEBUG_POLICY.md)；**Repo 分層**見 [**`REPO_ARCHITECTURE.md`**](REPO_ARCHITECTURE.md)；**介面契約**見 [**`ARCHITECTURE_CONTRACT.md`**](ARCHITECTURE_CONTRACT.md)；**流程護欄**見 [**`ops/process/RULES.md`**](ops/process/RULES.md)；**治理層級**見 [GOVERNANCE HIERARCHY](#governance-hierarchy)。產品治理仍依根目錄 **`DEVELOPMENT_CONSTITUTION.md`**。
 
 狀態約定：`[TODO]` · `[WIP]` · `[DONE]` · **`[REMOVED/INTERNAL_ONLY]`**。
 
@@ -327,3 +327,15 @@ System-level rules（詳 [`ops/process/RULES.md`](ops/process/RULES.md)）：
 
 - **2026-05-08**：BACKLOG 由「連續 HOTFIX 混編」改為 **P0–P3 + HOTFIX ARCHIVE + DEV LOG**；衝刺與測試清單外掛獨立 markdown，以降低 AI 協作與交付混線。
 - **2026-05-08**：啟動 **Stabilization Sprint (2026-W01)**，`SPRINT_PLAN.md`／`TEST_CHECKLIST.md`（MATCH FLOW UAT）對齊；凍結非 P0 新功能直至 DoD。
+
+---
+
+## GOVERNANCE HIERARCHY
+
+**Constitution → Rules → Hooks**
+
+| 層級 | 角色 |
+|------|------|
+| **Constitution** | 理念與原則 — [`DEVELOPMENT_CONSTITUTION.md`](DEVELOPMENT_CONSTITUTION.md) |
+| **Rules** | 可執行之流程定義 — [`ops/process/RULES.md`](ops/process/RULES.md) |
+| **Hooks** | 機械化檢查（檔案存在、回歸指令）— [`ops/hooks/`](ops/hooks/) |
