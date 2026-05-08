@@ -149,6 +149,15 @@ System-level rules（詳 [`ops/process/RULES.md`](ops/process/RULES.md)）：
 
 ---
 
+## MATCH FLOW v1
+
+- **MVP matching system**：規格 [`backlog/BACKLOG_MATCH_FLOW_v1.md`](backlog/BACKLOG_MATCH_FLOW_v1.md)
+- **rule-based scoring** 草案：[`product/match/match_logic.md`](product/match/match_logic.md)
+- **state / flow**：[`product/match/state_model.md`](product/match/state_model.md)、[`product/match/product_flow.md`](product/match/product_flow.md)
+- **Sprint 2026-W02**：[`backlog/SPRINT_MATCH_FLOW_v1.md`](backlog/SPRINT_MATCH_FLOW_v1.md)
+
+---
+
 ## HOTFIX ARCHIVE
 
 此區僅封存已發生之緊急修復與根因類項，避免與進行中需求混線。**本 Sprint 內每一筆程式面修復仍須同步更新本節與 [`SPRINT_LOG.md`](SPRINT_LOG.md)。**
@@ -316,6 +325,7 @@ System-level rules（詳 [`ops/process/RULES.md`](ops/process/RULES.md)）：
 | 2026-05-09 | **HOTFIX**：Reflex nested `<p>`／`rx.callout` hydration；見 **HOTFIX ARCHIVE** |
 | 2026-05-10 | **流程**：建立 **`DEBUG_GUIDE.md`**（標準除錯證據流＋HOTFIX SOP）；見 **HOTFIX ARCHIVE** |
 | 2026-05-11 | **資產化**：建立 **`debug_evidence/`**、`DEBUG_POLICY.md`；見 **HOTFIX ARCHIVE** |
+| （rolling） | **MATCH FLOW v1** 產品初始化文件：`backlog/`、`product/match/*.md` |
 
 ### Task 級筆記（精簡保留）
 

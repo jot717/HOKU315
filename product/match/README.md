@@ -2,6 +2,16 @@
 
 **Logical ownership**: match wall UI、配對 RPC 呼叫與相關 state。
 
+**MATCH FLOW v1（init 文件，無程式變更）**
+
+| 文件 | 內容 |
+|------|------|
+| [`state_model.md`](state_model.md) | USER_STATE / MATCH_STATE |
+| [`match_logic.md`](match_logic.md) | 規則式分數草案 |
+| [`product_flow.md`](product_flow.md) | 使用者流程 |
+
+**Backlog／Sprint**：[`backlog/BACKLOG_MATCH_FLOW_v1.md`](../../backlog/BACKLOG_MATCH_FLOW_v1.md)、[`backlog/SPRINT_MATCH_FLOW_v1.md`](../../backlog/SPRINT_MATCH_FLOW_v1.md)
+
 **目前實作位置**（Reflex app 模組未搬移，避免破壞 `fox_quiz`／`rxconfig`）：
 
 - `fox_quiz/match_wall.py`

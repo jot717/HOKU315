@@ -124,6 +124,18 @@
 
 ---
 
+## SPRINT 2026-W02 — MATCH FLOW v1
+
+**STATUS**: ACTIVE
+
+**GOAL**:
+
+- implement minimal match system
+
+詳見 [`backlog/SPRINT_MATCH_FLOW_v1.md`](backlog/SPRINT_MATCH_FLOW_v1.md)。
+
+---
+
 ## PROCESS ENFORCEMENT ACTIVE
 
 All development must follow:
