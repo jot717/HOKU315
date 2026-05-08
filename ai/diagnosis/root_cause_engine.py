@@ -5,6 +5,7 @@ Skeleton root-cause classifier: reads debug_evidence incident folders + taxonomy
 CLI:
   python -m ai.diagnosis.root_cause_engine --incident debug_evidence/2026-05-11-example
   python -m ai.diagnosis.root_cause_engine --scan-latest
+  python -m ai.diagnosis.root_cause_engine --error-type STATE_DESYNC   # v1-lite taxonomy lookup
 """
 
 from __future__ import annotations
@@ -111,15 +112,36 @@ def suggest_root_cause(incident_dir: Path, taxonomy_path: Path) -> str:
     return "\n".join(lines)
 
 
+def taxonomy_lookup(error_type: str, taxonomy_path: Path) -> dict[str, Any]:
+    taxonomy = load_taxonomy(taxonomy_path)
+    entry = taxonomy.get(error_type)
+    if isinstance(entry, dict):
+        return dict(entry)
+    return {"result": "unknown error", "error_type": error_type}
+
+
 def main() -> None:
     root = repo_root()
     default_tax = root / "ai" / "taxonomy" / "error_taxonomy.yaml"
     parser = argparse.ArgumentParser(description="Classify incident from debug_evidence (skeleton).")
     parser.add_argument("--incident", type=Path, help="Path to debug_evidence/YYYY-MM-DD-slug/")
     parser.add_argument("--scan-latest", action="store_true", help="Pick latest dated folder under debug_evidence/")
+    parser.add_argument(
+        "--error-type",
+        metavar="NAME",
+        help="v1-lite: print taxonomy entry for VECTOR_FORMAT_ERROR, RPC_SIGNATURE_ERROR, STATE_DESYNC, ...",
+    )
     parser.add_argument("--taxonomy", type=Path, default=default_tax)
     parser.add_argument("--json", action="store_true", help="Emit machine-readable summary to stdout")
     args = parser.parse_args()
+
+    if not args.taxonomy.is_file():
+        sys.exit(f"error: missing taxonomy: {args.taxonomy}")
+
+    if args.error_type:
+        out = taxonomy_lookup(args.error_type.strip(), args.taxonomy)
+        print(json.dumps(out, ensure_ascii=False, indent=2))
+        return
 
     ev = root / "debug_evidence"
     if args.scan_latest:
@@ -131,10 +153,7 @@ def main() -> None:
         if not inc.is_dir():
             sys.exit(f"error: not a directory: {inc}")
     else:
-        parser.error("provide --incident or --scan-latest")
-
-    if not args.taxonomy.is_file():
-        sys.exit(f"error: missing taxonomy: {args.taxonomy}")
+        parser.error("provide --incident, --scan-latest, or --error-type")
 
     if args.json:
         taxonomy = load_taxonomy(args.taxonomy)

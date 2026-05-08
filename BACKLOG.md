@@ -82,6 +82,10 @@ Definition of Done:
 - **Suggest**：`scripts/generate_patch_context.py`、`ai/prompt_templates/`。
 - **Patch Policy**：`ai/patch_policy/`（占位）、[`DEBUG_POLICY.md`](DEBUG_POLICY.md)、[`docs/AI_PATCH_FLOW.md`](docs/AI_PATCH_FLOW.md)。
 
+### INCIDENT SYSTEM v1-lite
+
+最小閉環 **Observe → Mock replay → Taxonomy lookup**：見 [`docs/INCIDENT_SYSTEM_LITE.md`](docs/INCIDENT_SYSTEM_LITE.md)（`runtime.json`、`replay_incident.py` 位置參數、`root_cause_engine --error-type`）。
+
 ---
 
 ## REGRESSION GATE

@@ -87,6 +87,14 @@ def main() -> None:
     }
     (target / "runtime_collect.json").write_text(json.dumps(snapshot, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
+    # INCIDENT SYSTEM v1-lite: single-file bundle for mock replay (secrets redacted).
+    lite_bundle = {
+        "timestamp": snapshot["collected_at"],
+        "env": redacted_environ(),
+        "note": "INCIDENT SYSTEM v1-lite compatible snapshot; env values are redacted (never raw os.environ).",
+    }
+    (target / "runtime.json").write_text(json.dumps(lite_bundle, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+
     env_path = target / "env_redacted.json"
     env_path.write_text(json.dumps(redacted_environ(), indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 

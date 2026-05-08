@@ -7,6 +7,7 @@ would do - without calling PostgREST, mutating DB, or loading full app state.
 
 Usage:
   python replay/replay_incident.py --incident debug_evidence/2026-05-11-example
+  python replay/replay_incident.py debug_evidence/2026-05-11-example   # v1-lite positional
 """
 
 from __future__ import annotations
@@ -41,14 +42,38 @@ def mock_replay_state(incident: Path) -> dict[str, object]:
 def main() -> None:
     root = repo_root()
     p = argparse.ArgumentParser(description="Mock replay for HOKU315 incidents (skeleton).")
-    p.add_argument("--incident", type=Path, required=True, help="Path to debug_evidence/YYYY-MM-DD-slug/")
+    p.add_argument(
+        "--incident",
+        "-i",
+        type=Path,
+        default=None,
+        help="Path to debug_evidence/YYYY-MM-DD-slug/",
+    )
+    p.add_argument(
+        "incident_positional",
+        nargs="?",
+        type=Path,
+        default=None,
+        help="(v1-lite) same as --incident",
+    )
     args = p.parse_args()
-    incident = args.incident.resolve()
+    raw = args.incident or args.incident_positional
+    if raw is None:
+        p.error("pass incident folder: replay_incident.py debug_evidence/YYYY-MM-DD-slug or --incident ...")
+    incident = raw.resolve()
     if not incident.is_dir():
         sys.exit(f"error: not a directory: {incident}")
 
     print("=== MOCK REPLAY (no side effects) ===")
     print(f"incident: {incident.relative_to(root)}")
+    print()
+
+    runtime_lite = load_json(incident / "runtime.json")
+    print("[0] runtime.json (v1-lite observation bundle)")
+    if runtime_lite and isinstance(runtime_lite, dict):
+        print(f"  loaded snapshot keys: {list(runtime_lite.keys())}")
+    else:
+        print("  (optional) missing or invalid; run scripts/collect_runtime.py <slug>")
     print()
 
     rpc = load_json(incident / "rpc_payload.json")
