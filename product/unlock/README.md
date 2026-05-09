@@ -1,11 +1,20 @@
-# Product layer — unlock
+# UNLOCK FLOW v1
 
-**Logical ownership**：解鎖／付費占位、`user_unlocks` 與配對牆解鎖 UX。
+## PRODUCT DIRECTION
 
-**目前實作位置**：
+MATCH → UNLOCK → INSIGHT
 
-- `fox_quiz/unlocks_page.py`（`/unlocks`）
-- `fox_quiz/match_wall.py`（解鎖 dialog）
-- `db_service.py`（`create_unlock` 等）
+---
 
-此目錄為分類占位；見 [`REPO_ARCHITECTURE.md`](../../REPO_ARCHITECTURE.md)。
+## MODULES
+
+- state_model.md
+- product_flow.md
+- runtime/unlock_engine.py
+- runtime/unlock_flow.py
+
+---
+
+## REGRESSION
+
+tests/regression/test_unlock_flow.py

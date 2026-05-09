@@ -349,3 +349,13 @@ System-level rules（詳 [`ops/process/RULES.md`](ops/process/RULES.md)）：
 | **Constitution** | 理念與原則 — [`DEVELOPMENT_CONSTITUTION.md`](DEVELOPMENT_CONSTITUTION.md) |
 | **Rules** | 可執行之流程定義 — [`ops/process/RULES.md`](ops/process/RULES.md) |
 | **Hooks** | 機械化檢查（檔案存在、回歸指令）— [`ops/hooks/`](ops/hooks/) |
+
+---
+
+## PRODUCT DIRECTION CORRECTION v1
+
+MATCH → UNLOCK → INSIGHT
+
+Deprecated:
+
+MATCH → CHAT

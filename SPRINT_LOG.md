@@ -143,3 +143,15 @@ All development must follow:
 `BACKLOG → SPRINT → IMPLEMENT → TEST → LOG`
 
 Rules: [`ops/process/RULES.md`](ops/process/RULES.md).
+
+---
+
+## SPRINT 2026-W03 — UNLOCK FLOW v1
+
+STATUS: ACTIVE
+
+GOAL:
+
+- implement unlock insight system
+
+- remove chat-first direction
