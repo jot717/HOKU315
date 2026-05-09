@@ -155,3 +155,15 @@ GOAL:
 - implement unlock insight system
 
 - remove chat-first direction
+
+---
+
+## FLOW CONSISTENCY SYSTEM v1
+
+STATUS: ACTIVE
+
+GOAL:
+
+- standardize product flow architecture
+
+- prevent flow drift

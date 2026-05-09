@@ -100,3 +100,17 @@ Feature spec file check (BACKLOG + SPRINT filenames under `backlog/`):
 ```powershell
 python ops/gate/check_flow.py --feature MATCH_FLOW_v1
 ```
+
+---
+
+## FLOW CONSISTENCY
+
+All product flows must follow:
+
+[`ops/flow/FLOW_CONTRACT.md`](../flow/FLOW_CONTRACT.md)
+
+Validation:
+
+```powershell
+python ops/flow/check_all_flows.py
+```

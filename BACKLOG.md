@@ -359,3 +359,17 @@ MATCH → UNLOCK → INSIGHT
 Deprecated:
 
 MATCH → CHAT
+
+---
+
+## FLOW CONSISTENCY SYSTEM v1
+
+Goal:
+
+Prevent architecture drift between MATCH / UNLOCK / future flows.
+
+Introduced:
+
+- FLOW_CONTRACT
+- flow_registry
+- shared flow validation
