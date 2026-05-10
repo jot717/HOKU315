@@ -16,6 +16,8 @@ class AppState(rx.State):
     flow_result: Dict[str, Any] = {}
     insight_state: Dict[str, Any] = {}
 
+    demo_match_loading: bool = False
+
     session_history: List[Dict[str, Any]] = []
 
     compatibility_title: str = ""
@@ -98,35 +100,42 @@ class AppState(rx.State):
         self.session_history = load_history()
 
     @rx.event
-    def run_demo_match(self) -> None:
-        user_a = load_profile()
+    async def run_demo_match(self):
+        async with self:
+            self.demo_match_loading = True
+        try:
+            user_a = load_profile()
 
-        user_b = {
-            "interests": ["music", "travel", "sports"],
-            "activity": 6,
-        }
+            user_b = {
+                "interests": ["music", "travel", "sports"],
+                "activity": 6,
+            }
 
-        result = execute_bound_flow(
-            {},
-            user_a,
-            user_b,
-        )
-
-        self.flow_result = result
-        self.insight_state = result.get(
-            "insight_state",
-            {},
-        )
-        self._apply_emotional_insight()
-
-        if self.insight_state:
-            append_history(
-                {
-                    "compatibility_title": self.compatibility_title,
-                    "energy_summary": self.energy_summary,
-                    "final_insight": self.final_insight,
-                }
+            result = execute_bound_flow(
+                {},
+                user_a,
+                user_b,
             )
+
+            async with self:
+                self.flow_result = result
+                self.insight_state = result.get(
+                    "insight_state",
+                    {},
+                )
+                self._apply_emotional_insight()
+
+                if self.insight_state:
+                    append_history(
+                        {
+                            "compatibility_title": self.compatibility_title,
+                            "energy_summary": self.energy_summary,
+                            "final_insight": self.final_insight,
+                        }
+                    )
+        finally:
+            async with self:
+                self.demo_match_loading = False
 
     @rx.event
     def load_latest_session(self) -> None:

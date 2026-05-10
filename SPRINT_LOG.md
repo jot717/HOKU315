@@ -203,3 +203,23 @@ STATUS: ACTIVE
 ## SPRINT 2026-W05 — PHASE 1 FINALIZATION
 
 STATUS: ACTIVE
+
+---
+
+# SPRINT 2026-W06 — APP SHELL REPLACEMENT v1
+
+STATUS: ACTIVE
+
+GOAL:
+Replace engineering/demo UI shell with real AI-native consumer UX.
+
+---
+
+# APP EXPERIENCE POLISH v1
+
+STATUS: ACTIVE
+
+GOAL:
+Improve emotional UX, hero insight, empty/loading states, and layout readability.
+
+See [`backlog/SPRINT_APP_EXPERIENCE_POLISH_v1.md`](backlog/SPRINT_APP_EXPERIENCE_POLISH_v1.md).

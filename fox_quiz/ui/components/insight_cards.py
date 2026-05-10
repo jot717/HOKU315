@@ -6,47 +6,27 @@ from fox_quiz.state.app_state import AppState
 
 
 def insight_cards() -> rx.Component:
-    return rx.vstack(
-        rx.box(
+    """Single emphasis card for narrative insight (score + energy live in hero_insight)."""
+    return rx.box(
+        rx.vstack(
             rx.heading(
-                "Compatibility",
+                "深度洞察",
                 size="4",
-            ),
-            rx.text(
-                AppState.compatibility_title,
-                size="5",
-            ),
-            padding="1em",
-            width="100%",
-            border_radius="16px",
-            border="1px solid #444",
-        ),
-        rx.box(
-            rx.heading(
-                "Shared Energy",
-                size="4",
-            ),
-            rx.text(
-                AppState.energy_summary,
-            ),
-            padding="1em",
-            width="100%",
-            border_radius="16px",
-            border="1px solid #444",
-        ),
-        rx.box(
-            rx.heading(
-                "Final Insight",
-                size="4",
+                weight="medium",
             ),
             rx.text(
                 AppState.final_insight,
+                size="3",
+                style={"line_height": "1.7"},
+                as_="span",
             ),
-            padding="1em",
+            spacing="3",
+            align_items="start",
             width="100%",
-            border_radius="16px",
-            border="1px solid #444",
         ),
-        spacing="4",
+        padding="1.25em",
         width="100%",
+        border_radius="16px",
+        border="1px solid var(--gray-6)",
+        background="var(--gray-1)",
     )
