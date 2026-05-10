@@ -387,3 +387,15 @@ Dynamic compatibility insight generation.
 Unified orchestration for:
 
 MATCH → UNLOCK → INSIGHT
+
+---
+
+## APP FLOW BINDING NOTE
+
+Current phase:
+
+runtime-side integration preparation only.
+
+Actual fox_quiz UI binding
+
+will be implemented in future APP UI INTEGRATION sprint.

@@ -2,7 +2,6 @@
   "flows": [
     "match",
     "unlock",
-    "insight",
-    "core"
+    "insight"
   ]
 }

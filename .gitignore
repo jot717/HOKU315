@@ -14,6 +14,9 @@ __pycache__/
 .venv/
 venv/
 
+# Local session (APP FLOW BINDING)
+runtime_state/local_session.json
+
 # Self-healing v1 generated artifacts (regenerate locally)
 ai/self_heal/patches/*.json
 ai/self_heal/logs/fix_log.json
