@@ -18,6 +18,7 @@ venv/
 runtime_state/local_session.json
 runtime_state/profile.json
 runtime_state/user_profile.json
+runtime_state/session_history.json
 
 # Self-healing v1 generated artifacts (regenerate locally)
 ai/self_heal/patches/*.json

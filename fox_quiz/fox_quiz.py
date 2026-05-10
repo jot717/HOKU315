@@ -14,6 +14,7 @@ from fox_quiz.match_wall import MatchWallState, match_wall_page
 from fox_quiz.nav_bar import app_navbar
 from fox_quiz.session_state import SessionState
 from fox_quiz.story_page import story_page
+from fox_quiz.state.app_state import AppState
 from fox_quiz.state.profile_state import ProfileState
 from fox_quiz.ui.app_page import app_page
 from fox_quiz.ui.profile_page import profile_page
@@ -295,6 +296,7 @@ app.add_page(
     app_page,
     route="/insight",
     title="Insight Demo",
+    on_load=AppState.load_session_history,
 )
 app.add_page(
     profile_page,

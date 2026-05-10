@@ -1,22 +1,30 @@
 from __future__ import annotations
 
-from typing import Any, Dict
+from typing import Any, Dict, List
 
 import reflex as rx
 
 from product.app_binding.runtime.flow_binding import execute_bound_flow
 from product.app_binding.runtime.persistence import load_session
 from product.insight.experience.insight_formatter import format_emotional_insight
+from product.insight.experience.reveal_engine import build_reveal_state
 from product.profile.runtime.profile_store import load_profile
+from product.session.runtime.session_history import append_history, load_history
 
 
 class AppState(rx.State):
     flow_result: Dict[str, Any] = {}
     insight_state: Dict[str, Any] = {}
 
+    session_history: List[Dict[str, Any]] = []
+
     compatibility_title: str = ""
     energy_summary: str = ""
     final_insight: str = ""
+
+    reveal_level: str = ""
+    reveal_delay: float = 0.0
+    show_final_card: bool = False
 
     @rx.var(cache=True)
     def has_insight(self) -> bool:
@@ -43,17 +51,39 @@ class AppState(rx.State):
             return ""
         return str(self.insight_state.get("activity_analysis", ""))
 
+    @rx.var(cache=True)
+    def match_score_for_meter(self) -> float:
+        return float(self.flow_result.get("match", {}).get("score", 0))
+
+    @rx.var(cache=True)
+    def match_score_heading(self) -> str:
+        s = float(self.flow_result.get("match", {}).get("score", 0))
+        return f"{int(round(s))}%"
+
     def _apply_emotional_insight(self) -> None:
         if not self.insight_state:
             self.compatibility_title = ""
             self.energy_summary = ""
             self.final_insight = ""
+            self.reveal_level = ""
+            self.reveal_delay = 0.0
+            self.show_final_card = False
             return
+
         score = float(self.flow_result.get("match", {}).get("score", 0))
         emotional = format_emotional_insight(self.insight_state, score)
         self.compatibility_title = emotional.get("compatibility_title", "")
         self.energy_summary = emotional.get("energy_summary", "")
         self.final_insight = emotional.get("final_insight", "")
+
+        reveal = build_reveal_state(self.insight_state, score)
+        self.reveal_level = str(reveal["level"])
+        self.reveal_delay = float(reveal["reveal_delay"])
+        self.show_final_card = bool(reveal["show_final_card"])
+
+    @rx.event
+    def load_session_history(self) -> None:
+        self.session_history = load_history()
 
     @rx.event
     def run_demo_match(self) -> None:
@@ -76,6 +106,15 @@ class AppState(rx.State):
             {},
         )
         self._apply_emotional_insight()
+
+        if self.insight_state:
+            append_history(
+                {
+                    "compatibility_title": self.compatibility_title,
+                    "energy_summary": self.energy_summary,
+                    "final_insight": self.final_insight,
+                }
+            )
 
     @rx.event
     def load_latest_session(self) -> None:
