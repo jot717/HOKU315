@@ -14,6 +14,7 @@ from fox_quiz.match_wall import MatchWallState, match_wall_page
 from fox_quiz.nav_bar import app_navbar
 from fox_quiz.session_state import SessionState
 from fox_quiz.story_page import story_page
+from fox_quiz.ui.app_page import app_page
 from fox_quiz.unlocks_page import unlocks_page
 from fox_logic import (
     SOCIAL_MINE_DIMENSIONS,
@@ -287,4 +288,9 @@ app.add_page(
     route="/unlocks",
     title="解鎖",
     on_load=SessionState.guard_protected_routes,
+)
+app.add_page(
+    app_page,
+    route="/insight",
+    title="Insight Demo",
 )

@@ -14,12 +14,23 @@ SAFE MODE:
 - local state binding
 - runtime orchestration
 - local persistence
+- `runtime/flow_binding.execute_bound_flow` → orchestrator + `persist_session`
+
+PARTIAL:
+
+- demo UI at `/insight` (`fox_quiz/ui`, `fox_quiz/state/app_state.py`)
 
 NOT YET:
 
-- Reflex UI binding
-- frontend event binding
-- live app integration
+- Production wiring from match_wall / real profiles
+- live authenticated session binding
+
+---
+
+## MODULES
+
+- `runtime/persistence.py`
+- `runtime/flow_binding.py`
 
 ---
 

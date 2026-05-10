@@ -399,3 +399,9 @@ runtime-side integration preparation only.
 Actual fox_quiz UI binding
 
 will be implemented in future APP UI INTEGRATION sprint.
+
+---
+
+## APP UI INTEGRATION v1
+
+First clickable insight experience.
