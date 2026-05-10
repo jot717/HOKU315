@@ -31,7 +31,7 @@ def insight_panel() -> rx.Component:
             rx.box(
                 rx.vstack(
                     compatibility_meter(
-                        AppState.match_score_for_meter,
+                        AppState.match_score_safe_int,
                         AppState.match_score_heading,
                     ),
                     rx.text(

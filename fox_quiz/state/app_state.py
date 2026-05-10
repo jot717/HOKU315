@@ -52,13 +52,25 @@ class AppState(rx.State):
         return str(self.insight_state.get("activity_analysis", ""))
 
     @rx.var(cache=True)
-    def match_score_for_meter(self) -> float:
-        return float(self.flow_result.get("match", {}).get("score", 0))
+    def match_score_safe_int(self) -> int:
+        """0–100 int for rx.progress (requires int, not float)."""
+        s = float(self.flow_result.get("match", {}).get("score", 0))
+        return max(0, min(100, int(round(s))))
 
     @rx.var(cache=True)
     def match_score_heading(self) -> str:
-        s = float(self.flow_result.get("match", {}).get("score", 0))
-        return f"{int(round(s))}%"
+        safe = max(
+            0,
+            min(
+                100,
+                int(
+                    round(
+                        float(self.flow_result.get("match", {}).get("score", 0)),
+                    )
+                ),
+            ),
+        )
+        return f"{safe}%"
 
     def _apply_emotional_insight(self) -> None:
         if not self.insight_state:

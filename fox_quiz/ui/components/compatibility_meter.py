@@ -6,13 +6,14 @@ import reflex as rx
 
 
 def compatibility_meter(
-    score: Union[float, int, rx.Var],
-    heading: Union[str, rx.Var],
+    safe_score: Union[int, rx.Var],
+    pct_label: Union[str, rx.Var],
 ) -> rx.Component:
+    """Use AppState.match_score_safe_int + match_score_heading so value is int for rx.progress."""
     return rx.vstack(
-        rx.heading(heading, size="5"),
+        rx.heading(pct_label, size="5"),
         rx.progress(
-            value=score,
+            value=safe_score,
             max=100,
             width="100%",
         ),
