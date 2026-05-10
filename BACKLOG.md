@@ -373,3 +373,9 @@ Introduced:
 - FLOW_CONTRACT
 - flow_registry
 - shared flow validation
+
+---
+
+## INSIGHT ENGINE v1
+
+Dynamic compatibility insight generation.

@@ -167,3 +167,9 @@ GOAL:
 - standardize product flow architecture
 
 - prevent flow drift
+
+---
+
+## SPRINT 2026-W04 — INSIGHT ENGINE v1
+
+STATUS: ACTIVE

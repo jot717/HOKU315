@@ -1,6 +1,7 @@
 {
   "flows": [
     "match",
-    "unlock"
+    "unlock",
+    "insight"
   ]
 }
