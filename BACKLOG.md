@@ -436,11 +436,3 @@ Emotional AI insight UX layer.
 Consumer-facing product shell replacement initiated.
 
 Legacy engineering/demo shell is being deprecated.
-
----
-
-# APP EXPERIENCE POLISH v1
-
-Emotional UX and product-like polish (onboarding, empty/loading states, insight hero, spacing).
-
-See [`backlog/BACKLOG_APP_EXPERIENCE_POLISH_v1.md`](backlog/BACKLOG_APP_EXPERIENCE_POLISH_v1.md).
