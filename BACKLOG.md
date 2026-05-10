@@ -379,3 +379,11 @@ Introduced:
 ## INSIGHT ENGINE v1
 
 Dynamic compatibility insight generation.
+
+---
+
+## FLOW INTEGRATION v1
+
+Unified orchestration for:
+
+MATCH → UNLOCK → INSIGHT
