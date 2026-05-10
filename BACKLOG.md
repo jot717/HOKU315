@@ -411,3 +411,9 @@ First clickable insight experience.
 ## INSIGHT EXPERIENCE v1
 
 Emotional AI insight UX layer.
+
+---
+
+## USER PROFILE SYSTEM v1
+
+Real profile state connected into product flow.

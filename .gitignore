@@ -16,6 +16,7 @@ venv/
 
 # Local session (APP FLOW BINDING)
 runtime_state/local_session.json
+runtime_state/profile.json
 
 # Self-healing v1 generated artifacts (regenerate locally)
 ai/self_heal/patches/*.json
