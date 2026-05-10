@@ -40,3 +40,13 @@ BACKLOG
 → IMPLEMENT
 → REGRESSION
 → DONE
+
+---
+
+## PROFILE FLOW
+
+Required:
+
+- runtime/profile_store.py
+- regression test
+- local persistence

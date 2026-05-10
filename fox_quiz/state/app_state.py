@@ -7,7 +7,7 @@ import reflex as rx
 from product.app_binding.runtime.flow_binding import execute_bound_flow
 from product.app_binding.runtime.persistence import load_session
 from product.insight.experience.insight_formatter import format_emotional_insight
-from product.profile.runtime.profile_persistence import load_profile
+from product.profile.runtime.profile_store import load_profile
 
 
 class AppState(rx.State):
@@ -58,12 +58,6 @@ class AppState(rx.State):
     @rx.event
     def run_demo_match(self) -> None:
         user_a = load_profile()
-
-        if not user_a:
-            user_a = {
-                "interests": ["ai", "music", "travel"],
-                "activity": 5,
-            }
 
         user_b = {
             "interests": ["music", "travel", "sports"],

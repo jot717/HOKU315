@@ -1,27 +1,38 @@
-## USER PROFILE SYSTEM v1
+# USER PROFILE SYSTEM v1
 
-### GOAL
+## GOAL
 
-Replace hardcoded demo users with real profile state.
-
----
-
-### SCOPE
-
-- editable profile
-- persistent interests
-- activity level
-- flow integration
+建立可持久化的本地 User Profile System，
+供 MATCH / UNLOCK / INSIGHT 使用。
 
 ---
 
-### DEPENDENCIES
+## SCOPE
 
-- APP UI INTEGRATION v1
-- INSIGHT EXPERIENCE v1
+- local user profile
+- editable interests
+- editable activity level
+- profile persistence
+- profile loading
 
 ---
 
-### STATUS
+## NON-GOALS
 
-planned
+- auth
+- cloud sync
+- supabase persistence
+- vector embedding
+
+---
+
+## DEPENDENCIES
+
+- APP FLOW BINDING v1.1
+- runtime_state persistence
+
+---
+
+## STATUS
+
+ACTIVE

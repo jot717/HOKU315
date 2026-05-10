@@ -1,22 +1,35 @@
-## SPRINT 2026-W09 — USER PROFILE SYSTEM v1
+# SPRINT 2026-W04 — USER PROFILE SYSTEM v1
 
-### GOAL
+## GOAL
 
-Connect real profile data into product flow.
-
----
-
-### DELIVERABLES
-
-- editable interests
-- editable activity level
-- persistent profile
-- real flow input
+Deliver editable local user profile system.
 
 ---
 
-### DONE CRITERIA
+## DELIVERABLES
+
+- [ ] local profile model
+- [ ] save profile runtime
+- [ ] load profile runtime
+- [ ] profile editor UI
+- [ ] bind profile into match flow
+
+---
+
+## DONE CRITERIA
 
 - user can edit profile
 - profile persists locally
-- flow uses real profile state
+- match uses saved profile
+
+---
+
+## BLOCKERS
+
+none
+
+---
+
+## NEXT
+
+INSIGHT REVEAL UX v2

@@ -416,4 +416,6 @@ Emotional AI insight UX layer.
 
 ## USER PROFILE SYSTEM v1
 
-Real profile state connected into product flow.
+- local editable profile
+- local persistence
+- match flow binding
