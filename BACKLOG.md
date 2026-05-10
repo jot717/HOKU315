@@ -405,3 +405,9 @@ will be implemented in future APP UI INTEGRATION sprint.
 ## APP UI INTEGRATION v1
 
 First clickable insight experience.
+
+---
+
+## INSIGHT EXPERIENCE v1
+
+Emotional AI insight UX layer.

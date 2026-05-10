@@ -3,6 +3,7 @@ from __future__ import annotations
 import reflex as rx
 
 from fox_quiz.state.app_state import AppState
+from fox_quiz.ui.components.insight_cards import insight_cards
 
 
 def insight_panel() -> rx.Component:
@@ -37,6 +38,7 @@ def insight_panel() -> rx.Component:
                     weight="bold",
                 ),
                 rx.text(AppState.insight_activity_analysis),
+                insight_cards(),
                 padding="1.5em",
                 border="1px solid #333",
                 border_radius="12px",
