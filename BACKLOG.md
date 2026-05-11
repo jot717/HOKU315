@@ -436,3 +436,11 @@ Emotional AI insight UX layer.
 Consumer-facing product shell replacement initiated.
 
 Legacy engineering/demo shell is being deprecated.
+
+---
+
+## PRODUCT CONSTITUTION ACTIVE
+
+Product direction is governed by:
+
+[`ops/product/PRODUCT_CONSTITUTION.md`](ops/product/PRODUCT_CONSTITUTION.md)
