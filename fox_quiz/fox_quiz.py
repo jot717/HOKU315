@@ -17,6 +17,7 @@ from fox_quiz.story_page import story_page
 from fox_quiz.state.app_state import AppState
 from fox_quiz.state.profile_state import ProfileState
 from fox_quiz.ui.app_page import app_page
+from fox_quiz.ui.pages.home_page import home_page
 from fox_quiz.ui.profile_page import profile_page
 from fox_quiz.unlocks_page import unlocks_page
 from fox_logic import (
@@ -184,16 +185,6 @@ def _question_card(index: int, label: str) -> rx.Component:
     )
 
 
-class RootRedirectState(rx.State):
-    @rx.event
-    async def go_match(self):
-        return rx.redirect("/match")
-
-
-def splash_home() -> rx.Component:
-    return rx.center(rx.spinner(), min_height="100vh", width="100%")
-
-
 def quiz_page() -> rx.Component:
     return rx.box(
         rx.vstack(
@@ -270,7 +261,7 @@ def quiz_page() -> rx.Component:
 
 
 app = rx.App(theme=rx.theme(appearance="light", accent_color="orange"))
-app.add_page(splash_home, route="/", title="JOT717", on_load=RootRedirectState.go_match)
+app.add_page(home_page, route="/", title="HOKU315")
 app.add_page(quiz_page, route="/quiz", title="狐狸性向測驗")
 app.add_page(login_page, route="/login", title="登入")
 app.add_page(chat_page, route="/chat", title="狐狸對話室")
@@ -283,7 +274,7 @@ app.add_page(
 app.add_page(
     match_wall_page,
     route="/match",
-    title="配對牆",
+    title="訊號牆",
     on_load=MatchWallState.load_match_wall,
 )
 app.add_page(
@@ -295,7 +286,7 @@ app.add_page(
 app.add_page(
     app_page,
     route="/insight",
-    title="Insight Demo",
+    title="AI 解析",
     on_load=AppState.load_session_history,
 )
 app.add_page(

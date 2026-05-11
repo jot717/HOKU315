@@ -3,6 +3,7 @@ from __future__ import annotations
 import reflex as rx
 
 from fox_quiz.state.app_state import AppState
+from fox_quiz.ui.components.fox_message_card import fox_message_card
 from fox_quiz.ui.components.hero_insight import hero_insight
 from fox_quiz.ui.components.insight_cards import insight_cards
 from fox_quiz.ui.components.session_history import session_history
@@ -13,7 +14,7 @@ def _loading_banner() -> rx.Component:
         rx.hstack(
             rx.spinner(size="3"),
             rx.text(
-                "AI 正在分析你們的互動能量...",
+                "北極狐正在為你整理訊號，請稍候片刻…",
                 size="3",
                 weight="medium",
                 as_="span",
@@ -35,14 +36,14 @@ def _empty_state() -> rx.Component:
     return rx.box(
         rx.vstack(
             rx.text(
-                "開始你的 AI 配對解析",
+                "北極狐正在等待你的訊號",
                 size="5",
                 weight="medium",
                 text_align="center",
                 as_="span",
             ),
             rx.text(
-                "完成個人資料後，按下按鈕即可取得第一份情緒向洞察。",
+                "有些疲憊，不需要自己承受。",
                 size="3",
                 color="gray",
                 text_align="center",
@@ -50,7 +51,7 @@ def _empty_state() -> rx.Component:
                 as_="span",
             ),
             rx.button(
-                "立即開始",
+                "開始觀察",
                 on_click=AppState.run_demo_match,
                 size="4",
                 width="100%",
@@ -72,7 +73,7 @@ def _empty_state() -> rx.Component:
 def _onboarding_strip() -> rx.Component:
     return rx.box(
         rx.text(
-            "依序完成：個人資料 → 配對解析 → 檢視洞察。以下為示範流程，不需額外設定。",
+            "先留下你的輪廓，再請北極狐觀察訊號——示範流程，不需額外設定。",
             size="2",
             color="gray",
             text_align="center",
@@ -140,6 +141,7 @@ def insight_panel() -> rx.Component:
                     border="1px solid var(--gray-6)",
                     background="var(--gray-1)",
                 ),
+                fox_message_card(AppState.fox_message),
                 insight_cards(),
                 rx.cond(
                     AppState.show_final_card,
@@ -169,7 +171,7 @@ def insight_panel() -> rx.Component:
                 rx.cond(
                     AppState.has_insight,
                     rx.button(
-                        "重新解析",
+                        "再次觀察",
                         on_click=AppState.run_demo_match,
                         variant="outline",
                         size="2",

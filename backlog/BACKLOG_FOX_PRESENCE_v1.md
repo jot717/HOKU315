@@ -1,30 +1,24 @@
-# BACKLOG — FOX PRESENCE v1
+# FOX PRESENCE v1
 
-## GOAL
+GOAL:
+Transform the app from an AI workflow demo into a living FOX GUARDIAN experience.
 
-Make the Arctic Fox feel **alive** and **protective** inside the product experience.
-
-## SCOPE
+SCOPE:
 
 * fox narration
 * guardian tone
-* signal-warning tone
+* emotional protection wording
+* quiet UX copy
+* signal-aware language
 * dream-world onboarding
-* emotional safety wording
-* fox presence in insight flow
 
-## NON-GOALS
+NON-GOALS:
 
-* auth / cloud identity (Phase 2)
-* new embeddings or vector systems (Phase 3)
-* social graph or circles (Phase 4)
+* auth
+* vector DB
+* realtime
+* social graph
+* monetization
 
-## DEPENDENCIES
-
-* [`ops/product/PRODUCT_CONSTITUTION.md`](../ops/product/PRODUCT_CONSTITUTION.md)
-* [`ops/product/FOX_ROADMAP.md`](../ops/product/FOX_ROADMAP.md)
-* Phase 1 runtime: profile, insight, session
-
-## STATUS
-
+STATUS:
 ACTIVE

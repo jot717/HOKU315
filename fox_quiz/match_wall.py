@@ -1,4 +1,4 @@
-"""Task 7：北極狐配對牆（UAT-04 門檻：0.7 模糊、1.2 攔截）。"""
+"""Task 7：北極狐訊號牆（UAT-04 門檻：0.7 模糊、1.2 攔截）。"""
 from __future__ import annotations
 
 import asyncio
@@ -65,7 +65,7 @@ class MatchWallState(rx.State):
                 self.loading = False
                 self.matches = []
                 self.blocked_count = 0
-                self.error_msg = f"配對牆載入失敗：{e}"
+                self.error_msg = f"訊號牆載入失敗：{e}"
             return
 
         async with self:
@@ -273,7 +273,7 @@ def match_wall_page() -> rx.Component:
         rx.fragment(
             rx.vstack(
             app_navbar(),
-            rx.heading("北極狐配對牆", size="6", weight="bold"),
+            rx.heading("北極狐訊號牆", size="6", weight="bold"),
             rx.card(
                 rx.text(
                     f"守護中：已為您成功攔截 {MatchWallState.blocked_count} 個高風險地雷。",
@@ -287,7 +287,7 @@ def match_wall_page() -> rx.Component:
             ),
             rx.hstack(
                 rx.button(
-                    rx.cond(MatchWallState.loading, "載入中…", "刷新配對牆"),
+                    rx.cond(MatchWallState.loading, "載入中…", "刷新訊號牆"),
                     on_click=MatchWallState.load_match_wall,
                     color_scheme="orange",
                     disabled=MatchWallState.loading,

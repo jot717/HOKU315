@@ -17,7 +17,7 @@ def app_page() -> rx.Component:
                             weight="bold",
                         ),
                         rx.text(
-                            "AI 情緒配對解析",
+                            "極狐觀察室",
                             size="4",
                             color="gray",
                             as_="span",

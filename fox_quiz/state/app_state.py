@@ -6,6 +6,7 @@ import reflex as rx
 
 from product.app_binding.runtime.flow_binding import execute_bound_flow
 from product.app_binding.runtime.persistence import load_session
+from product.insight.experience.fox_narration import build_fox_message
 from product.insight.experience.insight_formatter import format_emotional_insight
 from product.insight.experience.reveal_engine import build_reveal_state
 from product.profile.runtime.profile_store import load_profile
@@ -27,6 +28,8 @@ class AppState(rx.State):
     reveal_level: str = ""
     reveal_delay: float = 0.0
     show_final_card: bool = False
+
+    fox_message: str = ""
 
     @rx.var(cache=True)
     def has_insight(self) -> bool:
@@ -82,6 +85,7 @@ class AppState(rx.State):
             self.reveal_level = ""
             self.reveal_delay = 0.0
             self.show_final_card = False
+            self.fox_message = ""
             return
 
         score = float(self.flow_result.get("match", {}).get("score", 0))
@@ -94,6 +98,11 @@ class AppState(rx.State):
         self.reveal_level = str(reveal["level"])
         self.reveal_delay = float(reveal["reveal_delay"])
         self.show_final_card = bool(reveal["show_final_card"])
+
+        self.fox_message = build_fox_message(
+            self.insight_state,
+            score,
+        )
 
     @rx.event
     def load_session_history(self) -> None:

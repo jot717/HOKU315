@@ -11,17 +11,26 @@ def home_page() -> rx.Component:
                 size="9",
             ),
             rx.text(
-                "AI 情緒匹配系統",
+                "情緒守護 · 訊號觀測",
                 opacity=0.7,
                 size="4",
             ),
             rx.text(
-                "先建立輪廓，再取得 AI 解析——每一步都為情緒洞察而設計。",
-                size="2",
+                "在雪白安靜的世界裡，\n北極狐會幫你避開消耗情緒的人與訊號。",
+                size="3",
                 color="gray",
                 text_align="center",
-                style={"line_height": "1.55"},
+                style={"line_height": "1.65"},
                 max_width="420px",
+                white_space="pre-wrap",
+                as_="span",
+            ),
+            rx.text(
+                "不是每個人都值得靠近。",
+                size="2",
+                color="gray",
+                opacity=0.85,
+                text_align="center",
                 as_="span",
             ),
             rx.vstack(
@@ -36,7 +45,7 @@ def home_page() -> rx.Component:
                 ),
                 rx.link(
                     rx.button(
-                        "開始 AI 配對解析",
+                        "進入觀察室",
                         width="100%",
                         size="4",
                     ),

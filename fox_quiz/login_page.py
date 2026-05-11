@@ -171,7 +171,7 @@ def login_page() -> rx.Component:
                 width="100%",
             ),
             rx.hstack(
-                rx.link("← 配對牆", href="/match", color="orange", size="2"),
+                rx.link("← 訊號牆", href="/match", color="orange", size="2"),
                 rx.link("測驗", href="/quiz", color="gray", size="2"),
                 spacing="4",
             ),

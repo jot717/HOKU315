@@ -6,11 +6,11 @@ from fox_quiz.state.app_state import AppState
 
 
 def hero_insight() -> rx.Component:
-    """Large compatibility hero: score, headline, supporting line, generous spacing."""
+    """Large signal-safety hero: score, guardian headline, supporting line."""
     return rx.box(
         rx.vstack(
             rx.text(
-                "配對共鳴指數",
+                "訊號守護指數",
                 size="2",
                 weight="medium",
                 color="gray",
@@ -47,7 +47,7 @@ def hero_insight() -> rx.Component:
                 as_="span",
             ),
             rx.text(
-                "這份解析結合你的輪廓與互動節奏，幫助你理解彼此的距離感。",
+                "這份觀察幫你看見距離與界線，讓你決定要不要靠近。",
                 size="2",
                 opacity=0.75,
                 text_align="center",

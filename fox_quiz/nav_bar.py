@@ -9,7 +9,7 @@ from fox_quiz.session_state import SessionState
 def app_navbar(*, show_logout: bool = True) -> rx.Component:
     links = rx.hstack(
         rx.link("登入", href="/login", size="2", color="gray"),
-        rx.link("配對牆", href="/match", size="2", color="orange", font_weight="medium"),
+        rx.link("訊號牆", href="/match", size="2", color="orange", font_weight="medium"),
         rx.link("故事", href="/story", size="2", color="orange", font_weight="medium"),
         rx.link("解鎖", href="/unlocks", size="2", color="orange", font_weight="medium"),
         rx.link("測驗", href="/quiz", size="2", color="gray"),

@@ -452,3 +452,10 @@ Product direction is governed by:
 Product roadmap moved to:
 
 [`ops/product/FOX_ROADMAP.md`](ops/product/FOX_ROADMAP.md)
+
+---
+
+## FOX PRESENCE v1 ACTIVE
+
+Fox guardian tone and narration layer implementation started.
+
