@@ -444,3 +444,11 @@ Legacy engineering/demo shell is being deprecated.
 Product direction is governed by:
 
 [`ops/product/PRODUCT_CONSTITUTION.md`](ops/product/PRODUCT_CONSTITUTION.md)
+
+---
+
+## FOX ROADMAP ACTIVE
+
+Product roadmap moved to:
+
+[`ops/product/FOX_ROADMAP.md`](ops/product/FOX_ROADMAP.md)
