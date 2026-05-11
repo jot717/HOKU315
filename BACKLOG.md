@@ -471,3 +471,9 @@ Immersive guardian world shell (fox presence, signal scan, dream-world layout) �
 
 Local rule-based guardian memory (`runtime_state/fox_memory.json`) — see [`backlog/BACKLOG_FOX_MEMORY_SYSTEM_v1.md`](backlog/BACKLOG_FOX_MEMORY_SYSTEM_v1.md).
 
+---
+
+## FOX SIGNAL GUARD v1 ACTIVE
+
+Signal guard mechanism (risk evaluation + guardian warning card) — see [`backlog/BACKLOG_FOX_SIGNAL_GUARD_v1.md`](backlog/BACKLOG_FOX_SIGNAL_GUARD_v1.md).
+

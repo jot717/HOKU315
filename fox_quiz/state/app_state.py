@@ -9,6 +9,7 @@ from product.app_binding.runtime.persistence import load_session
 from product.insight.experience.fox_narration import build_fox_message
 from product.insight.experience.insight_formatter import format_emotional_insight
 from product.insight.experience.reveal_engine import build_reveal_state
+from product.guard.runtime.signal_guard_engine import evaluate_signal_risk
 from product.memory.runtime.fox_memory_engine import remember_insight
 from product.memory.runtime.fox_memory_store import get_memory_display
 from product.profile.runtime.profile_store import load_profile
@@ -35,6 +36,9 @@ class AppState(rx.State):
 
     fox_memory_note: str = ""
     recurring_pattern: str = ""
+    signal_risk_level: str = "low"
+    signal_risk_flags: List[str] = []
+    guardian_warning: str = ""
 
     @rx.var(cache=True)
     def has_insight(self) -> bool:
@@ -96,6 +100,9 @@ class AppState(rx.State):
             self.reveal_delay = 0.0
             self.show_final_card = False
             self.fox_message = ""
+            self.signal_risk_level = "low"
+            self.signal_risk_flags = []
+            self.guardian_warning = ""
             self._refresh_fox_memory_from_store()
             return
 
@@ -114,6 +121,12 @@ class AppState(rx.State):
             self.insight_state,
             score,
         )
+        guard = evaluate_signal_risk(self.insight_state, score)
+        self.signal_risk_level = str(guard.get("risk_level", "low"))
+        self.signal_risk_flags = [
+            str(x) for x in guard.get("risk_flags", []) if str(x).strip()
+        ]
+        self.guardian_warning = str(guard.get("guardian_warning", ""))
 
     @rx.event
     def load_session_history(self) -> None:

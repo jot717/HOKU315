@@ -252,3 +252,12 @@ STATUS: ACTIVE
 GOAL:
 Let the fox remember recent observation tone (local JSON, rule-based, no embeddings).
 
+---
+
+## FOX SIGNAL GUARD v1
+
+STATUS: ACTIVE
+
+GOAL:
+Let the Arctic Fox actively block risky signals with calm guardian warnings.
+

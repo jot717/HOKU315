@@ -9,6 +9,7 @@ from fox_quiz.ui.components.fox_message_card import fox_message_card
 from fox_quiz.ui.components.hero_insight import hero_insight
 from fox_quiz.ui.components.insight_cards import insight_cards
 from fox_quiz.ui.components.session_history import session_history
+from fox_quiz.ui.components.signal_guard_card import signal_guard_card
 from fox_quiz.ui.components.signal_scan_banner import signal_scan_banner
 
 
@@ -95,6 +96,11 @@ def insight_panel() -> rx.Component:
     return rx.vstack(
         fox_avatar(),
         fox_memory_card(AppState.fox_memory_note, AppState.recurring_pattern),
+        signal_guard_card(
+            AppState.signal_risk_level,
+            AppState.signal_risk_flags,
+            AppState.guardian_warning,
+        ),
         signal_scan_banner(),
         _onboarding_strip(),
         rx.cond(AppState.demo_match_loading, _loading_banner(), rx.fragment()),
