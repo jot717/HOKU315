@@ -3,10 +3,12 @@ from __future__ import annotations
 import reflex as rx
 
 from fox_quiz.state.app_state import AppState
+from fox_quiz.ui.components.fox_avatar import fox_avatar
 from fox_quiz.ui.components.fox_message_card import fox_message_card
 from fox_quiz.ui.components.hero_insight import hero_insight
 from fox_quiz.ui.components.insight_cards import insight_cards
 from fox_quiz.ui.components.session_history import session_history
+from fox_quiz.ui.components.signal_scan_banner import signal_scan_banner
 
 
 def _loading_banner() -> rx.Component:
@@ -27,8 +29,9 @@ def _loading_banner() -> rx.Component:
         padding="1rem",
         border_radius="12px",
         width="100%",
-        background="var(--accent-3)",
-        border="1px solid var(--accent-6)",
+        background="rgba(255,255,255,0.65)",
+        border="1px solid rgba(255,255,255,0.9)",
+        style={"boxShadow": "0 6px 24px rgba(150, 180, 220, 0.12)"},
     )
 
 
@@ -58,26 +61,27 @@ def _empty_state() -> rx.Component:
                 color_scheme="orange",
                 disabled=AppState.demo_match_loading,
             ),
-            spacing="4",
+            spacing="5",
             align="center",
             width="100%",
         ),
-        padding="2.5rem",
+        padding="2.75rem",
         width="100%",
-        border_radius="16px",
-        border="1px solid var(--gray-6)",
-        background="var(--gray-2)",
+        border_radius="20px",
+        border="1px solid rgba(255,255,255,0.9)",
+        background="rgba(255,255,255,0.72)",
+        style={"boxShadow": "0 12px 40px rgba(160, 185, 215, 0.14)"},
     )
 
 
 def _onboarding_strip() -> rx.Component:
     return rx.box(
         rx.text(
-            "先留下你的輪廓，再請北極狐觀察訊號——示範流程，不需額外設定。",
+            "走進安靜的觀察室，留下輪廓後，請北極狐替你讀訊號。示範流程，不需額外設定。",
             size="2",
             color="gray",
             text_align="center",
-            style={"line_height": "1.55"},
+            style={"line_height": "1.65"},
             as_="span",
         ),
         padding_x="0.5rem",
@@ -88,6 +92,8 @@ def _onboarding_strip() -> rx.Component:
 
 def insight_panel() -> rx.Component:
     return rx.vstack(
+        fox_avatar(),
+        signal_scan_banner(),
         _onboarding_strip(),
         rx.cond(AppState.demo_match_loading, _loading_banner(), rx.fragment()),
         rx.cond(
@@ -97,49 +103,50 @@ def insight_panel() -> rx.Component:
                 rx.box(
                     rx.vstack(
                         rx.heading(
-                            "解析摘要",
+                            "觀察筆記",
                             size="4",
                             weight="medium",
                         ),
                         rx.text(
                             AppState.insight_ai_summary,
                             size="3",
-                            style={"line_height": "1.65"},
+                            style={"line_height": "1.75"},
                             as_="span",
                         ),
                         rx.heading(
-                            "共同特質",
+                            "相似的痕跡",
                             size="3",
                             weight="medium",
-                            margin_top="3",
+                            margin_top="4",
                         ),
                         rx.text(
                             AppState.insight_shared_traits_text,
                             size="3",
                             color="gray",
-                            style={"line_height": "1.65"},
+                            style={"line_height": "1.75"},
                             as_="span",
                         ),
                         rx.heading(
-                            "活動節奏分析",
+                            "節奏與壓力",
                             size="3",
                             weight="medium",
-                            margin_top="3",
+                            margin_top="4",
                         ),
                         rx.text(
                             AppState.insight_activity_analysis,
                             size="3",
-                            style={"line_height": "1.65"},
+                            style={"line_height": "1.75"},
                             as_="span",
                         ),
-                        spacing="2",
+                        spacing="3",
                         width="100%",
                     ),
-                    padding="1.25rem",
-                    border_radius="12px",
+                    padding="1.5rem",
+                    border_radius="18px",
                     width="100%",
-                    border="1px solid var(--gray-6)",
-                    background="var(--gray-1)",
+                    border="1px solid rgba(255,255,255,0.95)",
+                    background="rgba(255,255,255,0.82)",
+                    style={"boxShadow": "0 10px 36px rgba(150, 175, 210, 0.1)"},
                 ),
                 fox_message_card(AppState.fox_message),
                 insight_cards(),
@@ -147,14 +154,14 @@ def insight_panel() -> rx.Component:
                     AppState.show_final_card,
                     session_history(),
                 ),
-                spacing="6",
+                spacing="7",
                 width="100%",
             ),
             _empty_state(),
         ),
         rx.vstack(
             rx.text(
-                "更多操作",
+                "守護選單",
                 size="2",
                 weight="bold",
                 color="gray",
@@ -162,7 +169,7 @@ def insight_panel() -> rx.Component:
             ),
             rx.hstack(
                 rx.button(
-                    "載入上次解析",
+                    "載入上次觀察",
                     on_click=AppState.load_latest_session,
                     variant="soft",
                     size="2",
@@ -191,11 +198,11 @@ def insight_panel() -> rx.Component:
                 width="100%",
                 flex_wrap="wrap",
             ),
-            spacing="2",
+            spacing="3",
             width="100%",
             align="start",
         ),
-        spacing="6",
+        spacing="7",
         width="100%",
         align="center",
     )

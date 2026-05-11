@@ -459,3 +459,9 @@ Product roadmap moved to:
 
 Fox guardian tone and narration layer implementation started.
 
+---
+
+## FOX IMMERSION SYSTEM v1 ACTIVE
+
+Immersive guardian world shell (fox presence, signal scan, dream-world layout) — see [`backlog/BACKLOG_FOX_IMMERSION_SYSTEM_v1.md`](backlog/BACKLOG_FOX_IMMERSION_SYSTEM_v1.md).
+

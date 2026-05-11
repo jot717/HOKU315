@@ -234,3 +234,12 @@ STATUS: ACTIVE
 GOAL:
 Make the Arctic Fox feel emotionally present inside the product.
 
+---
+
+## FOX IMMERSION SYSTEM v1
+
+STATUS: ACTIVE
+
+GOAL:
+Move the product from debug-style insight UI into the Arctic Fox guardian world (presence, scan, white dream space).
+

@@ -61,6 +61,7 @@ def hero_insight() -> rx.Component:
         padding_x="1.75rem",
         border_radius="16px",
         width="100%",
-        background="var(--gray-2)",
-        border="1px solid var(--gray-6)",
+        background="rgba(255,255,255,0.88)",
+        border="1px solid rgba(255,255,255,0.95)",
+        style={"boxShadow": "0 12px 40px rgba(150, 178, 210, 0.12)"},
     )
