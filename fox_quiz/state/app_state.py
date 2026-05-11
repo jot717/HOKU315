@@ -72,6 +72,12 @@ class AppState(rx.State):
         return max(0, min(100, int(round(s))))
 
     @rx.var(cache=True)
+    def signal_risk_flag_lines(self) -> str:
+        if not self.signal_risk_flags:
+            return ""
+        return "\n".join(f"・{x}" for x in self.signal_risk_flags[:12])
+
+    @rx.var(cache=True)
     def match_score_heading(self) -> str:
         safe = max(
             0,

@@ -477,3 +477,10 @@ Local rule-based guardian memory (`runtime_state/fox_memory.json`) — see [`bac
 
 Signal guard mechanism (risk evaluation + guardian warning card) — see [`backlog/BACKLOG_FOX_SIGNAL_GUARD_v1.md`](backlog/BACKLOG_FOX_SIGNAL_GUARD_v1.md).
 
+---
+
+## PHASE1 UAT FLOW FIX v2 ACTIVE
+
+**TYPE:** UX RECOVERY SPRINT — onboarding + journey clarity (not visual polish).  
+See [`backlog/BACKLOG_PHASE1_UAT_FLOW_FIX_v2.md`](backlog/BACKLOG_PHASE1_UAT_FLOW_FIX_v2.md), UAT script [`ops/uat/PHASE1_UAT_SCRIPT.md`](ops/uat/PHASE1_UAT_SCRIPT.md), UX constitution [`ops/product/UAT_EXPERIENCE_CONSTITUTION.md`](ops/product/UAT_EXPERIENCE_CONSTITUTION.md).
+

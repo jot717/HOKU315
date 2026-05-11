@@ -20,7 +20,7 @@ def home_page() -> rx.Component:
                     text_align="center",
                 ),
                 rx.text(
-                    "讓 AI 替你過濾消耗你的訊號",
+                    "讓北極狐替你過濾消耗你的訊號",
                     size="4",
                     color="gray",
                     text_align="center",
@@ -28,10 +28,19 @@ def home_page() -> rx.Component:
                     max_width="26rem",
                     as_="span",
                 ),
+                rx.text(
+                    "這裡不是評分你的人生。\n北極狐只是在你疲憊之前，先替你看見危險。",
+                    size="3",
+                    color="gray",
+                    text_align="center",
+                    style={"line_height": "1.65", "white_space": "pre-wrap"},
+                    max_width="28rem",
+                    as_="span",
+                ),
                 rx.vstack(
                     rx.link(
                         rx.button(
-                            "建立個人資料",
+                            "建立訊號檔案",
                             width="100%",
                             size="4",
                             variant="soft",

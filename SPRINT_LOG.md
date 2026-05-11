@@ -261,3 +261,14 @@ STATUS: ACTIVE
 GOAL:
 Let the Arctic Fox actively block risky signals with calm guardian warnings.
 
+---
+
+## PHASE1 UAT FLOW FIX v2
+
+STATUS: ACTIVE
+
+TYPE: UX RECOVERY SPRINT
+
+GOAL:
+Fix user confusion and restore correct FOX GUARDIAN SYSTEM onboarding (profile → insight → explain → next step).
+

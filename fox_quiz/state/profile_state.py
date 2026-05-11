@@ -5,6 +5,8 @@ import reflex as rx
 from product.profile.runtime.profile_store import save_profile as persist_profile_to_disk
 from product.profile.runtime.profile_store import load_profile as load_profile_from_store
 
+PROFILE_SAVE_SUCCESS_MESSAGE = "訊號檔案建立完成。你可以進入觀察室了。"
+
 
 class ProfileState(rx.State):
     name: str = ""
@@ -15,6 +17,7 @@ class ProfileState(rx.State):
     @rx.event
     def sync_from_disk(self) -> None:
         p = load_profile_from_store()
+        self.status_message = ""
         self.name = str(p.get("name", ""))
         interests = p.get("interests", [])
         if isinstance(interests, list):
@@ -43,12 +46,19 @@ class ProfileState(rx.State):
             if x.strip()
         ]
 
+        try:
+            raw_act = int(str(self.activity_text or "5").strip())
+        except ValueError:
+            raw_act = 5
+        activity = max(1, min(10, raw_act))
+
         profile = {
             "name": self.name,
             "interests": interests,
-            "activity": int(self.activity_text or "0"),
+            "activity": activity,
         }
 
         persist_profile_to_disk(profile)
+        self.activity_text = str(activity)
 
-        self.status_message = "Profile saved"
+        self.status_message = PROFILE_SAVE_SUCCESS_MESSAGE
