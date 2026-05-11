@@ -4,6 +4,7 @@ import reflex as rx
 
 from fox_quiz.state.app_state import AppState
 from fox_quiz.ui.components.fox_avatar import fox_avatar
+from fox_quiz.ui.components.fox_memory_card import fox_memory_card
 from fox_quiz.ui.components.fox_message_card import fox_message_card
 from fox_quiz.ui.components.hero_insight import hero_insight
 from fox_quiz.ui.components.insight_cards import insight_cards
@@ -93,6 +94,7 @@ def _onboarding_strip() -> rx.Component:
 def insight_panel() -> rx.Component:
     return rx.vstack(
         fox_avatar(),
+        fox_memory_card(AppState.fox_memory_note, AppState.recurring_pattern),
         signal_scan_banner(),
         _onboarding_strip(),
         rx.cond(AppState.demo_match_loading, _loading_banner(), rx.fragment()),

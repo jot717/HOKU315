@@ -465,3 +465,9 @@ Fox guardian tone and narration layer implementation started.
 
 Immersive guardian world shell (fox presence, signal scan, dream-world layout) — see [`backlog/BACKLOG_FOX_IMMERSION_SYSTEM_v1.md`](backlog/BACKLOG_FOX_IMMERSION_SYSTEM_v1.md).
 
+---
+
+## FOX MEMORY SYSTEM v1 ACTIVE
+
+Local rule-based guardian memory (`runtime_state/fox_memory.json`) — see [`backlog/BACKLOG_FOX_MEMORY_SYSTEM_v1.md`](backlog/BACKLOG_FOX_MEMORY_SYSTEM_v1.md).
+

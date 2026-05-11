@@ -9,6 +9,8 @@ from product.app_binding.runtime.persistence import load_session
 from product.insight.experience.fox_narration import build_fox_message
 from product.insight.experience.insight_formatter import format_emotional_insight
 from product.insight.experience.reveal_engine import build_reveal_state
+from product.memory.runtime.fox_memory_engine import remember_insight
+from product.memory.runtime.fox_memory_store import get_memory_display
 from product.profile.runtime.profile_store import load_profile
 from product.session.runtime.session_history import append_history, load_history
 
@@ -30,6 +32,9 @@ class AppState(rx.State):
     show_final_card: bool = False
 
     fox_message: str = ""
+
+    fox_memory_note: str = ""
+    recurring_pattern: str = ""
 
     @rx.var(cache=True)
     def has_insight(self) -> bool:
@@ -77,6 +82,11 @@ class AppState(rx.State):
         )
         return f"{safe}%"
 
+    def _refresh_fox_memory_from_store(self) -> None:
+        display = get_memory_display()
+        self.fox_memory_note = str(display.get("guardian_memory_note", ""))
+        self.recurring_pattern = str(display.get("recurring_pattern", ""))
+
     def _apply_emotional_insight(self) -> None:
         if not self.insight_state:
             self.compatibility_title = ""
@@ -86,6 +96,7 @@ class AppState(rx.State):
             self.reveal_delay = 0.0
             self.show_final_card = False
             self.fox_message = ""
+            self._refresh_fox_memory_from_store()
             return
 
         score = float(self.flow_result.get("match", {}).get("score", 0))
@@ -107,6 +118,7 @@ class AppState(rx.State):
     @rx.event
     def load_session_history(self) -> None:
         self.session_history = load_history()
+        self._refresh_fox_memory_from_store()
 
     @rx.event
     async def run_demo_match(self):
@@ -135,6 +147,10 @@ class AppState(rx.State):
                 self._apply_emotional_insight()
 
                 if self.insight_state:
+                    score = float(self.flow_result.get("match", {}).get("score", 0))
+                    mem = remember_insight(self.insight_state, score)
+                    self.fox_memory_note = mem["guardian_memory_note"]
+                    self.recurring_pattern = mem["recurring_pattern"]
                     append_history(
                         {
                             "compatibility_title": self.compatibility_title,
@@ -142,6 +158,8 @@ class AppState(rx.State):
                             "final_insight": self.final_insight,
                         }
                     )
+                else:
+                    self._refresh_fox_memory_from_store()
         finally:
             async with self:
                 self.demo_match_loading = False
@@ -160,3 +178,4 @@ class AppState(rx.State):
             {},
         )
         self._apply_emotional_insight()
+        self._refresh_fox_memory_from_store()

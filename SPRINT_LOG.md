@@ -243,3 +243,12 @@ STATUS: ACTIVE
 GOAL:
 Move the product from debug-style insight UI into the Arctic Fox guardian world (presence, scan, white dream space).
 
+---
+
+## FOX MEMORY SYSTEM v1
+
+STATUS: ACTIVE
+
+GOAL:
+Let the fox remember recent observation tone (local JSON, rule-based, no embeddings).
+
