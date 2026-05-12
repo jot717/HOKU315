@@ -191,6 +191,13 @@ def quiz_page() -> rx.Component:
             app_navbar(),
             rx.heading("狐狸性向測驗", size="7", weight="bold"),
             rx.text(
+                "訊號問卷：20 道社交地雷敏感度（滑桿），與訊號檔案同一條路，只是畫得更細。",
+                size="2",
+                color="gray",
+                as_="span",
+                display="block",
+            ),
+            rx.text(
                 "共 20 題。拖曳滑桿：越靠右代表你在該情境越容易「踩雷」或感到壓力。",
                 color="gray",
                 size="2",

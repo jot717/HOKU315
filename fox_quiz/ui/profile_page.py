@@ -17,6 +17,14 @@ def profile_page() -> rx.Component:
                     text_align="center",
                 ),
                 rx.text(
+                    "訊號檔案設定：用興趣與壓力節奏描述你，不是在做性格測驗。",
+                    size="2",
+                    color="gray",
+                    text_align="center",
+                    max_width="28rem",
+                    as_="span",
+                ),
+                rx.text(
                     "北極狐會根據你的習慣、興趣與壓力節奏，替你觀察容易消耗你的訊號。",
                     size="3",
                     color="gray",
@@ -93,7 +101,7 @@ def profile_page() -> rx.Component:
                             type="number",
                         ),
                         rx.text(
-                            "完成後，北極狐會開始建立你的觀察模型。",
+                            "完成後，北極狐會把你的輸入整理成可持續觀察的訊號檔案。",
                             size="2",
                             color="gray",
                             text_align="center",

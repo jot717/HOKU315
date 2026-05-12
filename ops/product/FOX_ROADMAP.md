@@ -2,6 +2,10 @@
 
 The **fox** is the **guardian persona and UX layer**; roadmap phases below prioritize **social signal intelligence**, **SNS-backed protection**, and **interaction risk** over standalone “insight app” positioning. Guardian world UX remains the **delivery shell** for alerts and clarity, not a substitute for the core moat.
 
+### Signal system consolidation (v1)
+
+Phase 1 delivery is documented as **one signal architecture**: canonical **Signal Profile Setup** on **`/profile`**, optional **signal questions** on **`/quiz`** (20 sliders), **Guardian Observation** on **`/insight`**, and **signal memory** in `runtime_state/` — **no duplicate onboarding route**. See [`SIGNAL_SYSTEM_CONSTITUTION.md`](SIGNAL_SYSTEM_CONSTITUTION.md), [`SIGNAL_FLOW_ARCHITECTURE.md`](SIGNAL_FLOW_ARCHITECTURE.md), [`SIGNAL_PROFILE_SCHEMA.md`](SIGNAL_PROFILE_SCHEMA.md).
+
 ---
 
 ## PHASE 1 — Guardian UX MVP

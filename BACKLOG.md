@@ -498,6 +498,15 @@ Signal guard mechanism (risk evaluation + guardian warning card) — see [`backl
 
 ---
 
+## SIGNAL SYSTEM CONSOLIDATION v1 ACTIVE
+
+**TYPE:** SIGNAL ARCHITECTURE CONSOLIDATION — unify existing `/profile`, `/quiz`, `/insight`, memory, and signal wording (**SAFE MODE**; **no** new onboarding route; **no** SNS / vector / auth implementation).  
+**Docs:** [`ops/product/SIGNAL_SYSTEM_CONSTITUTION.md`](ops/product/SIGNAL_SYSTEM_CONSTITUTION.md), [`ops/product/SIGNAL_PROFILE_SCHEMA.md`](ops/product/SIGNAL_PROFILE_SCHEMA.md), [`ops/product/SIGNAL_FLOW_ARCHITECTURE.md`](ops/product/SIGNAL_FLOW_ARCHITECTURE.md), [`ops/product/SIGNAL_INPUT_AUDIT.md`](ops/product/SIGNAL_INPUT_AUDIT.md), [`ops/product/SIGNAL_STATE_MAPPING.md`](ops/product/SIGNAL_STATE_MAPPING.md)  
+**UAT:** [`ops/uat/SIGNAL_SYSTEM_CONSOLIDATION_UAT.md`](ops/uat/SIGNAL_SYSTEM_CONSOLIDATION_UAT.md)  
+**Backlog / sprint:** [`backlog/BACKLOG_SIGNAL_SYSTEM_CONSOLIDATION_v1.md`](backlog/BACKLOG_SIGNAL_SYSTEM_CONSOLIDATION_v1.md), [`backlog/SPRINT_SIGNAL_SYSTEM_CONSOLIDATION_v1.md`](backlog/SPRINT_SIGNAL_SYSTEM_CONSOLIDATION_v1.md)
+
+---
+
 ## PHASE1 UAT FLOW FIX v2 ACTIVE
 
 **TYPE:** UX RECOVERY SPRINT — onboarding + journey clarity (not visual polish).  

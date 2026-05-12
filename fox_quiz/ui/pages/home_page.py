@@ -46,6 +46,48 @@ def home_page() -> rx.Component:
                     max_width="28rem",
                     as_="span",
                 ),
+                rx.box(
+                    rx.vstack(
+                        rx.heading(
+                            "你接下來會經歷的事",
+                            size="4",
+                            weight="medium",
+                            text_align="center",
+                        ),
+                        rx.text(
+                            "① 建立訊號檔案（/profile）\n"
+                            "② 北極狐整理你的危險節奏與地雷敏感度（含可選的 20 題滑桿 /quiz）\n"
+                            "③ 進入觀察室，開始守護觀察（/insight）\n"
+                            "④ 未來接上社群訊號與社交圖保護層",
+                            size="2",
+                            color="gray",
+                            text_align="center",
+                            style={
+                                "line_height": "1.85",
+                                "white_space": "pre-wrap",
+                                "font_variant_numeric": "tabular-nums",
+                            },
+                            as_="span",
+                        ),
+                        rx.text(
+                            "精簡路徑：訊號檔案 → 觀察室 →（需要更深時再到測驗頁加畫地雷敏感度）",
+                            size="1",
+                            color="gray",
+                            text_align="center",
+                            style={"line_height": "1.65"},
+                            as_="span",
+                        ),
+                        spacing="3",
+                        width="100%",
+                        align="center",
+                    ),
+                    padding="1.25rem",
+                    border_radius="16px",
+                    width="100%",
+                    max_width="28rem",
+                    border="1px dashed rgba(160, 185, 215, 0.55)",
+                    background="rgba(255,255,255,0.5)",
+                ),
                 rx.vstack(
                     rx.link(
                         rx.button(

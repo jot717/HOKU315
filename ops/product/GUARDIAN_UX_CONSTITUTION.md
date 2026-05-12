@@ -80,3 +80,19 @@ Users must not feel:
 * tested
 * judged
 * emotionally exposed
+
+---
+
+## 6. SIGNAL-FIRST RULE
+
+The system must always prioritize:
+
+* **signal intelligence** (what patterns imply for harm, drain, or pressure)
+* **dangerous interaction detection** (when framed as assistive alerts, not clinical labels)
+* **social protection** (boundaries, distance, pacing — not romance scoring)
+
+**Guardian UX** exists to **support signal interpretation** — calm language, presence, and next steps — so users can act on **signals** without drowning in raw data.
+
+Guardian UX must **not** **replace** the signal story: if copy could apply to a generic “wellness chatbot” with no social-risk core, it is **out of alignment**.
+
+Cross-read: [`SIGNAL_SYSTEM_CONSTITUTION.md`](SIGNAL_SYSTEM_CONSTITUTION.md), [`SIGNAL_FLOW_ARCHITECTURE.md`](SIGNAL_FLOW_ARCHITECTURE.md).

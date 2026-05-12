@@ -287,6 +287,18 @@ REFERENCES: [`ops/product/CORE_PRODUCT_REALIGNMENT.md`](ops/product/CORE_PRODUCT
 
 ---
 
+## SIGNAL SYSTEM CONSOLIDATION v1
+
+STATUS: ACTIVE
+
+TYPE: SIGNAL ARCHITECTURE CONSOLIDATION (docs + terminology + light home/profile/quiz copy)
+
+GOAL: One coherent signal path: **Signal Profile Setup** (`/profile`) → optional **signal questions** (`/quiz`) → **Guardian Observation** (`/insight`) → memory; no duplicate onboarding.
+
+REFERENCES: [`ops/product/SIGNAL_SYSTEM_CONSTITUTION.md`](ops/product/SIGNAL_SYSTEM_CONSTITUTION.md), [`backlog/BACKLOG_SIGNAL_SYSTEM_CONSOLIDATION_v1.md`](backlog/BACKLOG_SIGNAL_SYSTEM_CONSOLIDATION_v1.md), [`backlog/SPRINT_SIGNAL_SYSTEM_CONSOLIDATION_v1.md`](backlog/SPRINT_SIGNAL_SYSTEM_CONSOLIDATION_v1.md)
+
+---
+
 ## PHASE1 UAT FLOW FIX v2
 
 STATUS: ACTIVE

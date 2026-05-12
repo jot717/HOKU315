@@ -17,6 +17,15 @@ def insight_onboarding_explanation_card() -> rx.Component:
                 text_align="center",
             ),
             rx.text(
+                "建議先在「訊號檔案」頁存好你的節奏；這裡讀的是同一套訊號，不是另一套問卷。",
+                size="2",
+                color="gray",
+                text_align="center",
+                style={"line_height": "1.65"},
+                max_width="28rem",
+                as_="span",
+            ),
+            rx.text(
                 "北極狐會：",
                 size="3",
                 weight="medium",
