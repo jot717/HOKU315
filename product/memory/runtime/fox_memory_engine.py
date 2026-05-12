@@ -76,6 +76,28 @@ def record_relationship_simulation_memory(
     save_fox_memory(data)
 
 
+def record_target_pattern_memory(
+    target_name: str,
+    archetype_name: str,
+    interaction_risk_score: int,
+) -> None:
+    """Tag recurring target × interaction pattern exposure (SAFE MODE)."""
+    name = (target_name or "").strip()
+    if not name or interaction_risk_score < 46:
+        return
+    short_t = name[:12]
+    short_a = (archetype_name or "").strip()[:18] or "互動模式"
+    tag = f"目標壓力重複：{short_t}×{short_a}"
+    data = load_fox_memory()
+    patterns: list[str] = [str(x) for x in data.get("recent_patterns", [])]
+    if tag not in patterns:
+        patterns.append(tag)
+    patterns = patterns[-10:]
+    data["recent_patterns"] = patterns
+    data["updated_at"] = _utc_now_iso()
+    save_fox_memory(data)
+
+
 def apply_inference_memory_tags(
     risk_scores: Mapping[str, float],
     risk_types: Sequence[str],

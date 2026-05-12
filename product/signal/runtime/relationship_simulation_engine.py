@@ -103,6 +103,111 @@ _ARCHETYPES: tuple[Dict[str, Any], ...] = (
 )
 
 
+def _bound_int(value: Any, default: int = 0) -> int:
+    try:
+        n = int(round(float(value)))
+    except (TypeError, ValueError):
+        return default
+    return max(0, min(10, n))
+
+
+def _target_keyword_blob(target: Mapping[str, Any]) -> str:
+    parts: List[str] = []
+    for key in (
+        "observed_traits",
+        "communication_style",
+        "social_patterns",
+        "pressure_signals",
+        "notes",
+        "relationship_type",
+    ):
+        v = target.get(key)
+        if isinstance(v, list):
+            parts.extend(str(x) for x in v)
+        elif v is not None:
+            parts.append(str(v))
+    return " ".join(parts).lower()
+
+
+def archetype_for_target_profile(target: Mapping[str, Any]) -> Dict[str, Any]:
+    """Pick synthetic archetype from target text + sliders (rule-based)."""
+    blob = _target_keyword_blob(target)
+    scores = [0.0] * len(_ARCHETYPES)
+
+    def hit(i: int, w: float, *needles: str) -> None:
+        for n in needles:
+            if n and n.lower() in blob:
+                scores[i] += w
+
+    hit(0, 4.0, "消失", "不回", "ghost", "忽冷忽熱", "已讀不回")
+    hit(1, 4.0, "情緒", "低潮", "要你", "討拍", "借電", "drain")
+    hit(2, 4.0, "酸", "冷處理", "被動", "passive", "讀空氣")
+    hit(3, 4.0, "讚美", "釣", "承諾模糊", "validation", "收割")
+    hit(4, 4.0, "愧疚", "操弄", "guilt", "情勒")
+    hit(5, 4.0, "亂", "改期", "chaos", "不可預期", "翻臉")
+    hit(6, 4.0, "信任", "先甜", "保證", "親密", "籌碼")
+
+    inst = _bound_int(target.get("instability_level"))
+    att = _bound_int(target.get("attention_demand"))
+    resp = _bound_int(target.get("response_consistency"), 5)
+
+    scores[0] += (10 - resp) * 1.2
+    scores[1] += att * 1.4
+    scores[4] += inst * 0.9 + att * 0.35
+    scores[5] += inst * 1.1
+    scores[6] += inst * 0.75 + (10 - resp) * 0.35
+
+    best = max(range(len(scores)), key=lambda i: scores[i])
+    spec = _ARCHETYPES[best]
+    return {
+        "archetype_name": spec["archetype_name"],
+        "interaction_signals": list(spec["interaction_signals"]),
+        "danger_summary": spec["danger_summary"],
+        "guardian_warning": spec["guardian_warning"],
+        "risk_pressure": spec["risk_pressure"],
+    }
+
+
+def build_virtual_partner_profile(target: Mapping[str, Any]) -> Dict[str, Any]:
+    """Shape `user_b` for bound flow from target observation fields."""
+    traits = target.get("observed_traits") or []
+    if isinstance(traits, str):
+        traits = [traits]
+    interests = [str(x).strip() for x in traits if str(x).strip()][:12]
+    if not interests:
+        interests = ["music", "travel", "sports"]
+    inst = _bound_int(target.get("instability_level"))
+    att = _bound_int(target.get("attention_demand"))
+    activity = max(2, min(9, (inst + att + 3) // 2))
+    return {"interests": interests, "activity": activity}
+
+
+def target_object_risk_bullets(target: Mapping[str, Any]) -> List[str]:
+    """Concrete '這個對象可能會…' lines from sliders + keywords (max 3)."""
+    blob = _target_keyword_blob(target)
+    bullets: List[str] = []
+    rc = _bound_int(target.get("response_consistency"), 5)
+    inst = _bound_int(target.get("instability_level"))
+    att = _bound_int(target.get("attention_demand"))
+
+    if rc <= 3 or "消失" in blob or "不回" in blob or "ghost" in blob:
+        bullets.append("在需要銜接或安撫的時刻，回覆節奏可能突然變冷、變稀疏")
+    if att >= 6 or "情緒" in blob or "討拍" in blob:
+        bullets.append("可能經常需要大量情緒承接與即時回應，讓你的注意力被長期借走")
+    if inst >= 6 or "改期" in blob or "亂" in blob:
+        bullets.append("互動節奏可能不穩定，讓你較難預期下一步、神經系統容易一直待命")
+    if len(bullets) < 2 and ("酸" in blob or "被動" in blob):
+        bullets.append("可能用玩笑或冷處理包裝壓力，逼你花力氣讀空氣")
+    if len(bullets) < 2 and ("愧疚" in blob or "情勒" in blob):
+        bullets.append("可能用愧疚或情緒高低起伏，讓界線變模糊、難以離場")
+
+    out: List[str] = []
+    for b in bullets:
+        if b and b not in out:
+            out.append(b)
+    return out[:3]
+
+
 def generate_relationship_archetype() -> Dict[str, Any]:
     """Return one synthetic archetype package (public fields only)."""
     spec = _ARCHETYPES[_archetype_index()]
@@ -125,6 +230,7 @@ def _archetype_spec_by_name(zh_name: str) -> Dict[str, Any] | None:
 def simulate_relationship_risk(
     user_signal_profile: Mapping[str, Any],
     archetype: Mapping[str, Any],
+    optional_target: Mapping[str, Any] | None = None,
 ) -> Dict[str, Any]:
     """
     Overlap user inference scores with archetype stressors (rule-based).
@@ -154,12 +260,23 @@ def simulate_relationship_risk(
             matches.append(f"你的「{key}」訊號偏高，容易和「{name}」疊成壓力。")
 
     raw += activity_n * 12.0
+    if optional_target:
+        raw += _bound_int(optional_target.get("attention_demand")) * 1.35
+        raw += _bound_int(optional_target.get("instability_level")) * 1.05
+        rc = _bound_int(optional_target.get("response_consistency"), 5)
+        raw += (10 - rc) * 0.85
+
     interaction_risk_score = int(max(0, min(100, round(raw))))
 
     explanations: List[str] = [
         "這段描述的是「互動形狀」，不是在說你脆弱，也不是在說對方一定是壞人。",
         f"這類互動常見的疲勞點：{archetype.get('danger_summary', '')}",
     ]
+    if optional_target:
+        for b in target_object_risk_bullets(optional_target):
+            if b:
+                explanations.insert(1, f"觀察對象可能帶來的節奏：{b}")
+                break
     if matches:
         explanations.insert(1, matches[0])
     explanations = [str(x) for x in explanations if str(x).strip()][:3]

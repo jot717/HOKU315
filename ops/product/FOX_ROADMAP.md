@@ -10,9 +10,13 @@ Shipped: `collect_signal_profile_for_inference` + `infer_signal_risks` in [`prod
 
 Shipped: synthetic **interaction archetypes** + overlap simulation in [`product/signal/runtime/relationship_simulation_engine.py`](../../product/signal/runtime/relationship_simulation_engine.py) — `generate_relationship_archetype` + `simulate_relationship_risk` (rule-based only); guardian copy shifts toward **interaction exhaustion** framing; optional fox-memory tags via `record_relationship_simulation_memory` in [`product/memory/runtime/fox_memory_engine.py`](../../product/memory/runtime/fox_memory_engine.py). See [`RELATIONSHIP_INTELLIGENCE_CONSTITUTION.md`](RELATIONSHIP_INTELLIGENCE_CONSTITUTION.md), [`RELATIONSHIP_ARCHETYPE_MODEL.md`](RELATIONSHIP_ARCHETYPE_MODEL.md), [`INTERACTION_SIGNAL_ONTOLOGY.md`](INTERACTION_SIGNAL_ONTOLOGY.md).
 
+### Target signal profile (v1)
+
+Shipped: **target observation entity** persisted in [`product/target/runtime/target_profile_store.py`](../../product/target/runtime/target_profile_store.py) (`runtime_state/target_profile.json`); **`/target`** setup page; insight uses `archetype_for_target_profile` + `build_virtual_partner_profile` + optional third argument to `simulate_relationship_risk`; simplified insight column; `record_target_pattern_memory` for recurring target × pattern tags. See [`TARGET_SIGNAL_CONSTITUTION.md`](TARGET_SIGNAL_CONSTITUTION.md), [`TARGET_ANALYSIS_FLOW.md`](TARGET_ANALYSIS_FLOW.md), [`TARGET_PROFILE_SCHEMA.md`](TARGET_PROFILE_SCHEMA.md).
+
 ### Signal system consolidation (v1)
 
-Phase 1 delivery is documented as **one signal architecture**: canonical **Signal Profile Setup** on **`/profile`**, optional **signal questions** on **`/quiz`** (20 sliders), **Guardian Observation** on **`/insight`**, and **signal memory** in `runtime_state/` — **no duplicate onboarding route**. See [`SIGNAL_SYSTEM_CONSTITUTION.md`](SIGNAL_SYSTEM_CONSTITUTION.md), [`SIGNAL_FLOW_ARCHITECTURE.md`](SIGNAL_FLOW_ARCHITECTURE.md), [`SIGNAL_PROFILE_SCHEMA.md`](SIGNAL_PROFILE_SCHEMA.md).
+Phase 1 delivery is documented as **one signal architecture**: canonical **Signal Profile Setup** on **`/profile`**, **Target observation setup** on **`/target`**, optional **signal questions** on **`/quiz`** (20 sliders), **Guardian Observation** on **`/insight`**, and **signal memory** in `runtime_state/` — **no duplicate onboarding route**. See [`SIGNAL_SYSTEM_CONSTITUTION.md`](SIGNAL_SYSTEM_CONSTITUTION.md), [`SIGNAL_FLOW_ARCHITECTURE.md`](SIGNAL_FLOW_ARCHITECTURE.md), [`SIGNAL_PROFILE_SCHEMA.md`](SIGNAL_PROFILE_SCHEMA.md), [`TARGET_ANALYSIS_FLOW.md`](TARGET_ANALYSIS_FLOW.md).
 
 ---
 

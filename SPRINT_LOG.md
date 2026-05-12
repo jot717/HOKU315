@@ -287,6 +287,18 @@ REFERENCES: [`ops/product/CORE_PRODUCT_REALIGNMENT.md`](ops/product/CORE_PRODUCT
 
 ---
 
+## TARGET SIGNAL PROFILE v1
+
+STATUS: ACTIVE
+
+TYPE: CORE PRODUCT LOOP FIX (target JSON + primary loop HOME→PROFILE→TARGET→INSIGHT)
+
+GOAL: Remove abstract guardian UX by always having a **target signal** slot; merge insight layout to five blocks; memory tags for recurring target pressure.
+
+REFERENCES: [`ops/product/TARGET_SIGNAL_CONSTITUTION.md`](ops/product/TARGET_SIGNAL_CONSTITUTION.md), [`backlog/BACKLOG_TARGET_SIGNAL_PROFILE_v1.md`](backlog/BACKLOG_TARGET_SIGNAL_PROFILE_v1.md), [`backlog/SPRINT_TARGET_SIGNAL_PROFILE_v1.md`](backlog/SPRINT_TARGET_SIGNAL_PROFILE_v1.md)
+
+---
+
 ## RELATIONSHIP SIGNAL SIMULATION v1
 
 STATUS: ACTIVE

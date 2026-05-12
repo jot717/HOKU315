@@ -498,6 +498,15 @@ Signal guard mechanism (risk evaluation + guardian warning card) — see [`backl
 
 ---
 
+## TARGET SIGNAL PROFILE v1 ACTIVE
+
+**TYPE:** CORE PRODUCT LOOP FIX — named **target observation entity** (`/target`) + local JSON + user/target overlap in insight; **no** SNS / vectors / auth.  
+**Docs:** [`ops/product/TARGET_SIGNAL_CONSTITUTION.md`](ops/product/TARGET_SIGNAL_CONSTITUTION.md), [`ops/product/TARGET_ANALYSIS_FLOW.md`](ops/product/TARGET_ANALYSIS_FLOW.md), [`ops/product/TARGET_PROFILE_SCHEMA.md`](ops/product/TARGET_PROFILE_SCHEMA.md)  
+**UAT:** [`ops/uat/TARGET_SIGNAL_PROFILE_UAT.md`](ops/uat/TARGET_SIGNAL_PROFILE_UAT.md)  
+**Backlog / sprint:** [`backlog/BACKLOG_TARGET_SIGNAL_PROFILE_v1.md`](backlog/BACKLOG_TARGET_SIGNAL_PROFILE_v1.md), [`backlog/SPRINT_TARGET_SIGNAL_PROFILE_v1.md`](backlog/SPRINT_TARGET_SIGNAL_PROFILE_v1.md)
+
+---
+
 ## RELATIONSHIP SIGNAL SIMULATION v1 ACTIVE
 
 **TYPE:** RELATIONSHIP INTELLIGENCE FOUNDATION — synthetic **interaction archetypes** + overlap simulation; **no** SNS / multi-user / vectors / embeddings.  

@@ -16,8 +16,10 @@ from fox_quiz.session_state import SessionState
 from fox_quiz.story_page import story_page
 from fox_quiz.state.app_state import AppState
 from fox_quiz.state.profile_state import ProfileState
+from fox_quiz.state.target_state import TargetState
 from fox_quiz.ui.app_page import app_page
 from fox_quiz.ui.pages.home_page import home_page
+from fox_quiz.ui.pages.target_page import target_page
 from fox_quiz.ui.profile_page import profile_page
 from fox_quiz.unlocks_page import unlocks_page
 from fox_logic import (
@@ -301,4 +303,10 @@ app.add_page(
     route="/profile",
     title="Profile",
     on_load=ProfileState.sync_from_disk,
+)
+app.add_page(
+    target_page,
+    route="/target",
+    title="觀察對象",
+    on_load=TargetState.sync_from_disk,
 )

@@ -13,19 +13,24 @@ from product.insight.experience.reveal_engine import build_reveal_state
 from product.memory.runtime.fox_memory_engine import (
     apply_inference_memory_tags,
     record_relationship_simulation_memory,
+    record_target_pattern_memory,
     remember_insight,
 )
 from product.memory.runtime.fox_memory_store import get_memory_display
 from product.profile.runtime.profile_store import load_profile
 from product.session.runtime.session_history import append_history, load_history
 from product.signal.runtime.relationship_simulation_engine import (
+    archetype_for_target_profile,
+    build_virtual_partner_profile,
     generate_relationship_archetype,
     simulate_relationship_risk,
+    target_object_risk_bullets,
 )
 from product.signal.runtime.signal_inference_engine import (
     collect_signal_profile_for_inference,
     infer_signal_risks,
 )
+from product.target.runtime.target_profile_store import load_target_profile
 
 
 def _fallback_guardian_why_lines(flags: List[str], risk_level: str) -> List[str]:
@@ -86,6 +91,9 @@ class AppState(rx.State):
     relationship_explanation_lines: List[str] = []
     guardian_simulation_advice: str = ""
     guardian_interaction_framing: str = "你不需要自己承受所有壓力。"
+
+    insight_target_name: str = ""
+    insight_target_relationship: str = ""
 
     @rx.var(cache=True)
     def has_insight(self) -> bool:
@@ -172,6 +180,8 @@ class AppState(rx.State):
             self.relationship_explanation_lines = []
             self.guardian_simulation_advice = ""
             self.guardian_interaction_framing = "你不需要自己承受所有壓力。"
+            self.insight_target_name = ""
+            self.insight_target_relationship = ""
             self._refresh_fox_memory_from_store()
             return
 
@@ -224,7 +234,16 @@ class AppState(rx.State):
         if inf_rank > g_rank or (inf_rank >= 1 and hint):
             self.guardian_action = hint or guard_action
 
-        arch = generate_relationship_archetype()
+        tgt = load_target_profile()
+        self.insight_target_name = str(tgt.get("target_name", "")).strip()
+        self.insight_target_relationship = str(tgt.get("relationship_type", "")).strip()
+        has_target = bool(self.insight_target_name)
+
+        arch = (
+            archetype_for_target_profile(tgt)
+            if has_target
+            else generate_relationship_archetype()
+        )
         self.relationship_archetype_name = str(arch.get("archetype_name", ""))
         self.relationship_archetype_pressure = str(arch.get("risk_pressure", "LOW"))
         self.relationship_archetype_danger_summary = str(arch.get("danger_summary", ""))
@@ -234,13 +253,23 @@ class AppState(rx.State):
             "risk_types": self.signal_inference_types,
             "profile": bundle.get("profile", {}),
         }
-        sim = simulate_relationship_risk(user_sig, arch)
+        sim = simulate_relationship_risk(
+            user_sig,
+            arch,
+            tgt if has_target else None,
+        )
         self.relationship_interaction_risk_score = int(sim.get("interaction_risk_score", 0))
         self.relationship_explanation_lines = list(sim.get("danger_explanation", []))[:3]
         self.guardian_simulation_advice = str(sim.get("guardian_advice", ""))
 
         summary = str(arch.get("danger_summary", "")).strip()
-        if summary:
+        bullets = target_object_risk_bullets(tgt) if has_target else []
+        if has_target and bullets:
+            joined = "；".join(bullets)
+            self.guardian_interaction_framing = (
+                f"與「{self.insight_target_name}」這段互動裡，這個對象可能會：{joined}。"
+            )
+        elif summary:
             self.guardian_interaction_framing = (
                 "有些人習慣帶來「"
                 + self.relationship_archetype_name
@@ -261,11 +290,33 @@ class AppState(rx.State):
             self.guardian_why_lines = why
 
     @rx.var(cache=True)
+    def insight_target_summary_line(self) -> str:
+        if not (self.insight_target_name or "").strip():
+            return "尚未命名觀察對象：先到「觀察對象」頁補上稱呼與節奏，守護結論會更貼近真實互動。"
+        rel = (self.insight_target_relationship or "").strip()
+        if rel:
+            return (
+                f"「{self.insight_target_name}」（{rel}）"
+                "— 北極狐把你的訊號與這份觀察放在一起解讀。"
+            )
+        return (
+            f"「{self.insight_target_name}」"
+            "— 北極狐把你的訊號與這份觀察放在一起解讀。"
+        )
+
+    @rx.var(cache=True)
     def guardian_main_warning_title(self) -> str:
+        label = (self.insight_target_name or "").strip()
         if self.display_risk_level == "high":
+            if label:
+                return f"與「{label}」這段互動：壓力訊號偏高"
             return "目前訊號偏危險"
         if self.display_risk_level == "medium":
+            if label:
+                return f"與「{label}」這段互動：節奏偏消耗"
             return "你正在進入高消耗節奏"
+        if label:
+            return f"與「{label}」這段互動：目前相對平穩"
         return "目前訊號相對平穩"
 
     @rx.var(cache=True)
@@ -302,11 +353,14 @@ class AppState(rx.State):
             self.demo_match_loading = True
         try:
             user_a = load_profile()
-
-            user_b = {
-                "interests": ["music", "travel", "sports"],
-                "activity": 6,
-            }
+            tgt = load_target_profile()
+            if str(tgt.get("target_name", "")).strip():
+                user_b = build_virtual_partner_profile(tgt)
+            else:
+                user_b = {
+                    "interests": ["music", "travel", "sports"],
+                    "activity": 6,
+                }
 
             result = execute_bound_flow(
                 {},
@@ -332,6 +386,11 @@ class AppState(rx.State):
                         self.signal_inference_types,
                     )
                     record_relationship_simulation_memory(
+                        self.relationship_archetype_name,
+                        self.relationship_interaction_risk_score,
+                    )
+                    record_target_pattern_memory(
+                        str(tgt.get("target_name", "")),
                         self.relationship_archetype_name,
                         self.relationship_interaction_risk_score,
                     )

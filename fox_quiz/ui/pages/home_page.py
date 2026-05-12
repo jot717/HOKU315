@@ -29,7 +29,7 @@ def home_page() -> rx.Component:
                     as_="span",
                 ),
                 rx.text(
-                    "這裡是：用守護視角替你過濾危險訊號的世界。系統保護你遠離的是「危險互動環境與互動節奏」——不是「個性不合」或配對分數。會依你的訊號檔案與地雷問卷，用規則式推論學習「互動風險模式」；不是在做性格分析。",
+                    "這裡是：社交互動保護系統。用守護視角替你過濾危險訊號與「互動環境」——你在觀察的是危險互動模式，不是在做性格測驗。",
                     size="4",
                     weight="medium",
                     text_align="center",
@@ -56,9 +56,10 @@ def home_page() -> rx.Component:
                         ),
                         rx.text(
                             "① 建立訊號檔案（/profile）\n"
-                            "② 北極狐整理你的危險節奏與地雷敏感度（含可選的 20 題滑桿 /quiz）\n"
-                            "③ 進入觀察室，開始守護觀察（/insight）\n"
-                            "④ 未來接上社群訊號與社交圖保護層",
+                            "② 設定觀察對象（/target）：描述互動節奏，不是交友檔案\n"
+                            "③ 進入觀察室（/insight）：北極狐把你的訊號與對象訊號疊看壓力\n"
+                            "④ 可選：20 題地雷滑桿（/quiz）加深敏感度畫像\n"
+                            "⑤ 未來接上社群訊號與社交圖保護層",
                             size="2",
                             color="gray",
                             text_align="center",
@@ -70,7 +71,7 @@ def home_page() -> rx.Component:
                             as_="span",
                         ),
                         rx.text(
-                            "精簡路徑：訊號檔案 → 觀察室 →（需要更深時再到測驗頁加畫地雷敏感度）",
+                            "精簡路徑：訊號檔案 → 觀察對象 → 觀察室（需要更深時再到測驗頁）",
                             size="1",
                             color="gray",
                             text_align="center",
@@ -97,6 +98,16 @@ def home_page() -> rx.Component:
                             variant="soft",
                         ),
                         href="/profile",
+                        width="100%",
+                    ),
+                    rx.link(
+                        rx.button(
+                            "設定觀察對象",
+                            width="100%",
+                            size="4",
+                            variant="outline",
+                        ),
+                        href="/target",
                         width="100%",
                     ),
                     rx.link(
