@@ -263,6 +263,18 @@ Let the Arctic Fox actively block risky signals with calm guardian warnings.
 
 ---
 
+## PHASE1 UX RESTRUCTURE v1
+
+STATUS: ACTIVE
+
+TYPE: PRODUCT DIRECTION LOCK (SAFE MODE — UX hierarchy + copy only)
+
+GOAL: 「北極狐守護世界」：結論與危險優先、守護語氣、首頁／訊號檔案／觀察室層級一致；保留既有路由與 state 契約。
+
+REFERENCES: [`backlog/BACKLOG_PHASE1_UX_RESTRUCTURE_v1.md`](backlog/BACKLOG_PHASE1_UX_RESTRUCTURE_v1.md), [`ops/product/GUARDIAN_UX_CONSTITUTION.md`](ops/product/GUARDIAN_UX_CONSTITUTION.md), [`ops/uat/PHASE1_UX_RESTRUCTURE_NOTES.md`](ops/uat/PHASE1_UX_RESTRUCTURE_NOTES.md)
+
+---
+
 ## PHASE1 UAT FLOW FIX v2
 
 STATUS: ACTIVE

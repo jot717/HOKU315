@@ -479,6 +479,15 @@ Signal guard mechanism (risk evaluation + guardian warning card) — see [`backl
 
 ---
 
+## PHASE1 UX RESTRUCTURE v1 ACTIVE
+
+**TYPE:** PRODUCT DIRECTION LOCK — guardian hierarchy + copy only (**SAFE MODE**; no backend / DB / auth / vector / pipeline changes).  
+**UX law:** [`ops/product/GUARDIAN_UX_CONSTITUTION.md`](ops/product/GUARDIAN_UX_CONSTITUTION.md)  
+**UAT:** [`ops/uat/PHASE1_UX_RESTRUCTURE_NOTES.md`](ops/uat/PHASE1_UX_RESTRUCTURE_NOTES.md)  
+**Backlog / sprint:** [`backlog/BACKLOG_PHASE1_UX_RESTRUCTURE_v1.md`](backlog/BACKLOG_PHASE1_UX_RESTRUCTURE_v1.md), [`backlog/SPRINT_PHASE1_UX_RESTRUCTURE_v1.md`](backlog/SPRINT_PHASE1_UX_RESTRUCTURE_v1.md)
+
+---
+
 ## PHASE1 UAT FLOW FIX v2 ACTIVE
 
 **TYPE:** UX RECOVERY SPRINT — onboarding + journey clarity (not visual polish).  

@@ -39,6 +39,7 @@ class AppState(rx.State):
     signal_risk_level: str = "low"
     signal_risk_flags: List[str] = []
     guardian_warning: str = ""
+    guardian_action: str = ""
 
     @rx.var(cache=True)
     def has_insight(self) -> bool:
@@ -109,6 +110,7 @@ class AppState(rx.State):
             self.signal_risk_level = "low"
             self.signal_risk_flags = []
             self.guardian_warning = ""
+            self.guardian_action = ""
             self._refresh_fox_memory_from_store()
             return
 
@@ -133,6 +135,59 @@ class AppState(rx.State):
             str(x) for x in guard.get("risk_flags", []) if str(x).strip()
         ]
         self.guardian_warning = str(guard.get("guardian_warning", ""))
+        self.guardian_action = str(guard.get("guardian_action", ""))
+
+    @rx.var(cache=True)
+    def guardian_main_warning_title(self) -> str:
+        if self.signal_risk_level == "high":
+            return "目前訊號偏危險"
+        if self.signal_risk_level == "medium":
+            return "你正在進入高消耗節奏"
+        return "目前訊號相對平穩"
+
+    @rx.var(cache=True)
+    def guardian_presence_line_primary(self) -> str:
+        if self.signal_risk_level == "high":
+            return "北極狐注意到你最近正在接觸容易消耗你的訊號。"
+        if self.signal_risk_level == "medium":
+            return "北極狐注意到節奏正在變快，你的留白正在被擠壓。"
+        return "北極狐正在靜靜守著你這段節奏。"
+
+    @rx.var(cache=True)
+    def guardian_presence_line_secondary(self) -> str:
+        return "你不需要自己承受所有壓力。"
+
+    @rx.var(cache=True)
+    def guardian_risk_status_short(self) -> str:
+        if self.signal_risk_level == "high":
+            return "目前有較高消耗風險"
+        if self.signal_risk_level == "medium":
+            return "壓力訊號正在升溫"
+        return "目前沒有明顯危險訊號"
+
+    @rx.var(cache=True)
+    def guardian_action_display(self) -> str:
+        t = (self.guardian_action or "").strip()
+        if t:
+            return t
+        return "先替自己留一點空白，北極狐會繼續守著。"
+
+    @rx.var(cache=True)
+    def guardian_why_lines(self) -> List[str]:
+        """Max 3 short bullets; rule-based from flags + level (no LLM)."""
+        lines: List[str] = []
+        flags = set(self.signal_risk_flags)
+        if "高壓節奏" in flags or "消耗傾向" in flags:
+            lines.append("最近重複出現高壓互動")
+        if "訊號不穩定" in flags or "節奏失衡" in flags:
+            lines.append("壓力節奏沒有恢復空間")
+        if "過度比較" in flags or "低共鳴" in flags:
+            lines.append("某些訊號正在反覆消耗你")
+        if not lines and self.signal_risk_level != "low":
+            lines.append("訊號節奏仍需要你多留一步空間")
+        if not lines:
+            lines.append("目前守護視野裡沒有明顯危險")
+        return lines[:3]
 
     @rx.event
     def load_session_history(self) -> None:

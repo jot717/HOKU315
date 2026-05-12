@@ -28,6 +28,34 @@ def profile_page() -> rx.Component:
                 rx.box(
                     rx.vstack(
                         rx.text(
+                            "北極狐會用這些做什麼？",
+                            size="3",
+                            weight="bold",
+                            text_align="center",
+                            as_="span",
+                        ),
+                        rx.text(
+                            "北極狐會透過這些訊號，提前發現容易讓你疲憊的人事物。",
+                            size="3",
+                            color="gray",
+                            text_align="center",
+                            style={"line_height": "1.7"},
+                            as_="span",
+                        ),
+                        spacing="2",
+                        width="100%",
+                        align="center",
+                    ),
+                    padding="1.25rem",
+                    border_radius="16px",
+                    width="100%",
+                    max_width="28rem",
+                    border="1px solid rgba(255,255,255,0.88)",
+                    background="rgba(255,255,255,0.62)",
+                ),
+                rx.box(
+                    rx.vstack(
+                        rx.text(
                             "你希望北極狐怎麼稱呼你",
                             size="2",
                             color="gray",
@@ -100,7 +128,7 @@ def profile_page() -> rx.Component:
                         ),
                         rx.link(
                             rx.button(
-                                "前往觀察室",
+                                "進入觀察室",
                                 size="4",
                                 width="100%",
                                 color_scheme="orange",
