@@ -275,6 +275,18 @@ REFERENCES: [`backlog/BACKLOG_PHASE1_UX_RESTRUCTURE_v1.md`](backlog/BACKLOG_PHAS
 
 ---
 
+## PRODUCT CORE REALIGNMENT v1
+
+STATUS: ACTIVE
+
+TYPE: PRODUCT REALIGNMENT SPRINT (documentation + roadmap lock only)
+
+GOAL: Lock **AI Native SNS Guardian Network** as true core (social filtering, hater / dangerous interaction intelligence, SNS signals); fox = persona + guardian UX, not the engine alone.
+
+REFERENCES: [`ops/product/CORE_PRODUCT_REALIGNMENT.md`](ops/product/CORE_PRODUCT_REALIGNMENT.md), [`ops/product/SOCIAL_SIGNAL_ARCHITECTURE.md`](ops/product/SOCIAL_SIGNAL_ARCHITECTURE.md), [`ops/product/HATER_SIGNAL_MODEL.md`](ops/product/HATER_SIGNAL_MODEL.md), [`ops/uat/PRODUCT_DIRECTION_RESET_NOTES.md`](ops/uat/PRODUCT_DIRECTION_RESET_NOTES.md), [`backlog/BACKLOG_PRODUCT_CORE_REALIGNMENT_v1.md`](backlog/BACKLOG_PRODUCT_CORE_REALIGNMENT_v1.md)
+
+---
+
 ## PHASE1 UAT FLOW FIX v2
 
 STATUS: ACTIVE

@@ -488,6 +488,16 @@ Signal guard mechanism (risk evaluation + guardian warning card) — see [`backl
 
 ---
 
+## PRODUCT CORE REALIGNMENT v1 ACTIVE
+
+**TYPE:** PRODUCT REALIGNMENT SPRINT — direction lock (docs + roadmap + deprecated language; **no** removal of guardian UX / fox / insight flow; **no** backend implementation).  
+**Core:** AI-native **SNS guardian network** — social signal intelligence, hater / dangerous interaction detection, interaction risk; fox = persona + guardian UX layer.  
+**Docs:** [`ops/product/CORE_PRODUCT_REALIGNMENT.md`](ops/product/CORE_PRODUCT_REALIGNMENT.md), [`ops/product/SOCIAL_SIGNAL_ARCHITECTURE.md`](ops/product/SOCIAL_SIGNAL_ARCHITECTURE.md), [`ops/product/HATER_SIGNAL_MODEL.md`](ops/product/HATER_SIGNAL_MODEL.md)  
+**UAT:** [`ops/uat/PRODUCT_DIRECTION_RESET_NOTES.md`](ops/uat/PRODUCT_DIRECTION_RESET_NOTES.md)  
+**Backlog / sprint:** [`backlog/BACKLOG_PRODUCT_CORE_REALIGNMENT_v1.md`](backlog/BACKLOG_PRODUCT_CORE_REALIGNMENT_v1.md), [`backlog/SPRINT_PRODUCT_CORE_REALIGNMENT_v1.md`](backlog/SPRINT_PRODUCT_CORE_REALIGNMENT_v1.md)
+
+---
+
 ## PHASE1 UAT FLOW FIX v2 ACTIVE
 
 **TYPE:** UX RECOVERY SPRINT — onboarding + journey clarity (not visual polish).  

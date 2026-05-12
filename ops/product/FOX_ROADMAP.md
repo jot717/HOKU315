@@ -1,95 +1,71 @@
-# FOX GUARDIAN SYSTEM ROADMAP
+# FOX ROADMAP — AI-NATIVE SNS GUARDIAN PLATFORM
 
-## PHASE 1 — FOX WORLD MVP
-
-Goal:
-Create a dream-like emotional safe world.
-
-Core:
-
-* fox presence
-* profile
-* insight
-* emotional safety
-* session memory
-* signal interpretation
-
-Success:
-Users want to stay inside the fox world.
+The **fox** is the **guardian persona and UX layer**; roadmap phases below prioritize **social signal intelligence**, **SNS-backed protection**, and **interaction risk** over standalone “insight app” positioning. Guardian world UX remains the **delivery shell** for alerts and clarity, not a substitute for the core moat.
 
 ---
 
-## PHASE 2 — FOX IDENTITY SYSTEM
+## PHASE 1 — Guardian UX MVP
 
-Goal:
-The fox remembers the user.
+**Goal:** Ship a credible **guardian-first** experience that can later plug in real SNS intelligence.
 
-Includes:
+* Fox presence, tone, and navigation that explain **protection**, not therapy or scoring
+* Profile + local / demo signal path aligned to **risk and drain** language
+* Insight / observation flows that preview **interaction risk** framing (without over-claiming data the product does not yet ingest)
 
-* login
-* auth
-* cloud profile
-* persistence
-* cross-device continuity
-* memory sync
+**Success:** Users understand **what class of product** this is (social protection + signals), not a generic AI report app.
 
 ---
 
-## PHASE 3 — SIGNAL INTELLIGENCE
+## PHASE 2 — Persistent Identity + Auth + Cloud Profile
 
-Goal:
-The fox understands dangerous signals.
+**Goal:** Durable user identity for **cross-device** and **cloud-backed** social graph work later.
 
-Includes:
-
-* embeddings
-* signal ranking
-* manipulation detection
-* hater detection
-* scam awareness
-* behavioral memory
-* reasoning
+* Auth, session, and cloud profile
+* Consent and data-control surfaces required before SNS connect
+* Foundation for syncing **dangerous interaction memory** and preferences
 
 ---
 
-## PHASE 4 — FOX SOCIAL WORLD
+## PHASE 3 — SNS Ingestion + Signal Intelligence
 
-Goal:
-Users form emotionally safe fox circles.
+**Goal:** Turn **real social inputs** (where policy allows) into structured signals.
 
-Includes:
-
-* fox circles
-* SNS integration
-* protected communities
-* insight sharing
-* moderation
-* trust systems
+* Opt-in connectors (per [`SOCIAL_SIGNAL_ARCHITECTURE.md`](SOCIAL_SIGNAL_ARCHITECTURE.md))
+* Embeddings / vector memory for **longitudinal** patterns
+* Hater-adjacent and **drain** pattern detection aligned to [`HATER_SIGNAL_MODEL.md`](HATER_SIGNAL_MODEL.md) (implementation follows policy review)
 
 ---
 
-## PHASE 5 — GUARDIAN ECONOMY
+## PHASE 4 — Social Graph + Guardian Network
 
-Goal:
-Users pay for protection and clarity.
+**Goal:** **Relationship- and graph-aware** protection, not single-thread chat analysis.
 
-Includes:
-
-* premium signal filtering
-* advanced insight
-* aura customization
-* protection layers
+* Safe circles, high-friction zone awareness, repeat-actor memory
+* Network-scale alerts (e.g. coordinated negativity) where product scope allows
+* Community and trust primitives that support **guardian network** positioning
 
 ---
 
-## PHASE 6 — SCALE + OPTIMIZATION
+## PHASE 5 — Monetization + Premium Protection
 
-Goal:
-Scale only after emotional retention exists.
+**Goal:** Paid tiers for **deeper signal depth**, not vanity scores.
 
-Includes:
+* Premium filtering, advanced alerts, priority ingestion limits
+* Clear separation from “dating premium” or “compatibility unlock” framing
 
-* infra scaling
-* realtime optimization
-* caching
-* vector DB optimization
+---
+
+## PHASE 6 — AI Signal Scale Layer
+
+**Goal:** Cost, latency, and safety at scale once **retention on real social value** is proven.
+
+* Infra scaling, realtime paths, caching, vector and policy optimization
+* Evaluation harnesses for **harm reduction** and false-positive management
+
+---
+
+## ALIGNMENT
+
+* **North star:** [`CORE_PRODUCT_REALIGNMENT.md`](CORE_PRODUCT_REALIGNMENT.md)
+* **Deprecated language:** [`DEPRECATED_PRODUCT_LANGUAGE.md`](DEPRECATED_PRODUCT_LANGUAGE.md)
+* **Direction reset narrative:** [`../uat/PRODUCT_DIRECTION_RESET_NOTES.md`](../uat/PRODUCT_DIRECTION_RESET_NOTES.md)
