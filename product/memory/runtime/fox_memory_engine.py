@@ -57,6 +57,25 @@ def remember_insight(insight: Dict[str, Any], score: float) -> Dict[str, str]:
     }
 
 
+def record_relationship_simulation_memory(
+    archetype_name: str,
+    interaction_risk_score: int,
+) -> None:
+    """Tag recurring interaction-pattern exposure (SAFE MODE, synthetic archetype)."""
+    if interaction_risk_score < 42:
+        return
+    data = load_fox_memory()
+    patterns: list[str] = [str(x) for x in data.get("recent_patterns", [])]
+    short = (archetype_name or "").strip()[:24] or "示範原型"
+    tag = f"互動警示：{short}（壓力偏高）"
+    if tag not in patterns:
+        patterns.append(tag)
+    patterns = patterns[-10:]
+    data["recent_patterns"] = patterns
+    data["updated_at"] = _utc_now_iso()
+    save_fox_memory(data)
+
+
 def apply_inference_memory_tags(
     risk_scores: Mapping[str, float],
     risk_types: Sequence[str],

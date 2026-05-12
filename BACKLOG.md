@@ -498,6 +498,15 @@ Signal guard mechanism (risk evaluation + guardian warning card) — see [`backl
 
 ---
 
+## RELATIONSHIP SIGNAL SIMULATION v1 ACTIVE
+
+**TYPE:** RELATIONSHIP INTELLIGENCE FOUNDATION — synthetic **interaction archetypes** + overlap simulation; **no** SNS / multi-user / vectors / embeddings.  
+**Docs:** [`ops/product/RELATIONSHIP_INTELLIGENCE_CONSTITUTION.md`](ops/product/RELATIONSHIP_INTELLIGENCE_CONSTITUTION.md), [`ops/product/RELATIONSHIP_ARCHETYPE_MODEL.md`](ops/product/RELATIONSHIP_ARCHETYPE_MODEL.md), [`ops/product/INTERACTION_SIGNAL_ONTOLOGY.md`](ops/product/INTERACTION_SIGNAL_ONTOLOGY.md)  
+**UAT:** [`ops/uat/RELATIONSHIP_SIGNAL_SIMULATION_UAT.md`](ops/uat/RELATIONSHIP_SIGNAL_SIMULATION_UAT.md)  
+**Backlog / sprint:** [`backlog/BACKLOG_RELATIONSHIP_SIGNAL_SIMULATION_v1.md`](backlog/BACKLOG_RELATIONSHIP_SIGNAL_SIMULATION_v1.md), [`backlog/SPRINT_RELATIONSHIP_SIGNAL_SIMULATION_v1.md`](backlog/SPRINT_RELATIONSHIP_SIGNAL_SIMULATION_v1.md)
+
+---
+
 ## SIGNAL INTELLIGENCE ENGINE v1 ACTIVE
 
 **TYPE:** RULE-BASED SIGNAL INTELLIGENCE — first interpretive layer (`infer_signal_risks`); **no** LLM / embeddings / vector search / SNS / agents.  

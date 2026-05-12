@@ -259,7 +259,7 @@ def _section_fox_guardian_presence() -> rx.Component:
                 style={"line_height": "1.45"},
             ),
             rx.text(
-                AppState.guardian_presence_line_secondary,
+                AppState.guardian_interaction_framing,
                 size="3",
                 color="gray",
                 text_align="center",
@@ -286,6 +286,76 @@ def _section_fox_guardian_presence() -> rx.Component:
         border="1px solid rgba(255,255,255,0.95)",
         background="rgba(255,255,255,0.88)",
         style={"boxShadow": "0 14px 44px rgba(155, 185, 215, 0.16)"},
+    )
+
+
+def _section_archetype_vigilance() -> rx.Component:
+    return rx.box(
+        rx.vstack(
+            rx.text(
+                "北極狐正在警戒的互動類型（示範）",
+                size="3",
+                weight="bold",
+                as_="span",
+            ),
+            rx.text(
+                AppState.relationship_archetype_name,
+                size="4",
+                weight="medium",
+                as_="span",
+            ),
+            rx.hstack(
+                rx.badge(
+                    AppState.relationship_archetype_pressure,
+                    color_scheme="orange",
+                    variant="soft",
+                ),
+                rx.text(
+                    "互動壓力指數",
+                    size="1",
+                    color="gray",
+                    as_="span",
+                ),
+                rx.text(
+                    AppState.relationship_interaction_risk_score,
+                    size="2",
+                    weight="bold",
+                    as_="span",
+                ),
+                spacing="2",
+                align="center",
+            ),
+            rx.text(
+                AppState.relationship_archetype_danger_summary,
+                size="2",
+                color="gray",
+                style={"line_height": "1.65"},
+                as_="span",
+            ),
+            rx.text(
+                AppState.relationship_archetype_guardian_hint,
+                size="2",
+                color="gray",
+                style={"line_height": "1.6"},
+                as_="span",
+            ),
+            rx.text(
+                AppState.guardian_simulation_advice,
+                size="2",
+                weight="medium",
+                style={"line_height": "1.6"},
+                as_="span",
+            ),
+            spacing="2",
+            width="100%",
+            align_items="start",
+        ),
+        padding="1.25rem",
+        border_radius="14px",
+        width="100%",
+        max_width="32rem",
+        border="1px solid rgba(200, 215, 240, 0.65)",
+        background="rgba(255,255,255,0.72)",
     )
 
 
@@ -373,6 +443,7 @@ def _guardian_insight_result_column() -> rx.Component:
     return rx.vstack(
         _section_fox_guardian_presence(),
         _section_danger_pattern(),
+        _section_archetype_vigilance(),
         _section_main_warning(),
         insight_why_bullets_section(),
         _section_fox_guidance(),

@@ -12,11 +12,16 @@ from product.insight.experience.insight_formatter import format_emotional_insigh
 from product.insight.experience.reveal_engine import build_reveal_state
 from product.memory.runtime.fox_memory_engine import (
     apply_inference_memory_tags,
+    record_relationship_simulation_memory,
     remember_insight,
 )
 from product.memory.runtime.fox_memory_store import get_memory_display
 from product.profile.runtime.profile_store import load_profile
 from product.session.runtime.session_history import append_history, load_history
+from product.signal.runtime.relationship_simulation_engine import (
+    generate_relationship_archetype,
+    simulate_relationship_risk,
+)
 from product.signal.runtime.signal_inference_engine import (
     collect_signal_profile_for_inference,
     infer_signal_risks,
@@ -72,6 +77,15 @@ class AppState(rx.State):
     inference_high_warning: str = ""
     inference_guardian_reasoning: List[str] = []
     guardian_why_lines: List[str] = []
+
+    relationship_archetype_name: str = ""
+    relationship_archetype_pressure: str = ""
+    relationship_archetype_danger_summary: str = ""
+    relationship_archetype_guardian_hint: str = ""
+    relationship_interaction_risk_score: int = 0
+    relationship_explanation_lines: List[str] = []
+    guardian_simulation_advice: str = ""
+    guardian_interaction_framing: str = "你不需要自己承受所有壓力。"
 
     @rx.var(cache=True)
     def has_insight(self) -> bool:
@@ -150,6 +164,14 @@ class AppState(rx.State):
             self.inference_high_warning = ""
             self.inference_guardian_reasoning = []
             self.guardian_why_lines = []
+            self.relationship_archetype_name = ""
+            self.relationship_archetype_pressure = ""
+            self.relationship_archetype_danger_summary = ""
+            self.relationship_archetype_guardian_hint = ""
+            self.relationship_interaction_risk_score = 0
+            self.relationship_explanation_lines = []
+            self.guardian_simulation_advice = ""
+            self.guardian_interaction_framing = "你不需要自己承受所有壓力。"
             self._refresh_fox_memory_from_store()
             return
 
@@ -202,6 +224,42 @@ class AppState(rx.State):
         if inf_rank > g_rank or (inf_rank >= 1 and hint):
             self.guardian_action = hint or guard_action
 
+        arch = generate_relationship_archetype()
+        self.relationship_archetype_name = str(arch.get("archetype_name", ""))
+        self.relationship_archetype_pressure = str(arch.get("risk_pressure", "LOW"))
+        self.relationship_archetype_danger_summary = str(arch.get("danger_summary", ""))
+        self.relationship_archetype_guardian_hint = str(arch.get("guardian_warning", ""))
+        user_sig = {
+            "risk_scores": self.inference_risk_scores,
+            "risk_types": self.signal_inference_types,
+            "profile": bundle.get("profile", {}),
+        }
+        sim = simulate_relationship_risk(user_sig, arch)
+        self.relationship_interaction_risk_score = int(sim.get("interaction_risk_score", 0))
+        self.relationship_explanation_lines = list(sim.get("danger_explanation", []))[:3]
+        self.guardian_simulation_advice = str(sim.get("guardian_advice", ""))
+
+        summary = str(arch.get("danger_summary", "")).strip()
+        if summary:
+            self.guardian_interaction_framing = (
+                "有些人習慣帶來「"
+                + self.relationship_archetype_name
+                + "」的節奏，可能會這樣耗你："
+                + summary
+            )
+        else:
+            self.guardian_interaction_framing = "你不需要自己承受所有壓力。"
+
+        why: List[str] = []
+        for m in sim.get("risk_matches", [])[:2]:
+            if m and m not in why:
+                why.append(m)
+        for line in self.guardian_why_lines:
+            if line and line not in why and len(why) < 3:
+                why.append(line)
+        if why:
+            self.guardian_why_lines = why
+
     @rx.var(cache=True)
     def guardian_main_warning_title(self) -> str:
         if self.display_risk_level == "high":
@@ -217,10 +275,6 @@ class AppState(rx.State):
         if self.display_risk_level == "medium":
             return "北極狐注意到節奏正在變快，你的留白正在被擠壓。"
         return "北極狐正在靜靜守著你這段節奏。"
-
-    @rx.var(cache=True)
-    def guardian_presence_line_secondary(self) -> str:
-        return "你不需要自己承受所有壓力。"
 
     @rx.var(cache=True)
     def guardian_risk_status_short(self) -> str:
@@ -276,6 +330,10 @@ class AppState(rx.State):
                     apply_inference_memory_tags(
                         self.inference_risk_scores,
                         self.signal_inference_types,
+                    )
+                    record_relationship_simulation_memory(
+                        self.relationship_archetype_name,
+                        self.relationship_interaction_risk_score,
                     )
                     self._refresh_fox_memory_from_store()
                     append_history(
