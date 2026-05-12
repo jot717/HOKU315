@@ -287,6 +287,18 @@ REFERENCES: [`ops/product/CORE_PRODUCT_REALIGNMENT.md`](ops/product/CORE_PRODUCT
 
 ---
 
+## STATE SANITIZATION HOTFIX v1
+
+STATUS: ACTIVE
+
+TYPE: RUNTIME STABILITY HOTFIX (Reflex state serialization + defensive loads)
+
+GOAL: Remove hydration/socket instability from unsafe state shapes and dead computed vars; no feature changes.
+
+REFERENCES: [`ops/uat/STATE_SANITIZATION_RUNTIME_UAT.md`](ops/uat/STATE_SANITIZATION_RUNTIME_UAT.md), [`backlog/BACKLOG_STATE_SANITIZATION_HOTFIX_v1.md`](backlog/BACKLOG_STATE_SANITIZATION_HOTFIX_v1.md), [`backlog/SPRINT_STATE_SANITIZATION_HOTFIX_v1.md`](backlog/SPRINT_STATE_SANITIZATION_HOTFIX_v1.md)
+
+---
+
 ## TARGET SIGNAL PROFILE v1
 
 STATUS: ACTIVE

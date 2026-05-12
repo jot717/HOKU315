@@ -33,6 +33,37 @@ from product.signal.runtime.signal_inference_engine import (
 from product.target.runtime.target_profile_store import load_target_profile
 
 
+def _str_list(values: Any, *, limit: int) -> List[str]:
+    """Plain strings for Reflex state / hydration (no mixed nested types)."""
+    if values is None:
+        return []
+    if isinstance(values, str):
+        s = values.strip()
+        return [s] if s else []
+    if not isinstance(values, (list, tuple)):
+        return []
+    out: List[str] = []
+    for x in values:
+        s = str(x).strip()
+        if s:
+            out.append(s)
+        if len(out) >= limit:
+            break
+    return out
+
+
+def _match_score_from_flow(flow: Dict[str, Any]) -> float:
+    if not isinstance(flow, dict):
+        return 0.0
+    m = flow.get("match")
+    if not isinstance(m, dict):
+        m = {}
+    try:
+        return float(m.get("score", 0))
+    except (TypeError, ValueError):
+        return 0.0
+
+
 def _fallback_guardian_why_lines(flags: List[str], risk_level: str) -> List[str]:
     """Rule-based bullets when inference reasoning is empty."""
     lines: List[str] = []
@@ -97,54 +128,32 @@ class AppState(rx.State):
 
     @rx.var(cache=True)
     def has_insight(self) -> bool:
-        return bool(self.insight_state)
-
-    @rx.var(cache=True)
-    def insight_ai_summary(self) -> str:
-        if not self.insight_state:
-            return ""
-        return str(self.insight_state.get("ai_summary", ""))
-
-    @rx.var(cache=True)
-    def insight_shared_traits_text(self) -> str:
-        if not self.insight_state:
-            return ""
-        st = self.insight_state.get("shared_traits", [])
-        if isinstance(st, list):
-            return ", ".join(str(x) for x in st)
-        return str(st)
-
-    @rx.var(cache=True)
-    def insight_activity_analysis(self) -> str:
-        if not self.insight_state:
-            return ""
-        return str(self.insight_state.get("activity_analysis", ""))
+        return isinstance(self.insight_state, dict) and bool(self.insight_state)
 
     @rx.var(cache=True)
     def match_score_safe_int(self) -> int:
         """0–100 int for rx.progress (requires int, not float)."""
-        s = float(self.flow_result.get("match", {}).get("score", 0))
+        fr = self.flow_result if isinstance(self.flow_result, dict) else {}
+        m = fr.get("match")
+        if not isinstance(m, dict):
+            m = {}
+        try:
+            s = float(m.get("score", 0))
+        except (TypeError, ValueError):
+            s = 0.0
         return max(0, min(100, int(round(s))))
 
     @rx.var(cache=True)
-    def signal_risk_flag_lines(self) -> str:
-        if not self.signal_risk_flags:
-            return ""
-        return "\n".join(f"・{x}" for x in self.signal_risk_flags[:12])
-
-    @rx.var(cache=True)
     def match_score_heading(self) -> str:
-        safe = max(
-            0,
-            min(
-                100,
-                int(
-                    round(
-                        float(self.flow_result.get("match", {}).get("score", 0)),
-                    )
-                ),
-            ),
-        )
+        fr = self.flow_result if isinstance(self.flow_result, dict) else {}
+        m = fr.get("match")
+        if not isinstance(m, dict):
+            m = {}
+        try:
+            raw = float(m.get("score", 0))
+        except (TypeError, ValueError):
+            raw = 0.0
+        safe = max(0, min(100, int(round(raw))))
         return f"{safe}%"
 
     def _refresh_fox_memory_from_store(self) -> None:
@@ -153,7 +162,7 @@ class AppState(rx.State):
         self.recurring_pattern = str(display.get("recurring_pattern", ""))
 
     def _apply_emotional_insight(self) -> None:
-        if not self.insight_state:
+        if not isinstance(self.insight_state, dict) or not self.insight_state:
             self.compatibility_title = ""
             self.energy_summary = ""
             self.final_insight = ""
@@ -185,11 +194,11 @@ class AppState(rx.State):
             self._refresh_fox_memory_from_store()
             return
 
-        score = float(self.flow_result.get("match", {}).get("score", 0))
+        score = _match_score_from_flow(self.flow_result)
         emotional = format_emotional_insight(self.insight_state, score)
-        self.compatibility_title = emotional.get("compatibility_title", "")
-        self.energy_summary = emotional.get("energy_summary", "")
-        self.final_insight = emotional.get("final_insight", "")
+        self.compatibility_title = str(emotional.get("compatibility_title", "") or "")
+        self.energy_summary = str(emotional.get("energy_summary", "") or "")
+        self.final_insight = str(emotional.get("final_insight", "") or "")
 
         reveal = build_reveal_state(self.insight_state, score)
         self.reveal_level = str(reveal["level"])
@@ -211,11 +220,19 @@ class AppState(rx.State):
 
         bundle = collect_signal_profile_for_inference(self.insight_state, score, None)
         inf = infer_signal_risks(bundle)
-        self.signal_inference_types = list(inf.get("risk_types", []))
-        self.inference_risk_scores = dict(inf.get("risk_scores", {}))
+        self.signal_inference_types = _str_list(inf.get("risk_types"), limit=32)
+        raw_rs = inf.get("risk_scores")
+        scored: Dict[str, float] = {}
+        if isinstance(raw_rs, dict):
+            for k, v in raw_rs.items():
+                try:
+                    scored[str(k)] = float(v)
+                except (TypeError, ValueError):
+                    continue
+        self.inference_risk_scores = scored
         self.inference_priority_label = str(inf.get("priority", "LOW")).upper()
         self.inference_high_warning = str(inf.get("high_priority_warning", ""))
-        self.inference_guardian_reasoning = list(inf.get("guardian_reasoning", []))[:4]
+        self.inference_guardian_reasoning = _str_list(inf.get("guardian_reasoning"), limit=4)
         hint = str(inf.get("guardian_action_hint", "")).strip()
 
         inf_rank = {"HIGH": 2, "MEDIUM": 1, "LOW": 0}.get(self.inference_priority_label, 0)
@@ -259,7 +276,7 @@ class AppState(rx.State):
             tgt if has_target else None,
         )
         self.relationship_interaction_risk_score = int(sim.get("interaction_risk_score", 0))
-        self.relationship_explanation_lines = list(sim.get("danger_explanation", []))[:3]
+        self.relationship_explanation_lines = _str_list(sim.get("danger_explanation"), limit=3)
         self.guardian_simulation_advice = str(sim.get("guardian_advice", ""))
 
         summary = str(arch.get("danger_summary", "")).strip()
@@ -281,11 +298,13 @@ class AppState(rx.State):
 
         why: List[str] = []
         for m in sim.get("risk_matches", [])[:2]:
-            if m and m not in why:
-                why.append(m)
+            ms = str(m).strip()
+            if ms and ms not in why:
+                why.append(ms)
         for line in self.guardian_why_lines:
-            if line and line not in why and len(why) < 3:
-                why.append(line)
+            ls = str(line).strip()
+            if ls and ls not in why and len(why) < 3:
+                why.append(ls)
         if why:
             self.guardian_why_lines = why
 
@@ -320,14 +339,6 @@ class AppState(rx.State):
         return "目前訊號相對平穩"
 
     @rx.var(cache=True)
-    def guardian_presence_line_primary(self) -> str:
-        if self.display_risk_level == "high":
-            return "北極狐注意到你最近正在接觸容易消耗你的訊號。"
-        if self.display_risk_level == "medium":
-            return "北極狐注意到節奏正在變快，你的留白正在被擠壓。"
-        return "北極狐正在靜靜守著你這段節奏。"
-
-    @rx.var(cache=True)
     def guardian_risk_status_short(self) -> str:
         if self.display_risk_level == "high":
             return "目前有較高消耗風險"
@@ -344,7 +355,8 @@ class AppState(rx.State):
 
     @rx.event
     def load_session_history(self) -> None:
-        self.session_history = load_history()
+        hist = load_history()
+        self.session_history = hist if isinstance(hist, list) else []
         self._refresh_fox_memory_from_store()
 
     @rx.event
@@ -369,15 +381,13 @@ class AppState(rx.State):
             )
 
             async with self:
-                self.flow_result = result
-                self.insight_state = result.get(
-                    "insight_state",
-                    {},
-                )
+                self.flow_result = result if isinstance(result, dict) else {}
+                ins = result.get("insight_state", {}) if isinstance(result, dict) else {}
+                self.insight_state = ins if isinstance(ins, dict) else {}
                 self._apply_emotional_insight()
 
                 if self.insight_state:
-                    score = float(self.flow_result.get("match", {}).get("score", 0))
+                    score = _match_score_from_flow(self.flow_result)
                     mem = remember_insight(self.insight_state, score)
                     self.fox_memory_note = mem["guardian_memory_note"]
                     self.recurring_pattern = mem["recurring_pattern"]
@@ -411,15 +421,14 @@ class AppState(rx.State):
     @rx.event
     def load_latest_session(self) -> None:
         session = load_session()
+        if not isinstance(session, dict):
+            session = {}
 
-        self.flow_result = session.get(
-            "flow_result",
-            {},
-        )
+        fr = session.get("flow_result", {})
+        self.flow_result = fr if isinstance(fr, dict) else {}
 
-        self.insight_state = session.get(
-            "insight_state",
-            {},
-        )
+        ins = session.get("insight_state", {})
+        self.insight_state = ins if isinstance(ins, dict) else {}
+
         self._apply_emotional_insight()
         self._refresh_fox_memory_from_store()

@@ -43,52 +43,76 @@ class TargetState(rx.State):
 
     @rx.event
     def set_target_name(self, value: str) -> None:
-        self.target_name = value
+        self.target_name = "" if value is None else str(value)
 
     @rx.event
     def set_relationship_type(self, value: str) -> None:
-        self.relationship_type = value
+        self.relationship_type = "" if value is None else str(value)
 
     @rx.event
     def set_observed_traits_text(self, value: str) -> None:
-        self.observed_traits_text = value
+        self.observed_traits_text = "" if value is None else str(value)
 
     @rx.event
     def set_communication_style_text(self, value: str) -> None:
-        self.communication_style_text = value
+        self.communication_style_text = "" if value is None else str(value)
 
     @rx.event
     def set_social_patterns_text(self, value: str) -> None:
-        self.social_patterns_text = value
+        self.social_patterns_text = "" if value is None else str(value)
 
     @rx.event
     def set_pressure_signals_text(self, value: str) -> None:
-        self.pressure_signals_text = value
+        self.pressure_signals_text = "" if value is None else str(value)
 
     @rx.event
     def set_notes(self, value: str) -> None:
-        self.notes = value
+        self.notes = "" if value is None else str(value)
 
     @rx.event
-    def set_instability_level(self, value: list[float | int] | float | int) -> None:
-        if isinstance(value, (list, tuple)) and value:
-            self.instability_level = max(0, min(10, int(round(float(value[0])))))
+    def set_instability_level(self, value: list[float | int] | float | int | None) -> None:
+        if isinstance(value, (list, tuple)):
+            if not value:
+                return
+            raw = value[0]
+        elif value is None:
+            return
         else:
-            self.instability_level = max(0, min(10, int(round(float(value)))))
+            raw = value
+        try:
+            self.instability_level = max(0, min(10, int(round(float(raw)))))
+        except (TypeError, ValueError):
+            return
 
     @rx.event
-    def set_attention_demand(self, value: list[float | int] | float | int) -> None:
-        if isinstance(value, (list, tuple)) and value:
-            self.attention_demand = max(0, min(10, int(round(float(value[0])))))
+    def set_attention_demand(self, value: list[float | int] | float | int | None) -> None:
+        if isinstance(value, (list, tuple)):
+            if not value:
+                return
+            raw = value[0]
+        elif value is None:
+            return
         else:
-            self.attention_demand = max(0, min(10, int(round(float(value)))))
+            raw = value
+        try:
+            self.attention_demand = max(0, min(10, int(round(float(raw)))))
+        except (TypeError, ValueError):
+            return
 
     @rx.event
-    def set_response_consistency(self, value: list[float | int] | float | int) -> None:
-        if isinstance(value, (list, tuple)) and value:
-            self.response_consistency = max(0, min(10, int(round(float(value[0])))))
+    def set_response_consistency(self, value: list[float | int] | float | int | None) -> None:
+        if isinstance(value, (list, tuple)):
+            if not value:
+                return
+            raw = value[0]
+        elif value is None:
+            return
         else:
-            self.response_consistency = max(0, min(10, int(round(float(value)))))
+            raw = value
+        try:
+            self.response_consistency = max(0, min(10, int(round(float(raw)))))
+        except (TypeError, ValueError):
+            return
 
     @rx.event
     def save_target(self) -> None:

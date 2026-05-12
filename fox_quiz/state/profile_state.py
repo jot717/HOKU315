@@ -28,15 +28,15 @@ class ProfileState(rx.State):
 
     @rx.event
     def set_name(self, value: str) -> None:
-        self.name = value
+        self.name = "" if value is None else str(value)
 
     @rx.event
     def set_interests_text(self, value: str) -> None:
-        self.interests_text = value
+        self.interests_text = "" if value is None else str(value)
 
     @rx.event
     def set_activity_text(self, value: str) -> None:
-        self.activity_text = value
+        self.activity_text = "" if value is None else str(value)
 
     @rx.event
     def save_profile(self) -> None:

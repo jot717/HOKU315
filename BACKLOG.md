@@ -498,6 +498,14 @@ Signal guard mechanism (risk evaluation + guardian warning card) — see [`backl
 
 ---
 
+## STATE SANITIZATION HOTFIX v1 ACTIVE
+
+**TYPE:** RUNTIME STABILITY HOTFIX — Reflex `@rx.var` / list coercion / session JSON safety; **no** new features or routes.  
+**UAT:** [`ops/uat/STATE_SANITIZATION_RUNTIME_UAT.md`](ops/uat/STATE_SANITIZATION_RUNTIME_UAT.md)  
+**Backlog / sprint:** [`backlog/BACKLOG_STATE_SANITIZATION_HOTFIX_v1.md`](backlog/BACKLOG_STATE_SANITIZATION_HOTFIX_v1.md), [`backlog/SPRINT_STATE_SANITIZATION_HOTFIX_v1.md`](backlog/SPRINT_STATE_SANITIZATION_HOTFIX_v1.md)
+
+---
+
 ## TARGET SIGNAL PROFILE v1 ACTIVE
 
 **TYPE:** CORE PRODUCT LOOP FIX — named **target observation entity** (`/target`) + local JSON + user/target overlap in insight; **no** SNS / vectors / auth.  

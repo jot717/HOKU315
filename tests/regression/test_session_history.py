@@ -19,3 +19,6 @@ def test_session_history_append(tmp_path, monkeypatch) -> None:
     history = session_history.load_history()
 
     assert len(history) >= 1
+    row = history[0]
+    assert set(row.keys()) >= {"final_insight", "compatibility_title", "energy_summary"}
+    assert isinstance(row["final_insight"], str)
