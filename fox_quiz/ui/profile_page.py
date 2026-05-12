@@ -17,7 +17,7 @@ def profile_page() -> rx.Component:
                     text_align="center",
                 ),
                 rx.text(
-                    "訊號檔案設定：用興趣與壓力節奏描述你，不是在做性格測驗。",
+                    "訊號檔案設定：用興趣與壓力節奏描述你，不是在做性格測驗。儲存後，北極狐會用規則式推論整理互動風險模式。",
                     size="2",
                     color="gray",
                     text_align="center",

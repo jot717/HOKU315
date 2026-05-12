@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any, Dict
+from typing import Any, Dict, Mapping, Sequence
 
 from product.memory.runtime.fox_memory_store import (
     derive_recurring_note,
@@ -55,3 +55,42 @@ def remember_insight(insight: Dict[str, Any], score: float) -> Dict[str, str]:
         "guardian_memory_note": guardian,
         "recurring_pattern": recurring,
     }
+
+
+def apply_inference_memory_tags(
+    risk_scores: Mapping[str, float],
+    risk_types: Sequence[str],
+) -> None:
+    """
+    Append short rule-based tags when inferred risks are elevated (SAFE MODE).
+    Called after remember_insight so score-based memory is already written.
+    """
+    data = load_fox_memory()
+    patterns: list[str] = [str(x) for x in data.get("recent_patterns", [])]
+
+    tags: list[str] = []
+    for key in risk_types[:4]:
+        val = float(risk_scores.get(key, 0.0))
+        if val < 0.52:
+            continue
+        if key == "manipulation_sensitivity":
+            tags.append("推論：操弄壓力訊號偏高")
+        elif key == "attention_drain_risk":
+            tags.append("推論：注意力消耗偏高")
+        elif key == "ghosting_sensitivity":
+            tags.append("推論：回覆節奏壓力偏高")
+        elif key == "emotional_exhaustion_risk":
+            tags.append("推論：疲勞堆疊訊號偏高")
+        elif key == "social_comparison_risk":
+            tags.append("推論：比較壓力偏高")
+        if len(tags) >= 2:
+            break
+
+    for t in tags:
+        if t not in patterns:
+            patterns.append(t)
+    patterns = patterns[-10:]
+    data["recent_patterns"] = patterns
+    data["updated_at"] = _utc_now_iso()
+    save_fox_memory(data)
+

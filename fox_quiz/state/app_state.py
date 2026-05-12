@@ -6,14 +6,38 @@ import reflex as rx
 
 from product.app_binding.runtime.flow_binding import execute_bound_flow
 from product.app_binding.runtime.persistence import load_session
+from product.guard.runtime.signal_guard_engine import evaluate_signal_risk
 from product.insight.experience.fox_narration import build_fox_message
 from product.insight.experience.insight_formatter import format_emotional_insight
 from product.insight.experience.reveal_engine import build_reveal_state
-from product.guard.runtime.signal_guard_engine import evaluate_signal_risk
-from product.memory.runtime.fox_memory_engine import remember_insight
+from product.memory.runtime.fox_memory_engine import (
+    apply_inference_memory_tags,
+    remember_insight,
+)
 from product.memory.runtime.fox_memory_store import get_memory_display
 from product.profile.runtime.profile_store import load_profile
 from product.session.runtime.session_history import append_history, load_history
+from product.signal.runtime.signal_inference_engine import (
+    collect_signal_profile_for_inference,
+    infer_signal_risks,
+)
+
+
+def _fallback_guardian_why_lines(flags: List[str], risk_level: str) -> List[str]:
+    """Rule-based bullets when inference reasoning is empty."""
+    lines: List[str] = []
+    flagset = set(flags)
+    if "高壓節奏" in flagset or "消耗傾向" in flagset:
+        lines.append("最近重複出現高壓互動")
+    if "訊號不穩定" in flagset or "節奏失衡" in flagset:
+        lines.append("壓力節奏沒有恢復空間")
+    if "過度比較" in flagset or "低共鳴" in flagset:
+        lines.append("某些訊號正在反覆消耗你")
+    if not lines and risk_level != "low":
+        lines.append("訊號節奏仍需要你多留一步空間")
+    if not lines:
+        lines.append("目前守護視野裡沒有明顯危險")
+    return lines[:3]
 
 
 class AppState(rx.State):
@@ -40,6 +64,14 @@ class AppState(rx.State):
     signal_risk_flags: List[str] = []
     guardian_warning: str = ""
     guardian_action: str = ""
+
+    display_risk_level: str = "low"
+    signal_inference_types: List[str] = []
+    inference_risk_scores: Dict[str, float] = {}
+    inference_priority_label: str = "LOW"
+    inference_high_warning: str = ""
+    inference_guardian_reasoning: List[str] = []
+    guardian_why_lines: List[str] = []
 
     @rx.var(cache=True)
     def has_insight(self) -> bool:
@@ -111,6 +143,13 @@ class AppState(rx.State):
             self.signal_risk_flags = []
             self.guardian_warning = ""
             self.guardian_action = ""
+            self.display_risk_level = "low"
+            self.signal_inference_types = []
+            self.inference_risk_scores = {}
+            self.inference_priority_label = "LOW"
+            self.inference_high_warning = ""
+            self.inference_guardian_reasoning = []
+            self.guardian_why_lines = []
             self._refresh_fox_memory_from_store()
             return
 
@@ -135,21 +174,47 @@ class AppState(rx.State):
             str(x) for x in guard.get("risk_flags", []) if str(x).strip()
         ]
         self.guardian_warning = str(guard.get("guardian_warning", ""))
-        self.guardian_action = str(guard.get("guardian_action", ""))
+        guard_action = str(guard.get("guardian_action", ""))
+        self.guardian_action = guard_action
+
+        bundle = collect_signal_profile_for_inference(self.insight_state, score, None)
+        inf = infer_signal_risks(bundle)
+        self.signal_inference_types = list(inf.get("risk_types", []))
+        self.inference_risk_scores = dict(inf.get("risk_scores", {}))
+        self.inference_priority_label = str(inf.get("priority", "LOW")).upper()
+        self.inference_high_warning = str(inf.get("high_priority_warning", ""))
+        self.inference_guardian_reasoning = list(inf.get("guardian_reasoning", []))[:4]
+        hint = str(inf.get("guardian_action_hint", "")).strip()
+
+        inf_rank = {"HIGH": 2, "MEDIUM": 1, "LOW": 0}.get(self.inference_priority_label, 0)
+        g_rank = {"high": 2, "medium": 1, "low": 0}.get(str(self.signal_risk_level).lower(), 0)
+        merged = max(inf_rank, g_rank)
+        self.display_risk_level = "high" if merged == 2 else "medium" if merged == 1 else "low"
+
+        if self.inference_guardian_reasoning:
+            self.guardian_why_lines = self.inference_guardian_reasoning[:3]
+        else:
+            self.guardian_why_lines = _fallback_guardian_why_lines(
+                self.signal_risk_flags,
+                self.signal_risk_level,
+            )
+
+        if inf_rank > g_rank or (inf_rank >= 1 and hint):
+            self.guardian_action = hint or guard_action
 
     @rx.var(cache=True)
     def guardian_main_warning_title(self) -> str:
-        if self.signal_risk_level == "high":
+        if self.display_risk_level == "high":
             return "目前訊號偏危險"
-        if self.signal_risk_level == "medium":
+        if self.display_risk_level == "medium":
             return "你正在進入高消耗節奏"
         return "目前訊號相對平穩"
 
     @rx.var(cache=True)
     def guardian_presence_line_primary(self) -> str:
-        if self.signal_risk_level == "high":
+        if self.display_risk_level == "high":
             return "北極狐注意到你最近正在接觸容易消耗你的訊號。"
-        if self.signal_risk_level == "medium":
+        if self.display_risk_level == "medium":
             return "北極狐注意到節奏正在變快，你的留白正在被擠壓。"
         return "北極狐正在靜靜守著你這段節奏。"
 
@@ -159,9 +224,9 @@ class AppState(rx.State):
 
     @rx.var(cache=True)
     def guardian_risk_status_short(self) -> str:
-        if self.signal_risk_level == "high":
+        if self.display_risk_level == "high":
             return "目前有較高消耗風險"
-        if self.signal_risk_level == "medium":
+        if self.display_risk_level == "medium":
             return "壓力訊號正在升溫"
         return "目前沒有明顯危險訊號"
 
@@ -171,23 +236,6 @@ class AppState(rx.State):
         if t:
             return t
         return "先替自己留一點空白，北極狐會繼續守著。"
-
-    @rx.var(cache=True)
-    def guardian_why_lines(self) -> List[str]:
-        """Max 3 short bullets; rule-based from flags + level (no LLM)."""
-        lines: List[str] = []
-        flags = set(self.signal_risk_flags)
-        if "高壓節奏" in flags or "消耗傾向" in flags:
-            lines.append("最近重複出現高壓互動")
-        if "訊號不穩定" in flags or "節奏失衡" in flags:
-            lines.append("壓力節奏沒有恢復空間")
-        if "過度比較" in flags or "低共鳴" in flags:
-            lines.append("某些訊號正在反覆消耗你")
-        if not lines and self.signal_risk_level != "low":
-            lines.append("訊號節奏仍需要你多留一步空間")
-        if not lines:
-            lines.append("目前守護視野裡沒有明顯危險")
-        return lines[:3]
 
     @rx.event
     def load_session_history(self) -> None:
@@ -225,6 +273,11 @@ class AppState(rx.State):
                     mem = remember_insight(self.insight_state, score)
                     self.fox_memory_note = mem["guardian_memory_note"]
                     self.recurring_pattern = mem["recurring_pattern"]
+                    apply_inference_memory_tags(
+                        self.inference_risk_scores,
+                        self.signal_inference_types,
+                    )
+                    self._refresh_fox_memory_from_store()
                     append_history(
                         {
                             "compatibility_title": self.compatibility_title,

@@ -498,6 +498,15 @@ Signal guard mechanism (risk evaluation + guardian warning card) — see [`backl
 
 ---
 
+## SIGNAL INTELLIGENCE ENGINE v1 ACTIVE
+
+**TYPE:** RULE-BASED SIGNAL INTELLIGENCE — first interpretive layer (`infer_signal_risks`); **no** LLM / embeddings / vector search / SNS / agents.  
+**Docs:** [`ops/product/SIGNAL_INTELLIGENCE_CONSTITUTION.md`](ops/product/SIGNAL_INTELLIGENCE_CONSTITUTION.md), [`ops/product/SIGNAL_RISK_ONTOLOGY.md`](ops/product/SIGNAL_RISK_ONTOLOGY.md), [`ops/product/SIGNAL_INFERENCE_MODEL.md`](ops/product/SIGNAL_INFERENCE_MODEL.md)  
+**UAT:** [`ops/uat/SIGNAL_INTELLIGENCE_ENGINE_UAT.md`](ops/uat/SIGNAL_INTELLIGENCE_ENGINE_UAT.md)  
+**Backlog / sprint:** [`backlog/BACKLOG_SIGNAL_INTELLIGENCE_ENGINE_v1.md`](backlog/BACKLOG_SIGNAL_INTELLIGENCE_ENGINE_v1.md), [`backlog/SPRINT_SIGNAL_INTELLIGENCE_ENGINE_v1.md`](backlog/SPRINT_SIGNAL_INTELLIGENCE_ENGINE_v1.md)
+
+---
+
 ## SIGNAL SYSTEM CONSOLIDATION v1 ACTIVE
 
 **TYPE:** SIGNAL ARCHITECTURE CONSOLIDATION — unify existing `/profile`, `/quiz`, `/insight`, memory, and signal wording (**SAFE MODE**; **no** new onboarding route; **no** SNS / vector / auth implementation).  

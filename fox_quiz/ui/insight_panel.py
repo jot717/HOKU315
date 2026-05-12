@@ -225,7 +225,7 @@ def _onboarding_strip() -> rx.Component:
 
 def _section_fox_guardian_presence() -> rx.Component:
     risk_callout = rx.cond(
-        AppState.signal_risk_level == "high",
+        AppState.display_risk_level == "high",
         rx.callout(
             AppState.guardian_risk_status_short,
             icon="triangle-alert",
@@ -233,7 +233,7 @@ def _section_fox_guardian_presence() -> rx.Component:
             width="100%",
         ),
         rx.cond(
-            AppState.signal_risk_level == "medium",
+            AppState.display_risk_level == "medium",
             rx.callout(
                 AppState.guardian_risk_status_short,
                 icon="triangle-alert",
@@ -289,6 +289,43 @@ def _section_fox_guardian_presence() -> rx.Component:
     )
 
 
+def _section_danger_pattern() -> rx.Component:
+    return rx.box(
+        rx.vstack(
+            rx.text(
+                "北極狐看到的危險型態",
+                size="2",
+                weight="bold",
+                color="gray",
+                as_="span",
+            ),
+            rx.text(
+                AppState.inference_high_warning,
+                size="3",
+                weight="medium",
+                style={"line_height": "1.65"},
+                as_="span",
+            ),
+            rx.text(
+                "這不是心理診斷，而是依你輸入的訊號組合做的規則式提醒。",
+                size="1",
+                color="gray",
+                style={"line_height": "1.55"},
+                as_="span",
+            ),
+            spacing="2",
+            width="100%",
+            align_items="start",
+        ),
+        padding="1.25rem",
+        border_radius="14px",
+        width="100%",
+        max_width="32rem",
+        border="1px solid rgba(255,200,160,0.45)",
+        background="rgba(255,248,240,0.75)",
+    )
+
+
 def _section_main_warning() -> rx.Component:
     return rx.box(
         rx.heading(
@@ -335,6 +372,7 @@ def _section_fox_guidance() -> rx.Component:
 def _guardian_insight_result_column() -> rx.Component:
     return rx.vstack(
         _section_fox_guardian_presence(),
+        _section_danger_pattern(),
         _section_main_warning(),
         insight_why_bullets_section(),
         _section_fox_guidance(),

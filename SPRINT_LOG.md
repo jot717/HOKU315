@@ -287,6 +287,18 @@ REFERENCES: [`ops/product/CORE_PRODUCT_REALIGNMENT.md`](ops/product/CORE_PRODUCT
 
 ---
 
+## SIGNAL INTELLIGENCE ENGINE v1
+
+STATUS: ACTIVE
+
+TYPE: RULE-BASED SIGNAL INTELLIGENCE (`infer_signal_risks`; no LLM / embeddings / SNS)
+
+GOAL: Interpret danger patterns from existing inputs; merge HIGH/MEDIUM/LOW with legacy signal guard; short guardian copy + optional fox-memory tags.
+
+REFERENCES: [`ops/product/SIGNAL_INTELLIGENCE_CONSTITUTION.md`](ops/product/SIGNAL_INTELLIGENCE_CONSTITUTION.md), [`backlog/BACKLOG_SIGNAL_INTELLIGENCE_ENGINE_v1.md`](backlog/BACKLOG_SIGNAL_INTELLIGENCE_ENGINE_v1.md), [`backlog/SPRINT_SIGNAL_INTELLIGENCE_ENGINE_v1.md`](backlog/SPRINT_SIGNAL_INTELLIGENCE_ENGINE_v1.md)
+
+---
+
 ## SIGNAL SYSTEM CONSOLIDATION v1
 
 STATUS: ACTIVE

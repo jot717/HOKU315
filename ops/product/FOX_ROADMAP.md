@@ -2,6 +2,10 @@
 
 The **fox** is the **guardian persona and UX layer**; roadmap phases below prioritize **social signal intelligence**, **SNS-backed protection**, and **interaction risk** over standalone “insight app” positioning. Guardian world UX remains the **delivery shell** for alerts and clarity, not a substitute for the core moat.
 
+### Rule-based signal intelligence (v1)
+
+Shipped: `collect_signal_profile_for_inference` + `infer_signal_risks` in [`product/signal/runtime/signal_inference_engine.py`](../../product/signal/runtime/signal_inference_engine.py) — **combination rules** over profile, 20-D mine vector, memory, and bound-flow score; outputs ontology-aligned risks, **HIGH/MEDIUM/LOW** priority, and short guardian strings merged in [`fox_quiz/state/app_state.py`](../../fox_quiz/state/app_state.py). See [`SIGNAL_INTELLIGENCE_CONSTITUTION.md`](SIGNAL_INTELLIGENCE_CONSTITUTION.md).
+
 ### Signal system consolidation (v1)
 
 Phase 1 delivery is documented as **one signal architecture**: canonical **Signal Profile Setup** on **`/profile`**, optional **signal questions** on **`/quiz`** (20 sliders), **Guardian Observation** on **`/insight`**, and **signal memory** in `runtime_state/` — **no duplicate onboarding route**. See [`SIGNAL_SYSTEM_CONSTITUTION.md`](SIGNAL_SYSTEM_CONSTITUTION.md), [`SIGNAL_FLOW_ARCHITECTURE.md`](SIGNAL_FLOW_ARCHITECTURE.md), [`SIGNAL_PROFILE_SCHEMA.md`](SIGNAL_PROFILE_SCHEMA.md).
