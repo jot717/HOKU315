@@ -13,6 +13,7 @@
 - **Supabase / PostgREST**：`PGRST205`／schema cache 暖機；RPC 簽名與部署版本與 `sql/match_logic.sql` 對齊記錄於 `sql/DEPLOY_LOG.md`。
 - **`malformed array literal` 迴歸防線**：RPC 僅傳 pgvector literal、`profiles.vector` 為單一來源；見 **HOTFIX ARCHIVE** 與 `TEST_CHECKLIST.md`。
 - **Reflex runtime**：禁止在事件處理器中違反 async／`ImmutableStateError` 模式（背景任務見歷史 HOTFIX）。
+- **Reflex compile / `rx.foreach`**：禁止在 foreach 內對項目欄位做 Python 數值比較（會得到 `ObjectItemOperation`）；閾值在載入層預先計算為字串／布林，UI 僅 `rx.cond`／顯示欄位（見 **MATCH WALL COMPILE HOTFIX v1 ACTIVE**）。
 - **環境**：`python-dotenv`、`.env` 與金鑰載入一致；依賴見凍結後之 `requirements.txt`（含 `reflex==0.9.2`、`supabase`、`postgrest`、`python-dotenv`）。
 - **前后端契約**：`get_safe_matches` 回傳欄位與 `match_wall` 渲染鍵一致，避免 RPC／UI mismatch（見 `TEST_CHECKLIST.md`）。
 - **測試閘門**：一鍵 `python -m tests.run_all_tests`；無雲端時 SKIP、exit 0。
@@ -523,6 +524,14 @@ Guardian UX constitution **archived** to [`docs/deprecated/GUARDIAN_UX_CONSTITUT
 **TYPE:** RUNTIME STABILITY HOTFIX — Reflex `@rx.var` / list coercion / session JSON safety; **no** new features or routes.  
 **UAT:** [`ops/uat/STATE_SANITIZATION_RUNTIME_UAT.md`](ops/uat/STATE_SANITIZATION_RUNTIME_UAT.md)  
 **Backlog / sprint:** [`backlog/BACKLOG_STATE_SANITIZATION_HOTFIX_v1.md`](backlog/BACKLOG_STATE_SANITIZATION_HOTFIX_v1.md), [`backlog/SPRINT_STATE_SANITIZATION_HOTFIX_v1.md`](backlog/SPRINT_STATE_SANITIZATION_HOTFIX_v1.md)
+
+---
+
+## MATCH WALL COMPILE HOTFIX v1 ACTIVE
+
+**TYPE:** COMPILE STABILITY — Reflex `rx.foreach` item fields are reactive ops; **no** native Python numeric compares on those values inside card renderers. Precompute buckets / labels in `enrich_match_row_for_ui` (loader) or plain Python.  
+**UAT:** [`ops/uat/MATCH_WALL_COMPILE_HOTFIX.md`](ops/uat/MATCH_WALL_COMPILE_HOTFIX.md)  
+**Backlog / sprint:** [`backlog/BACKLOG_MATCH_WALL_COMPILE_HOTFIX_v1.md`](backlog/BACKLOG_MATCH_WALL_COMPILE_HOTFIX_v1.md), [`backlog/SPRINT_MATCH_WALL_COMPILE_HOTFIX_v1.md`](backlog/SPRINT_MATCH_WALL_COMPILE_HOTFIX_v1.md)
 
 ---
 

@@ -8,6 +8,8 @@
 
 * **PHASE1-E ENVIRONMENT LOCKDOWN v1**: `.python-version` (3.11.9), `requirements-lock.txt`, Reflex **0.9.2.post1** + **reflex-components-radix 0.9.2** (fixes `reflex_components_radix.plugin`), `start_hoku.bat` / `run_all_checks.bat`, `ops/env/*` policies + `runtime_sanity_check.py` + `reflex_compile_gate.py`, regression `test_phase1e_environment_lockdown_v1.py`, backlog/sprint entries, `BACKLOG.md` section.
 
+* **MATCH WALL COMPILE HOTFIX v1**: moved distance / threshold logic out of `rx.foreach` card UI into `enrich_match_row_for_ui`; badges use string buckets + `rx.cond`; audit of other `rx.foreach` usages (no numeric-risk patterns); UAT `ops/uat/MATCH_WALL_COMPILE_HOTFIX.md`, regression `test_match_wall_compile_hotfix_v1.py`, backlog/sprint, `BACKLOG.md` section.
+
 ### NEXT
 
 * Manual UAT per `ops/uat/PHASE1_PRODUCT_FLOW_UAT.md` on deployed/staging build.

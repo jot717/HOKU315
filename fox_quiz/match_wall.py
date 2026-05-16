@@ -16,6 +16,59 @@ _PLACEHOLDER_IMG = "https://images.unsplash.com/photo-1518791841217-8f162f1e1131
 _STORAGE_PUBLIC_BASE = f"{(os.getenv('SUPABASE_URL') or '').strip().rstrip('/')}/storage/v1/object/public"
 
 
+def _coerce_distance(value: Any) -> float:
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return 1.0
+
+
+def enrich_match_row_for_ui(row: dict[str, Any], card_idx: int) -> dict[str, Any]:
+    """Precompute all tier strings / buckets in plain Python — never compare floats inside rx.foreach."""
+    nr = dict(row)
+    d = _coerce_distance(nr.get("distance"))
+    blurred = bool(nr.get("is_blurred"))
+
+    if d <= 0.35:
+        nr["compat_bucket"] = "h"
+    elif d < 0.7:
+        nr["compat_bucket"] = "m"
+    else:
+        nr["compat_bucket"] = "l"
+
+    if blurred:
+        nr["emotion_line"] = "情緒壓力：偏高（已觸發訊號落差預警）"
+    elif d < 0.4:
+        nr["emotion_line"] = "情緒壓力：相對緩和"
+    else:
+        nr["emotion_line"] = "情緒壓力：中度"
+
+    if d < 0.35:
+        nr["rhythm_line"] = "溝通節奏：與你的向量較接近"
+    elif d < 0.7:
+        nr["rhythm_line"] = "溝通節奏：部分接近，仍有調整空間"
+    else:
+        nr["rhythm_line"] = "溝通節奏：落差較大，需額外留意"
+
+    if blurred:
+        nr["risk_bucket"] = "h"
+    elif d < 0.45:
+        nr["risk_bucket"] = "l"
+    else:
+        nr["risk_bucket"] = "m"
+
+    if blurred:
+        nr["match_rationale_line"] = (
+            "系統因訊號落差將此對象標示為需審慎評估；相對穩定的組合會優先呈現。"
+        )
+    else:
+        nr["match_rationale_line"] = "與你目前的訊號向量距離較近，互動節奏相對可控。"
+
+    nr["distance_str"] = f"{d:.3f}"
+    nr["card_idx"] = card_idx
+    return nr
+
+
 class MatchWallState(rx.State):
     matches: list[dict[str, Any]] = []
     blocked_count: int = 0
@@ -53,8 +106,7 @@ class MatchWallState(rx.State):
                 nr["matched_user_id"] = str(r.get("user_id") or "")
                 nr["conflict_dim_label"] = str(r.get("conflict_dim_label") or "待擴充")
                 nr["image_url"] = image_url
-                nr["card_idx"] = i
-                out.append(nr)
+                out.append(enrich_match_row_for_ui(nr, i))
             blocked = 0
             return out, blocked
 
@@ -111,79 +163,36 @@ class MatchWallState(rx.State):
             return rx.window_alert(str(e))
 
 
-def _match_card(item: dict[str, Any]) -> rx.Component:
-    is_blurred = item["is_blurred"]
-    distance = item["distance"]
-    dim_label = item["conflict_dim_label"]
-    image_url = item["image_url"]
-    card_idx = item["card_idx"]
-
-    compat = rx.cond(
-        distance <= 0.35,
+def _compat_badge(item: dict[str, Any]) -> rx.Component:
+    b = item["compat_bucket"]
+    return rx.cond(
+        b == "h",
         rx.badge("相容度：高", color_scheme="green", variant="soft"),
         rx.cond(
-            distance < 0.7,
+            b == "m",
             rx.badge("相容度：中", color_scheme="orange", variant="soft"),
             rx.badge("相容度：低", color_scheme="red", variant="soft"),
         ),
     )
-    emotion = rx.cond(
-        is_blurred,
-        rx.text(
-            "情緒壓力：偏高（已觸發訊號落差預警）",
-            size="2",
-            color="gray",
-            as_="span",
-        ),
-        rx.cond(
-            distance < 0.4,
-            rx.text(
-                "情緒壓力：相對緩和",
-                size="2",
-                color="gray",
-                as_="span",
-            ),
-            rx.text(
-                "情緒壓力：中度",
-                size="2",
-                color="gray",
-                as_="span",
-            ),
-        ),
-    )
-    rhythm = rx.cond(
-        distance < 0.35,
-        rx.text(
-            "溝通節奏：與你的向量較接近",
-            size="2",
-            color="gray",
-            as_="span",
-        ),
-        rx.cond(
-            distance < 0.7,
-            rx.text(
-                "溝通節奏：部分接近，仍有調整空間",
-                size="2",
-                color="gray",
-                as_="span",
-            ),
-            rx.text(
-                "溝通節奏：落差較大，需額外留意",
-                size="2",
-                color="gray",
-                as_="span",
-            ),
-        ),
-    )
-    risk = rx.cond(
-        is_blurred,
+
+
+def _risk_badge(item: dict[str, Any]) -> rx.Component:
+    r = item["risk_bucket"]
+    return rx.cond(
+        r == "h",
         rx.badge("風險：高", color_scheme="red", variant="surface"),
         rx.cond(
-            distance < 0.45,
+            r == "l",
             rx.badge("風險：低", color_scheme="green", variant="surface"),
             rx.badge("風險：中", color_scheme="orange", variant="surface"),
         ),
     )
+
+
+def _match_card(item: dict[str, Any]) -> rx.Component:
+    is_blurred = item["is_blurred"]
+    image_url = item["image_url"]
+    card_idx = item["card_idx"]
 
     inner = rx.vstack(
         rx.cond(
@@ -204,37 +213,38 @@ def _match_card(item: dict[str, Any]) -> rx.Component:
                 border_radius="12px",
             ),
         ),
-        compat,
-        emotion,
-        rhythm,
-        risk,
+        _compat_badge(item),
+        rx.text(
+            item["emotion_line"],
+            size="2",
+            color="gray",
+            as_="span",
+        ),
+        rx.text(
+            item["rhythm_line"],
+            size="2",
+            color="gray",
+            as_="span",
+        ),
+        _risk_badge(item),
         rx.vstack(
             rx.text("為何出現在清單", size="1", color="gray", weight="bold", as_="span"),
             rx.hstack(
                 rx.text("向量距離", size="2", color="gray", as_="span"),
-                rx.text(distance, size="2", weight="medium", as_="span"),
+                rx.text(item["distance_str"], size="2", weight="medium", as_="span"),
                 spacing="2",
             ),
             rx.text(
-                dim_label,
+                item["conflict_dim_label"],
                 size="2",
                 color="gray",
                 as_="span",
             ),
-            rx.cond(
-                is_blurred,
-                rx.text(
-                    "系統因訊號落差將此對象標示為需審慎評估；相對穩定的組合會優先呈現。",
-                    size="2",
-                    color="gray",
-                    as_="span",
-                ),
-                rx.text(
-                    "與你目前的訊號向量距離較近，互動節奏相對可控。",
-                    size="2",
-                    color="gray",
-                    as_="span",
-                ),
+            rx.text(
+                item["match_rationale_line"],
+                size="2",
+                color="gray",
+                as_="span",
             ),
             spacing="1",
             align_items="start",
@@ -354,67 +364,67 @@ def match_wall_page() -> rx.Component:
     return rx.box(
         rx.fragment(
             rx.vstack(
-            app_navbar(),
-            rx.heading("適合你的社交對象", size="6", weight="bold"),
-            rx.text(
-                "系統會優先過濾高風險互動，留下較穩定的社交對象。",
-                size="2",
-                color="gray",
-                as_="span",
-                display="block",
-            ),
-            rx.card(
-                rx.hstack(
-                    rx.text("目前已為你屏蔽 ", size="3", as_="span"),
-                    rx.text(MatchWallState.blocked_count, size="3", weight="bold", as_="span"),
-                    rx.text(" 筆高落差訊號。", size="3", as_="span"),
-                    spacing="1",
-                    align_items="center",
-                    flex_wrap="wrap",
-                ),
-                width="100%",
-                background="rgba(255, 237, 213, 0.65)",
-            ),
-            rx.hstack(
-                rx.button(
-                    rx.cond(MatchWallState.loading, "載入中…", "重新載入"),
-                    on_click=MatchWallState.load_match_wall,
-                    color_scheme="orange",
-                    disabled=MatchWallState.loading,
-                ),
-                width="100%",
-            ),
-            rx.cond(
-                MatchWallState.error_msg != "",
-                rx.callout(
-                    MatchWallState.error_msg,
-                    icon="triangle-alert",
-                    color="red",
-                    width="100%",
-                ),
-                rx.box(),
-            ),
-            rx.cond(
-                MatchWallState.matches != [],
-                rx.grid(
-                    rx.foreach(MatchWallState.matches, _match_card),
-                    columns=rx.breakpoints(initial="1", sm="2", md="3"),
-                    spacing="4",
-                    width="100%",
-                ),
+                app_navbar(),
+                rx.heading("適合你的社交對象", size="6", weight="bold"),
                 rx.text(
-                    "目前沒有可顯示對象（高風險已攔截或資料尚未建立）。",
+                    "系統會優先過濾高風險互動，留下較穩定的社交對象。",
                     size="2",
                     color="gray",
-                    width="100%",
                     as_="span",
                     display="block",
                 ),
-            ),
-            spacing="4",
-            width="100%",
-            max_width="52rem",
-            padding="6",
+                rx.card(
+                    rx.hstack(
+                        rx.text("目前已為你屏蔽 ", size="3", as_="span"),
+                        rx.text(MatchWallState.blocked_count, size="3", weight="bold", as_="span"),
+                        rx.text(" 筆高落差訊號。", size="3", as_="span"),
+                        spacing="1",
+                        align_items="center",
+                        flex_wrap="wrap",
+                    ),
+                    width="100%",
+                    background="rgba(255, 237, 213, 0.65)",
+                ),
+                rx.hstack(
+                    rx.button(
+                        rx.cond(MatchWallState.loading, "載入中…", "重新載入"),
+                        on_click=MatchWallState.load_match_wall,
+                        color_scheme="orange",
+                        disabled=MatchWallState.loading,
+                    ),
+                    width="100%",
+                ),
+                rx.cond(
+                    MatchWallState.error_msg != "",
+                    rx.callout(
+                        MatchWallState.error_msg,
+                        icon="triangle-alert",
+                        color="red",
+                        width="100%",
+                    ),
+                    rx.box(),
+                ),
+                rx.cond(
+                    MatchWallState.matches != [],
+                    rx.grid(
+                        rx.foreach(MatchWallState.matches, _match_card),
+                        columns=rx.breakpoints(initial="1", sm="2", md="3"),
+                        spacing="4",
+                        width="100%",
+                    ),
+                    rx.text(
+                        "目前沒有可顯示對象（高風險已攔截或資料尚未建立）。",
+                        size="2",
+                        color="gray",
+                        width="100%",
+                        as_="span",
+                        display="block",
+                    ),
+                ),
+                spacing="4",
+                width="100%",
+                max_width="52rem",
+                padding="6",
             ),
             _unlock_overlay(),
         ),
