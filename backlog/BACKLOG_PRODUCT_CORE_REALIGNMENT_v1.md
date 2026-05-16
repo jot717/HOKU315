@@ -18,7 +18,7 @@ Lock **AI Native SNS Guardian Network** as the true core: social interaction fil
 * [`ops/product/SOCIAL_SIGNAL_ARCHITECTURE.md`](../ops/product/SOCIAL_SIGNAL_ARCHITECTURE.md)
 * [`ops/product/HATER_SIGNAL_MODEL.md`](../ops/product/HATER_SIGNAL_MODEL.md)
 * [`ops/uat/PRODUCT_DIRECTION_RESET_NOTES.md`](../ops/uat/PRODUCT_DIRECTION_RESET_NOTES.md)
-* Updates: [`ops/product/DEPRECATED_PRODUCT_LANGUAGE.md`](../ops/product/DEPRECATED_PRODUCT_LANGUAGE.md), [`ops/product/FOX_ROADMAP.md`](../ops/product/FOX_ROADMAP.md)
+* Updates: [`docs/deprecated/DEPRECATED_PRODUCT_LANGUAGE.md`](../docs/deprecated/DEPRECATED_PRODUCT_LANGUAGE.md), [`ops/product/FOX_ROADMAP.md`](../ops/product/FOX_ROADMAP.md)
 * Regression: [`tests/regression/test_product_core_realignment_v1.py`](../tests/regression/test_product_core_realignment_v1.py)
 
 ## NON-GOALS

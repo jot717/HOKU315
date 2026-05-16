@@ -83,5 +83,5 @@ Phase 1 delivery is documented as **one signal architecture**: canonical **Signa
 ## ALIGNMENT
 
 * **North star:** [`CORE_PRODUCT_REALIGNMENT.md`](CORE_PRODUCT_REALIGNMENT.md)
-* **Deprecated language:** [`DEPRECATED_PRODUCT_LANGUAGE.md`](DEPRECATED_PRODUCT_LANGUAGE.md)
+* **Deprecated language:** [`docs/deprecated/DEPRECATED_PRODUCT_LANGUAGE.md`](../../docs/deprecated/DEPRECATED_PRODUCT_LANGUAGE.md)
 * **Direction reset narrative:** [`../uat/PRODUCT_DIRECTION_RESET_NOTES.md`](../uat/PRODUCT_DIRECTION_RESET_NOTES.md)

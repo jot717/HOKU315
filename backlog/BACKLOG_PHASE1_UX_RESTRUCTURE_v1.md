@@ -14,7 +14,7 @@ Lock **北極狐守護世界** UX: remove AI-report feeling; enforce guardian hi
 
 ## SCOPE
 
-* `ops/product/GUARDIAN_UX_CONSTITUTION.md`
+* `docs/deprecated/GUARDIAN_UX_CONSTITUTION.md`（歸檔）
 * Insight page restructure (sections 1–5)
 * Profile + home clarity copy
 * UAT notes + process logs
@@ -25,5 +25,5 @@ Lock **北極狐守護世界** UX: remove AI-report feeling; enforce guardian hi
 
 ## REFERENCES
 
-* [`ops/product/GUARDIAN_UX_CONSTITUTION.md`](../ops/product/GUARDIAN_UX_CONSTITUTION.md)
-* [`ops/uat/PHASE1_UX_RESTRUCTURE_NOTES.md`](../ops/uat/PHASE1_UX_RESTRUCTURE_NOTES.md)
+* [`docs/deprecated/GUARDIAN_UX_CONSTITUTION.md`](../docs/deprecated/GUARDIAN_UX_CONSTITUTION.md)
+* [`ops/uat/PHASE1_PRODUCT_FLOW_UAT.md`](../ops/uat/PHASE1_PRODUCT_FLOW_UAT.md)（取代舊 UAT 筆記時請以此為準）

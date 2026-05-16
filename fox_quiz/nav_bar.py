@@ -8,12 +8,13 @@ from fox_quiz.session_state import SessionState
 
 def app_navbar(*, show_logout: bool = True) -> rx.Component:
     links = rx.hstack(
-        rx.link("登入", href="/login", size="2", color="gray"),
+        rx.link("首頁", href="/", size="2", color="gray"),
+        rx.link("我的訊號", href="/profile", size="2", color="orange", font_weight="medium"),
+        rx.link("訊號問卷", href="/quiz", size="2", color="gray"),
         rx.link("觀察對象", href="/target", size="2", color="orange", font_weight="medium"),
-        rx.link("訊號牆", href="/match", size="2", color="orange", font_weight="medium"),
-        rx.link("故事", href="/story", size="2", color="orange", font_weight="medium"),
-        rx.link("解鎖", href="/unlocks", size="2", color="orange", font_weight="medium"),
-        rx.link("測驗", href="/quiz", size="2", color="gray"),
+        rx.link("分析結果", href="/insight", size="2", color="orange", font_weight="medium"),
+        rx.link("適合對象", href="/match", size="2", color="orange", font_weight="medium"),
+        rx.link("登入", href="/login", size="2", color="gray"),
         spacing="4",
         flex_wrap="wrap",
     )

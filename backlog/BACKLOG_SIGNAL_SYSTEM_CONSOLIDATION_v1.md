@@ -21,7 +21,7 @@ Unify **existing** profile, quiz sliders, insight, memory, and signal wording un
 * [`ops/product/SIGNAL_STATE_MAPPING.md`](../ops/product/SIGNAL_STATE_MAPPING.md)
 * [`ops/uat/SIGNAL_SYSTEM_CONSOLIDATION_UAT.md`](../uat/SIGNAL_SYSTEM_CONSOLIDATION_UAT.md)
 * Home + profile (+ optional quiz intro) copy alignment
-* [`GUARDIAN_UX_CONSTITUTION.md`](../product/GUARDIAN_UX_CONSTITUTION.md) — SIGNAL-FIRST section
+* [`GUARDIAN_UX_CONSTITUTION.md`](../../docs/deprecated/GUARDIAN_UX_CONSTITUTION.md) — historical SIGNAL-FIRST section (archived)
 * [`FOX_ROADMAP.md`](../product/FOX_ROADMAP.md) — consolidation pointer
 * Regression: `tests/regression/test_signal_system_consolidation_v1.py`
 

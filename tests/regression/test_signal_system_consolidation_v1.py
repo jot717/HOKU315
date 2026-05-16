@@ -33,10 +33,10 @@ def test_canonical_schema_doc_contains_identity_signals() -> None:
     assert "signal_history" in schema
 
 
-def test_guardian_constitution_has_signal_first_rule() -> None:
-    text = (ROOT / "ops" / "product" / "GUARDIAN_UX_CONSTITUTION.md").read_text(encoding="utf-8")
-    assert "SIGNAL-FIRST" in text
-    assert "signal intelligence" in text
+def test_signal_first_positioning_doc() -> None:
+    text = (ROOT / "ops" / "product" / "SIGNAL_FIRST_PRODUCT_POSITION.md").read_text(encoding="utf-8")
+    assert "Signal-first UX law" in text
+    assert "social signal intelligence" in text
 
 
 def test_fox_roadmap_mentions_signal_consolidation() -> None:

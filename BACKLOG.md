@@ -479,12 +479,23 @@ Signal guard mechanism (risk evaluation + guardian warning card) — see [`backl
 
 ---
 
-## PHASE1 UX RESTRUCTURE v1 ACTIVE
+## PHASE1 UX RESTRUCTURE v1 (ARCHIVED GUARDIAN SPEC)
 
-**TYPE:** PRODUCT DIRECTION LOCK — guardian hierarchy + copy only (**SAFE MODE**; no backend / DB / auth / vector / pipeline changes).  
-**UX law:** [`ops/product/GUARDIAN_UX_CONSTITUTION.md`](ops/product/GUARDIAN_UX_CONSTITUTION.md)  
-**UAT:** [`ops/uat/PHASE1_UX_RESTRUCTURE_NOTES.md`](ops/uat/PHASE1_UX_RESTRUCTURE_NOTES.md)  
-**Backlog / sprint:** [`backlog/BACKLOG_PHASE1_UX_RESTRUCTURE_v1.md`](backlog/BACKLOG_PHASE1_UX_RESTRUCTURE_v1.md), [`backlog/SPRINT_PHASE1_UX_RESTRUCTURE_v1.md`](backlog/SPRINT_PHASE1_UX_RESTRUCTURE_v1.md)
+**TYPE:** PRODUCT DIRECTION LOCK — guardian hierarchy + copy only (**SAFE MODE**; historical).  
+Guardian UX constitution **archived** to [`docs/deprecated/GUARDIAN_UX_CONSTITUTION.md`](docs/deprecated/GUARDIAN_UX_CONSTITUTION.md).  
+**Current UX law:** [`ops/product/SIGNAL_FIRST_PRODUCT_POSITION.md`](ops/product/SIGNAL_FIRST_PRODUCT_POSITION.md)  
+**UAT:** [`ops/uat/PHASE1_PRODUCT_FLOW_UAT.md`](ops/uat/PHASE1_PRODUCT_FLOW_UAT.md)  
+**Backlog / sprint (historical):** [`backlog/BACKLOG_PHASE1_UX_RESTRUCTURE_v1.md`](backlog/BACKLOG_PHASE1_UX_RESTRUCTURE_v1.md), [`backlog/SPRINT_PHASE1_UX_RESTRUCTURE_v1.md`](backlog/SPRINT_PHASE1_UX_RESTRUCTURE_v1.md)
+
+---
+
+## PHASE1 PRODUCT FLOW RECOVERY v1 ACTIVE
+
+**TYPE:** SAFE MODE — one user journey, signal-first copy, nav + insight simplification (**no** backend/auth/vector changes).  
+**Flow:** [`ops/product/PHASE1_PRODUCT_FLOW.md`](ops/product/PHASE1_PRODUCT_FLOW.md) · **Pages:** [`ops/product/PAGE_PURPOSE_SYSTEM.md`](ops/product/PAGE_PURPOSE_SYSTEM.md) · **Position:** [`ops/product/SIGNAL_FIRST_PRODUCT_POSITION.md`](ops/product/SIGNAL_FIRST_PRODUCT_POSITION.md)  
+**UAT:** [`ops/uat/PHASE1_PRODUCT_FLOW_UAT.md`](ops/uat/PHASE1_PRODUCT_FLOW_UAT.md)  
+**Deprecation index:** [`docs/deprecated/README.md`](docs/deprecated/README.md)  
+**Backlog / sprint:** [`backlog/BACKLOG_PHASE1_PRODUCT_FLOW_RECOVERY_v1.md`](backlog/BACKLOG_PHASE1_PRODUCT_FLOW_RECOVERY_v1.md), [`backlog/SPRINT_PHASE1_PRODUCT_FLOW_RECOVERY_v1.md`](backlog/SPRINT_PHASE1_PRODUCT_FLOW_RECOVERY_v1.md)
 
 ---
 

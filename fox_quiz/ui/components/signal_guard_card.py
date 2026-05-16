@@ -1,15 +1,37 @@
 from __future__ import annotations
 
-from typing import Union
+from typing import Any, Union
 
 import reflex as rx
 
 from fox_quiz.ui.components.warning_signal_chip import warning_signal_chip
 
 
+def _risk_flag_row(
+    risk_level: Union[str, rx.Var[str]],
+    risk_flags: Any,
+) -> rx.Component:
+    if isinstance(risk_flags, (list, tuple)):
+        items = [str(x) for x in risk_flags if str(x).strip()][:12]
+        if not items:
+            return rx.fragment()
+        return rx.hstack(
+            *[warning_signal_chip(item, risk_level) for item in items],
+            spacing="2",
+            width="100%",
+            flex_wrap="wrap",
+        )
+    return rx.text(
+        "（訊號旗標由狀態載入）",
+        size="2",
+        color="gray",
+        as_="span",
+    )
+
+
 def signal_guard_card(
     risk_level: Union[str, rx.Var[str]],
-    risk_flags: rx.Var[list[str]],
+    risk_flags: Any,
     guardian_warning: Union[str, rx.Var[str]],
 ) -> rx.Component:
     tone_title = rx.cond(
@@ -39,10 +61,7 @@ def signal_guard_card(
                 as_="span",
             ),
             rx.hstack(
-                rx.foreach(
-                    risk_flags,
-                    lambda flag: warning_signal_chip(flag, risk_level),
-                ),
+                _risk_flag_row(risk_level, risk_flags),
                 spacing="2",
                 width="100%",
                 flex_wrap="wrap",

@@ -5,7 +5,7 @@ import reflex as rx
 from product.profile.runtime.profile_store import save_profile as persist_profile_to_disk
 from product.profile.runtime.profile_store import load_profile as load_profile_from_store
 
-PROFILE_SAVE_SUCCESS_MESSAGE = "你現在可以進入觀察室了。"
+PROFILE_SAVE_SUCCESS_MESSAGE = "你的社交訊號檔案已建立完成。"
 
 
 class ProfileState(rx.State):

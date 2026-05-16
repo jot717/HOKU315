@@ -3,7 +3,6 @@ from __future__ import annotations
 import reflex as rx
 
 from fox_quiz.state.app_state import AppState
-from fox_quiz.ui.components.fox_avatar import fox_avatar
 
 
 def insight_onboarding_explanation_card() -> rx.Component:
@@ -11,33 +10,19 @@ def insight_onboarding_explanation_card() -> rx.Component:
     return rx.box(
         rx.vstack(
             rx.heading(
-                "北極狐正在觀察",
+                "互動風險分析",
                 size="5",
                 weight="medium",
                 text_align="center",
             ),
             rx.text(
-                "建議流程：訊號檔案（/profile）→ 觀察對象（/target）→ 再進觀察室；北極狐會把你的訊號與觀察對象放在一起解讀。",
+                "建議流程：訊號檔案（/profile）→ 訊號問卷（/quiz）→ 觀察對象（/target）→ 在此執行分析。"
+                "系統會把你的訊號與觀察對象合併判讀。",
                 size="2",
                 color="gray",
                 text_align="center",
                 style={"line_height": "1.65"},
                 max_width="28rem",
-                as_="span",
-            ),
-            rx.text(
-                "北極狐會：",
-                size="3",
-                weight="medium",
-                as_="span",
-            ),
-            rx.text(
-                "1. 替你擋掉容易消耗的訊號\n"
-                "2. 提醒你在太累以前先休息\n"
-                "3. 用守護視角陪你整理壓力",
-                size="3",
-                color="gray",
-                style={"line_height": "1.75", "white_space": "pre-wrap"},
                 as_="span",
             ),
             spacing="3",
@@ -54,28 +39,28 @@ def insight_onboarding_explanation_card() -> rx.Component:
 
 
 def insight_why_bullets_section() -> rx.Component:
-    """Why this interaction is costly — short bullets (max 3 from state)."""
+    """High-risk patterns — short bullets from state."""
     return rx.box(
         rx.vstack(
             rx.heading(
-                "為什麼這段互動有壓力？",
+                "系統發現的高風險模式",
                 size="4",
                 weight="medium",
             ),
-            rx.foreach(
-                AppState.guardian_why_lines,
-                lambda line: rx.hstack(
-                    rx.text("・", size="3", color="gray", as_="span"),
-                    rx.text(
-                        line,
-                        size="3",
-                        color="gray",
-                        style={"line_height": "1.65"},
-                        as_="span",
-                    ),
-                    spacing="1",
-                    align="start",
-                    width="100%",
+            rx.cond(
+                AppState.guardian_why_bullets_formatted != "",
+                rx.text(
+                    AppState.guardian_why_bullets_formatted,
+                    size="3",
+                    color="gray",
+                    style={"line_height": "1.65", "white_space": "pre-wrap"},
+                    as_="span",
+                ),
+                rx.text(
+                    "（本次分析未額外標示短句模式，請以上方摘要與危險度為主。）",
+                    size="3",
+                    color="gray",
+                    as_="span",
                 ),
             ),
             spacing="3",
@@ -92,12 +77,12 @@ def insight_why_bullets_section() -> rx.Component:
 
 
 def insight_result_explanation_section() -> rx.Component:
-    """Regression alias: post-result WHY (bullets only, guardian tone)."""
+    """Regression alias: high-risk bullets."""
     return insight_why_bullets_section()
 
 
 def insight_next_actions_section() -> rx.Component:
-    """Section 5 — clear next steps after a result."""
+    """Next steps after a result."""
     return rx.box(
         rx.vstack(
             rx.text(
@@ -108,18 +93,8 @@ def insight_next_actions_section() -> rx.Component:
                 as_="span",
             ),
             rx.vstack(
-                rx.link(
-                    rx.button(
-                        "觀察對象設定",
-                        variant="soft",
-                        size="4",
-                        width="100%",
-                    ),
-                    href="/target",
-                    width="100%",
-                ),
                 rx.button(
-                    "重新觀察",
+                    "重新分析",
                     on_click=AppState.run_demo_match,
                     variant="outline",
                     size="4",
@@ -137,13 +112,16 @@ def insight_next_actions_section() -> rx.Component:
                     href="/profile",
                     width="100%",
                 ),
-                rx.button(
-                    "查看守護筆記",
-                    on_click=AppState.load_session_history,
-                    variant="ghost",
-                    size="4",
+                rx.link(
+                    rx.button(
+                        "查看適合對象",
+                        variant="solid",
+                        size="4",
+                        width="100%",
+                        color_scheme="orange",
+                    ),
+                    href="/match",
                     width="100%",
-                    disabled=AppState.demo_match_loading,
                 ),
                 spacing="3",
                 width="100%",
@@ -160,51 +138,17 @@ def insight_next_actions_section() -> rx.Component:
     )
 
 
-def _section_target_summary() -> rx.Component:
-    return rx.box(
-        rx.vstack(
-            rx.text(
-                "觀察對象摘要",
-                size="3",
-                weight="bold",
-                as_="span",
-            ),
-            rx.text(
-                AppState.insight_target_summary_line,
-                size="3",
-                color="gray",
-                style={"line_height": "1.65"},
-                as_="span",
-            ),
-            rx.text(
-                AppState.guardian_interaction_framing,
-                size="2",
-                color="gray",
-                style={"line_height": "1.6"},
-                as_="span",
-            ),
-            rx.hstack(
-                rx.badge(AppState.relationship_archetype_name, variant="soft", color_scheme="gray"),
-                rx.badge(AppState.relationship_archetype_pressure, variant="soft", color_scheme="orange"),
-                rx.text("互動壓力指數", size="1", color="gray", as_="span"),
-                rx.text(AppState.relationship_interaction_risk_score, size="2", weight="bold", as_="span"),
-                spacing="2",
-                align="center",
-                flex_wrap="wrap",
-            ),
-            width="100%",
-            align_items="start",
-        ),
-        padding="1.25rem",
-        border_radius="16px",
+def _row_item(label: str, body) -> rx.Component:
+    return rx.vstack(
+        rx.text(label, size="1", color="gray", weight="bold", as_="span"),
+        body,
+        spacing="1",
+        align_items="start",
         width="100%",
-        max_width="32rem",
-        border="1px solid rgba(200, 215, 240, 0.65)",
-        background="rgba(255,255,255,0.78)",
     )
 
 
-def _section_main_danger() -> rx.Component:
+def _section_result_summary() -> rx.Component:
     risk_callout = rx.cond(
         AppState.display_risk_level == "high",
         rx.callout(
@@ -229,81 +173,113 @@ def _section_main_danger() -> rx.Component:
             ),
         ),
     )
+    manipulation_body = rx.cond(
+        AppState.inference_high_warning != "",
+        rx.text(
+            AppState.inference_high_warning,
+            size="3",
+            color="gray",
+            style={"line_height": "1.65"},
+            as_="span",
+        ),
+        rx.text(
+            "依目前訊號未標示為高優先操控警訊；仍請搭配下方模式細讀。",
+            size="3",
+            color="gray",
+            style={"line_height": "1.65"},
+            as_="span",
+        ),
+    )
     return rx.box(
         rx.vstack(
-            fox_avatar(),
             rx.heading(
-                AppState.guardian_main_warning_title,
-                size="7",
+                "互動分析結果",
+                size="5",
                 weight="bold",
-                text_align="center",
-                style={"line_height": "1.25"},
             ),
-            risk_callout,
-            rx.text(
-                AppState.inference_high_warning,
-                size="3",
-                weight="medium",
-                style={"line_height": "1.65"},
-                as_="span",
+            _row_item(
+                "相容度",
+                rx.text(
+                    AppState.compatibility_title,
+                    size="3",
+                    weight="medium",
+                    style={"line_height": "1.65"},
+                    as_="span",
+                ),
             ),
+            _row_item(
+                "情緒消耗風險",
+                rx.text(
+                    AppState.energy_summary,
+                    size="3",
+                    color="gray",
+                    style={"line_height": "1.65"},
+                    as_="span",
+                ),
+            ),
+            _row_item("操控風險", manipulation_body),
+            _row_item(
+                "溝通節奏",
+                rx.text(
+                    AppState.insight_communication_rhythm_line,
+                    size="3",
+                    color="gray",
+                    style={"line_height": "1.65"},
+                    as_="span",
+                ),
+            ),
+            _row_item("整體危險度", risk_callout),
             rx.text(
-                AppState.guardian_warning,
+                AppState.insight_target_summary_line,
                 size="2",
                 color="gray",
-                text_align="center",
                 style={"line_height": "1.6"},
                 as_="span",
             ),
             rx.text(
-                "這不是心理診斷，而是依你與觀察對象的訊號組合做的規則式提醒。",
+                "此結果為規則式訊號整合，非心理診斷或醫療建議。",
                 size="1",
                 color="gray",
-                text_align="center",
-                style={"line_height": "1.55"},
                 as_="span",
             ),
             spacing="3",
-            align="center",
             width="100%",
+            align_items="start",
         ),
-        padding="1.75rem",
+        padding="1.5rem",
+        border_radius="18px",
         width="100%",
         max_width="32rem",
-        border_radius="20px",
         border="1px solid rgba(255,255,255,0.92)",
         background="rgba(255,255,255,0.88)",
         style={"boxShadow": "0 12px 40px rgba(160, 185, 215, 0.14)"},
     )
 
 
-def _section_fox_recommendation() -> rx.Component:
+def _section_best_social_fit() -> rx.Component:
     return rx.box(
         rx.vstack(
             rx.heading(
-                "北極狐的建議",
+                "適合你的社交類型",
                 size="4",
                 weight="medium",
             ),
-            rx.text(
-                AppState.guardian_action_display,
-                size="4",
-                style={"line_height": "1.65"},
-                as_="span",
-            ),
-            rx.text(
-                AppState.guardian_simulation_advice,
-                size="3",
-                color="gray",
-                style={"line_height": "1.65"},
-                as_="span",
-            ),
-            rx.text(
-                AppState.relationship_archetype_guardian_hint,
-                size="2",
-                color="gray",
-                style={"line_height": "1.55"},
-                as_="span",
+            rx.cond(
+                AppState.has_relationship_explanation_lines,
+                rx.text(
+                    AppState.relationship_explanation_bullets_formatted,
+                    size="3",
+                    color="gray",
+                    style={"line_height": "1.65", "white_space": "pre-wrap"},
+                    as_="span",
+                ),
+                rx.text(
+                    AppState.compatibility_title,
+                    size="3",
+                    color="gray",
+                    style={"line_height": "1.65"},
+                    as_="span",
+                ),
             ),
             spacing="3",
             width="100%",
@@ -319,12 +295,80 @@ def _section_fox_recommendation() -> rx.Component:
     )
 
 
-def _guardian_insight_result_column() -> rx.Component:
+def _section_avoid_types() -> rx.Component:
+    return rx.box(
+        rx.vstack(
+            rx.heading(
+                "建議避免的互動類型",
+                size="4",
+                weight="medium",
+            ),
+            rx.cond(
+                AppState.has_signal_inference_types,
+                rx.text(
+                    AppState.signal_inference_bullets_formatted,
+                    size="3",
+                    color="gray",
+                    style={"line_height": "1.65", "white_space": "pre-wrap"},
+                    as_="span",
+                ),
+                rx.text(
+                    AppState.relationship_archetype_danger_summary,
+                    size="3",
+                    color="gray",
+                    style={"line_height": "1.65"},
+                    as_="span",
+                ),
+            ),
+            spacing="3",
+            width="100%",
+            align_items="start",
+        ),
+        padding="1.5rem",
+        border_radius="18px",
+        width="100%",
+        max_width="32rem",
+        border="1px solid rgba(255,255,255,0.92)",
+        background="rgba(255,255,255,0.78)",
+        style={"boxShadow": "0 10px 32px rgba(160, 185, 210, 0.1)"},
+    )
+
+
+def _section_fox_note() -> rx.Component:
+    return rx.box(
+        rx.vstack(
+            rx.heading(
+                "北極狐提醒",
+                size="4",
+                weight="medium",
+            ),
+            rx.text(
+                AppState.fox_message,
+                size="3",
+                color="gray",
+                style={"line_height": "1.65", "white_space": "pre-wrap"},
+                as_="span",
+            ),
+            spacing="2",
+            width="100%",
+            align_items="start",
+        ),
+        padding="1.25rem",
+        border_radius="16px",
+        width="100%",
+        max_width="32rem",
+        border="1px dashed rgba(180, 200, 230, 0.7)",
+        background="rgba(255,255,255,0.65)",
+    )
+
+
+def _insight_result_column() -> rx.Component:
     return rx.vstack(
-        _section_target_summary(),
-        _section_main_danger(),
+        _section_result_summary(),
         insight_why_bullets_section(),
-        _section_fox_recommendation(),
+        _section_best_social_fit(),
+        _section_avoid_types(),
+        _section_fox_note(),
         insight_next_actions_section(),
         spacing="6",
         width="100%",
@@ -337,7 +381,7 @@ def _loading_banner() -> rx.Component:
         rx.hstack(
             rx.spinner(size="3"),
             rx.text(
-                "北極狐正在替你檢查危險訊號",
+                "系統正在分析互動訊號…",
                 size="3",
                 weight="medium",
                 as_="span",
@@ -361,7 +405,7 @@ def _empty_state() -> rx.Component:
         rx.vstack(
             insight_onboarding_explanation_card(),
             rx.text(
-                "按下開始，北極狐會依你的訊號檔案與「觀察對象」頁的節奏描述，陪你看這段互動的壓力輪廓。",
+                "按下開始後，系統會依你的訊號檔案與觀察對象資料產出互動分析。",
                 size="3",
                 color="gray",
                 text_align="center",
@@ -369,7 +413,7 @@ def _empty_state() -> rx.Component:
                 as_="span",
             ),
             rx.button(
-                "開始觀察",
+                "開始分析",
                 on_click=AppState.run_demo_match,
                 size="4",
                 width="100%",
@@ -392,7 +436,7 @@ def _empty_state() -> rx.Component:
 def _onboarding_strip() -> rx.Component:
     return rx.box(
         rx.text(
-            "這裡是觀察室：讀你的訊號檔案與觀察對象，用守護視角整理「互動壓力」，不是性格分析。",
+            "此頁整合訊號檔案與觀察對象，輸出互動風險與相容摘要。",
             size="2",
             color="gray",
             text_align="center",
@@ -420,7 +464,7 @@ def insight_panel() -> rx.Component:
     return rx.vstack(
         rx.cond(
             AppState.has_insight,
-            _guardian_insight_result_column(),
+            _insight_result_column(),
             _pre_insight_column(),
         ),
         spacing="7",

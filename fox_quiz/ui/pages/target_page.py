@@ -11,13 +11,13 @@ def target_page() -> rx.Component:
         rx.container(
             rx.vstack(
                 rx.heading(
-                    "觀察對象（訊號實體）",
+                    "設定觀察對象",
                     size="7",
                     weight="bold",
                     text_align="center",
                 ),
                 rx.text(
-                    "北極狐會根據你觀察到的互動節奏，分析這段關係可能帶來的壓力與風險。",
+                    "輸入你正在互動、曖昧、交友或長期接觸的對象資料。",
                     size="3",
                     color="gray",
                     text_align="center",
@@ -25,13 +25,34 @@ def target_page() -> rx.Component:
                     max_width="28rem",
                     as_="span",
                 ),
-                rx.text(
-                    "這不是交友檔案或性格測驗；你在描述「互動形狀」，讓守護結論不再漂浮在抽象裡。",
-                    size="2",
-                    color="gray",
-                    text_align="center",
+                rx.box(
+                    rx.vstack(
+                        rx.text(
+                            "系統會分析：",
+                            size="2",
+                            weight="bold",
+                            as_="span",
+                        ),
+                        rx.text(
+                            "- 對方是否容易造成情緒消耗\n"
+                            "- 是否存在操控模式\n"
+                            "- 互動節奏是否失衡\n"
+                            "- 長期關係風險",
+                            size="2",
+                            color="gray",
+                            style={"line_height": "1.75", "white_space": "pre-wrap"},
+                            as_="span",
+                        ),
+                        spacing="2",
+                        align_items="start",
+                        width="100%",
+                    ),
+                    padding="1rem",
+                    border_radius="12px",
+                    width="100%",
                     max_width="28rem",
-                    as_="span",
+                    border="1px solid rgba(200, 215, 235, 0.65)",
+                    background="rgba(255,255,255,0.62)",
                 ),
                 rx.box(
                     rx.vstack(
@@ -49,7 +70,12 @@ def target_page() -> rx.Component:
                             placeholder="例如：同事、朋友、合作方",
                             width="100%",
                         ),
-                        rx.text("你觀察到的行為線索（逗號分隔）", size="2", color="gray", as_="span"),
+                        rx.text(
+                            "你觀察到的行為線索（逗號分隔）",
+                            size="2",
+                            color="gray",
+                            as_="span",
+                        ),
                         rx.input(
                             value=TargetState.observed_traits_text,
                             on_change=TargetState.set_observed_traits_text,
@@ -111,7 +137,12 @@ def target_page() -> rx.Component:
                             align="center",
                             spacing="3",
                         ),
-                        rx.text("回覆一致性（0=很飄，10=很穩）", size="2", color="gray", as_="span"),
+                        rx.text(
+                            "回覆一致性（0=很飄，10=很穩）",
+                            size="2",
+                            color="gray",
+                            as_="span",
+                        ),
                         rx.hstack(
                             rx.slider(
                                 min=0,
@@ -132,7 +163,7 @@ def target_page() -> rx.Component:
                         rx.text_area(
                             value=TargetState.notes,
                             on_change=TargetState.set_notes,
-                            placeholder="只記你願意交給北極狐的觀察，不必完整自傳。",
+                            placeholder="可記錄你願意交給系統分析的觀察重點。",
                             width="100%",
                             min_height="5rem",
                         ),
@@ -164,18 +195,33 @@ def target_page() -> rx.Component:
                     border="1px solid rgba(255,255,255,0.88)",
                     background="rgba(255,255,255,0.62)",
                 ),
+                rx.text(
+                    "下一步：開始互動風險分析。",
+                    size="2",
+                    color="gray",
+                    text_align="center",
+                    as_="span",
+                ),
+                rx.link(
+                    rx.button(
+                        "開始分析",
+                        variant="solid",
+                        size="4",
+                        width="100%",
+                        max_width="28rem",
+                        color_scheme="orange",
+                    ),
+                    href="/insight",
+                    width="100%",
+                ),
                 rx.hstack(
                     rx.link(
-                        rx.button("回到首頁", variant="ghost", size="3"),
+                        rx.button("首頁", variant="ghost", size="3"),
                         href="/",
                     ),
                     rx.link(
                         rx.button("訊號檔案", variant="soft", size="3"),
                         href="/profile",
-                    ),
-                    rx.link(
-                        rx.button("進入觀察室", variant="solid", size="3", color_scheme="orange"),
-                        href="/insight",
                     ),
                     spacing="3",
                     flex_wrap="wrap",

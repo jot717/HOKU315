@@ -1,12 +1,14 @@
 # Sprint Log
 
-## YYYY-MM-DD
+## 2026-05-16
 
 ### DONE
 
-### BLOCKER
+* **PHASE1 PRODUCT FLOW RECOVERY v1**: signal-first home/profile/quiz/target/insight/match copy; insight six-block layout + single fox note; primary nav reduced to core six links; `MatchWall` cards expose compatibility / pressure / rhythm / risk / rationale; archived drifted docs under `docs/deprecated/`; added `ops/product/PHASE1_PRODUCT_FLOW.md`, `PAGE_PURPOSE_SYSTEM.md`, `SIGNAL_FIRST_PRODUCT_POSITION.md`, `ops/uat/PHASE1_PRODUCT_FLOW_UAT.md`, and recovery backlog/sprint entries.
 
 ### NEXT
+
+* Manual UAT per `ops/uat/PHASE1_PRODUCT_FLOW_UAT.md` on deployed/staging build.
 
 ---
 
@@ -271,7 +273,7 @@ TYPE: PRODUCT DIRECTION LOCK (SAFE MODE — UX hierarchy + copy only)
 
 GOAL: 「北極狐守護世界」：結論與危險優先、守護語氣、首頁／訊號檔案／觀察室層級一致；保留既有路由與 state 契約。
 
-REFERENCES: [`backlog/BACKLOG_PHASE1_UX_RESTRUCTURE_v1.md`](backlog/BACKLOG_PHASE1_UX_RESTRUCTURE_v1.md), [`ops/product/GUARDIAN_UX_CONSTITUTION.md`](ops/product/GUARDIAN_UX_CONSTITUTION.md), [`ops/uat/PHASE1_UX_RESTRUCTURE_NOTES.md`](ops/uat/PHASE1_UX_RESTRUCTURE_NOTES.md)
+REFERENCES: [`backlog/BACKLOG_PHASE1_UX_RESTRUCTURE_v1.md`](backlog/BACKLOG_PHASE1_UX_RESTRUCTURE_v1.md), [`docs/deprecated/GUARDIAN_UX_CONSTITUTION.md`](docs/deprecated/GUARDIAN_UX_CONSTITUTION.md), [`ops/uat/PHASE1_PRODUCT_FLOW_UAT.md`](ops/uat/PHASE1_PRODUCT_FLOW_UAT.md)
 
 ---
 

@@ -77,5 +77,5 @@ Differentiation and defensibility come from:
 |----------|------|
 | [`SOCIAL_SIGNAL_ARCHITECTURE.md`](SOCIAL_SIGNAL_ARCHITECTURE.md) | Future signal pipeline (conceptual) |
 | [`HATER_SIGNAL_MODEL.md`](HATER_SIGNAL_MODEL.md) | Future hater / drain pattern vocabulary |
-| [`DEPRECATED_PRODUCT_LANGUAGE.md`](DEPRECATED_PRODUCT_LANGUAGE.md) | Words and frames to retire in new work |
+| [`docs/deprecated/DEPRECATED_PRODUCT_LANGUAGE.md`](../../docs/deprecated/DEPRECATED_PRODUCT_LANGUAGE.md) | Words and frames to retire in new work |
 | [`ops/uat/PRODUCT_DIRECTION_RESET_NOTES.md`](../uat/PRODUCT_DIRECTION_RESET_NOTES.md) | Why direction reset, old vs real |

@@ -29,7 +29,7 @@ def test_core_realignment_defines_product_core() -> None:
 
 
 def test_deprecated_language_updated() -> None:
-    text = _read("ops/product/DEPRECATED_PRODUCT_LANGUAGE.md")
+    text = _read("docs/deprecated/DEPRECATED_PRODUCT_LANGUAGE.md")
     assert "AI emotional analysis" in text
     assert "Signal filtering" in text
     assert "social protection" in text

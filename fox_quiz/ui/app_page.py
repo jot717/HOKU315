@@ -13,12 +13,12 @@ def app_page() -> rx.Component:
                 rx.box(
                     rx.vstack(
                         rx.heading(
-                            "HOKU315",
+                            "互動風險分析",
                             size="8",
                             weight="bold",
                         ),
                         rx.text(
-                            "極狐觀察室",
+                            "AI 社交訊號分析系統",
                             size="4",
                             color="gray",
                             as_="span",

@@ -9,47 +9,52 @@ from fox_quiz.ui.insight_panel import insight_panel
 ROOT = Path(__file__).resolve().parents[2]
 
 
-def test_guardian_ux_constitution_exists() -> None:
-    path = ROOT / "ops" / "product" / "GUARDIAN_UX_CONSTITUTION.md"
+def test_signal_first_product_position_exists() -> None:
+    path = ROOT / "ops" / "product" / "SIGNAL_FIRST_PRODUCT_POSITION.md"
     assert path.is_file()
     text = path.read_text(encoding="utf-8")
-    assert "PRODUCT IDENTITY" in text
-    assert "FORBIDDEN UX PATTERNS" in text
-    assert "UX HIERARCHY" in text
+    assert "Signal-first UX law" in text
+    assert "AI-native social signal intelligence" in text
 
 
-def test_phase1_ux_restructure_uat_notes_exist() -> None:
-    path = ROOT / "ops" / "uat" / "PHASE1_UX_RESTRUCTURE_NOTES.md"
+def test_phase1_product_flow_uat_exists() -> None:
+    path = ROOT / "ops" / "uat" / "PHASE1_PRODUCT_FLOW_UAT.md"
     assert path.is_file()
 
 
-def test_phase1_ux_restructure_backlog_sprint_docs_exist() -> None:
-    assert (ROOT / "backlog" / "BACKLOG_PHASE1_UX_RESTRUCTURE_v1.md").is_file()
-    assert (ROOT / "backlog" / "SPRINT_PHASE1_UX_RESTRUCTURE_v1.md").is_file()
+def test_phase1_product_flow_recovery_backlog_sprint_exist() -> None:
+    assert (ROOT / "backlog" / "BACKLOG_PHASE1_PRODUCT_FLOW_RECOVERY_v1.md").is_file()
+    assert (ROOT / "backlog" / "SPRINT_PHASE1_PRODUCT_FLOW_RECOVERY_v1.md").is_file()
 
 
-def test_profile_save_success_message_observatory_cta() -> None:
-    assert "觀察室" in PROFILE_SAVE_SUCCESS_MESSAGE
+def test_deprecated_guardian_constitution_archived() -> None:
+    path = ROOT / "docs" / "deprecated" / "GUARDIAN_UX_CONSTITUTION.md"
+    assert path.is_file()
+    text = path.read_text(encoding="utf-8")
+    assert "SIGNAL-FIRST" in text
+
+
+def test_profile_save_success_message_signal_profile() -> None:
+    assert "社交訊號檔案" in PROFILE_SAVE_SUCCESS_MESSAGE
 
 
 def test_insight_next_actions_labels() -> None:
     panel_src = (ROOT / "fox_quiz" / "ui" / "insight_panel.py").read_text(encoding="utf-8")
-    assert "重新觀察" in panel_src
+    assert "重新分析" in panel_src
     assert "更新我的訊號" in panel_src
-    assert "查看守護筆記" in panel_src
+    assert "查看適合對象" in panel_src
 
 
-def test_home_page_guardian_hook_copy() -> None:
+def test_home_page_signal_first_hook_copy() -> None:
     home_src = (ROOT / "fox_quiz" / "ui" / "pages" / "home_page.py").read_text(encoding="utf-8")
-    assert "有些危險" in home_src
-    assert "交友軟體" in home_src
-    assert "守護視角" in home_src or "過濾" in home_src
+    assert "AI 社交訊號分析系統" in home_src
+    assert "建立你的社交訊號檔案" in home_src
 
 
-def test_profile_page_fox_data_purpose_copy() -> None:
+def test_profile_page_signal_profile_copy() -> None:
     prof_src = (ROOT / "fox_quiz" / "ui" / "profile_page.py").read_text(encoding="utf-8")
-    assert "北極狐會透過這些訊號" in prof_src
-    assert "進入觀察室" in prof_src
+    assert "危險互動分析" in prof_src
+    assert "開始訊號問卷" in prof_src
 
 
 def test_insight_panel_compiles() -> None:

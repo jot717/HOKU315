@@ -131,6 +131,47 @@ class AppState(rx.State):
         return isinstance(self.insight_state, dict) and bool(self.insight_state)
 
     @rx.var(cache=True)
+    def has_relationship_explanation_lines(self) -> bool:
+        return bool(self.relationship_explanation_lines)
+
+    @rx.var(cache=True)
+    def has_signal_inference_types(self) -> bool:
+        return bool(self.signal_inference_types)
+
+    @rx.var(cache=True)
+    def insight_communication_rhythm_line(self) -> str:
+        name = (self.relationship_archetype_name or "").strip()
+        pressure = (self.relationship_archetype_pressure or "").strip()
+        if name and pressure:
+            return f"{name} · 壓力標記：{pressure}"
+        if name:
+            return name
+        if pressure:
+            return f"壓力標記：{pressure}"
+        return "（尚未成形）"
+
+    @staticmethod
+    def _bullet_block(items: List[str], *, limit: int) -> str:
+        out: List[str] = []
+        for x in (items or [])[:limit]:
+            s = str(x).strip()
+            if s:
+                out.append(f"・ {s}")
+        return "\n".join(out)
+
+    @rx.var(cache=True)
+    def guardian_why_bullets_formatted(self) -> str:
+        return self._bullet_block(self.guardian_why_lines, limit=8)
+
+    @rx.var(cache=True)
+    def relationship_explanation_bullets_formatted(self) -> str:
+        return self._bullet_block(self.relationship_explanation_lines, limit=8)
+
+    @rx.var(cache=True)
+    def signal_inference_bullets_formatted(self) -> str:
+        return self._bullet_block(self.signal_inference_types, limit=16)
+
+    @rx.var(cache=True)
     def match_score_safe_int(self) -> int:
         """0–100 int for rx.progress (requires int, not float)."""
         fr = self.flow_result if isinstance(self.flow_result, dict) else {}
@@ -311,17 +352,11 @@ class AppState(rx.State):
     @rx.var(cache=True)
     def insight_target_summary_line(self) -> str:
         if not (self.insight_target_name or "").strip():
-            return "尚未命名觀察對象：先到「觀察對象」頁補上稱呼與節奏，守護結論會更貼近真實互動。"
+            return "尚未命名觀察對象：請先到「觀察對象」頁補上稱呼與節奏，分析會更貼近真實互動。"
         rel = (self.insight_target_relationship or "").strip()
         if rel:
-            return (
-                f"「{self.insight_target_name}」（{rel}）"
-                "— 北極狐把你的訊號與這份觀察放在一起解讀。"
-            )
-        return (
-            f"「{self.insight_target_name}」"
-            "— 北極狐把你的訊號與這份觀察放在一起解讀。"
-        )
+            return f"分析對象：「{self.insight_target_name}」（{rel}）"
+        return f"分析對象：「{self.insight_target_name}」"
 
     @rx.var(cache=True)
     def guardian_main_warning_title(self) -> str:
@@ -351,7 +386,7 @@ class AppState(rx.State):
         t = (self.guardian_action or "").strip()
         if t:
             return t
-        return "先替自己留一點空白，北極狐會繼續守著。"
+        return "先替自己保留步調與界線，必要時更新訊號資料後再跑一次分析。"
 
     @rx.event
     def load_session_history(self) -> None:

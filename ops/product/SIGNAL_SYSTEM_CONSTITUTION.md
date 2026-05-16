@@ -3,7 +3,7 @@
 **STATUS:** ACTIVE  
 **TYPE:** System consolidation — **one coherent signal architecture** across existing surfaces
 
-This document **locks how the repo already works** and forbids parallel “new onboarding” systems. It complements [`SIGNAL_FLOW_ARCHITECTURE.md`](SIGNAL_FLOW_ARCHITECTURE.md), [`SIGNAL_PROFILE_SCHEMA.md`](SIGNAL_PROFILE_SCHEMA.md), and [`GUARDIAN_UX_CONSTITUTION.md`](GUARDIAN_UX_CONSTITUTION.md).
+This document **locks how the repo already works** and forbids parallel “new onboarding” systems. It complements [`SIGNAL_FLOW_ARCHITECTURE.md`](SIGNAL_FLOW_ARCHITECTURE.md), [`SIGNAL_PROFILE_SCHEMA.md`](SIGNAL_PROFILE_SCHEMA.md), and [`SIGNAL_FIRST_PRODUCT_POSITION.md`](SIGNAL_FIRST_PRODUCT_POSITION.md) (archived guardian-UX spec: [`docs/deprecated/GUARDIAN_UX_CONSTITUTION.md`](../../docs/deprecated/GUARDIAN_UX_CONSTITUTION.md)).
 
 ---
 
@@ -20,7 +20,7 @@ This document **locks how the repo already works** and forbids parallel “new o
 
 Users are building a **signal profile** (what drains them, what pressures them, how they tolerate interaction), **not** a personality typing profile.
 
-Guardian copy exists to **interpret signals**; it must not **replace** the signal pipeline story (see **SIGNAL-FIRST** in [`GUARDIAN_UX_CONSTITUTION.md`](GUARDIAN_UX_CONSTITUTION.md)).
+Interpreter copy (including legacy “guardian” tone in some engines) exists to **explain signals**; it must not **replace** the signal pipeline story (see **Signal-first UX law** in [`SIGNAL_FIRST_PRODUCT_POSITION.md`](SIGNAL_FIRST_PRODUCT_POSITION.md)).
 
 ---
 

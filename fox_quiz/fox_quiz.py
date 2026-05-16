@@ -191,13 +191,42 @@ def quiz_page() -> rx.Component:
     return rx.box(
         rx.vstack(
             app_navbar(),
-            rx.heading("狐狸性向測驗", size="7", weight="bold"),
+            rx.heading("社交訊號問卷", size="7", weight="bold"),
             rx.text(
-                "訊號問卷：20 道社交地雷敏感度（滑桿），與訊號檔案同一條路，只是畫得更細。",
+                "這 20 題會分析你的互動敏感度與危險關係耐受度。",
                 size="2",
                 color="gray",
                 as_="span",
                 display="block",
+            ),
+            rx.box(
+                rx.vstack(
+                    rx.text(
+                        "系統正在分析：",
+                        size="2",
+                        weight="bold",
+                        as_="span",
+                    ),
+                    rx.text(
+                        "- 情緒索取耐受度\n"
+                        "- 操控敏感度\n"
+                        "- 社交疲勞節奏\n"
+                        "- 高壓關係停留傾向\n"
+                        "- 衝突逃避模式",
+                        size="2",
+                        color="gray",
+                        style={"line_height": "1.75", "white_space": "pre-wrap"},
+                        as_="span",
+                    ),
+                    spacing="2",
+                    align_items="start",
+                    width="100%",
+                ),
+                padding="1rem",
+                border_radius="12px",
+                width="100%",
+                border="1px solid rgba(200, 215, 235, 0.65)",
+                background="rgba(255,255,255,0.72)",
             ),
             rx.text(
                 "共 20 題。拖曳滑桿：越靠右代表你在該情境越容易「踩雷」或感到壓力。",
@@ -224,6 +253,13 @@ def quiz_page() -> rx.Component:
                 width="100%",
             ),
             rx.divider(margin_y="4"),
+            rx.text(
+                "完成後，系統會開始建立你的危險互動模型。",
+                size="2",
+                color="gray",
+                as_="span",
+                display="block",
+            ),
             rx.hstack(
                 rx.button(
                     "產生結果向量",
@@ -231,6 +267,16 @@ def quiz_page() -> rx.Component:
                     size="3",
                     color_scheme="orange",
                 ),
+                rx.link(
+                    rx.button(
+                        "下一步：設定觀察對象",
+                        size="3",
+                        variant="outline",
+                    ),
+                    href="/target",
+                ),
+                spacing="3",
+                flex_wrap="wrap",
                 width="100%",
             ),
             rx.cond(
@@ -271,7 +317,7 @@ def quiz_page() -> rx.Component:
 
 app = rx.App(theme=rx.theme(appearance="light", accent_color="orange"))
 app.add_page(home_page, route="/", title="HOKU315")
-app.add_page(quiz_page, route="/quiz", title="狐狸性向測驗")
+app.add_page(quiz_page, route="/quiz", title="社交訊號問卷")
 app.add_page(login_page, route="/login", title="登入")
 app.add_page(chat_page, route="/chat", title="狐狸對話室")
 app.add_page(
@@ -283,7 +329,7 @@ app.add_page(
 app.add_page(
     match_wall_page,
     route="/match",
-    title="訊號牆",
+    title="適合對象",
     on_load=MatchWallState.load_match_wall,
 )
 app.add_page(
@@ -295,13 +341,13 @@ app.add_page(
 app.add_page(
     app_page,
     route="/insight",
-    title="AI 解析",
+    title="分析結果",
     on_load=AppState.load_session_history,
 )
 app.add_page(
     profile_page,
     route="/profile",
-    title="Profile",
+    title="我的訊號",
     on_load=ProfileState.sync_from_disk,
 )
 app.add_page(

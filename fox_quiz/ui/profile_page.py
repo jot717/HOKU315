@@ -11,43 +11,32 @@ def profile_page() -> rx.Component:
         rx.container(
             rx.vstack(
                 rx.heading(
-                    "建立你的訊號檔案",
+                    "建立你的社交訊號檔案",
                     size="7",
                     weight="bold",
                     text_align="center",
                 ),
                 rx.text(
-                    "訊號檔案設定：用興趣與壓力節奏描述你，不是在做性格測驗。儲存後，北極狐會用規則式推論整理互動風險模式。",
+                    "系統會根據你的社交節奏、壓力耐受度與互動偏好，建立你的基礎互動模型。",
                     size="2",
                     color="gray",
                     text_align="center",
                     max_width="28rem",
                     as_="span",
                 ),
-                rx.text(
-                    "北極狐會根據你的習慣、興趣與壓力節奏，替你觀察容易消耗你的訊號。",
-                    size="3",
-                    color="gray",
-                    text_align="center",
-                    style={"line_height": "1.65"},
-                    max_width="28rem",
-                    as_="span",
-                ),
                 rx.box(
                     rx.vstack(
                         rx.text(
-                            "北極狐會用這些做什麼？",
-                            size="3",
-                            weight="bold",
-                            text_align="center",
-                            as_="span",
-                        ),
-                        rx.text(
-                            "北極狐會透過這些訊號，提前發現容易讓你疲憊的人事物。",
+                            "這會影響：\n"
+                            "- 危險互動分析\n"
+                            "- 情緒消耗判定\n"
+                            "- 社交節奏分析\n"
+                            "- 適合對象推薦",
                             size="3",
                             color="gray",
-                            text_align="center",
-                            style={"line_height": "1.7"},
+                            text_align="left",
+                            style={"line_height": "1.75", "white_space": "pre-wrap"},
+                            width="100%",
                             as_="span",
                         ),
                         spacing="2",
@@ -64,7 +53,7 @@ def profile_page() -> rx.Component:
                 rx.box(
                     rx.vstack(
                         rx.text(
-                            "你希望北極狐怎麼稱呼你",
+                            "系統如何稱呼你",
                             size="2",
                             color="gray",
                             as_="span",
@@ -76,7 +65,7 @@ def profile_page() -> rx.Component:
                             width="100%",
                         ),
                         rx.text(
-                            "輸入你的興趣、生活習慣或長期關注的事",
+                            "你的興趣、生活型態與長期關注事物",
                             size="2",
                             color="gray",
                             as_="span",
@@ -88,7 +77,7 @@ def profile_page() -> rx.Component:
                             width="100%",
                         ),
                         rx.text(
-                            "你最近的生活壓力程度（1-10）",
+                            "你目前的社交與生活壓力程度",
                             size="2",
                             color="gray",
                             as_="span",
@@ -96,16 +85,9 @@ def profile_page() -> rx.Component:
                         rx.input(
                             value=ProfileState.activity_text,
                             on_change=ProfileState.set_activity_text,
-                            placeholder="5",
+                            placeholder="1–10",
                             width="100%",
                             type="number",
-                        ),
-                        rx.text(
-                            "完成後，北極狐會把你的輸入整理成可持續觀察的訊號檔案。",
-                            size="2",
-                            color="gray",
-                            text_align="center",
-                            as_="span",
                         ),
                         rx.button(
                             "儲存訊號檔案",
@@ -134,14 +116,28 @@ def profile_page() -> rx.Component:
                             color="green",
                             width="100%",
                         ),
+                        rx.heading(
+                            "下一步",
+                            size="4",
+                            weight="medium",
+                            width="100%",
+                            text_align="center",
+                        ),
+                        rx.text(
+                            "繼續完成社交訊號問卷，讓系統更準確理解你的互動模式。",
+                            size="2",
+                            color="gray",
+                            text_align="center",
+                            as_="span",
+                        ),
                         rx.link(
                             rx.button(
-                                "進入觀察室",
+                                "開始訊號問卷",
                                 size="4",
                                 width="100%",
                                 color_scheme="orange",
                             ),
-                            href="/insight",
+                            href="/quiz",
                             width="100%",
                         ),
                         spacing="3",

@@ -118,6 +118,73 @@ def _match_card(item: dict[str, Any]) -> rx.Component:
     image_url = item["image_url"]
     card_idx = item["card_idx"]
 
+    compat = rx.cond(
+        distance <= 0.35,
+        rx.badge("相容度：高", color_scheme="green", variant="soft"),
+        rx.cond(
+            distance < 0.7,
+            rx.badge("相容度：中", color_scheme="orange", variant="soft"),
+            rx.badge("相容度：低", color_scheme="red", variant="soft"),
+        ),
+    )
+    emotion = rx.cond(
+        is_blurred,
+        rx.text(
+            "情緒壓力：偏高（已觸發訊號落差預警）",
+            size="2",
+            color="gray",
+            as_="span",
+        ),
+        rx.cond(
+            distance < 0.4,
+            rx.text(
+                "情緒壓力：相對緩和",
+                size="2",
+                color="gray",
+                as_="span",
+            ),
+            rx.text(
+                "情緒壓力：中度",
+                size="2",
+                color="gray",
+                as_="span",
+            ),
+        ),
+    )
+    rhythm = rx.cond(
+        distance < 0.35,
+        rx.text(
+            "溝通節奏：與你的向量較接近",
+            size="2",
+            color="gray",
+            as_="span",
+        ),
+        rx.cond(
+            distance < 0.7,
+            rx.text(
+                "溝通節奏：部分接近，仍有調整空間",
+                size="2",
+                color="gray",
+                as_="span",
+            ),
+            rx.text(
+                "溝通節奏：落差較大，需額外留意",
+                size="2",
+                color="gray",
+                as_="span",
+            ),
+        ),
+    )
+    risk = rx.cond(
+        is_blurred,
+        rx.badge("風險：高", color_scheme="red", variant="surface"),
+        rx.cond(
+            distance < 0.45,
+            rx.badge("風險：低", color_scheme="green", variant="surface"),
+            rx.badge("風險：中", color_scheme="orange", variant="surface"),
+        ),
+    )
+
     inner = rx.vstack(
         rx.cond(
             is_blurred,
@@ -137,19 +204,45 @@ def _match_card(item: dict[str, Any]) -> rx.Component:
                 border_radius="12px",
             ),
         ),
+        compat,
+        emotion,
+        rhythm,
+        risk,
+        rx.vstack(
+            rx.text("為何出現在清單", size="1", color="gray", weight="bold", as_="span"),
+            rx.hstack(
+                rx.text("向量距離", size="2", color="gray", as_="span"),
+                rx.text(distance, size="2", weight="medium", as_="span"),
+                spacing="2",
+            ),
+            rx.text(
+                dim_label,
+                size="2",
+                color="gray",
+                as_="span",
+            ),
+            rx.cond(
+                is_blurred,
+                rx.text(
+                    "系統因訊號落差將此對象標示為需審慎評估；相對穩定的組合會優先呈現。",
+                    size="2",
+                    color="gray",
+                    as_="span",
+                ),
+                rx.text(
+                    "與你目前的訊號向量距離較近，互動節奏相對可控。",
+                    size="2",
+                    color="gray",
+                    as_="span",
+                ),
+            ),
+            spacing="1",
+            align_items="start",
+            width="100%",
+        ),
         rx.hstack(
             rx.badge(
-                rx.hstack(
-                    rx.text("距離 ", size="2", as_="span"),
-                    rx.text(distance, size="2", as_="span"),
-                    spacing="1",
-                    align_items="center",
-                ),
-                color_scheme="orange",
-                variant="surface",
-            ),
-            rx.badge(
-                rx.cond(is_blurred, "模糊預警", "可見"),
+                rx.cond(is_blurred, "需留意", "可觀察"),
                 color_scheme=rx.cond(is_blurred, "red", "green"),
                 variant="soft",
             ),
@@ -157,26 +250,15 @@ def _match_card(item: dict[str, Any]) -> rx.Component:
         ),
         rx.cond(
             is_blurred,
-            rx.hstack(
-                rx.text("預警維度：", size="2", color="red", as_="span"),
-                rx.text(dim_label, size="2", color="red", as_="span"),
-            ),
-            rx.hstack(
-                rx.text("主要落差：", size="2", color="gray", as_="span"),
-                rx.text(dim_label, size="2", color="gray", as_="span"),
-            ),
-        ),
-        rx.cond(
-            is_blurred,
             rx.text(
-                "點擊卡片以查看解鎖選項（Task 9）",
+                "點擊卡片以查看解鎖選項",
                 size="1",
                 color="gray",
                 as_="span",
                 display="block",
             ),
             rx.button(
-                "詳情（Task 8）",
+                "詳情（稍後開放）",
                 variant="outline",
                 size="2",
                 width="100%",
@@ -273,21 +355,29 @@ def match_wall_page() -> rx.Component:
         rx.fragment(
             rx.vstack(
             app_navbar(),
-            rx.heading("北極狐訊號牆", size="6", weight="bold"),
+            rx.heading("適合你的社交對象", size="6", weight="bold"),
+            rx.text(
+                "系統會優先過濾高風險互動，留下較穩定的社交對象。",
+                size="2",
+                color="gray",
+                as_="span",
+                display="block",
+            ),
             rx.card(
-                rx.text(
-                    f"守護中：已為您成功攔截 {MatchWallState.blocked_count} 個高風險地雷。",
-                    size="3",
-                    weight="bold",
-                    as_="span",
-                    display="block",
+                rx.hstack(
+                    rx.text("目前已為你屏蔽 ", size="3", as_="span"),
+                    rx.text(MatchWallState.blocked_count, size="3", weight="bold", as_="span"),
+                    rx.text(" 筆高落差訊號。", size="3", as_="span"),
+                    spacing="1",
+                    align_items="center",
+                    flex_wrap="wrap",
                 ),
                 width="100%",
                 background="rgba(255, 237, 213, 0.65)",
             ),
             rx.hstack(
                 rx.button(
-                    rx.cond(MatchWallState.loading, "載入中…", "刷新訊號牆"),
+                    rx.cond(MatchWallState.loading, "載入中…", "重新載入"),
                     on_click=MatchWallState.load_match_wall,
                     color_scheme="orange",
                     disabled=MatchWallState.loading,
