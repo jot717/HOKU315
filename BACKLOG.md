@@ -499,6 +499,15 @@ Guardian UX constitution **archived** to [`docs/deprecated/GUARDIAN_UX_CONSTITUT
 
 ---
 
+## PHASE1-E ENVIRONMENT LOCKDOWN v1 ACTIVE
+
+**TYPE:** DEV/RUNTIME STABILIZATION — Python pin, `.venv`, Reflex+radix pins, `runtime_state` recovery, compile gate, one-command startup (**no** PHASE1-D/F/2 scope).  
+**Docs:** [`ops/env/STARTUP_GUIDE.md`](ops/env/STARTUP_GUIDE.md), [`ops/env/PYTHON_VERSION_POLICY.md`](ops/env/PYTHON_VERSION_POLICY.md), [`ops/env/VENV_POLICY.md`](ops/env/VENV_POLICY.md), [`ops/env/DEPENDENCY_LOCK_REPORT.md`](ops/env/DEPENDENCY_LOCK_REPORT.md), [`ops/env/RUNTIME_STATE_SCHEMA.md`](ops/env/RUNTIME_STATE_SCHEMA.md)  
+**Scripts:** `start_hoku.bat`, `run_all_checks.bat`, `ops/env/runtime_sanity_check.py`, `ops/env/reflex_compile_gate.py`  
+**Backlog / sprint:** [`backlog/BACKLOG_PHASE1_ENVIRONMENT_LOCKDOWN_v1.md`](backlog/BACKLOG_PHASE1_ENVIRONMENT_LOCKDOWN_v1.md), [`backlog/SPRINT_PHASE1_ENVIRONMENT_LOCKDOWN_v1.md`](backlog/SPRINT_PHASE1_ENVIRONMENT_LOCKDOWN_v1.md)
+
+---
+
 ## PRODUCT CORE REALIGNMENT v1 ACTIVE
 
 **TYPE:** PRODUCT REALIGNMENT SPRINT — direction lock (docs + roadmap + deprecated language; **no** removal of guardian UX / fox / insight flow; **no** backend implementation).  

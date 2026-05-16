@@ -23,8 +23,9 @@ _HTTP = os.environ.get("REGRESSION_HTTP", "") == "1"
 
 
 def test_reflex_compile_gate() -> None:
+    gate = ROOT / "ops" / "env" / "reflex_compile_gate.py"
     r = subprocess.run(
-        [sys.executable, "-m", "reflex", "compile"],
+        [sys.executable, str(gate)],
         cwd=ROOT,
         capture_output=True,
         text=True,
