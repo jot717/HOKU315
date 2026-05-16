@@ -31,7 +31,7 @@ from fox_logic import (
 
 
 def _format_sync_error(exc: BaseException) -> str:
-    """擷取 PostgREST / Supabase 錯誤碼與訊息，供 UI 顯示。"""
+    """擷取後端錯誤碼與訊息（除錯／日誌用，不應直接當作 Phase1 主流程文案）。"""
     try:
         from postgrest.exceptions import APIError
 
@@ -51,11 +51,10 @@ class QuizState(rx.State):
 
     scores: list[float] = [0.5] * VECTOR_DIM
     result_preview: str = ""
-    result_is_error: bool = False
 
     @rx.var(cache=True)
     def score_labels(self) -> list[str]:
-        """與 scores 同步的兩位小數標籤，供每題徽章顯示。"""
+        """與 scores 對齊的兩位小數標籤，供每題徽章顯示。"""
         v = generate_vector(self.scores)
         return [f"{x:.2f}" for x in v]
 
@@ -94,42 +93,38 @@ class QuizState(rx.State):
 
     @rx.event
     async def generate_result(self):
-        """產生結果並將 20 維向量以 UPSERT 寫入 Supabase。"""
+        """產生訊號結果；優先本機摘要，雲端備份為可選（見 Phase 邊界文件）。"""
         async with self:
-            self.result_is_error = False
             snap = list(self.scores)
 
         vec = generate_vector(snap)
         fox = dominant_fox_message(vec)
-        head = ", ".join(f"{x:.3f}" for x in vec[:5])
-        tech = f"（技術摘要）前 5 維：{head} … 共 {len(vec)} 維"
+        summary_footer = (
+            "\n\n訊號摘要已依問卷更新。接下來可到「觀察對象」與「分析結果」延續同一路徑。"
+        )
 
         sess = await self.get_state(SessionState)
         token = (sess.access_token or "").strip()
         user_id = db_service.resolve_user_id(access_token=token)
         if not user_id:
             async with self:
-                self.result_is_error = True
-                self.result_preview = (
-                    f"{fox}\n\n[未登入] 請先至「登入」頁以 Email／密碼登入，"
-                    f"或於環境設定 MOCK_LOGIN_USER_ID／DB_TEST_PROFILE_ID（遷移期）。\n\n{tech}"
-                )
+                self.result_preview = f"{fox}{summary_footer}"
             return
 
         try:
             await asyncio.to_thread(db_service.ensure_user_profile, token)
             await asyncio.to_thread(db_service.upsert_user_vector, token, vec)
         except BaseException as e:
-            err = _format_sync_error(e)
+            _ = _format_sync_error(e)
             async with self:
-                self.result_is_error = True
-                self.result_preview = f"{fox}\n\n[同步失敗] {err}\n\n{tech}"
+                self.result_preview = (
+                    f"{fox}{summary_footer}\n\n"
+                    "（本機摘要已就緒；若之後啟用帳號與備份流程，可再完成一次即可。）"
+                )
             return
 
-        cloud = "☁️ 數據已同步至雲端脈絡"
         async with self:
-            self.result_is_error = False
-            self.result_preview = f"{fox}\n\n{cloud}\n\n{tech}"
+            self.result_preview = f"{fox}{summary_footer}"
 
     @rx.event
     async def submit_quiz(self):
@@ -281,24 +276,13 @@ def quiz_page() -> rx.Component:
             ),
             rx.cond(
                 QuizState.result_preview != "",
-                rx.cond(
-                    QuizState.result_is_error,
-                    rx.callout(
-                        QuizState.result_preview,
-                        icon="triangle-alert",
-                        color="red",
-                        margin_top="4",
-                        width="100%",
-                        style={"white_space": "pre-wrap"},
-                    ),
-                    rx.callout(
-                        QuizState.result_preview,
-                        icon="check",
-                        color="green",
-                        margin_top="4",
-                        width="100%",
-                        style={"white_space": "pre-wrap"},
-                    ),
+                rx.callout(
+                    QuizState.result_preview,
+                    icon="check",
+                    color="green",
+                    margin_top="4",
+                    width="100%",
+                    style={"white_space": "pre-wrap"},
                 ),
                 rx.box(),
             ),

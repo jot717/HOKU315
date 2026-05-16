@@ -79,7 +79,7 @@ class ChatState(rx.State):
                     *self.messages,
                     {
                         "role": "assistant",
-                        "content": "【系統】請先於「我的故事」頁貼上 access_token，或設定 MOCK_LOGIN_USER_ID／DB_TEST_PROFILE_ID。",
+                        "content": "【系統】請先於「登入」完成帳號，再使用故事或問卷延伸流程。",
                     },
                 ]
             return

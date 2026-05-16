@@ -41,9 +41,9 @@ class LoginState(rx.State):
 
         try:
             data = await asyncio.to_thread(_do)
-        except Exception as e:
+        except Exception:
             async with self:
-                self.message = f"登入失敗：{e}"
+                self.message = "登入未完成，請確認帳號密碼與網路後再試。"
             return
 
         token = data["access_token"]
@@ -55,7 +55,7 @@ class LoginState(rx.State):
             await asyncio.to_thread(_ensure_profile)
         except Exception as e:
             async with self:
-                self.message = f"無法同步 profiles（請確認 RLS 允許使用者建立自己的列）：{e}"
+                self.message = "無法完成帳號準備，請稍後再試或檢查網路與權限設定。"
             return
 
         sess = await self.get_state(SessionState)
@@ -92,9 +92,9 @@ class LoginState(rx.State):
             async with self:
                 self.message = str(e)
             return
-        except Exception as e:
+        except Exception:
             async with self:
-                self.message = f"註冊失敗：{e}"
+                self.message = "註冊未完成，請稍後再試。"
             return
 
         token = data["access_token"]
@@ -106,7 +106,7 @@ class LoginState(rx.State):
             await asyncio.to_thread(_ensure_profile)
         except Exception as e:
             async with self:
-                self.message = f"無法建立 profiles（請確認 RLS／表結構）：{e}"
+                self.message = "無法完成註冊後的帳號準備，請稍後再試或檢查權限設定。"
             return
 
         sess = await self.get_state(SessionState)
@@ -129,7 +129,7 @@ def login_page() -> rx.Component:
         rx.vstack(
             rx.heading("登入 JOT717", size="6", weight="bold"),
             rx.text(
-                "使用 Supabase Auth（Email／密碼），成功後 token 存於裝置，不必手動貼上。",
+                "使用電子郵件與密碼建立或進入帳號（跨裝置備份於後續階段啟用）。",
                 size="2",
                 color="gray",
                 as_="span",

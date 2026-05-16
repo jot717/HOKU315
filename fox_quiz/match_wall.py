@@ -117,7 +117,7 @@ class MatchWallState(rx.State):
                 self.loading = False
                 self.matches = []
                 self.blocked_count = 0
-                self.error_msg = f"訊號牆載入失敗：{e}"
+                self.error_msg = "訊號牆暫時無法載入，請確認網路後重試。"
             return
 
         async with self:
@@ -156,11 +156,11 @@ class MatchWallState(rx.State):
         try:
             await asyncio.to_thread(_do)
             async with self:
-                self.unlock_msg = "解鎖請求已送出（Task 9）。"
-        except Exception as e:
+                self.unlock_msg = "解鎖請求已送出。"
+        except Exception:
             async with self:
-                self.unlock_msg = f"解鎖失敗：{e}"
-            return rx.window_alert(str(e))
+                self.unlock_msg = "解鎖未完成，請稍後再試。"
+            return rx.window_alert("解鎖未完成，請稍後再試。")
 
 
 def _compat_badge(item: dict[str, Any]) -> rx.Component:

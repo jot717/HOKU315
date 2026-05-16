@@ -1,11 +1,10 @@
 """
-個人故事：拖放圖片 → **先上傳 Supabase Storage**，成功後再寫入 `stories`。
+個人故事：拖放圖片後上傳，再寫入故事紀錄（Phase2 雲端細節見 deprecated 說明）。
 """
 from __future__ import annotations
 
 import asyncio
 import base64
-import os
 from pathlib import Path
 from typing import Any
 
@@ -35,7 +34,7 @@ class StoryState(rx.State):
     body: str = ""
     image_basename: str = "story_cover.jpg"
     status_msg: str = ""
-    upload_hint: str = "尚未選檔（拖放後將先上傳 Storage）"
+    upload_hint: str = "尚未選檔（拖放圖片後即可儲存）"
     pending_image_b64: str = ""
     uploading: bool = False
 
@@ -79,7 +78,7 @@ class StoryState(rx.State):
         async with self:
             self.image_basename = name
             self.pending_image_b64 = b64
-            self.upload_hint = f"已選檔：{bn}（將上傳至 bucket stories，路徑：<你的UUID>/{bn}）"
+            self.upload_hint = f"已選檔：{bn}（將隨故事一併儲存）"
 
     @rx.event
     async def submit_story(self) -> Any:
@@ -112,7 +111,7 @@ class StoryState(rx.State):
         if not b64:
             async with self:
                 self.uploading = False
-                self.status_msg = "請先拖放圖片：會先上傳 Storage（user_id/檔名），成功後才寫入資料庫。"
+                self.status_msg = "請先拖放圖片，再按儲存。"
             return rx.window_alert("請先拖放圖片後再儲存。")
 
         try:
@@ -131,8 +130,8 @@ class StoryState(rx.State):
         except Exception as e:
             async with self:
                 self.uploading = False
-                self.status_msg = f"無法同步 profiles（RLS 42501？請執行 sql/profiles_rls.sql）：{e}"
-            return rx.window_alert(f"無法同步 profiles：{e}")
+                self.status_msg = "無法完成故事上傳前準備，請稍後再試。"
+            return rx.window_alert("無法完成故事上傳前準備，請稍後再試。")
 
         path = db_service.story_image_object_path(uid, img)
         ctype = _guess_content_type(img)
@@ -150,8 +149,8 @@ class StoryState(rx.State):
         except Exception as e:
             async with self:
                 self.uploading = False
-                self.status_msg = f"Storage 上傳失敗（請確認已執行 sql/stories.sql、bucket stories、RLS）：{e}"
-            return rx.window_alert(f"Storage 上傳失敗：{e}")
+                self.status_msg = "圖片上傳失敗，請檢查網路後重試。"
+            return rx.window_alert("圖片上傳失敗，請檢查網路後重試。")
 
         def _insert():
             db_service.ensure_user_profile(token)
@@ -165,20 +164,15 @@ class StoryState(rx.State):
         try:
             await asyncio.to_thread(_insert)
             rows = await asyncio.to_thread(db_service.get_user_stories, token)
-            supabase_url = (os.getenv("SUPABASE_URL") or "").strip().rstrip("/")
-            public_url = f"{supabase_url}/storage/v1/object/public/stories/{path}" if supabase_url else path
-            print(f"DEBUG_URL: {public_url}")
             async with self:
                 self.uploading = False
                 self.pending_image_b64 = ""
-                self.status_msg = (
-                    f"已完成：Storage `{path}` → DB 紀錄（共 {len(rows)} 筆故事）。"
-                )
+                self.status_msg = f"故事已儲存（共 {len(rows)} 筆）。"
         except Exception as e:
             async with self:
                 self.uploading = False
-                self.status_msg = f"資料庫寫入失敗（檔案可能已在 Storage）：{e}"
-            return rx.window_alert(f"資料庫寫入失敗（檔案可能已在 Storage）：{e}")
+                self.status_msg = "故事寫入未完成，請稍後重試。"
+            return rx.window_alert("故事寫入未完成，請稍後重試。")
 
 
 def story_page() -> rx.Component:
@@ -187,9 +181,7 @@ def story_page() -> rx.Component:
             app_navbar(),
             rx.heading("我的故事（Story）", size="6", weight="bold"),
             rx.text(
-                "登入後 Session 會自動帶入 JWT。拖放圖片時系統會 **先上傳至 bucket「stories」**（路徑 "
-                "`{你的 user_id}/{檔名}`），成功後才寫入 `stories` 表。需已在 Supabase 執行 "
-                "`sql/stories.sql`（含 Storage RLS）。",
+                "登入後可上傳封面圖並儲存故事；圖片會與故事一併保存。",
                 size="2",
                 color="gray",
                 as_="span",

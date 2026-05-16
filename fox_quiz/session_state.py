@@ -1,4 +1,4 @@
-"""全域 Session：Supabase access/refresh 以 LocalStorage 持久化（去手動貼 Token）。"""
+"""裝置端 Session：認證欄位持久化於 LocalStorage（Phase2 帳號／備份；實作細節見 docs/deprecated/future_sns_layer）。"""
 from __future__ import annotations
 
 from typing import Any
@@ -27,7 +27,7 @@ class SessionState(rx.State):
 
     @rx.event
     async def guard_protected_routes(self) -> Any:
-        """未登入或 token 失效 → /login（供 /story、/match on_load）。"""
+        """未登入或登入失效時導向 /login（供 /story、/match on_load）。"""
         t = (self.access_token or "").strip()
         if not t:
             return rx.redirect("/login")
