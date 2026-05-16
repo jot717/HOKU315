@@ -9,7 +9,8 @@ def test_enrich_match_row_buckets_from_plain_floats() -> None:
     low = enrich_match_row_for_ui({"distance": 0.2, "is_blurred": False}, 0)
     assert low["compat_bucket"] == "h"
     assert low["risk_bucket"] == "l"
-    assert low["emotion_line"].startswith("情緒")
+    assert low["emotion_line"]
+    assert low["scenario_line"]
     assert low["distance_str"] == "0.200"
 
     mid = enrich_match_row_for_ui({"distance": 0.5, "is_blurred": False}, 1)
@@ -21,7 +22,8 @@ def test_enrich_match_row_buckets_from_plain_floats() -> None:
 
     blurred = enrich_match_row_for_ui({"distance": 0.5, "is_blurred": True}, 3)
     assert blurred["risk_bucket"] == "h"
-    assert "預警" in blurred["emotion_line"]
+    assert blurred["emotion_line"]
+    assert "模糊" in blurred["emotion_line"] or "落差" in blurred["emotion_line"]
 
 
 def test_match_card_renderer_has_no_distance_threshold_compare() -> None:

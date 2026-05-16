@@ -9,6 +9,12 @@ from product.signal.runtime.signal_inference_engine import (
     collect_signal_profile_for_inference,
     infer_signal_risks,
 )
+from product.signal.runtime.ux_intelligence_engine import (
+    generate_avoidance_reasoning,
+    generate_interaction_reasoning,
+    generate_match_fit_reasoning,
+    generate_pressure_explanations,
+)
 
 __all__ = [
     "collect_signal_profile_for_inference",
@@ -18,4 +24,8 @@ __all__ = [
     "archetype_for_target_profile",
     "build_virtual_partner_profile",
     "target_object_risk_bullets",
+    "generate_interaction_reasoning",
+    "generate_pressure_explanations",
+    "generate_match_fit_reasoning",
+    "generate_avoidance_reasoning",
 ]

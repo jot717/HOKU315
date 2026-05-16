@@ -30,6 +30,7 @@ from product.signal.runtime.signal_inference_engine import (
     collect_signal_profile_for_inference,
     infer_signal_risks,
 )
+from product.signal.runtime.ux_intelligence_engine import generate_interaction_reasoning
 from product.target.runtime.target_profile_store import load_target_profile
 
 
@@ -126,6 +127,13 @@ class AppState(rx.State):
     insight_target_name: str = ""
     insight_target_relationship: str = ""
 
+    ux_why_drains_line: str = ""
+    ux_rhythm_conflict_line: str = ""
+    ux_pressure_bullets: List[str] = []
+    ux_fit_reasoning: str = ""
+    ux_avoid_reasoning: str = ""
+    ux_fox_observer_note: str = ""
+
     @rx.var(cache=True)
     def has_insight(self) -> bool:
         return isinstance(self.insight_state, dict) and bool(self.insight_state)
@@ -140,6 +148,9 @@ class AppState(rx.State):
 
     @rx.var(cache=True)
     def insight_communication_rhythm_line(self) -> str:
+        rhythm = (self.ux_rhythm_conflict_line or "").strip()
+        if rhythm:
+            return rhythm
         name = (self.relationship_archetype_name or "").strip()
         pressure = (self.relationship_archetype_pressure or "").strip()
         if name and pressure:
@@ -149,6 +160,10 @@ class AppState(rx.State):
         if pressure:
             return f"壓力標記：{pressure}"
         return "（尚未成形）"
+
+    @rx.var(cache=True)
+    def ux_pressure_bullets_formatted(self) -> str:
+        return self._bullet_block(self.ux_pressure_bullets, limit=3)
 
     @staticmethod
     def _bullet_block(items: List[str], *, limit: int) -> str:
@@ -232,6 +247,12 @@ class AppState(rx.State):
             self.guardian_interaction_framing = "你不需要自己承受所有壓力。"
             self.insight_target_name = ""
             self.insight_target_relationship = ""
+            self.ux_why_drains_line = ""
+            self.ux_rhythm_conflict_line = ""
+            self.ux_pressure_bullets = []
+            self.ux_fit_reasoning = ""
+            self.ux_avoid_reasoning = ""
+            self.ux_fox_observer_note = ""
             self._refresh_fox_memory_from_store()
             return
 
@@ -348,6 +369,27 @@ class AppState(rx.State):
                 why.append(ls)
         if why:
             self.guardian_why_lines = why
+
+        ux = generate_interaction_reasoning(
+            profile=bundle.get("profile"),
+            target_profile=tgt if has_target else None,
+            inference=inf,
+            relationship_simulation=sim,
+            archetype=arch,
+            match_score=score,
+        )
+        self.ux_why_drains_line = str(ux.get("why_drains", "") or "")
+        self.ux_rhythm_conflict_line = str(ux.get("rhythm_conflict", "") or "")
+        self.ux_pressure_bullets = _str_list(ux.get("pressure_bullets"), limit=3)
+        self.ux_fit_reasoning = str(ux.get("fit_reasoning", "") or "")
+        self.ux_avoid_reasoning = str(ux.get("avoid_reasoning", "") or "")
+        self.ux_fox_observer_note = str(ux.get("fox_observer", "") or "")
+        if self.ux_why_drains_line:
+            self.energy_summary = self.ux_why_drains_line
+        if self.ux_fit_reasoning:
+            self.compatibility_title = self.ux_fit_reasoning
+        if self.ux_fox_observer_note:
+            self.fox_message = self.ux_fox_observer_note
 
     @rx.var(cache=True)
     def insight_target_summary_line(self) -> str:

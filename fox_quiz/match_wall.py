@@ -10,6 +10,12 @@ import reflex as rx
 import db_service
 from fox_quiz.nav_bar import app_navbar
 from fox_quiz.session_state import SessionState
+from product.profile.runtime.profile_store import load_profile
+from product.signal.runtime.signal_inference_engine import (
+    collect_signal_profile_for_inference,
+    infer_signal_risks,
+)
+from product.signal.runtime.ux_intelligence_engine import generate_match_fit_reasoning
 
 _BG = "linear-gradient(180deg, #f8fafc 0%, #e0f2fe 100%)"
 _PLACEHOLDER_IMG = "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?w=800&auto=format&fit=crop"
@@ -23,46 +29,52 @@ def _coerce_distance(value: Any) -> float:
         return 1.0
 
 
-def enrich_match_row_for_ui(row: dict[str, Any], card_idx: int) -> dict[str, Any]:
-    """Precompute all tier strings / buckets in plain Python — never compare floats inside rx.foreach."""
+def _local_user_inference() -> dict[str, Any]:
+    bundle = collect_signal_profile_for_inference(None, None)
+    return infer_signal_risks(bundle)
+
+
+def enrich_match_row_for_ui(
+    row: dict[str, Any],
+    card_idx: int,
+    *,
+    inference: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Precompute tiers + UX social causality in plain Python — never compare floats inside rx.foreach."""
     nr = dict(row)
     d = _coerce_distance(nr.get("distance"))
     blurred = bool(nr.get("is_blurred"))
 
     if d <= 0.35:
-        nr["compat_bucket"] = "h"
+        compat_bucket = "h"
     elif d < 0.7:
-        nr["compat_bucket"] = "m"
+        compat_bucket = "m"
     else:
-        nr["compat_bucket"] = "l"
+        compat_bucket = "l"
+    nr["compat_bucket"] = compat_bucket
 
     if blurred:
-        nr["emotion_line"] = "情緒壓力：偏高（已觸發訊號落差預警）"
-    elif d < 0.4:
-        nr["emotion_line"] = "情緒壓力：相對緩和"
-    else:
-        nr["emotion_line"] = "情緒壓力：中度"
-
-    if d < 0.35:
-        nr["rhythm_line"] = "溝通節奏：與你的向量較接近"
-    elif d < 0.7:
-        nr["rhythm_line"] = "溝通節奏：部分接近，仍有調整空間"
-    else:
-        nr["rhythm_line"] = "溝通節奏：落差較大，需額外留意"
-
-    if blurred:
-        nr["risk_bucket"] = "h"
+        risk_bucket = "h"
     elif d < 0.45:
-        nr["risk_bucket"] = "l"
+        risk_bucket = "l"
     else:
-        nr["risk_bucket"] = "m"
+        risk_bucket = "m"
+    nr["risk_bucket"] = risk_bucket
 
-    if blurred:
-        nr["match_rationale_line"] = (
-            "系統因訊號落差將此對象標示為需審慎評估；相對穩定的組合會優先呈現。"
-        )
-    else:
-        nr["match_rationale_line"] = "與你目前的訊號向量距離較近，互動節奏相對可控。"
+    inf = inference if inference is not None else _local_user_inference()
+    ux = generate_match_fit_reasoning(
+        distance=d,
+        compat_bucket=compat_bucket,
+        conflict_dim_label=str(nr.get("conflict_dim_label") or ""),
+        blurred=blurred,
+        inference=inf,
+        profile=load_profile(),
+    )
+    nr["emotion_line"] = ux["lighter_line"]
+    nr["rhythm_line"] = ux["rhythm_line"]
+    nr["match_rationale_line"] = ux["pressure_reduced_line"]
+    nr["fatigue_avoided_line"] = ux["fatigue_avoided_line"]
+    nr["scenario_line"] = ux["scenario_line"]
 
     nr["distance_str"] = f"{d:.3f}"
     nr["card_idx"] = card_idx
@@ -93,6 +105,7 @@ class MatchWallState(rx.State):
         def _load() -> tuple[list[dict[str, Any]], int]:
             db_service.ensure_user_profile(token)
             rows = db_service.get_safe_matches_current_user(token)
+            inference = _local_user_inference()
             out: list[dict[str, Any]] = []
             for i, r in enumerate(rows):
                 path = str(r.get("image_object_path") or "").strip()
@@ -106,7 +119,7 @@ class MatchWallState(rx.State):
                 nr["matched_user_id"] = str(r.get("user_id") or "")
                 nr["conflict_dim_label"] = str(r.get("conflict_dim_label") or "待擴充")
                 nr["image_url"] = image_url
-                out.append(enrich_match_row_for_ui(nr, i))
+                out.append(enrich_match_row_for_ui(nr, i, inference=inference))
             blocked = 0
             return out, blocked
 
@@ -221,30 +234,36 @@ def _match_card(item: dict[str, Any]) -> rx.Component:
             as_="span",
         ),
         rx.text(
+            item["match_rationale_line"],
+            size="2",
+            color="gray",
+            as_="span",
+        ),
+        rx.text(
             item["rhythm_line"],
+            size="2",
+            color="gray",
+            as_="span",
+        ),
+        rx.text(
+            item["fatigue_avoided_line"],
             size="2",
             color="gray",
             as_="span",
         ),
         _risk_badge(item),
         rx.vstack(
-            rx.text("為何出現在清單", size="1", color="gray", weight="bold", as_="span"),
+            rx.text("互動情境", size="1", color="gray", weight="bold", as_="span"),
+            rx.text(
+                item["scenario_line"],
+                size="2",
+                color="gray",
+                as_="span",
+            ),
             rx.hstack(
-                rx.text("向量距離", size="2", color="gray", as_="span"),
-                rx.text(item["distance_str"], size="2", weight="medium", as_="span"),
+                rx.text("訊號距離", size="1", color="gray", as_="span"),
+                rx.text(item["distance_str"], size="1", weight="medium", as_="span"),
                 spacing="2",
-            ),
-            rx.text(
-                item["conflict_dim_label"],
-                size="2",
-                color="gray",
-                as_="span",
-            ),
-            rx.text(
-                item["match_rationale_line"],
-                size="2",
-                color="gray",
-                as_="span",
             ),
             spacing="1",
             align_items="start",
@@ -367,7 +386,7 @@ def match_wall_page() -> rx.Component:
                 app_navbar(),
                 rx.heading("適合你的社交對象", size="6", weight="bold"),
                 rx.text(
-                    "系統會優先過濾高風險互動，留下較穩定的社交對象。",
+                    "每張卡片會說明互動為何較省力、節奏如何、以及你可能避開的疲勞型態。",
                     size="2",
                     color="gray",
                     as_="span",
