@@ -42,8 +42,8 @@ def test_startup_scripts_exist() -> None:
 
 
 def test_phase1e_backlog_sprint_docs() -> None:
-    assert (ROOT / "backlog/BACKLOG_PHASE1_ENVIRONMENT_LOCKDOWN_v1.md").is_file()
-    assert (ROOT / "backlog/SPRINT_PHASE1_ENVIRONMENT_LOCKDOWN_v1.md").is_file()
+    assert (ROOT / "backlog/archive/BACKLOG_PHASE1_ENVIRONMENT_LOCKDOWN_v1.md").is_file()
+    assert (ROOT / "backlog/archive/SPRINT_PHASE1_ENVIRONMENT_LOCKDOWN_v1.md").is_file()
 
 
 def test_runtime_sanity_script_runs_with_fix() -> None:

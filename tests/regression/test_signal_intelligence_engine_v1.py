@@ -20,8 +20,8 @@ def test_signal_intelligence_docs_exist() -> None:
         "ops/product/SIGNAL_RISK_ONTOLOGY.md",
         "ops/product/SIGNAL_INFERENCE_MODEL.md",
         "ops/uat/SIGNAL_INTELLIGENCE_ENGINE_UAT.md",
-        "backlog/BACKLOG_SIGNAL_INTELLIGENCE_ENGINE_v1.md",
-        "backlog/SPRINT_SIGNAL_INTELLIGENCE_ENGINE_v1.md",
+        "backlog/archive/BACKLOG_SIGNAL_INTELLIGENCE_ENGINE_v1.md",
+        "backlog/archive/SPRINT_SIGNAL_INTELLIGENCE_ENGINE_v1.md",
     ):
         assert (ROOT / rel).is_file(), rel
 

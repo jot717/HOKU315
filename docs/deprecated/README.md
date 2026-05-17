@@ -1,6 +1,10 @@
 # Deprecated documentation
 
+**Current product law:** [`ops/product/PRODUCT_MASTER.md`](../ops/product/PRODUCT_MASTER.md)
+
 This folder holds product and UAT documents that **drifted** from the locked user journey or were **superseded** by PHASE1 product flow recovery. Files are kept for history and search; **do not** treat them as current product law.
+
+**Historical archive (drift / hotfix UAT):** [`archive/`](archive/)
 
 ## Index
 

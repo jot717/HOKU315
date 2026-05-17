@@ -1,5 +1,7 @@
 # Signal-first product position (LOCKED)
 
+> **Authority:** [`PRODUCT_MASTER.md`](PRODUCT_MASTER.md)
+
 ## This product **is**
 
 - **AI-native social signal intelligence** — dangerous interaction patterns, manipulation / drain sensitivity, communication rhythm, compatibility *as an output of signal rules*, not as a dating quiz.

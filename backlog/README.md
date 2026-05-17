@@ -1,8 +1,20 @@
-# Backlog specs (init documents)
+# Backlog
 
-| 文件 | 說明 |
-|------|------|
-| [`BACKLOG_MATCH_FLOW_v1.md`](BACKLOG_MATCH_FLOW_v1.md) | MATCH FLOW v1 條目（goal / scope / deps） |
-| [`SPRINT_MATCH_FLOW_v1.md`](SPRINT_MATCH_FLOW_v1.md) | SPRINT 2026-W02 對應衝刺條件 |
+**Canonical index:** [`MASTER_BACKLOG.md`](MASTER_BACKLOG.md)  
+**Product truth:** [`../ops/product/PRODUCT_MASTER.md`](../ops/product/PRODUCT_MASTER.md)  
+**Engineering P0/P1:** [`../BACKLOG.md`](../BACKLOG.md)
 
-主索引仍為根目錄 [`BACKLOG.md`](../BACKLOG.md)。
+## Structure
+
+| Location | Contents |
+|----------|----------|
+| `MASTER_BACKLOG.md` | ACTIVE / COMPLETED / ARCHIVED / FUTURE — one row per phase |
+| `archive/` | Historical `BACKLOG_*_v1.md` and `SPRINT_*_v1.md` slices |
+| `../BACKLOG.md` | Stabilization, tasks, hotfix archive (engineering) |
+| `../SPRINT_LOG.md` | Daily done/next |
+
+## Rules
+
+- Do **not** add a second master backlog.
+- New work → one row in `MASTER_BACKLOG.md` (ACTIVE).
+- When a sprint completes → move slice files to `archive/`, move row to COMPLETED.

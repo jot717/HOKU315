@@ -14,9 +14,9 @@ def test_core_realignment_docs_exist() -> None:
         "ops/product/CORE_PRODUCT_REALIGNMENT.md",
         "ops/product/SOCIAL_SIGNAL_ARCHITECTURE.md",
         "ops/product/HATER_SIGNAL_MODEL.md",
-        "ops/uat/PRODUCT_DIRECTION_RESET_NOTES.md",
-        "backlog/BACKLOG_PRODUCT_CORE_REALIGNMENT_v1.md",
-        "backlog/SPRINT_PRODUCT_CORE_REALIGNMENT_v1.md",
+        "docs/deprecated/archive/uat/PRODUCT_DIRECTION_RESET_NOTES.md",
+        "backlog/archive/BACKLOG_PRODUCT_CORE_REALIGNMENT_v1.md",
+        "backlog/archive/SPRINT_PRODUCT_CORE_REALIGNMENT_v1.md",
     ):
         assert (ROOT / rel).is_file(), rel
 

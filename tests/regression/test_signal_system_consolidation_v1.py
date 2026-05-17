@@ -23,8 +23,8 @@ def test_signal_consolidation_product_docs_exist() -> None:
 
 def test_signal_consolidation_uat_and_backlog_exist() -> None:
     assert (ROOT / "ops" / "uat" / "SIGNAL_SYSTEM_CONSOLIDATION_UAT.md").is_file()
-    assert (ROOT / "backlog" / "BACKLOG_SIGNAL_SYSTEM_CONSOLIDATION_v1.md").is_file()
-    assert (ROOT / "backlog" / "SPRINT_SIGNAL_SYSTEM_CONSOLIDATION_v1.md").is_file()
+    assert (ROOT / "backlog/archive/BACKLOG_SIGNAL_SYSTEM_CONSOLIDATION_v1.md").is_file()
+    assert (ROOT / "backlog/archive/SPRINT_SIGNAL_SYSTEM_CONSOLIDATION_v1.md").is_file()
 
 
 def test_canonical_schema_doc_contains_identity_signals() -> None:

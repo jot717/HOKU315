@@ -1,5 +1,10 @@
 # HOKU315 BACKLOG
 
+> **Product single source of truth:** [`ops/product/PRODUCT_MASTER.md`](ops/product/PRODUCT_MASTER.md)  
+> **Phase backlog index:** [`backlog/MASTER_BACKLOG.md`](backlog/MASTER_BACKLOG.md)  
+> **Official UAT:** [`ops/uat/UAT_MASTER_GUIDE.md`](ops/uat/UAT_MASTER_GUIDE.md)  
+> **Repo governance:** [`ops/product/REPO_GOVERNANCE_RULES.md`](ops/product/REPO_GOVERNANCE_RULES.md)
+
 **Workflow（AI-native）**：衝刺計畫見 [`SPRINT_PLAN.md`](SPRINT_PLAN.md)、日誌見 [`SPRINT_LOG.md`](SPRINT_LOG.md)；配對牆驗收見 [`TEST_CHECKLIST.md`](TEST_CHECKLIST.md)；資料庫套用軌跡見 [`sql/DEPLOY_LOG.md`](sql/DEPLOY_LOG.md)；**Debug／UAT 證據收集**見 [**`DEBUG_GUIDE.md`**](DEBUG_GUIDE.md)；**證據資產化目錄**見 [**`debug_evidence/README.md`**](debug_evidence/README.md)；**AI／P0 patch 約束**見 [**`DEBUG_POLICY.md`**](DEBUG_POLICY.md)；**Repo 分層**見 [**`REPO_ARCHITECTURE.md`**](REPO_ARCHITECTURE.md)；**介面契約**見 [**`ARCHITECTURE_CONTRACT.md`**](ARCHITECTURE_CONTRACT.md)；**流程護欄**見 [**`ops/process/RULES.md`**](ops/process/RULES.md)；**治理層級**見 [GOVERNANCE HIERARCHY](#governance-hierarchy)。產品治理仍依根目錄 **`DEVELOPMENT_CONSTITUTION.md`**。
 
 狀態約定：`[TODO]` · `[WIP]` · `[DONE]` · **`[REMOVED/INTERNAL_ONLY]`**。
@@ -152,10 +157,10 @@ System-level rules（詳 [`ops/process/RULES.md`](ops/process/RULES.md)）：
 
 ## MATCH FLOW v1
 
-- **MVP matching system**：規格 [`backlog/BACKLOG_MATCH_FLOW_v1.md`](backlog/BACKLOG_MATCH_FLOW_v1.md)
+- **MVP matching system**：規格 [`backlog/BACKLOG_MATCH_FLOW_v1.md`](backlog/archive/BACKLOG_MATCH_FLOW_v1.md)
 - **rule-based scoring** 草案：[`product/match/match_logic.md`](product/match/match_logic.md)
 - **state / flow**：[`product/match/state_model.md`](product/match/state_model.md)、[`product/match/product_flow.md`](product/match/product_flow.md)
-- **Sprint 2026-W02**：[`backlog/SPRINT_MATCH_FLOW_v1.md`](backlog/SPRINT_MATCH_FLOW_v1.md)
+- **Sprint 2026-W02**：[`backlog/SPRINT_MATCH_FLOW_v1.md`](backlog/archive/SPRINT_MATCH_FLOW_v1.md)
 
 ---
 
@@ -464,19 +469,19 @@ Fox guardian tone and narration layer implementation started.
 
 ## FOX IMMERSION SYSTEM v1 ACTIVE
 
-Immersive guardian world shell (fox presence, signal scan, dream-world layout) — see [`backlog/BACKLOG_FOX_IMMERSION_SYSTEM_v1.md`](backlog/BACKLOG_FOX_IMMERSION_SYSTEM_v1.md).
+Immersive guardian world shell (fox presence, signal scan, dream-world layout) — see [`backlog/BACKLOG_FOX_IMMERSION_SYSTEM_v1.md`](backlog/archive/BACKLOG_FOX_IMMERSION_SYSTEM_v1.md).
 
 ---
 
 ## FOX MEMORY SYSTEM v1 ACTIVE
 
-Local rule-based guardian memory (`runtime_state/fox_memory.json`) — see [`backlog/BACKLOG_FOX_MEMORY_SYSTEM_v1.md`](backlog/BACKLOG_FOX_MEMORY_SYSTEM_v1.md).
+Local rule-based guardian memory (`runtime_state/fox_memory.json`) — see [`backlog/BACKLOG_FOX_MEMORY_SYSTEM_v1.md`](backlog/archive/BACKLOG_FOX_MEMORY_SYSTEM_v1.md).
 
 ---
 
 ## FOX SIGNAL GUARD v1 ACTIVE
 
-Signal guard mechanism (risk evaluation + guardian warning card) — see [`backlog/BACKLOG_FOX_SIGNAL_GUARD_v1.md`](backlog/BACKLOG_FOX_SIGNAL_GUARD_v1.md).
+Signal guard mechanism (risk evaluation + guardian warning card) — see [`backlog/BACKLOG_FOX_SIGNAL_GUARD_v1.md`](backlog/archive/BACKLOG_FOX_SIGNAL_GUARD_v1.md).
 
 ---
 
@@ -486,7 +491,7 @@ Signal guard mechanism (risk evaluation + guardian warning card) — see [`backl
 Guardian UX constitution **archived** to [`docs/deprecated/GUARDIAN_UX_CONSTITUTION.md`](docs/deprecated/GUARDIAN_UX_CONSTITUTION.md).  
 **Current UX law:** [`ops/product/SIGNAL_FIRST_PRODUCT_POSITION.md`](ops/product/SIGNAL_FIRST_PRODUCT_POSITION.md)  
 **UAT:** [`ops/uat/PHASE1_PRODUCT_FLOW_UAT.md`](ops/uat/PHASE1_PRODUCT_FLOW_UAT.md)  
-**Backlog / sprint (historical):** [`backlog/BACKLOG_PHASE1_UX_RESTRUCTURE_v1.md`](backlog/BACKLOG_PHASE1_UX_RESTRUCTURE_v1.md), [`backlog/SPRINT_PHASE1_UX_RESTRUCTURE_v1.md`](backlog/SPRINT_PHASE1_UX_RESTRUCTURE_v1.md)
+**Backlog / sprint (historical):** [`backlog/BACKLOG_PHASE1_UX_RESTRUCTURE_v1.md`](backlog/archive/BACKLOG_PHASE1_UX_RESTRUCTURE_v1.md), [`backlog/SPRINT_PHASE1_UX_RESTRUCTURE_v1.md`](backlog/archive/SPRINT_PHASE1_UX_RESTRUCTURE_v1.md)
 
 ---
 
@@ -496,7 +501,7 @@ Guardian UX constitution **archived** to [`docs/deprecated/GUARDIAN_UX_CONSTITUT
 **Flow:** [`ops/product/PHASE1_PRODUCT_FLOW.md`](ops/product/PHASE1_PRODUCT_FLOW.md) · **Pages:** [`ops/product/PAGE_PURPOSE_SYSTEM.md`](ops/product/PAGE_PURPOSE_SYSTEM.md) · **Position:** [`ops/product/SIGNAL_FIRST_PRODUCT_POSITION.md`](ops/product/SIGNAL_FIRST_PRODUCT_POSITION.md)  
 **UAT:** [`ops/uat/PHASE1_PRODUCT_FLOW_UAT.md`](ops/uat/PHASE1_PRODUCT_FLOW_UAT.md)  
 **Deprecation index:** [`docs/deprecated/README.md`](docs/deprecated/README.md)  
-**Backlog / sprint:** [`backlog/BACKLOG_PHASE1_PRODUCT_FLOW_RECOVERY_v1.md`](backlog/BACKLOG_PHASE1_PRODUCT_FLOW_RECOVERY_v1.md), [`backlog/SPRINT_PHASE1_PRODUCT_FLOW_RECOVERY_v1.md`](backlog/SPRINT_PHASE1_PRODUCT_FLOW_RECOVERY_v1.md)
+**Backlog / sprint:** [`backlog/BACKLOG_PHASE1_PRODUCT_FLOW_RECOVERY_v1.md`](backlog/archive/BACKLOG_PHASE1_PRODUCT_FLOW_RECOVERY_v1.md), [`backlog/SPRINT_PHASE1_PRODUCT_FLOW_RECOVERY_v1.md`](backlog/archive/SPRINT_PHASE1_PRODUCT_FLOW_RECOVERY_v1.md)
 
 ---
 
@@ -505,7 +510,7 @@ Guardian UX constitution **archived** to [`docs/deprecated/GUARDIAN_UX_CONSTITUT
 **TYPE:** DEV/RUNTIME STABILIZATION — Python pin, `.venv`, Reflex+radix pins, `runtime_state` recovery, compile gate, one-command startup (**no** PHASE1-D/F/2 scope).  
 **Docs:** [`ops/env/STARTUP_GUIDE.md`](ops/env/STARTUP_GUIDE.md), [`ops/env/PYTHON_VERSION_POLICY.md`](ops/env/PYTHON_VERSION_POLICY.md), [`ops/env/VENV_POLICY.md`](ops/env/VENV_POLICY.md), [`ops/env/DEPENDENCY_LOCK_REPORT.md`](ops/env/DEPENDENCY_LOCK_REPORT.md), [`ops/env/RUNTIME_STATE_SCHEMA.md`](ops/env/RUNTIME_STATE_SCHEMA.md)  
 **Scripts:** `start_hoku.bat`, `run_all_checks.bat`, `ops/env/runtime_sanity_check.py`, `ops/env/reflex_compile_gate.py`  
-**Backlog / sprint:** [`backlog/BACKLOG_PHASE1_ENVIRONMENT_LOCKDOWN_v1.md`](backlog/BACKLOG_PHASE1_ENVIRONMENT_LOCKDOWN_v1.md), [`backlog/SPRINT_PHASE1_ENVIRONMENT_LOCKDOWN_v1.md`](backlog/SPRINT_PHASE1_ENVIRONMENT_LOCKDOWN_v1.md)
+**Backlog / sprint:** [`backlog/BACKLOG_PHASE1_ENVIRONMENT_LOCKDOWN_v1.md`](backlog/archive/BACKLOG_PHASE1_ENVIRONMENT_LOCKDOWN_v1.md), [`backlog/SPRINT_PHASE1_ENVIRONMENT_LOCKDOWN_v1.md`](backlog/archive/SPRINT_PHASE1_ENVIRONMENT_LOCKDOWN_v1.md)
 
 ---
 
@@ -515,7 +520,7 @@ Guardian UX constitution **archived** to [`docs/deprecated/GUARDIAN_UX_CONSTITUT
 **Core:** AI-native **SNS guardian network** — social signal intelligence, hater / dangerous interaction detection, interaction risk; fox = persona + guardian UX layer.  
 **Docs:** [`ops/product/CORE_PRODUCT_REALIGNMENT.md`](ops/product/CORE_PRODUCT_REALIGNMENT.md), [`ops/product/SOCIAL_SIGNAL_ARCHITECTURE.md`](ops/product/SOCIAL_SIGNAL_ARCHITECTURE.md), [`ops/product/HATER_SIGNAL_MODEL.md`](ops/product/HATER_SIGNAL_MODEL.md)  
 **UAT:** [`ops/uat/PRODUCT_DIRECTION_RESET_NOTES.md`](ops/uat/PRODUCT_DIRECTION_RESET_NOTES.md)  
-**Backlog / sprint:** [`backlog/BACKLOG_PRODUCT_CORE_REALIGNMENT_v1.md`](backlog/BACKLOG_PRODUCT_CORE_REALIGNMENT_v1.md), [`backlog/SPRINT_PRODUCT_CORE_REALIGNMENT_v1.md`](backlog/SPRINT_PRODUCT_CORE_REALIGNMENT_v1.md)
+**Backlog / sprint:** [`backlog/BACKLOG_PRODUCT_CORE_REALIGNMENT_v1.md`](backlog/archive/BACKLOG_PRODUCT_CORE_REALIGNMENT_v1.md), [`backlog/SPRINT_PRODUCT_CORE_REALIGNMENT_v1.md`](backlog/archive/SPRINT_PRODUCT_CORE_REALIGNMENT_v1.md)
 
 ---
 
@@ -523,7 +528,7 @@ Guardian UX constitution **archived** to [`docs/deprecated/GUARDIAN_UX_CONSTITUT
 
 **TYPE:** RUNTIME STABILITY HOTFIX — Reflex `@rx.var` / list coercion / session JSON safety; **no** new features or routes.  
 **UAT:** [`ops/uat/STATE_SANITIZATION_RUNTIME_UAT.md`](ops/uat/STATE_SANITIZATION_RUNTIME_UAT.md)  
-**Backlog / sprint:** [`backlog/BACKLOG_STATE_SANITIZATION_HOTFIX_v1.md`](backlog/BACKLOG_STATE_SANITIZATION_HOTFIX_v1.md), [`backlog/SPRINT_STATE_SANITIZATION_HOTFIX_v1.md`](backlog/SPRINT_STATE_SANITIZATION_HOTFIX_v1.md)
+**Backlog / sprint:** [`backlog/BACKLOG_STATE_SANITIZATION_HOTFIX_v1.md`](backlog/archive/BACKLOG_STATE_SANITIZATION_HOTFIX_v1.md), [`backlog/SPRINT_STATE_SANITIZATION_HOTFIX_v1.md`](backlog/archive/SPRINT_STATE_SANITIZATION_HOTFIX_v1.md)
 
 ---
 
@@ -531,7 +536,7 @@ Guardian UX constitution **archived** to [`docs/deprecated/GUARDIAN_UX_CONSTITUT
 
 **TYPE:** COMPILE STABILITY — Reflex `rx.foreach` item fields are reactive ops; **no** native Python numeric compares on those values inside card renderers. Precompute buckets / labels in `enrich_match_row_for_ui` (loader) or plain Python.  
 **UAT:** [`ops/uat/MATCH_WALL_COMPILE_HOTFIX.md`](ops/uat/MATCH_WALL_COMPILE_HOTFIX.md)  
-**Backlog / sprint:** [`backlog/BACKLOG_MATCH_WALL_COMPILE_HOTFIX_v1.md`](backlog/BACKLOG_MATCH_WALL_COMPILE_HOTFIX_v1.md), [`backlog/SPRINT_MATCH_WALL_COMPILE_HOTFIX_v1.md`](backlog/SPRINT_MATCH_WALL_COMPILE_HOTFIX_v1.md)
+**Backlog / sprint:** [`backlog/BACKLOG_MATCH_WALL_COMPILE_HOTFIX_v1.md`](backlog/archive/BACKLOG_MATCH_WALL_COMPILE_HOTFIX_v1.md), [`backlog/SPRINT_MATCH_WALL_COMPILE_HOTFIX_v1.md`](backlog/archive/SPRINT_MATCH_WALL_COMPILE_HOTFIX_v1.md)
 
 ---
 
@@ -540,7 +545,7 @@ Guardian UX constitution **archived** to [`docs/deprecated/GUARDIAN_UX_CONSTITUT
 **TYPE:** CORE PRODUCT LOOP FIX — named **target observation entity** (`/target`) + local JSON + user/target overlap in insight; **no** SNS / vectors / auth.  
 **Docs:** [`ops/product/TARGET_SIGNAL_CONSTITUTION.md`](ops/product/TARGET_SIGNAL_CONSTITUTION.md), [`ops/product/TARGET_ANALYSIS_FLOW.md`](ops/product/TARGET_ANALYSIS_FLOW.md), [`ops/product/TARGET_PROFILE_SCHEMA.md`](ops/product/TARGET_PROFILE_SCHEMA.md)  
 **UAT:** [`ops/uat/TARGET_SIGNAL_PROFILE_UAT.md`](ops/uat/TARGET_SIGNAL_PROFILE_UAT.md)  
-**Backlog / sprint:** [`backlog/BACKLOG_TARGET_SIGNAL_PROFILE_v1.md`](backlog/BACKLOG_TARGET_SIGNAL_PROFILE_v1.md), [`backlog/SPRINT_TARGET_SIGNAL_PROFILE_v1.md`](backlog/SPRINT_TARGET_SIGNAL_PROFILE_v1.md)
+**Backlog / sprint:** [`backlog/BACKLOG_TARGET_SIGNAL_PROFILE_v1.md`](backlog/archive/BACKLOG_TARGET_SIGNAL_PROFILE_v1.md), [`backlog/SPRINT_TARGET_SIGNAL_PROFILE_v1.md`](backlog/archive/SPRINT_TARGET_SIGNAL_PROFILE_v1.md)
 
 ---
 
@@ -549,7 +554,7 @@ Guardian UX constitution **archived** to [`docs/deprecated/GUARDIAN_UX_CONSTITUT
 **TYPE:** RELATIONSHIP INTELLIGENCE FOUNDATION — synthetic **interaction archetypes** + overlap simulation; **no** SNS / multi-user / vectors / embeddings.  
 **Docs:** [`ops/product/RELATIONSHIP_INTELLIGENCE_CONSTITUTION.md`](ops/product/RELATIONSHIP_INTELLIGENCE_CONSTITUTION.md), [`ops/product/RELATIONSHIP_ARCHETYPE_MODEL.md`](ops/product/RELATIONSHIP_ARCHETYPE_MODEL.md), [`ops/product/INTERACTION_SIGNAL_ONTOLOGY.md`](ops/product/INTERACTION_SIGNAL_ONTOLOGY.md)  
 **UAT:** [`ops/uat/RELATIONSHIP_SIGNAL_SIMULATION_UAT.md`](ops/uat/RELATIONSHIP_SIGNAL_SIMULATION_UAT.md)  
-**Backlog / sprint:** [`backlog/BACKLOG_RELATIONSHIP_SIGNAL_SIMULATION_v1.md`](backlog/BACKLOG_RELATIONSHIP_SIGNAL_SIMULATION_v1.md), [`backlog/SPRINT_RELATIONSHIP_SIGNAL_SIMULATION_v1.md`](backlog/SPRINT_RELATIONSHIP_SIGNAL_SIMULATION_v1.md)
+**Backlog / sprint:** [`backlog/BACKLOG_RELATIONSHIP_SIGNAL_SIMULATION_v1.md`](backlog/archive/BACKLOG_RELATIONSHIP_SIGNAL_SIMULATION_v1.md), [`backlog/SPRINT_RELATIONSHIP_SIGNAL_SIMULATION_v1.md`](backlog/archive/SPRINT_RELATIONSHIP_SIGNAL_SIMULATION_v1.md)
 
 ---
 
@@ -558,7 +563,7 @@ Guardian UX constitution **archived** to [`docs/deprecated/GUARDIAN_UX_CONSTITUT
 **TYPE:** RULE-BASED SIGNAL INTELLIGENCE — first interpretive layer (`infer_signal_risks`); **no** LLM / embeddings / vector search / SNS / agents.  
 **Docs:** [`ops/product/SIGNAL_INTELLIGENCE_CONSTITUTION.md`](ops/product/SIGNAL_INTELLIGENCE_CONSTITUTION.md), [`ops/product/SIGNAL_RISK_ONTOLOGY.md`](ops/product/SIGNAL_RISK_ONTOLOGY.md), [`ops/product/SIGNAL_INFERENCE_MODEL.md`](ops/product/SIGNAL_INFERENCE_MODEL.md)  
 **UAT:** [`ops/uat/SIGNAL_INTELLIGENCE_ENGINE_UAT.md`](ops/uat/SIGNAL_INTELLIGENCE_ENGINE_UAT.md)  
-**Backlog / sprint:** [`backlog/BACKLOG_SIGNAL_INTELLIGENCE_ENGINE_v1.md`](backlog/BACKLOG_SIGNAL_INTELLIGENCE_ENGINE_v1.md), [`backlog/SPRINT_SIGNAL_INTELLIGENCE_ENGINE_v1.md`](backlog/SPRINT_SIGNAL_INTELLIGENCE_ENGINE_v1.md)
+**Backlog / sprint:** [`backlog/BACKLOG_SIGNAL_INTELLIGENCE_ENGINE_v1.md`](backlog/archive/BACKLOG_SIGNAL_INTELLIGENCE_ENGINE_v1.md), [`backlog/SPRINT_SIGNAL_INTELLIGENCE_ENGINE_v1.md`](backlog/archive/SPRINT_SIGNAL_INTELLIGENCE_ENGINE_v1.md)
 
 ---
 
@@ -567,12 +572,12 @@ Guardian UX constitution **archived** to [`docs/deprecated/GUARDIAN_UX_CONSTITUT
 **TYPE:** SIGNAL ARCHITECTURE CONSOLIDATION — unify existing `/profile`, `/quiz`, `/insight`, memory, and signal wording (**SAFE MODE**; **no** new onboarding route; **no** SNS / vector / auth implementation).  
 **Docs:** [`ops/product/SIGNAL_SYSTEM_CONSTITUTION.md`](ops/product/SIGNAL_SYSTEM_CONSTITUTION.md), [`ops/product/SIGNAL_PROFILE_SCHEMA.md`](ops/product/SIGNAL_PROFILE_SCHEMA.md), [`ops/product/SIGNAL_FLOW_ARCHITECTURE.md`](ops/product/SIGNAL_FLOW_ARCHITECTURE.md), [`ops/product/SIGNAL_INPUT_AUDIT.md`](ops/product/SIGNAL_INPUT_AUDIT.md), [`ops/product/SIGNAL_STATE_MAPPING.md`](ops/product/SIGNAL_STATE_MAPPING.md)  
 **UAT:** [`ops/uat/SIGNAL_SYSTEM_CONSOLIDATION_UAT.md`](ops/uat/SIGNAL_SYSTEM_CONSOLIDATION_UAT.md)  
-**Backlog / sprint:** [`backlog/BACKLOG_SIGNAL_SYSTEM_CONSOLIDATION_v1.md`](backlog/BACKLOG_SIGNAL_SYSTEM_CONSOLIDATION_v1.md), [`backlog/SPRINT_SIGNAL_SYSTEM_CONSOLIDATION_v1.md`](backlog/SPRINT_SIGNAL_SYSTEM_CONSOLIDATION_v1.md)
+**Backlog / sprint:** [`backlog/BACKLOG_SIGNAL_SYSTEM_CONSOLIDATION_v1.md`](backlog/archive/BACKLOG_SIGNAL_SYSTEM_CONSOLIDATION_v1.md), [`backlog/SPRINT_SIGNAL_SYSTEM_CONSOLIDATION_v1.md`](backlog/archive/SPRINT_SIGNAL_SYSTEM_CONSOLIDATION_v1.md)
 
 ---
 
 ## PHASE1 UAT FLOW FIX v2 ACTIVE
 
 **TYPE:** UX RECOVERY SPRINT — onboarding + journey clarity (not visual polish).  
-See [`backlog/BACKLOG_PHASE1_UAT_FLOW_FIX_v2.md`](backlog/BACKLOG_PHASE1_UAT_FLOW_FIX_v2.md), UAT script [`ops/uat/PHASE1_UAT_SCRIPT.md`](ops/uat/PHASE1_UAT_SCRIPT.md), UX constitution [`ops/product/UAT_EXPERIENCE_CONSTITUTION.md`](ops/product/UAT_EXPERIENCE_CONSTITUTION.md).
+See [`backlog/BACKLOG_PHASE1_UAT_FLOW_FIX_v2.md`](backlog/archive/BACKLOG_PHASE1_UAT_FLOW_FIX_v2.md), UAT script [`ops/uat/PHASE1_UAT_SCRIPT.md`](ops/uat/PHASE1_UAT_SCRIPT.md), UX constitution [`ops/product/UAT_EXPERIENCE_CONSTITUTION.md`](ops/product/UAT_EXPERIENCE_CONSTITUTION.md).
 

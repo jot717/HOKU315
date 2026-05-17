@@ -1,5 +1,7 @@
 # MATCH CREDIBILITY CONSTITUTION (Phase1-F)
 
+> **Authority:** [`PRODUCT_MASTER.md`](PRODUCT_MASTER.md)
+
 ## Purpose
 
 Make `/match` and `/insight` feel **believable** through **social energy compatibility**—rhythm, reply pressure, pacing, and fatigue points—not template compatibility language.

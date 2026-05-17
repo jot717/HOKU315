@@ -23,8 +23,8 @@ def test_phase1_product_flow_uat_exists() -> None:
 
 
 def test_phase1_product_flow_recovery_backlog_sprint_exist() -> None:
-    assert (ROOT / "backlog" / "BACKLOG_PHASE1_PRODUCT_FLOW_RECOVERY_v1.md").is_file()
-    assert (ROOT / "backlog" / "SPRINT_PHASE1_PRODUCT_FLOW_RECOVERY_v1.md").is_file()
+    assert (ROOT / "backlog/archive/BACKLOG_PHASE1_PRODUCT_FLOW_RECOVERY_v1.md").is_file()
+    assert (ROOT / "backlog/archive/SPRINT_PHASE1_PRODUCT_FLOW_RECOVERY_v1.md").is_file()
 
 
 def test_deprecated_guardian_constitution_archived() -> None:
@@ -48,7 +48,8 @@ def test_insight_next_actions_labels() -> None:
 def test_home_page_signal_first_hook_copy() -> None:
     home_src = (ROOT / "fox_quiz" / "ui" / "pages" / "home_page.py").read_text(encoding="utf-8")
     assert "AI 社交訊號分析系統" in home_src
-    assert "建立你的社交訊號檔案" in home_src
+    assert "立即開始分析" in home_src
+    assert "訪客" in home_src
 
 
 def test_profile_page_signal_profile_copy() -> None:

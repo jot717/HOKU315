@@ -23,8 +23,8 @@ def test_target_signal_docs_exist() -> None:
         "ops/product/TARGET_ANALYSIS_FLOW.md",
         "ops/product/TARGET_PROFILE_SCHEMA.md",
         "ops/uat/TARGET_SIGNAL_PROFILE_UAT.md",
-        "backlog/BACKLOG_TARGET_SIGNAL_PROFILE_v1.md",
-        "backlog/SPRINT_TARGET_SIGNAL_PROFILE_v1.md",
+        "backlog/archive/BACKLOG_TARGET_SIGNAL_PROFILE_v1.md",
+        "backlog/archive/SPRINT_TARGET_SIGNAL_PROFILE_v1.md",
     ):
         assert (ROOT / rel).is_file(), rel
 

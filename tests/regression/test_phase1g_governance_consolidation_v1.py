@@ -1,0 +1,77 @@
+from __future__ import annotations
+
+import inspect
+from pathlib import Path
+
+from fox_quiz.login_page import login_page
+from fox_quiz.ui.pages.home_page import home_page
+
+ROOT = Path(__file__).resolve().parents[2]
+
+
+def test_product_master_exists() -> None:
+    p = ROOT / "ops/product/PRODUCT_MASTER.md"
+    text = p.read_text(encoding="utf-8")
+    assert p.is_file()
+    assert "Guest" in text or "訪客" in text
+    assert "PRODUCT_MASTER" in text or "Single Source" in text
+    assert "SOCIAL_ENERGY_MODEL" in text
+
+
+def test_master_backlog_exists() -> None:
+    p = ROOT / "backlog/MASTER_BACKLOG.md"
+    text = p.read_text(encoding="utf-8")
+    assert "ACTIVE" in text
+    assert "COMPLETED" in text
+
+
+def test_uat_master_guide_exists() -> None:
+    assert (ROOT / "ops/uat/UAT_MASTER_GUIDE.md").is_file()
+
+
+def test_readme_indexes_exist() -> None:
+    for rel in (
+        "ops/product/README.md",
+        "ops/uat/README.md",
+        "backlog/README.md",
+    ):
+        assert (ROOT / rel).is_file(), rel
+
+
+def test_deprecated_archive_exists() -> None:
+    assert (ROOT / "docs/deprecated/archive/README.md").is_file()
+    assert (ROOT / "docs/deprecated/archive/product").is_dir()
+    assert (ROOT / "backlog/archive").is_dir()
+
+
+def test_repo_governance_rules_exist() -> None:
+    text = (ROOT / "ops/product/REPO_GOVERNANCE_RULES.md").read_text(encoding="utf-8")
+    assert "PRODUCT_MASTER" in text
+    assert "no duplicate" in text.lower() or "Duplicate" in text
+
+
+def test_home_guest_and_account_copy() -> None:
+    src = inspect.getsource(home_page)
+    assert "立即開始分析" in src
+    assert "登入以保存長期互動趨勢" in src
+    assert "訪客" in src
+
+
+def test_login_guest_clarity() -> None:
+    src = inspect.getsource(login_page)
+    assert "訪客" in src
+    assert "帳號" in src
+
+
+def test_core_product_docs_not_deleted() -> None:
+    for rel in (
+        "ops/product/PHASE1_PRODUCT_FLOW.md",
+        "ops/product/SOCIAL_ENERGY_MODEL.md",
+        "DEVELOPMENT_CONSTITUTION.md",
+    ):
+        assert (ROOT / rel).is_file(), rel
+
+
+def test_pages_compile() -> None:
+    assert home_page() is not None
+    assert login_page() is not None

@@ -1,5 +1,7 @@
 # PHASE BOUNDARY SYSTEM
 
+> **Authority:** [`PRODUCT_MASTER.md`](PRODUCT_MASTER.md)
+
 This document separates **what ships in the product face** from **backend and future moat work**. **No later-phase UI or copy may leak into earlier-phase experiences.**
 
 ## Phase 1 — Local signal product (current face)

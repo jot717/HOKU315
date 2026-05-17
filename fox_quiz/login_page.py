@@ -127,13 +127,36 @@ class LoginState(rx.State):
 def login_page() -> rx.Component:
     return rx.box(
         rx.vstack(
-            rx.heading("登入 JOT717", size="6", weight="bold"),
+            rx.heading("帳號登入", size="6", weight="bold"),
             rx.text(
-                "使用電子郵件與密碼建立或進入帳號（跨裝置備份於後續階段啟用）。",
+                "帳號模式可保存問卷向量、配對牆與長期互動趨勢。"
+                "若只想先體驗分析，無需登入。",
                 size="2",
                 color="gray",
                 as_="span",
                 display="block",
+            ),
+            rx.card(
+                rx.vstack(
+                    rx.text("訪客模式", size="2", weight="bold", as_="span"),
+                    rx.text(
+                        "在本機完成訊號檔案、問卷、觀察對象與互動分析；"
+                        "不保證跨裝置同步。",
+                        size="2",
+                        color="gray",
+                        as_="span",
+                        style={"line_height": "1.55"},
+                    ),
+                    rx.link(
+                        rx.button("返回首頁 · 立即開始分析", variant="soft", width="100%", size="2"),
+                        href="/",
+                        width="100%",
+                    ),
+                    spacing="2",
+                    width="100%",
+                ),
+                width="100%",
+                margin_bottom="4",
             ),
             rx.card(
                 rx.vstack(
@@ -171,9 +194,11 @@ def login_page() -> rx.Component:
                 width="100%",
             ),
             rx.hstack(
-                rx.link("← 訊號牆", href="/match", color="orange", size="2"),
-                rx.link("測驗", href="/quiz", color="gray", size="2"),
+                rx.link("← 首頁", href="/", color="gray", size="2"),
+                rx.link("訊號問卷", href="/quiz", color="gray", size="2"),
+                rx.link("分析結果", href="/insight", color="orange", size="2"),
                 spacing="4",
+                flex_wrap="wrap",
             ),
             spacing="4",
             max_width="24rem",

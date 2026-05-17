@@ -4,6 +4,14 @@
 
 ### DONE
 
+* **PHASE1-G PROJECT GOVERNANCE & PRODUCT CLARITY v1**: `ops/product/PRODUCT_MASTER.md`, `REPO_GOVERNANCE_RULES.md`, `backlog/MASTER_BACKLOG.md`, `ops/uat/UAT_MASTER_GUIDE.md`; README indexes; `docs/deprecated/archive/` + `backlog/archive/`; home guest/account CTAs; login/nav clarity.
+
+* **PHASE1-F MATCH CREDIBILITY SYSTEM v1**: social energy match archetypes, `match_rhythm_engine.py`, match wall + insight weakness link; docs + regression.
+
+* **PHASE1-D UX INTELLIGENCE LAYER v1**: interaction pressure ontology, `ux_intelligence_engine.py`, insight/match copy upgrade; fox observer rebalance.
+
+* **MATCH WALL COMPILE HOTFIX v1** + **REMOVE PREMATURE SNS LAYER v1**: Reflex foreach safety; Phase1 UI without API/token noise.
+
 * **PHASE1 PRODUCT FLOW RECOVERY v1**: signal-first home/profile/quiz/target/insight/match copy; insight six-block layout + single fox note; primary nav reduced to core six links; `MatchWall` cards expose compatibility / pressure / rhythm / risk / rationale; archived drifted docs under `docs/deprecated/`; added `ops/product/PHASE1_PRODUCT_FLOW.md`, `PAGE_PURPOSE_SYSTEM.md`, `SIGNAL_FIRST_PRODUCT_POSITION.md`, `ops/uat/PHASE1_PRODUCT_FLOW_UAT.md`, and recovery backlog/sprint entries.
 
 * **PHASE1-E ENVIRONMENT LOCKDOWN v1**: `.python-version` (3.11.9), `requirements-lock.txt`, Reflex **0.9.2.post1** + **reflex-components-radix 0.9.2** (fixes `reflex_components_radix.plugin`), `start_hoku.bat` / `run_all_checks.bat`, `ops/env/*` policies + `runtime_sanity_check.py` + `reflex_compile_gate.py`, regression `test_phase1e_environment_lockdown_v1.py`, backlog/sprint entries, `BACKLOG.md` section.

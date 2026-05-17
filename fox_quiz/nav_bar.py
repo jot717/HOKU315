@@ -14,7 +14,7 @@ def app_navbar(*, show_logout: bool = True) -> rx.Component:
         rx.link("觀察對象", href="/target", size="2", color="orange", font_weight="medium"),
         rx.link("分析結果", href="/insight", size="2", color="orange", font_weight="medium"),
         rx.link("適合對象", href="/match", size="2", color="orange", font_weight="medium"),
-        rx.link("登入", href="/login", size="2", color="gray"),
+        rx.link("帳號登入", href="/login", size="2", color="gray"),
         spacing="4",
         flex_wrap="wrap",
     )

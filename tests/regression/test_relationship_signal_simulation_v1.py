@@ -18,8 +18,8 @@ def test_relationship_intelligence_docs_exist() -> None:
         "ops/product/RELATIONSHIP_ARCHETYPE_MODEL.md",
         "ops/product/INTERACTION_SIGNAL_ONTOLOGY.md",
         "ops/uat/RELATIONSHIP_SIGNAL_SIMULATION_UAT.md",
-        "backlog/BACKLOG_RELATIONSHIP_SIGNAL_SIMULATION_v1.md",
-        "backlog/SPRINT_RELATIONSHIP_SIGNAL_SIMULATION_v1.md",
+        "backlog/archive/BACKLOG_RELATIONSHIP_SIGNAL_SIMULATION_v1.md",
+        "backlog/archive/SPRINT_RELATIONSHIP_SIGNAL_SIMULATION_v1.md",
     ):
         assert (ROOT / rel).is_file(), rel
 
