@@ -2,7 +2,6 @@
 from __future__ import annotations
 
 import argparse
-import json
 import sys
 from collections.abc import Callable
 from pathlib import Path
@@ -31,12 +30,24 @@ def _in_repo_venv() -> bool:
         return False
 
 
-def _load_json(path: Path) -> Any | None:
-    try:
-        with path.open(encoding="utf-8") as f:
-            return json.load(f)
-    except (OSError, json.JSONDecodeError):
+_ENTITY_BY_FILE = {
+    "user_profile.json": "user_profile",
+    "target_profile.json": "target_profile",
+    "fox_memory.json": "fox_memory",
+    "session_history.json": "session_history",
+    "local_session.json": "local_session",
+}
+
+
+def _read_entity(rel: str) -> Any | None:
+    from product.persistence.runtime import registry
+
+    entity = _ENTITY_BY_FILE.get(rel)
+    if entity is None:
         return None
+    if not (RUNTIME_DIR / rel).exists():
+        return None
+    return registry.get_backend().read(entity)
 
 
 def _fix_user_profile() -> None:
@@ -58,35 +69,43 @@ def _fix_fox_memory() -> None:
 
 
 def _fix_session_history() -> None:
-    RUNTIME_DIR.mkdir(parents=True, exist_ok=True)
-    path = RUNTIME_DIR / "session_history.json"
-    with path.open("w", encoding="utf-8") as f:
-        json.dump([], f, indent=2, ensure_ascii=False)
+    from product.session.runtime.session_history import reset_session_history
+
+    reset_session_history()
 
 
 def _fix_local_session() -> None:
-    RUNTIME_DIR.mkdir(parents=True, exist_ok=True)
-    path = RUNTIME_DIR / "local_session.json"
-    with path.open("w", encoding="utf-8") as f:
-        json.dump({}, f, indent=2, ensure_ascii=False)
+    from product.app_binding.runtime.persistence import persist_session
+
+    persist_session({})
 
 
 def _valid_user_profile(o: Any) -> bool:
+    from product.profile.runtime.profile_store import normalize_profile
+
     if not isinstance(o, dict):
         return False
-    if "name" not in o or "interests" not in o or "activity" not in o:
-        return False
-    if not isinstance(o.get("interests"), list):
-        return False
     try:
-        a = int(o.get("activity", 0))
+        normalized = normalize_profile(o)
     except (TypeError, ValueError):
         return False
-    return 0 <= a <= 10
+    return (
+        "name" in normalized
+        and "interests" in normalized
+        and "activity" in normalized
+        and isinstance(normalized.get("interests"), list)
+        and 0 <= int(normalized.get("activity", 0)) <= 10
+    )
 
 
 def _valid_target_profile(o: Any) -> bool:
+    from product.target.runtime.target_profile_store import normalize_target_profile
+
     if not isinstance(o, dict):
+        return False
+    try:
+        normalized = normalize_target_profile(o)
+    except (TypeError, ValueError):
         return False
     required = (
         "target_name",
@@ -100,25 +119,33 @@ def _valid_target_profile(o: Any) -> bool:
         "response_consistency",
         "notes",
     )
-    if not all(k in o for k in required):
-        return False
-    for key in ("observed_traits", "communication_style", "social_patterns", "pressure_signals"):
-        if not isinstance(o.get(key), list):
-            return False
-    return True
+    return all(k in normalized for k in required)
 
 
 def _valid_fox_memory(o: Any) -> bool:
+    from product.memory.runtime.fox_memory_store import normalize_fox_memory
+
     if not isinstance(o, dict):
         return False
-    return isinstance(o.get("recent_patterns"), list) and isinstance(
-        o.get("recent_warnings"),
+    try:
+        normalized = normalize_fox_memory(o)
+    except (TypeError, ValueError):
+        return False
+    return isinstance(normalized.get("recent_patterns"), list) and isinstance(
+        normalized.get("recent_warnings"),
         list,
     )
 
 
 def _valid_history(o: Any) -> bool:
-    return isinstance(o, list)
+    from product.session.runtime.session_history import _unpack_history
+
+    if isinstance(o, list):
+        return True
+    if isinstance(o, dict) and isinstance(o.get("items"), list):
+        _unpack_history(o)
+        return True
+    return False
 
 
 def _valid_local_session(o: Any) -> bool:
@@ -143,7 +170,7 @@ def main(argv: list[str] | None = None) -> int:
     if not ok:
         print(
             f"[runtime_sanity_check] WARNING: Python {ver} is outside policy "
-            f"(use 3.11.x or 3.12.x; see ops/env/PYTHON_VERSION_POLICY.md)",
+            f"(use 3.11.x or 3.12.x; see docs/active/env/PYTHON_VERSION_POLICY.md)",
             file=sys.stderr,
         )
 
@@ -167,7 +194,9 @@ def main(argv: list[str] | None = None) -> int:
 
     for rel, validate, fix in checks:
         path = RUNTIME_DIR / rel
-        data = _load_json(path) if path.exists() else None
+        data = _read_entity(rel) if path.exists() else None
+        if data is None and path.exists():
+            data = None  # corrupt JSON treated as missing
 
         if data is None:
             if path.exists():

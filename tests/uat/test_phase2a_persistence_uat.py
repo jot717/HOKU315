@@ -139,7 +139,9 @@ def test_uat_runtime_matches_disk_json(isolated_persistence: dict[str, Path]) ->
     append_history({"final_insight": "sync-check", "compatibility_title": "", "energy_summary": ""})
     disk_hist = read_disk_json(paths[SESSION_HISTORY])
     assert disk_hist == backend.read(SESSION_HISTORY)
-    assert disk_hist[0]["final_insight"] == "sync-check"
+    assert isinstance(disk_hist, dict)
+    assert disk_hist["schema_version"] == 1
+    assert disk_hist["items"][0]["final_insight"] == "sync-check"
 
 
 # --- 6. Fail-fast backend validation ---
@@ -190,3 +192,28 @@ def test_uat_isolation_side_b(isolated_persistence: dict[str, Path]) -> None:
     loaded = load_profile()
     assert loaded["name"] != "Side-A-Only"
     assert isolated_persistence[USER_PROFILE].parent != REPO_RUNTIME
+
+
+# --- PHASE2-AH hardening ---
+
+
+def test_uat_schema_version_on_disk(isolated_persistence: dict[str, Path]) -> None:
+    save_profile({**DEFAULT_PROFILE, "name": "Schema UAT"})
+    data = read_disk_json(isolated_persistence[USER_PROFILE])
+    assert data["schema_version"] == 1
+    assert data["name"] == "Schema UAT"
+
+
+def test_uat_corrupt_profile_self_heals(isolated_persistence: dict[str, Path]) -> None:
+    path = isolated_persistence[USER_PROFILE]
+    path.write_text("<<<bad", encoding="utf-8")
+    loaded = load_profile()
+    assert loaded["schema_version"] == 1
+    assert path.stat().st_size > 10
+
+
+def test_uat_no_tmp_artifact_after_write(isolated_persistence: dict[str, Path]) -> None:
+    save_profile({**DEFAULT_PROFILE, "name": "Clean Write"})
+    profile_path = isolated_persistence[USER_PROFILE]
+    assert profile_path.is_file()
+    assert not profile_path.with_name(f"{profile_path.name}.tmp").exists()

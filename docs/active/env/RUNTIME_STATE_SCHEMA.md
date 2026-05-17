@@ -6,6 +6,10 @@ These files are the **Phase 1 / Phase 2-A local runtime** contract. All reads/wr
 
 Phase 2-B+ may add cloud backends; schema keys remain stable.
 
+**Schema version:** Dict entities include `"schema_version": 1`. `session_history.json` uses envelope `{"schema_version": 1, "items": [...]}` (legacy bare array still loads).
+
+**Writes:** Atomic temp-file replace via `LocalJsonBackend` (PHASE2-AH).
+
 | File | Purpose | Schema (normative) |
 |------|---------|---------------------|
 | `user_profile.json` | Baseline signal profile | `name` (string), `interests` (string array), `activity` (int 1–10) — see `product/profile/runtime/profile_store.py` |

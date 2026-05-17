@@ -6,6 +6,14 @@
 
 ---
 
+## 2026-05-17 — PHASE2-AH
+
+- Hardening: normalize_profile, atomic writes, schema_version, sanity via stores
+- Assessment: **PASS** (90/100) — ready for PHASE2-B planning
+- Report: `docs/archive/reviews/PHASE2AH_PERSISTENCE_HARDENING_REPORT_v1.md`
+
+---
+
 ## 2026-05-17 — PHASE2-A Architecture Review
 
 - Review: `docs/archive/reviews/PHASE2A_PERSISTENCE_ARCHITECTURE_REVIEW_v1.md`

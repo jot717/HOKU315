@@ -23,7 +23,7 @@ RULES:
 * archive immediately after completion
 
 CURRENT TARGET:
-**PHASE2-A Persistence Architecture Review v1** (COMPLETE — see archive review)
+**PHASE2-AH Persistence Hardening v1** (COMPLETE — see hardening report)
 
 DELIVERABLES:
 

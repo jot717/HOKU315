@@ -5,8 +5,10 @@ from typing import Any, Dict, List, MutableMapping
 
 from product.persistence.runtime.entities import TARGET_PROFILE
 from product.persistence.runtime.registry import get_backend
+from product.persistence.runtime.schema import SCHEMA_VERSION, with_schema_version
 
 DEFAULT_TARGET: Dict[str, Any] = {
+    "schema_version": SCHEMA_VERSION,
     "target_name": "",
     "relationship_type": "",
     "observed_traits": [],
@@ -55,7 +57,7 @@ def normalize_target_profile(raw: Dict[str, Any]) -> Dict[str, Any]:
     merged["target_name"] = str(merged.get("target_name", "")).strip()[:80]
     merged["relationship_type"] = str(merged.get("relationship_type", "")).strip()[:40]
     merged["notes"] = str(merged.get("notes", "")).strip()[:2000]
-    return merged
+    return with_schema_version(merged)
 
 
 def save_target_profile(profile: Dict[str, Any]) -> None:

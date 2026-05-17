@@ -33,11 +33,23 @@ class LocalJsonBackend:
         path = self.path_for(entity)
         if not path.exists():
             return None
-        with path.open(encoding="utf-8") as f:
-            return json.load(f)
+        try:
+            with path.open(encoding="utf-8") as f:
+                return json.load(f)
+        except json.JSONDecodeError:
+            return None
 
     def write(self, entity: str, data: Any) -> None:
         path = self.path_for(entity)
         path.parent.mkdir(parents=True, exist_ok=True)
-        with path.open("w", encoding="utf-8") as f:
-            json.dump(data, f, indent=2, ensure_ascii=False)
+        tmp_path = path.with_name(f"{path.name}.tmp")
+        try:
+            with tmp_path.open("w", encoding="utf-8") as f:
+                json.dump(data, f, indent=2, ensure_ascii=False)
+                f.flush()
+                os.fsync(f.fileno())
+            tmp_path.replace(path)
+        except Exception:
+            if tmp_path.exists():
+                tmp_path.unlink(missing_ok=True)
+            raise
