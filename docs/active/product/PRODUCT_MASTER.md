@@ -78,6 +78,14 @@ Detail: [`SIGNAL_SYSTEM.md`](SIGNAL_SYSTEM.md) · [`MATCH_SYSTEM.md`](MATCH_SYST
 
 ---
 
+## AI DEVELOPMENT DISCIPLINE
+
+All implementation must follow:
+
+[`docs/active/governance/START_NEW_SPRINT.md`](../governance/START_NEW_SPRINT.md)
+
+---
+
 ## Phase boundaries
 
 | Phase | Scope |

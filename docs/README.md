@@ -14,7 +14,9 @@
 | Environment | [`active/env/`](active/env/) |
 | Testing notes | [`active/testing/`](active/testing/) |
 
-**Start:** [`active/product/PRODUCT_MASTER.md`](active/product/PRODUCT_MASTER.md)
+**AI boot:** [`active/governance/START_NEW_SPRINT.md`](active/governance/START_NEW_SPRINT.md)
+
+**Product:** [`active/product/PRODUCT_MASTER.md`](active/product/PRODUCT_MASTER.md)
 
 ---
 

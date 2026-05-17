@@ -19,6 +19,7 @@ Product truth: [`../product/PRODUCT_MASTER.md`](../product/PRODUCT_MASTER.md) ·
 
 | Phase | Summary | Key docs |
 |-------|---------|----------|
+| **PHASE1-H6 AI development discipline v1** | `START_NEW_SPRINT.md`, `AI_TASK_TEMPLATE.md`, regression guard | `START_NEW_SPRINT.md` |
 | **PHASE1-H5 Root consolidation v1** | Root lobby, governance layer in `docs/active/governance/` | `docs/README.md` |
 | **PHASE1-H4 MD highway v1** | `docs/active/` SSOT, archive buckets | `docs/active/product/` |
 | **PHASE1-H3 Repo minimization v1** | Active surface map, dead routes, WIP quarantine | `ACTIVE_SURFACE_MAP.md` |

@@ -12,6 +12,14 @@ Identify high-drain interaction patterns through local rule-based social signal 
 
 ---
 
+## AI DEVELOPMENT ENTRY
+
+All AI implementation must begin from:
+
+**[`docs/active/governance/START_NEW_SPRINT.md`](docs/active/governance/START_NEW_SPRINT.md)**
+
+---
+
 ## Quick links
 
 | Need | Path |

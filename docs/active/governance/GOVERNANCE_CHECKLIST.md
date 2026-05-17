@@ -9,10 +9,16 @@ Pre-sprint checks. Law: [`../product/AI_DEVELOPMENT_CONSTITUTION.md`](../product
 - [ ] Adds markdown to repo root?
 - [ ] Puts product truth in `ops/`?
 - [ ] Breaks [`CANONICAL_TERMINOLOGY.md`](../product/CANONICAL_TERMINOLOGY.md)?
+- [ ] START_NEW_SPRINT loaded
+- [ ] PRODUCT_MASTER loaded
+- [ ] MASTER_BACKLOG loaded
+- [ ] no archive context used
+- [ ] no duplicate docs created
+- [ ] phase boundary respected
 
 Entropy: [`REPO_ENTROPY_CHECKLIST.md`](REPO_ENTROPY_CHECKLIST.md)
 
 ```bash
 python ops/flow/check_all_flows.py
-python -m pytest tests/regression/test_phase1h5_root_consolidation_v1.py -v --tb=short
+python -m pytest tests/regression/test_ai_development_discipline_v1.py -v --tb=short
 ```

@@ -2,6 +2,8 @@
 
 | File | Role |
 |------|------|
+| [`START_NEW_SPRINT.md`](START_NEW_SPRINT.md) | **Mandatory AI boot sequence** |
+| [`AI_TASK_TEMPLATE.md`](AI_TASK_TEMPLATE.md) | Per-task sprint template |
 | [`MASTER_BACKLOG.md`](MASTER_BACKLOG.md) | Canonical phase index |
 | [`REPO_GOVERNANCE_RULES.md`](REPO_GOVERNANCE_RULES.md) | Doc locations |
 | [`GOVERNANCE_CHECKLIST.md`](GOVERNANCE_CHECKLIST.md) | Pre-sprint checks |

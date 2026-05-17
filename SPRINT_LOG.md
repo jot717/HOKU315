@@ -2,7 +2,15 @@
 
 **Latest sprint logs (full history):** [`docs/archive/legacy/sprint_history/SPRINT_LOG_FULL.md`](docs/archive/legacy/sprint_history/SPRINT_LOG_FULL.md)
 
-**Current:** PHASE1-H5 TOTAL ROOT CONSOLIDATION
+**Current:** PHASE1-H6 AI DEVELOPMENT DISCIPLINE
+
+---
+
+## 2026-05-17 — PHASE1-H6
+
+- Mandatory AI boot: `docs/active/governance/START_NEW_SPRINT.md`
+- Task template: `docs/active/governance/AI_TASK_TEMPLATE.md`
+- Regression: `tests/regression/test_ai_development_discipline_v1.py`
 
 ---
 
