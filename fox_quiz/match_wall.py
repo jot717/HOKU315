@@ -15,7 +15,7 @@ from product.signal.runtime.signal_inference_engine import (
     collect_signal_profile_for_inference,
     infer_signal_risks,
 )
-from product.signal.runtime.ux_intelligence_engine import generate_match_fit_reasoning
+from product.match.runtime.match_rhythm_engine import generate_match_credibility_bundle
 
 _BG = "linear-gradient(180deg, #f8fafc 0%, #e0f2fe 100%)"
 _PLACEHOLDER_IMG = "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?w=800&auto=format&fit=crop"
@@ -62,19 +62,26 @@ def enrich_match_row_for_ui(
     nr["risk_bucket"] = risk_bucket
 
     inf = inference if inference is not None else _local_user_inference()
-    ux = generate_match_fit_reasoning(
+    cred = generate_match_credibility_bundle(
         distance=d,
         compat_bucket=compat_bucket,
         conflict_dim_label=str(nr.get("conflict_dim_label") or ""),
         blurred=blurred,
-        inference=inf,
+        user_inference=inf,
         profile=load_profile(),
     )
-    nr["emotion_line"] = ux["lighter_line"]
-    nr["rhythm_line"] = ux["rhythm_line"]
-    nr["match_rationale_line"] = ux["pressure_reduced_line"]
-    nr["fatigue_avoided_line"] = ux["fatigue_avoided_line"]
-    nr["scenario_line"] = ux["scenario_line"]
+    nr["peer_archetype"] = cred["peer_archetype"]
+    nr["interaction_rhythm_line"] = cred["interaction_rhythm_line"]
+    nr["reply_pressure_line"] = cred["reply_pressure_line"]
+    nr["emotional_pacing_line"] = cred["emotional_pacing_line"]
+    nr["energy_safety_line"] = cred["energy_safety_line"]
+    nr["exhaustion_point_line"] = cred["exhaustion_point_line"]
+    nr["scenario_line"] = cred["scenario_line"]
+    nr["energy_badge"] = cred.get("energy_safety", "中等")
+    nr["emotion_line"] = cred["interaction_rhythm_line"]
+    nr["rhythm_line"] = cred["reply_pressure_line"]
+    nr["match_rationale_line"] = cred["energy_safety_line"]
+    nr["fatigue_avoided_line"] = cred["exhaustion_point_line"]
 
     nr["distance_str"] = f"{d:.3f}"
     nr["card_idx"] = card_idx
@@ -176,15 +183,15 @@ class MatchWallState(rx.State):
             return rx.window_alert("解鎖未完成，請稍後再試。")
 
 
-def _compat_badge(item: dict[str, Any]) -> rx.Component:
-    b = item["compat_bucket"]
+def _energy_badge(item: dict[str, Any]) -> rx.Component:
+    safety = item["energy_badge"]
     return rx.cond(
-        b == "h",
-        rx.badge("相容度：高", color_scheme="green", variant="soft"),
+        safety == "偏高",
+        rx.badge("社交電量：較省", color_scheme="green", variant="soft"),
         rx.cond(
-            b == "m",
-            rx.badge("相容度：中", color_scheme="orange", variant="soft"),
-            rx.badge("相容度：低", color_scheme="red", variant="soft"),
+            safety == "偏低",
+            rx.badge("社交電量：偏耗", color_scheme="red", variant="soft"),
+            rx.badge("社交電量：中等", color_scheme="orange", variant="soft"),
         ),
     )
 
@@ -226,27 +233,33 @@ def _match_card(item: dict[str, Any]) -> rx.Component:
                 border_radius="12px",
             ),
         ),
-        _compat_badge(item),
+        _energy_badge(item),
         rx.text(
-            item["emotion_line"],
+            item["interaction_rhythm_line"],
             size="2",
             color="gray",
             as_="span",
         ),
         rx.text(
-            item["match_rationale_line"],
+            item["reply_pressure_line"],
             size="2",
             color="gray",
             as_="span",
         ),
         rx.text(
-            item["rhythm_line"],
+            item["emotional_pacing_line"],
             size="2",
             color="gray",
             as_="span",
         ),
         rx.text(
-            item["fatigue_avoided_line"],
+            item["energy_safety_line"],
+            size="2",
+            color="gray",
+            as_="span",
+        ),
+        rx.text(
+            item["exhaustion_point_line"],
             size="2",
             color="gray",
             as_="span",
@@ -384,9 +397,9 @@ def match_wall_page() -> rx.Component:
         rx.fragment(
             rx.vstack(
                 app_navbar(),
-                rx.heading("適合你的社交對象", size="6", weight="bold"),
+                rx.heading("社交電量相容對象", size="6", weight="bold"),
                 rx.text(
-                    "每張卡片會說明互動為何較省力、節奏如何、以及你可能避開的疲勞型態。",
+                    "每張卡片依互動節奏、回覆壓力與社交電量安全度解讀——不是約會分數或性格類型。",
                     size="2",
                     color="gray",
                     as_="span",

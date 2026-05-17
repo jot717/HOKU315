@@ -88,6 +88,46 @@ def insight_pressure_section() -> rx.Component:
     )
 
 
+def insight_weakness_trigger_section() -> rx.Component:
+    """User rhythm weakness ↔ interaction type that triggers drain."""
+    return rx.box(
+        rx.vstack(
+            rx.heading(
+                "你的節奏弱點",
+                size="4",
+                weight="medium",
+            ),
+            rx.cond(
+                AppState.ux_weakness_trigger_line != "",
+                rx.text(
+                    AppState.ux_weakness_trigger_line,
+                    size="3",
+                    color="gray",
+                    style={"line_height": "1.65"},
+                    as_="span",
+                ),
+                rx.text(
+                    "完成問卷後，系統會指出哪種互動節奏最容易拖長你的消耗。",
+                    size="3",
+                    color="gray",
+                    style={"line_height": "1.65"},
+                    as_="span",
+                ),
+            ),
+            spacing="3",
+            width="100%",
+            align_items="start",
+        ),
+        padding="1.5rem",
+        border_radius="18px",
+        width="100%",
+        max_width="32rem",
+        border="1px solid rgba(255,255,255,0.92)",
+        background="rgba(255,255,255,0.82)",
+        style={"boxShadow": "0 10px 32px rgba(160, 185, 210, 0.1)"},
+    )
+
+
 def insight_why_bullets_section() -> rx.Component:
     """Regression alias for Phase1 UAT tests."""
     return insight_pressure_section()
@@ -376,6 +416,7 @@ def _insight_result_column() -> rx.Component:
     return rx.vstack(
         _section_result_summary(),
         insight_pressure_section(),
+        insight_weakness_trigger_section(),
         _section_best_social_fit(),
         _section_avoid_types(),
         _section_fox_observer(),

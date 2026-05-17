@@ -30,6 +30,7 @@ from product.signal.runtime.signal_inference_engine import (
     collect_signal_profile_for_inference,
     infer_signal_risks,
 )
+from product.match.runtime.match_rhythm_engine import generate_insight_weakness_link
 from product.signal.runtime.ux_intelligence_engine import generate_interaction_reasoning
 from product.target.runtime.target_profile_store import load_target_profile
 
@@ -133,6 +134,7 @@ class AppState(rx.State):
     ux_fit_reasoning: str = ""
     ux_avoid_reasoning: str = ""
     ux_fox_observer_note: str = ""
+    ux_weakness_trigger_line: str = ""
 
     @rx.var(cache=True)
     def has_insight(self) -> bool:
@@ -253,6 +255,7 @@ class AppState(rx.State):
             self.ux_fit_reasoning = ""
             self.ux_avoid_reasoning = ""
             self.ux_fox_observer_note = ""
+            self.ux_weakness_trigger_line = ""
             self._refresh_fox_memory_from_store()
             return
 
@@ -390,6 +393,11 @@ class AppState(rx.State):
             self.compatibility_title = self.ux_fit_reasoning
         if self.ux_fox_observer_note:
             self.fox_message = self.ux_fox_observer_note
+
+        self.ux_weakness_trigger_line = generate_insight_weakness_link(
+            inference=inf,
+            relationship_simulation=sim,
+        )
 
     @rx.var(cache=True)
     def insight_target_summary_line(self) -> str:

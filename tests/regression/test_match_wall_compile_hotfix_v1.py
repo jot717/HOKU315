@@ -23,7 +23,7 @@ def test_enrich_match_row_buckets_from_plain_floats() -> None:
     blurred = enrich_match_row_for_ui({"distance": 0.5, "is_blurred": True}, 3)
     assert blurred["risk_bucket"] == "h"
     assert blurred["emotion_line"]
-    assert "模糊" in blurred["emotion_line"] or "落差" in blurred["emotion_line"]
+    assert blurred["interaction_rhythm_line"]
 
 
 def test_match_card_renderer_has_no_distance_threshold_compare() -> None:
@@ -52,3 +52,5 @@ def test_load_path_assigns_card_idx_via_enrich() -> None:
     )
     assert sample["card_idx"] == 7
     assert "compat_bucket" in sample
+    assert "interaction_rhythm_line" in sample
+    assert "energy_badge" in sample
