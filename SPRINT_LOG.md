@@ -2,7 +2,15 @@
 
 **Latest sprint logs (full history):** [`docs/archive/legacy/sprint_history/SPRINT_LOG_FULL.md`](docs/archive/legacy/sprint_history/SPRINT_LOG_FULL.md)
 
-**Current:** PHASE2-A PERSISTENCE UAT
+**Current:** PHASE2-B planning (cloud persistence — not started)
+
+---
+
+## 2026-05-17 — PHASE2-A Architecture Review
+
+- Review: `docs/archive/reviews/PHASE2A_PERSISTENCE_ARCHITECTURE_REVIEW_v1.md`
+- Assessment: **WARN** (82/100) — approved to plan PHASE2-B with hardening conditions
+- No product code changes
 
 ---
 

@@ -23,28 +23,23 @@ RULES:
 * archive immediately after completion
 
 CURRENT TARGET:
-**PHASE2-A Persistence Foundation v1**
+**PHASE2-A Persistence Architecture Review v1** (COMPLETE — see archive review)
 
 DELIVERABLES:
 
-* `product/persistence/runtime/` — `PersistenceBackend`, `LocalJsonBackend`, entity registry, `get_backend()`
-* Runtime stores refactored to use persistence port (profile, target, fox_memory, session_history, local_session)
-* `ROADMAP.md` PHASE2-A slice documented
-* `backlog/archive/BACKLOG_PHASE2A_PERSISTENCE_FOUNDATION_v1.md` + `SPRINT_PHASE2A_*`
-* `tests/regression/test_phase2a_persistence_foundation_v1.py`
-* `RUNTIME_STATE_SCHEMA.md` — Phase 2-A backend note
+* `docs/archive/reviews/PHASE2A_PERSISTENCE_ARCHITECTURE_REVIEW_v1.md`
+* Scorecard, ownership map, PHASE2-B risk analysis
+* Validation gates run (regression + UAT)
 
 NON-GOALS:
 
-* Supabase / cloud persistence adapter
-* Auth redesign or login UX changes
-* SNS, graph, or PHASE3+ features
-* New root markdown or parallel roadmap files
-* Phase 1 face copy advertising cloud sync
+* Cloud / Supabase / sync / realtime implementation
+* Product behavior changes
+* PHASE2-B adapter code
 
 VALIDATION:
 
 * python ops/flow/check_all_flows.py
 * python ops/env/reflex_compile_gate.py
-* pytest tests/regression/test_phase2a_persistence_foundation_v1.py -v --tb=short
 * pytest tests/regression/ -v --tb=short
+* pytest tests/uat/ -v --tb=short
