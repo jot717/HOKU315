@@ -12,5 +12,5 @@ Documents moved here are **not** current product law.
 
 ## Rules
 
-- Do not delete; link from [`backlog/MASTER_BACKLOG.md`](../../backlog/MASTER_BACKLOG.md) when relevant.
+- Do not delete; link from [`docs/active/governance/MASTER_BACKLOG.md`](../../docs/active/governance/MASTER_BACKLOG.md) when relevant.
 - New archives → add one line to this README table.

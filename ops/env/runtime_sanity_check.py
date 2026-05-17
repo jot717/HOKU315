@@ -11,6 +11,9 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[2]
 RUNTIME_DIR = ROOT / "runtime_state"
 
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
 
 def _supported_python() -> tuple[bool, str]:
     v = sys.version_info

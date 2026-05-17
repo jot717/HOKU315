@@ -8,4 +8,4 @@
 - `scripts/create_incident.py`、`scripts/collect_runtime.py`、`scripts/generate_patch_context.py`
 - `docs/ops/debug/DEBUG_GUIDE.md`、`ops/debug/DEBUG_POLICY.md`
 
-見 [`ops/governance/REPO_ARCHITECTURE.md`](../../ops/governance/REPO_ARCHITECTURE.md)。
+見 [`docs/active/governance/REPO_ARCHITECTURE.md`](../../docs/active/governance/REPO_ARCHITECTURE.md)。

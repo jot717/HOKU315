@@ -22,7 +22,7 @@ When loading context for implementation, prefer files in this order.
 ## Priority 3 — Delivery & backlog
 
 - [`ROADMAP.md`](ROADMAP.md)
-- [`../../backlog/MASTER_BACKLOG.md`](../../backlog/MASTER_BACKLOG.md)
+- [`MASTER_BACKLOG.md`](MASTER_BACKLOG.md)
 
 ---
 

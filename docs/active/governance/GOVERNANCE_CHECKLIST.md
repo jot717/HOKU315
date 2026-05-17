@@ -6,14 +6,13 @@ Pre-sprint checks. Law: [`../product/AI_DEVELOPMENT_CONSTITUTION.md`](../product
 - [ ] Creates a second system?
 - [ ] Leaks a future phase?
 - [ ] Creates duplicate docs outside `docs/active/`?
-- [ ] Increases repo entropy?
-- [ ] Needs archive cleanup?
+- [ ] Adds markdown to repo root?
+- [ ] Puts product truth in `ops/`?
 - [ ] Breaks [`CANONICAL_TERMINOLOGY.md`](../product/CANONICAL_TERMINOLOGY.md)?
-- [ ] Creates UX confusion (second flow)?
 
-Entropy: [`../../../ops/governance/REPO_ENTROPY_CHECKLIST.md`](../../../ops/governance/REPO_ENTROPY_CHECKLIST.md)
+Entropy: [`REPO_ENTROPY_CHECKLIST.md`](REPO_ENTROPY_CHECKLIST.md)
 
 ```bash
 python ops/flow/check_all_flows.py
-python -m pytest tests/regression/test_phase1h4_md_highway_v1.py -v --tb=short
+python -m pytest tests/regression/test_phase1h5_root_consolidation_v1.py -v --tb=short
 ```

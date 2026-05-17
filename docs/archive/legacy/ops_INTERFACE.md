@@ -18,4 +18,4 @@
 
 Ops layer is the **ONLY** cross-layer allowed dependency zone.
 
-See also [`ops/governance/REPO_ARCHITECTURE.md`](../ops/governance/REPO_ARCHITECTURE.md), [`ops/governance/ARCHITECTURE_CONTRACT.md`](../ops/governance/ARCHITECTURE_CONTRACT.md).
+See also [`docs/active/governance/REPO_ARCHITECTURE.md`](../docs/active/governance/REPO_ARCHITECTURE.md), [`docs/active/governance/ARCHITECTURE_CONTRACT.md`](../docs/active/governance/ARCHITECTURE_CONTRACT.md).

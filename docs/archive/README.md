@@ -1,16 +1,16 @@
-# Archive — historical only
+# ARCHIVE ZONE
 
-**Never** define product logic, **never** link as authority from active docs (plain-text annex pointer only).
+**Historical only.**
 
-| Folder | Contents |
+Never use archive files as active implementation context.
+
+| Bucket | Contents |
 |--------|----------|
-| [`product/`](product/) | Legacy constitutions, ontologies |
-| [`uat/`](uat/) | Phase/domain UAT scripts |
-| [`hotfix/`](hotfix/) | Compile/state/SNS audits |
-| [`legacy/`](legacy/) | Drift, phase reports, dead components |
-| [`dead_routes/`](dead_routes/) | Removed `/story`, `/chat`, `/unlocks` |
+| [`product/`](product/) | Legacy constitutions |
+| [`uat/`](uat/) | Phase UAT scripts |
+| [`hotfix/`](hotfix/) | Hotfix audits |
+| [`legacy/`](legacy/) | Drift, reports, sprint history |
+| [`dead_routes/`](dead_routes/) | Removed routes |
 | [`root_legacy/`](root_legacy/) | Former root planning docs |
 
 **Active law:** [`../active/product/PRODUCT_MASTER.md`](../active/product/PRODUCT_MASTER.md)
-
-**Next:** [`../README.md`](../README.md)

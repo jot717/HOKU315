@@ -1,6 +1,6 @@
 # SYSTEM ARCHITECTURE CONTRACT v1
 
-Normative boundaries for **PRODUCT**, **AI**, and **OPS**. Companion to [`ops/governance/REPO_ARCHITECTURE.md`](ops/governance/REPO_ARCHITECTURE.md) and per-layer [`product/INTERFACE.md`](product/INTERFACE.md), [`ai/INTERFACE.md`](ai/INTERFACE.md), [`ops/INTERFACE.md`](ops/INTERFACE.md).
+Normative boundaries for **PRODUCT**, **AI**, and **OPS**. Companion to [`docs/active/governance/REPO_ARCHITECTURE.md`](docs/active/governance/REPO_ARCHITECTURE.md) and per-layer [`product/INTERFACE.md`](product/INTERFACE.md), [`ai/INTERFACE.md`](ai/INTERFACE.md), [`ops/INTERFACE.md`](ops/INTERFACE.md).
 
 ---
 

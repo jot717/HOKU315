@@ -18,7 +18,7 @@ def test_signal_first_product_position_exists() -> None:
 
 
 def test_phase1_product_flow_uat_exists() -> None:
-    path = ROOT / "ops" / "uat" / "PHASE1_PRODUCT_FLOW_UAT.md"
+    path = ROOT / "docs" / "active" / "uat" / "PHASE1_PRODUCT_FLOW_UAT.md"
     assert path.is_file()
 
 

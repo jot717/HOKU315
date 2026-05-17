@@ -1,5 +1,3 @@
-# Moved — active UAT
+# Moved
 
-Active UAT lives in **`docs/active/uat/`**.
-
-Start: [`../../docs/active/uat/UAT_MASTER_GUIDE.md`](../../docs/active/uat/UAT_MASTER_GUIDE.md)
+Active UAT: [`../../docs/active/uat/`](../../docs/active/uat/)

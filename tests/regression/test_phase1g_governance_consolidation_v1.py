@@ -19,7 +19,7 @@ def test_product_master_exists() -> None:
 
 
 def test_master_backlog_exists() -> None:
-    p = ROOT / "backlog/MASTER_BACKLOG.md"
+    p = ROOT / "docs/active/governance/MASTER_BACKLOG.md"
     text = p.read_text(encoding="utf-8")
     assert "ACTIVE" in text
     assert "COMPLETED" in text
@@ -40,14 +40,14 @@ def test_readme_indexes_exist() -> None:
 
 def test_deprecated_archive_exists() -> None:
     assert (ROOT / "docs/deprecated/archive/README.md").is_file()
-    assert (ROOT / "docs/archive/phase1_legacy").is_dir()
+    assert (ROOT / "docs/archive/legacy").is_dir()
     assert (ROOT / "backlog/archive").is_dir()
 
 
 def test_repo_governance_rules_exist() -> None:
-    text = (ROOT / "docs/active/product/REPO_GOVERNANCE_RULES.md").read_text(encoding="utf-8")
+    text = (ROOT / "docs/active/governance/REPO_GOVERNANCE_RULES.md").read_text(encoding="utf-8")
     assert "PRODUCT_MASTER" in text
-    assert "no duplicate" in text.lower() or "Duplicate" in text
+    assert "forbidden" in text.lower() or "parallel" in text.lower()
 
 
 def test_home_guest_and_account_copy() -> None:
@@ -68,7 +68,7 @@ def test_core_ssot_docs_not_deleted() -> None:
         "docs/active/product/SIGNAL_SYSTEM.md",
         "docs/active/product/MATCH_SYSTEM.md",
         "docs/active/product/ROADMAP.md",
-        "ops/governance/DEVELOPMENT_CONSTITUTION.md",
+        "docs/active/governance/DEVELOPMENT_CONSTITUTION.md",
     ):
         assert (ROOT / rel).is_file(), rel
 

@@ -26,7 +26,7 @@
 | Active governance | `docs/active/governance/GOVERNANCE_CHECKLIST.md` |
 | Active env | `docs/active/env/` |
 | Archive buckets | `product/`, `uat/`, `hotfix/`, `legacy/`, `dead_routes/`, `root_legacy/` |
-| Engineering law | `ops/governance/`, `ops/debug/`, `ops/testing/` |
+| Engineering law | `docs/active/governance/`, `ops/debug/`, `ops/testing/` |
 
 **Reduction:** root markdown ~70% fewer files (10 -> 3).
 

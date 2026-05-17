@@ -2,7 +2,7 @@
 
 **All product, UAT, and backlog docs must reference this file.**
 
-AI: [`AI_DEVELOPMENT_CONSTITUTION.md`](AI_DEVELOPMENT_CONSTITUTION.md) · Checklist: [`../governance/GOVERNANCE_CHECKLIST.md`](../governance/GOVERNANCE_CHECKLIST.md) · Backlog: [`../../../backlog/MASTER_BACKLOG.md`](../../../backlog/MASTER_BACKLOG.md) · UAT: [`../uat/UAT_MASTER_GUIDE.md`](../uat/UAT_MASTER_GUIDE.md)
+AI: [`AI_DEVELOPMENT_CONSTITUTION.md`](AI_DEVELOPMENT_CONSTITUTION.md) · Checklist: [`../governance/GOVERNANCE_CHECKLIST.md`](../governance/GOVERNANCE_CHECKLIST.md) · Backlog: [`../governance/MASTER_BACKLOG.md`](../governance/MASTER_BACKLOG.md) · UAT: [`../uat/UAT_MASTER_GUIDE.md`](../uat/UAT_MASTER_GUIDE.md)
 
 ---
 
@@ -92,7 +92,7 @@ Detail: [`SIGNAL_SYSTEM.md`](SIGNAL_SYSTEM.md) · [`MATCH_SYSTEM.md`](MATCH_SYST
 
 ## Engineering (non-product SSOT)
 
-- [`../../../ops/governance/DEVELOPMENT_CONSTITUTION.md`](../../../ops/governance/DEVELOPMENT_CONSTITUTION.md)
-- [`../../../ops/governance/ARCHITECTURE_CONTRACT.md`](../../../ops/governance/ARCHITECTURE_CONTRACT.md)
+- [`../governance/DEVELOPMENT_CONSTITUTION.md`](../governance/DEVELOPMENT_CONSTITUTION.md)
+- [`../governance/ARCHITECTURE_CONTRACT.md`](../governance/ARCHITECTURE_CONTRACT.md)
 
 Historical annex: `docs/archive/product/` (reference only).

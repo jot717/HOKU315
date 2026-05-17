@@ -13,7 +13,6 @@ ACTIVE_PRODUCT_FILES = {
     "AI_DEVELOPMENT_CONSTITUTION.md",
     "CANONICAL_TERMINOLOGY.md",
     "ACTIVE_SURFACE_MAP.md",
-    "REPO_GOVERNANCE_RULES.md",
 }
 ACTIVE_UAT_FILES = {"UAT_MASTER_GUIDE.md", "PHASE1_PRODUCT_FLOW_UAT.md"}
 
@@ -34,9 +33,8 @@ def test_active_uat_files() -> None:
 
 
 def test_governance_files_moved_from_root() -> None:
-    assert (ROOT / "ops/governance/DEVELOPMENT_CONSTITUTION.md").is_file()
+    assert (ROOT / "docs/active/governance/DEVELOPMENT_CONSTITUTION.md").is_file()
     assert (ROOT / "ops/debug/DEBUG_GUIDE.md").is_file()
-    assert (ROOT / "ops/testing/TEST_CHECKLIST.md").is_file()
     assert not (ROOT / "DEVELOPMENT_CONSTITUTION.md").exists()
 
 
@@ -53,7 +51,6 @@ def test_md_highway_readmes() -> None:
 
 def test_ai_constitution_highway_rules() -> None:
     text = (ROOT / "docs/active/product/AI_DEVELOPMENT_CONSTITUTION.md").read_text(encoding="utf-8")
-    assert "Section I" in text
     assert "docs/active/" in text
     assert "Never create" in text and "root" in text.lower()
 

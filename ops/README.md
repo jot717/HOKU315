@@ -1,14 +1,12 @@
-# Operations
+# OPS — executable factory
 
-Non-product runtime and process docs.
+**No product truth here.** Law lives in `docs/active/`.
 
 | Path | Role |
 |------|------|
-| [`governance/`](governance/) | Development constitution, architecture |
+| [`env/`](env/) | Python/Reflex pin, compile gate, runtime sanity |
+| [`flow/`](flow/) | Flow registry and consistency checks |
 | [`debug/`](debug/) | Debug SOP and policy |
 | [`testing/`](testing/) | Manual test checklists |
-| [`process/`](process/) | CI/process rules (if present) |
 
-**Product law:** [`../docs/active/product/PRODUCT_MASTER.md`](../docs/active/product/PRODUCT_MASTER.md)
-
-**Forbidden:** product SSOT in `ops/` (use `docs/active/product/`).
+**Product:** [`../docs/active/product/`](../docs/active/product/)

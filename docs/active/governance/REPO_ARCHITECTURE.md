@@ -59,4 +59,4 @@
 ## INTERFACE STABILIZATION v1（摘要）
 
 - 各層入口與規則：**[`product/INTERFACE.md`](product/INTERFACE.md)**、**[`ai/INTERFACE.md`](ai/INTERFACE.md)**、**[`ops/INTERFACE.md`](ops/INTERFACE.md)**。
-- 全系統契約：**[`ops/governance/ARCHITECTURE_CONTRACT.md`](ops/governance/ARCHITECTURE_CONTRACT.md)**。
+- 全系統契約：**[`docs/active/governance/ARCHITECTURE_CONTRACT.md`](docs/active/governance/ARCHITECTURE_CONTRACT.md)**。

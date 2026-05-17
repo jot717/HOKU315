@@ -1,11 +1,14 @@
-# HOKU315 BACKLOG
+# ACTIVE BACKLOG
 
-> **Product single source of truth:** [`docs/active/product/PRODUCT_MASTER.md`](docs/active/product/PRODUCT_MASTER.md)  
-> **Phase backlog index:** [`backlog/MASTER_BACKLOG.md`](backlog/MASTER_BACKLOG.md)  
-> **Official UAT:** [`docs/active/uat/UAT_MASTER_GUIDE.md`](docs/active/uat/UAT_MASTER_GUIDE.md)  
-> **Repo governance:** [`docs/active/product/REPO_GOVERNANCE_RULES.md`](docs/active/product/REPO_GOVERNANCE_RULES.md)
+**Canonical backlog:** [`docs/active/governance/MASTER_BACKLOG.md`](docs/active/governance/MASTER_BACKLOG.md)
 
-**Workflow（AI-native）**：衝刺計畫見 [`docs/archive/root_legacy/SPRINT_PLAN.md`](docs/archive/root_legacy/SPRINT_PLAN.md)、日誌見 [`SPRINT_LOG.md`](SPRINT_LOG.md)；配對牆驗收見 [`ops/testing/TEST_CHECKLIST.md`](ops/testing/TEST_CHECKLIST.md)；資料庫套用軌跡見 [`sql/DEPLOY_LOG.md`](sql/DEPLOY_LOG.md)；**Debug／UAT 證據收集**見 [**`ops/debug/DEBUG_GUIDE.md`**](ops/debug/DEBUG_GUIDE.md)；**證據資產化目錄**見 [**`debug_evidence/README.md`**](debug_evidence/README.md)；**AI／P0 patch 約束**見 [**`ops/debug/DEBUG_POLICY.md`**](ops/debug/DEBUG_POLICY.md)；**Repo 分層**見 [**`ops/governance/REPO_ARCHITECTURE.md`**](ops/governance/REPO_ARCHITECTURE.md)；**介面契約**見 [**`ops/governance/ARCHITECTURE_CONTRACT.md`**](ops/governance/ARCHITECTURE_CONTRACT.md)；**流程護欄**見 [**`ops/process/RULES.md`**](ops/process/RULES.md)；**治理層級**見 [GOVERNANCE HIERARCHY](#governance-hierarchy)。產品治理仍依根目錄 **`ops/governance/DEVELOPMENT_CONSTITUTION.md`**。
+**Current phase:** PHASE2 — Persistence Layer
+
+> **Product SSOT:** [`docs/active/product/PRODUCT_MASTER.md`](docs/active/product/PRODUCT_MASTER.md)  
+> **UAT:** [`docs/active/uat/UAT_MASTER_GUIDE.md`](docs/active/uat/UAT_MASTER_GUIDE.md)  
+> **Governance:** [`docs/active/governance/REPO_GOVERNANCE_RULES.md`](docs/active/governance/REPO_GOVERNANCE_RULES.md)
+
+**Workflow:** Sprint plan [`docs/archive/root_legacy/SPRINT_PLAN.md`](docs/archive/root_legacy/SPRINT_PLAN.md) · Log [`SPRINT_LOG.md`](SPRINT_LOG.md) · Full history [`docs/archive/legacy/sprint_history/SPRINT_LOG_FULL.md`](docs/archive/legacy/sprint_history/SPRINT_LOG_FULL.md) · Debug [`ops/debug/DEBUG_GUIDE.md`](ops/debug/DEBUG_GUIDE.md) · Engineering law [`docs/active/governance/DEVELOPMENT_CONSTITUTION.md`](docs/active/governance/DEVELOPMENT_CONSTITUTION.md)
 
 狀態約定：`[TODO]` · `[WIP]` · `[DONE]` · **`[REMOVED/INTERNAL_ONLY]`**。
 
@@ -127,7 +130,7 @@ pytest tests/regression/
 
 完成：
 
-- **PRODUCT／AI／OPS** 邏輯分層與目錄對照（見 [`ops/governance/REPO_ARCHITECTURE.md`](ops/governance/REPO_ARCHITECTURE.md)、[`product/`](product/)、[`ops/`](ops/)、[`ai/incident/README.md`](ai/incident/README.md)）。
+- **PRODUCT／AI／OPS** 邏輯分層與目錄對照（見 [`docs/active/governance/REPO_ARCHITECTURE.md`](docs/active/governance/REPO_ARCHITECTURE.md)、[`product/`](product/)、[`ops/`](ops/)、[`ai/incident/README.md`](ai/incident/README.md)）。
 - **Replay** 實作歸位 **`ai/replay/`**；根目錄 **`replay/`** 保留 shim。
 - **無搬移** `scripts/`、`tests/`、`docs/`（維持 `pytest`、`python -m tests.*` 與 CI 相容）。
 
@@ -138,8 +141,8 @@ pytest tests/regression/
 完成：
 
 - **product／ai／ops** 三層入口定義：`product/INTERFACE.md`、`ai/INTERFACE.md`、`ops/INTERFACE.md`
-- **不改程式**，僅建立契約層：[`ops/governance/ARCHITECTURE_CONTRACT.md`](ops/governance/ARCHITECTURE_CONTRACT.md)
-- **系統邊界**與 [`ops/governance/REPO_ARCHITECTURE.md`](ops/governance/REPO_ARCHITECTURE.md) 對齊
+- **不改程式**，僅建立契約層：[`docs/active/governance/ARCHITECTURE_CONTRACT.md`](docs/active/governance/ARCHITECTURE_CONTRACT.md)
+- **系統邊界**與 [`docs/active/governance/REPO_ARCHITECTURE.md`](docs/active/governance/REPO_ARCHITECTURE.md) 對齊
 
 ---
 
@@ -352,7 +355,7 @@ System-level rules（詳 [`ops/process/RULES.md`](ops/process/RULES.md)）：
 
 | 層級 | 角色 |
 |------|------|
-| **Constitution** | 理念與原則 — [`ops/governance/DEVELOPMENT_CONSTITUTION.md`](ops/governance/DEVELOPMENT_CONSTITUTION.md) |
+| **Constitution** | 理念與原則 — [`docs/active/governance/DEVELOPMENT_CONSTITUTION.md`](docs/active/governance/DEVELOPMENT_CONSTITUTION.md) |
 | **Rules** | 可執行之流程定義 — [`ops/process/RULES.md`](ops/process/RULES.md) |
 | **Hooks** | 機械化檢查（檔案存在、回歸指令）— [`ops/hooks/`](ops/hooks/) |
 

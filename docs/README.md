@@ -1,13 +1,33 @@
-# Documentation highway
+# DOCS HIGHWAY
 
-**One navigation path for humans and AI.** Start at [`active/README.md`](active/README.md).
+**Single navigation path for all documentation.**
 
-| Zone | Path | Role |
-|------|------|------|
-| Active law | [`active/`](active/) | Product, UAT, env, governance, testing |
-| History | [`archive/`](archive/) | Read-only; never implementation law |
-| Generated | [`generated/`](generated/) | Tool output only |
+---
 
-**Forbidden:** new markdown in repository root (except `README.md`, `BACKLOG.md`, `SPRINT_LOG.md`).
+## ACTIVE
 
-**Next:** [`active/product/PRODUCT_MASTER.md`](active/product/PRODUCT_MASTER.md)
+| Zone | Path |
+|------|------|
+| Product | [`active/product/`](active/product/) |
+| Governance | [`active/governance/`](active/governance/) |
+| UAT | [`active/uat/`](active/uat/) |
+| Environment | [`active/env/`](active/env/) |
+| Testing notes | [`active/testing/`](active/testing/) |
+
+**Start:** [`active/product/PRODUCT_MASTER.md`](active/product/PRODUCT_MASTER.md)
+
+---
+
+## ARCHIVE
+
+| Zone | Path |
+|------|------|
+| Historical | [`archive/`](archive/) |
+
+**Never** use archive as implementation law.
+
+---
+
+## Generated
+
+[`generated/`](generated/) — tool output only.

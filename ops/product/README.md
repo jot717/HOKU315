@@ -1,5 +1,3 @@
-# Moved — product SSOT
+# Moved
 
-Active product law lives in **`docs/active/product/`**.
-
-Start: [`../../docs/active/product/PRODUCT_MASTER.md`](../../docs/active/product/PRODUCT_MASTER.md)
+Product SSOT: [`../../docs/active/product/`](../../docs/active/product/)

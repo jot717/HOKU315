@@ -1,6 +1,6 @@
 # PROCESS ENFORCEMENT RULES v1
 
-Workflow guardrails for AI-native development. See [`ops/governance/ARCHITECTURE_CONTRACT.md`](../../ops/governance/ARCHITECTURE_CONTRACT.md), [`BACKLOG.md`](../../BACKLOG.md), [`SPRINT_LOG.md`](../../SPRINT_LOG.md).
+Workflow guardrails for AI-native development. See [`docs/active/governance/ARCHITECTURE_CONTRACT.md`](../../docs/active/governance/ARCHITECTURE_CONTRACT.md), [`BACKLOG.md`](../../BACKLOG.md), [`SPRINT_LOG.md`](../../SPRINT_LOG.md).
 
 ---
 
@@ -85,7 +85,7 @@ On Unix / Git Bash: [`ops/hooks/check_regression.sh`](../hooks/check_regression.
 
 ## SOURCE OF TRUTH
 
-- **Conceptual**: [`ops/governance/DEVELOPMENT_CONSTITUTION.md`](../../ops/governance/DEVELOPMENT_CONSTITUTION.md)
+- **Conceptual**: [`docs/active/governance/DEVELOPMENT_CONSTITUTION.md`](../../docs/active/governance/DEVELOPMENT_CONSTITUTION.md)
 - **Execution**: [`ops/process/RULES.md`](RULES.md) (this file)
 - **Enforcement**: [`ops/hooks/`](../hooks/)、[`ops/gate/`](../gate/)（執行閘門）
 

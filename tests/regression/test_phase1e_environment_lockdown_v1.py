@@ -24,12 +24,12 @@ def test_requirements_lock_matches_reflex_bundle() -> None:
 
 def test_ops_env_artifacts_exist() -> None:
     for rel in (
-        "ops/env/PYTHON_VERSION_POLICY.md",
-        "ops/env/VENV_POLICY.md",
-        "ops/env/DEPENDENCY_LOCK_REPORT.md",
-        "ops/env/RUNTIME_STATE_SCHEMA.md",
-        "ops/env/STARTUP_GUIDE.md",
-        "ops/env/CLEANUP_LOG_PHASE1E.md",
+        "docs/active/env/PYTHON_VERSION_POLICY.md",
+        "docs/active/env/VENV_POLICY.md",
+        "docs/active/env/DEPENDENCY_LOCK_REPORT.md",
+        "docs/active/env/RUNTIME_STATE_SCHEMA.md",
+        "docs/active/env/STARTUP_GUIDE.md",
+        "docs/active/env/CLEANUP_LOG_PHASE1E.md",
         "ops/env/runtime_sanity_check.py",
         "ops/env/reflex_compile_gate.py",
     ):
