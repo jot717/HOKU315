@@ -1,127 +1,101 @@
 # PRODUCT MASTER — Single Source of Truth
 
 **All product, UAT, and backlog docs must reference this file.**  
-Governance: [`REPO_GOVERNANCE_RULES.md`](REPO_GOVERNANCE_RULES.md) · Backlog index: [`../../backlog/MASTER_BACKLOG.md`](../../backlog/MASTER_BACKLOG.md) · UAT index: [`../uat/UAT_MASTER_GUIDE.md`](../uat/UAT_MASTER_GUIDE.md)
+AI implementation: [`AI_DEVELOPMENT_CONSTITUTION.md`](AI_DEVELOPMENT_CONSTITUTION.md) · Governance: [`GOVERNANCE_CHECKLIST.md`](GOVERNANCE_CHECKLIST.md) · Backlog: [`../../backlog/MASTER_BACKLOG.md`](../../backlog/MASTER_BACKLOG.md) · UAT: [`../uat/UAT_MASTER_GUIDE.md`](../uat/UAT_MASTER_GUIDE.md)
 
 ---
 
-## What HOKU315 is
+## Official product identity
 
-An **AI-native social signal analysis** product that helps users understand:
+**HOKU315 = AI social signal intelligence system**
 
-- **How social interactions drain energy** (rhythm, reply pressure, emotional pacing)
-- **Which interaction shapes to avoid** (rule-based pressure patterns)
-- **Which peer rhythms are lighter** for their current signal profile (social energy compatibility)
+Helps users identify **dangerous / high-drain interaction patterns** through rule-based social signal and energy analysis.
 
-**Core model:** [`SOCIAL_ENERGY_MODEL.md`](SOCIAL_ENERGY_MODEL.md) · **Match archetypes:** [`MATCH_ARCHETYPE_SYSTEM.md`](MATCH_ARCHETYPE_SYSTEM.md)
+**Core value:** Understand interaction pressure, rhythm mismatch, and social energy cost — not who to date or how to heal.
 
----
+### What HOKU315 is NOT
 
-## What HOKU315 is NOT
+- Not a therapy app or emotional healing AI
+- Not an AI companion or life coach SKU
+- Not a dating score or compatibility-percent product
+- Not a personality analyzer (MBTI, attachment labels as identity)
+- Not SNS-connected in **Phase 1 face**
 
-- Not a dating app or “compatibility score” SKU
-- Not personality typing (MBTI, attachment labels as identity)
-- Not therapy, healing, or clinical diagnosis
-- Not astrology or fate-based matching
-- Not SNS-connected in **Phase 1 face** (no OAuth/graph copy in primary UX)
+Terminology: [`CANONICAL_TERMINOLOGY.md`](CANONICAL_TERMINOLOGY.md)
 
 ---
 
-## Core product loop (Phase 1)
+## Official user flow
+
+**No second flow allowed.**
+
+```
+/  →  /profile  →  /quiz  →  /target  →  /insight  →  /match
+```
 
 | Step | Route | Purpose |
 |------|-------|---------|
-| 1 | `/profile` | Local signal profile (name, interests, stress) |
-| 2 | `/quiz` | 20-dimension sensitivity vector |
-| 3 | `/target` | Named observation target (local JSON) |
-| 4 | `/insight` | Rule-based interaction pressure + rhythm analysis |
-| 5 | `/match` | Social energy compatibility cards (when account + data) |
+| Home | `/` | Guest vs account entry (no second onboarding) |
+| Signal profile | `/profile` | Local signal profile |
+| Mine questionnaire | `/quiz` | Sensitivity vector |
+| Target observation | `/target` | Named target (local) |
+| Guardian observation | `/insight` | Interaction pressure + rhythm |
+| Match wall | `/match` | Social energy compatibility |
 
-Detail: [`PHASE1_PRODUCT_FLOW.md`](PHASE1_PRODUCT_FLOW.md) · Pages: [`PAGE_PURPOSE_SYSTEM.md`](PAGE_PURPOSE_SYSTEM.md)
+Detail: [`SIGNAL_SYSTEM.md`](SIGNAL_SYSTEM.md) · Match: [`MATCH_SYSTEM.md`](MATCH_SYSTEM.md) · UAT: [`../uat/PHASE1_PRODUCT_FLOW_UAT.md`](../uat/PHASE1_PRODUCT_FLOW_UAT.md)
+
+---
+
+## Official systems (only)
+
+| System | SSOT / code |
+|--------|-------------|
+| Signal system | [`SIGNAL_SYSTEM.md`](SIGNAL_SYSTEM.md) · `product/signal/`, `product/profile/`, `product/target/` |
+| Interaction pressure system | `ux_intelligence_engine.py` · archive annex |
+| Social energy system | `match_rhythm_engine.py` · [`MATCH_SYSTEM.md`](MATCH_SYSTEM.md) |
+| Match credibility system | `fox_quiz/match_wall.py` · [`MATCH_SYSTEM.md`](MATCH_SYSTEM.md) |
+| Persistence layer | Phase 2 — account/cloud utility |
+| SNS intelligence layer | Phase 3+ — gated |
+
+**Forbidden:** second signal system, second match narrative, second onboarding, second memory law in active docs.
 
 ---
 
 ## Guest vs account
 
-| Mode | Who | Persistence | Product promise |
-|------|-----|-------------|-----------------|
-| **Guest（訪客）** | No login | Local JSON / session on device; **no** cross-device guarantee | “Analyze my signals now” |
-| **Account（帳號）** | Email login | Cloud profile, vector, stories, match wall; longitudinal memory | “Save trends across time” |
+| Mode | Persistence | Promise |
+|------|-------------|---------|
+| **Guest** | Local JSON on device | Analyze signals now |
+| **Account** | Cloud profile, match wall, history | Save trends across time |
 
-Phase boundary: [`PHASE_BOUNDARY_SYSTEM.md`](PHASE_BOUNDARY_SYSTEM.md)  
-Future SNS: [`../../docs/deprecated/future_sns_layer/README.md`](../../docs/deprecated/future_sns_layer/README.md)
-
-**UI entry:** `/` explains both modes; `/login` is optional utility, not the product story.
+`/login` is optional utility. Phase rules: [`ROADMAP.md`](ROADMAP.md)
 
 ---
 
 ## Fox role
 
-- **Observer** — names interaction shape and pacing (max **one** block per insight page)
-- **Not** therapist, life coach, emotional healer, or mascot spam
-
-Constitutions: [`UX_INTELLIGENCE_CONSTITUTION.md`](UX_INTELLIGENCE_CONSTITUTION.md) · [`MATCH_CREDIBILITY_CONSTITUTION.md`](MATCH_CREDIBILITY_CONSTITUTION.md) · [`SOCIAL_CAUSALITY_RULES.md`](SOCIAL_CAUSALITY_RULES.md)
-
----
-
-## Signal system (rule-based)
-
-| Layer | Doc | Code |
-|-------|-----|------|
-| Constitution | [`SIGNAL_SYSTEM_CONSTITUTION.md`](SIGNAL_SYSTEM_CONSTITUTION.md) | — |
-| Profile schema | [`SIGNAL_PROFILE_SCHEMA.md`](SIGNAL_PROFILE_SCHEMA.md) | `product/profile/` |
-| Flow | [`SIGNAL_FLOW_ARCHITECTURE.md`](SIGNAL_FLOW_ARCHITECTURE.md) | `product/app_binding/` |
-| Inference | [`SIGNAL_INTELLIGENCE_CONSTITUTION.md`](SIGNAL_INTELLIGENCE_CONSTITUTION.md) | `signal_inference_engine.py` |
-| Pressure ontology | [`INTERACTION_PRESSURE_ONTOLOGY.md`](INTERACTION_PRESSURE_ONTOLOGY.md) | `ux_intelligence_engine.py` |
-| Target | [`TARGET_SIGNAL_CONSTITUTION.md`](TARGET_SIGNAL_CONSTITUTION.md) | `product/target/` |
-| Relationship sim | [`RELATIONSHIP_INTELLIGENCE_CONSTITUTION.md`](RELATIONSHIP_INTELLIGENCE_CONSTITUTION.md) | `relationship_simulation_engine.py` |
-
----
-
-## Social energy & match credibility
-
-- Energy model: [`SOCIAL_ENERGY_MODEL.md`](SOCIAL_ENERGY_MODEL.md)
-- Match rhythm engine: `product/match/runtime/match_rhythm_engine.py`
-- UX intelligence: `product/signal/runtime/ux_intelligence_engine.py`
+- **北極狐觀察** — one observer block on `/insight` max
+- Not therapy guidance, not emotional healing copy
 
 ---
 
 ## Phase boundaries
 
-| Phase | User-facing scope |
-|-------|-------------------|
-| **1** | Local signal + questionnaire + target + rule insight + energy-oriented match copy |
-| **2** | Account persistence, cross-device backup (utility framing) |
-| **3** | SNS import, external graph, interaction ingestion (gated; not in Phase 1 UI) |
+| Phase | Scope |
+|-------|--------|
+| **1** | Manual / local rule-based intelligence (current face) |
+| **2** | Persistence & memory |
+| **3** | SNS import |
+| **4** | Social graph intelligence |
+| **5** | AI-scale inference |
 
-Full rules: [`PHASE_BOUNDARY_SYSTEM.md`](PHASE_BOUNDARY_SYSTEM.md)
-
----
-
-## Roadmap & direction
-
-- North star: [`CORE_PRODUCT_REALIGNMENT.md`](CORE_PRODUCT_REALIGNMENT.md) · [`SOCIAL_SIGNAL_ARCHITECTURE.md`](SOCIAL_SIGNAL_ARCHITECTURE.md)
-- Phased delivery: [`FOX_ROADMAP.md`](FOX_ROADMAP.md)
-- Positioning: [`SIGNAL_FIRST_PRODUCT_POSITION.md`](SIGNAL_FIRST_PRODUCT_POSITION.md)
+Full phased delivery: [`ROADMAP.md`](ROADMAP.md) · No phase leakage in primary UX.
 
 ---
 
-## Memory model
+## Engineering (non-product SSOT)
 
-- Fox memory store: `product/memory/runtime/fox_memory_store.py`
-- Session history: `product/session/runtime/session_history.py`
-- Local runtime state: `runtime_state/` (see `ops/env/RUNTIME_STATE_SCHEMA.md`)
+- [`../../DEVELOPMENT_CONSTITUTION.md`](../../DEVELOPMENT_CONSTITUTION.md)
+- [`../../ARCHITECTURE_CONTRACT.md`](../../ARCHITECTURE_CONTRACT.md)
 
----
-
-## Engineering constitution
-
-- Root: [`../../DEVELOPMENT_CONSTITUTION.md`](../../DEVELOPMENT_CONSTITUTION.md)
-- Architecture: [`../../ARCHITECTURE_CONTRACT.md`](../../ARCHITECTURE_CONTRACT.md)
-- Environment: [`../env/STARTUP_GUIDE.md`](../env/STARTUP_GUIDE.md)
-
----
-
-## Document index
-
-See [`README.md`](README.md) for active vs archived product docs.
+Historical technical annex: `docs/archive/product/` (reference only).

@@ -25,13 +25,14 @@ _FORBIDDEN = (
 
 
 def test_match_archetype_docs_exist() -> None:
-    arch = (ROOT / "ops/product/MATCH_ARCHETYPE_SYSTEM.md").read_text(encoding="utf-8")
+    arch = (ROOT / "docs/archive/product/MATCH_ARCHETYPE_SYSTEM.md").read_text(encoding="utf-8")
     assert "stable_low_pressure" in arch
     assert "asynchronous_safe" in arch
-    energy = (ROOT / "ops/product/SOCIAL_ENERGY_MODEL.md").read_text(encoding="utf-8")
+    energy = (ROOT / "docs/archive/product/SOCIAL_ENERGY_MODEL.md").read_text(encoding="utf-8")
     assert "response debt" in energy
-    assert (ROOT / "ops/product/MATCH_CREDIBILITY_CONSTITUTION.md").is_file()
-    assert (ROOT / "ops/uat/PHASE1F_MATCH_CREDIBILITY_UAT.md").is_file()
+    assert (ROOT / "docs/archive/product/MATCH_CREDIBILITY_CONSTITUTION.md").is_file()
+    assert (ROOT / "ops/product/MATCH_SYSTEM.md").is_file()
+    assert (ROOT / "docs/archive/uat/PHASE1F_MATCH_CREDIBILITY_UAT.md").is_file()
 
 
 def test_rhythm_engine_functions_exist() -> None:

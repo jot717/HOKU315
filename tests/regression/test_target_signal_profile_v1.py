@@ -19,9 +19,9 @@ ROOT = Path(__file__).resolve().parents[2]
 
 def test_target_signal_docs_exist() -> None:
     for rel in (
-        "ops/product/TARGET_SIGNAL_CONSTITUTION.md",
-        "ops/product/TARGET_ANALYSIS_FLOW.md",
-        "ops/product/TARGET_PROFILE_SCHEMA.md",
+        "docs/archive/product/TARGET_SIGNAL_CONSTITUTION.md",
+        "docs/archive/product/TARGET_ANALYSIS_FLOW.md",
+        "docs/archive/product/TARGET_PROFILE_SCHEMA.md",
         "ops/uat/TARGET_SIGNAL_PROFILE_UAT.md",
         "backlog/archive/BACKLOG_TARGET_SIGNAL_PROFILE_v1.md",
         "backlog/archive/SPRINT_TARGET_SIGNAL_PROFILE_v1.md",

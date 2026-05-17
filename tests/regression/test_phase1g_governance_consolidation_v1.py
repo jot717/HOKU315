@@ -15,7 +15,7 @@ def test_product_master_exists() -> None:
     assert p.is_file()
     assert "Guest" in text or "訪客" in text
     assert "PRODUCT_MASTER" in text or "Single Source" in text
-    assert "SOCIAL_ENERGY_MODEL" in text
+    assert "SIGNAL_SYSTEM.md" in text or "social signal" in text.lower()
 
 
 def test_master_backlog_exists() -> None:
@@ -63,10 +63,11 @@ def test_login_guest_clarity() -> None:
     assert "帳號" in src
 
 
-def test_core_product_docs_not_deleted() -> None:
+def test_core_ssot_docs_not_deleted() -> None:
     for rel in (
-        "ops/product/PHASE1_PRODUCT_FLOW.md",
-        "ops/product/SOCIAL_ENERGY_MODEL.md",
+        "ops/product/SIGNAL_SYSTEM.md",
+        "ops/product/MATCH_SYSTEM.md",
+        "ops/product/ROADMAP.md",
         "DEVELOPMENT_CONSTITUTION.md",
     ):
         assert (ROOT / rel).is_file(), rel

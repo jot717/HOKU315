@@ -16,9 +16,9 @@ ROOT = Path(__file__).resolve().parents[2]
 
 def test_signal_intelligence_docs_exist() -> None:
     for rel in (
-        "ops/product/SIGNAL_INTELLIGENCE_CONSTITUTION.md",
-        "ops/product/SIGNAL_RISK_ONTOLOGY.md",
-        "ops/product/SIGNAL_INFERENCE_MODEL.md",
+        "docs/archive/product/SIGNAL_INTELLIGENCE_CONSTITUTION.md",
+        "docs/archive/product/SIGNAL_RISK_ONTOLOGY.md",
+        "docs/archive/product/SIGNAL_INFERENCE_MODEL.md",
         "ops/uat/SIGNAL_INTELLIGENCE_ENGINE_UAT.md",
         "backlog/archive/BACKLOG_SIGNAL_INTELLIGENCE_ENGINE_v1.md",
         "backlog/archive/SPRINT_SIGNAL_INTELLIGENCE_ENGINE_v1.md",

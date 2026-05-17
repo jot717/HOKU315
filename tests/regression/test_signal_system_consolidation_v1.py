@@ -12,36 +12,38 @@ ROOT = Path(__file__).resolve().parents[2]
 
 def test_signal_consolidation_product_docs_exist() -> None:
     for rel in (
-        "ops/product/SIGNAL_SYSTEM_CONSTITUTION.md",
-        "ops/product/SIGNAL_PROFILE_SCHEMA.md",
-        "ops/product/SIGNAL_FLOW_ARCHITECTURE.md",
-        "ops/product/SIGNAL_INPUT_AUDIT.md",
-        "ops/product/SIGNAL_STATE_MAPPING.md",
+        "ops/product/SIGNAL_SYSTEM.md",
+        "docs/archive/product/SIGNAL_SYSTEM_CONSTITUTION.md",
+        "docs/archive/product/SIGNAL_PROFILE_SCHEMA.md",
+        "docs/archive/product/SIGNAL_FLOW_ARCHITECTURE.md",
+        "docs/archive/product/SIGNAL_INPUT_AUDIT.md",
+        "docs/archive/product/SIGNAL_STATE_MAPPING.md",
     ):
         assert (ROOT / rel).is_file(), rel
 
 
 def test_signal_consolidation_uat_and_backlog_exist() -> None:
-    assert (ROOT / "ops" / "uat" / "SIGNAL_SYSTEM_CONSOLIDATION_UAT.md").is_file()
+    assert (ROOT / "docs" / "archive" / "uat" / "SIGNAL_SYSTEM_CONSOLIDATION_UAT.md").is_file()
     assert (ROOT / "backlog/archive/BACKLOG_SIGNAL_SYSTEM_CONSOLIDATION_v1.md").is_file()
     assert (ROOT / "backlog/archive/SPRINT_SIGNAL_SYSTEM_CONSOLIDATION_v1.md").is_file()
 
 
 def test_canonical_schema_doc_contains_identity_signals() -> None:
-    schema = (ROOT / "ops" / "product" / "SIGNAL_PROFILE_SCHEMA.md").read_text(encoding="utf-8")
+    schema = (ROOT / "docs/archive/product/SIGNAL_PROFILE_SCHEMA.md").read_text(encoding="utf-8")
     assert '"identity_signals"' in schema
     assert "signal_history" in schema
 
 
 def test_signal_first_positioning_doc() -> None:
-    text = (ROOT / "ops" / "product" / "SIGNAL_FIRST_PRODUCT_POSITION.md").read_text(encoding="utf-8")
+    text = (ROOT / "docs/archive/product/SIGNAL_FIRST_PRODUCT_POSITION.md").read_text(encoding="utf-8")
     assert "Signal-first UX law" in text
     assert "social signal intelligence" in text
 
 
-def test_fox_roadmap_mentions_signal_consolidation() -> None:
-    text = (ROOT / "ops" / "product" / "FOX_ROADMAP.md").read_text(encoding="utf-8")
-    assert "SIGNAL_SYSTEM_CONSTITUTION" in text
+def test_roadmap_ssot_exists() -> None:
+    text = (ROOT / "ops/product/ROADMAP.md").read_text(encoding="utf-8")
+    assert "Phase 1" in text
+    assert "SNS" in text
 
 
 def test_no_duplicate_onboarding_route_added() -> None:

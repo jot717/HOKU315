@@ -33,7 +33,7 @@ _DIAG_FORBIDDEN = (
 
 
 def test_ontology_doc_exists() -> None:
-    path = ROOT / "ops/product/INTERACTION_PRESSURE_ONTOLOGY.md"
+    path = ROOT / "docs/archive/product/INTERACTION_PRESSURE_ONTOLOGY.md"
     assert path.is_file()
     text = path.read_text(encoding="utf-8")
     for pattern in (
@@ -130,8 +130,9 @@ def test_insight_and_match_pages_build() -> None:
 
 def test_phase1d_docs_exist() -> None:
     for rel in (
-        "ops/product/UX_INTELLIGENCE_CONSTITUTION.md",
-        "ops/product/SOCIAL_CAUSALITY_RULES.md",
-        "ops/uat/PHASE1D_UX_INTELLIGENCE_UAT.md",
+        "docs/archive/product/UX_INTELLIGENCE_CONSTITUTION.md",
+        "docs/archive/product/SOCIAL_CAUSALITY_RULES.md",
+        "ops/product/SIGNAL_SYSTEM.md",
+        "docs/archive/uat/PHASE1D_UX_INTELLIGENCE_UAT.md",
     ):
         assert (ROOT / rel).is_file(), rel

@@ -21,6 +21,7 @@ Each row = **one canonical entry**. Sprint files: `backlog/archive/BACKLOG_*` / 
 
 | Phase | Summary | Key docs |
 |-------|---------|----------|
+| **PHASE1-H2 AI governance reset v1** | SSOT consolidation, archive enforcement, AI constitution | `AI_DEVELOPMENT_CONSTITUTION.md`, `SIGNAL_SYSTEM.md`, `MATCH_SYSTEM.md` |
 | **PHASE1-G Governance v1** | Product master, backlog/UAT governance, guest/login clarity | `PRODUCT_MASTER.md`, `MASTER_BACKLOG.md`, `UAT_MASTER_GUIDE.md` |
 | **PHASE1-F Match credibility v1** | Social energy match cards, rhythm engine | `MATCH_ARCHETYPE_SYSTEM.md`, `match_rhythm_engine.py` |
 | **PHASE1-D UX intelligence v1** | Interaction pressure copy, insight upgrade | `ux_intelligence_engine.py`, `INTERACTION_PRESSURE_ONTOLOGY.md` |
@@ -42,8 +43,8 @@ Each row = **one canonical entry**. Sprint files: `backlog/archive/BACKLOG_*` / 
 ## ARCHIVED
 
 - All `backlog/archive/BACKLOG_*.md` and `SPRINT_*.md` — historical scope/DoD
-- Drift reports: `docs/deprecated/archive/product/`
-- Superseded UAT: `docs/deprecated/archive/uat/`
+- Product/UAT annex: `docs/archive/product/`, `docs/archive/uat/`
+- Older drift: `docs/deprecated/archive/`
 
 ---
 
@@ -62,7 +63,7 @@ Each row = **one canonical entry**. Sprint files: `backlog/archive/BACKLOG_*` / 
 |-------|--------|
 | **2** | Longitudinal memory, account utility, cloud backup UX |
 | **3** | SNS import, external graph, interaction ingestion |
-| **4+** | See [`ops/product/FOX_ROADMAP.md`](../ops/product/FOX_ROADMAP.md) |
+| **4+** | See [`ops/product/ROADMAP.md`](../ops/product/ROADMAP.md) |
 
 ---
 

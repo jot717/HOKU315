@@ -14,9 +14,9 @@ ROOT = Path(__file__).resolve().parents[2]
 
 def test_relationship_intelligence_docs_exist() -> None:
     for rel in (
-        "ops/product/RELATIONSHIP_INTELLIGENCE_CONSTITUTION.md",
-        "ops/product/RELATIONSHIP_ARCHETYPE_MODEL.md",
-        "ops/product/INTERACTION_SIGNAL_ONTOLOGY.md",
+        "docs/archive/product/RELATIONSHIP_INTELLIGENCE_CONSTITUTION.md",
+        "docs/archive/product/RELATIONSHIP_ARCHETYPE_MODEL.md",
+        "docs/archive/product/INTERACTION_SIGNAL_ONTOLOGY.md",
         "ops/uat/RELATIONSHIP_SIGNAL_SIMULATION_UAT.md",
         "backlog/archive/BACKLOG_RELATIONSHIP_SIGNAL_SIMULATION_v1.md",
         "backlog/archive/SPRINT_RELATIONSHIP_SIGNAL_SIMULATION_v1.md",

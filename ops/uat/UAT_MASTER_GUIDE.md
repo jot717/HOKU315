@@ -83,18 +83,16 @@ python ops/env/reflex_compile_gate.py
 
 ---
 
-## Active UAT scripts (detail)
+## Active UAT scripts
 
 | Doc | When to use |
 |-----|-------------|
 | [`PHASE1_PRODUCT_FLOW_UAT.md`](PHASE1_PRODUCT_FLOW_UAT.md) | Full journey wording |
-| [`PHASE1D_UX_INTELLIGENCE_UAT.md`](PHASE1D_UX_INTELLIGENCE_UAT.md) | Insight pressure copy |
-| [`PHASE1F_MATCH_CREDIBILITY_UAT.md`](PHASE1F_MATCH_CREDIBILITY_UAT.md) | Match wall energy cards |
-| [`PHASE1_UAT_SCRIPT.md`](PHASE1_UAT_SCRIPT.md) | Legacy checklist (reference) |
-| Domain UATs | `TARGET_*`, `SIGNAL_*`, `RELATIONSHIP_*` under `ops/uat/` |
+
+Phase-specific and domain UAT (historical): `docs/archive/uat/` — not release gate.
 
 ---
 
-## Archived UAT
+## Governance regression
 
-Micro-hotfix and direction-reset scripts: [`../../docs/deprecated/archive/uat/`](../../docs/deprecated/archive/uat/) — historical only.
+`tests/regression/test_phase1h2_ai_governance_reset_v1.py` — active doc limits, SSOT files, terminology.
