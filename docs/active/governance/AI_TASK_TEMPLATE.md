@@ -4,8 +4,10 @@ FOLLOW:
 
 README.md
 → docs/README.md
+→ docs/active/governance/SSOT_HIERARCHY.md
 → docs/active/product/PRODUCT_MASTER.md
 → docs/active/product/AI_DEVELOPMENT_CONSTITUTION.md
+→ docs/active/product/ROADMAP.md
 → docs/active/governance/GOVERNANCE_CHECKLIST.md
 → docs/active/governance/MASTER_BACKLOG.md
 → START_NEW_SPRINT.md

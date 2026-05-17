@@ -33,7 +33,8 @@ Product logic only in `docs/active/product/`:
 | `PRODUCT_MASTER.md` | Identity, flow, systems |
 | `SIGNAL_SYSTEM.md` | Signal pipeline |
 | `MATCH_SYSTEM.md` | Match / social energy |
-| `ROADMAP.md` | Phases 1-5 |
+| `ROADMAP.md` | Phases 1-7 (canonical) |
+| `../governance/SSOT_HIERARCHY.md` | Authority map |
 | `../governance/MASTER_BACKLOG.md` | Sprint index |
 | `../uat/UAT_MASTER_GUIDE.md` | Acceptance |
 
@@ -47,7 +48,7 @@ Forbidden: parallel signal/match/onboarding/memory/UX systems; shadow backlog.
 
 ## Section C - Phase enforcement
 
-Phase 1 = local rules only. Phases 2-5 gated. No leakage in Phase 1 face.
+Phase 1 = local rules only. Phases 2-7 gated per `ROADMAP.md`. No leakage in Phase 1 face. Never infer phases from archive.
 
 ---
 

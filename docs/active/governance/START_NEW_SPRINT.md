@@ -2,140 +2,99 @@
 
 ## PURPOSE
 
-This file is the mandatory AI boot sequence.
-
-Before ANY implementation:
-
-1. Load README.md
-2. Load docs/README.md
-3. Load PRODUCT_MASTER.md
-4. Load AI_DEVELOPMENT_CONSTITUTION.md
-5. Load GOVERNANCE_CHECKLIST.md
-6. Load MASTER_BACKLOG.md
-
-Never skip this order.
+Mandatory AI boot sequence. **No implementation before load.**
 
 ---
 
-# AI CONTEXT LOAD ORDER
+## Canonical SSOT loading order
 
-README.md
-→ docs/README.md
-→ docs/active/product/PRODUCT_MASTER.md
-→ docs/active/product/AI_DEVELOPMENT_CONSTITUTION.md
-→ docs/active/governance/GOVERNANCE_CHECKLIST.md
-→ docs/active/governance/MASTER_BACKLOG.md
+Load in order; never skip:
 
----
+| Step | File |
+|------|------|
+| 1 | [`README.md`](../../../README.md) |
+| 2 | [`docs/README.md`](../../README.md) |
+| 3 | [`docs/active/governance/SSOT_HIERARCHY.md`](SSOT_HIERARCHY.md) |
+| 4 | [`docs/active/product/PRODUCT_MASTER.md`](../product/PRODUCT_MASTER.md) |
+| 5 | [`docs/active/product/AI_DEVELOPMENT_CONSTITUTION.md`](../product/AI_DEVELOPMENT_CONSTITUTION.md) |
+| 6 | [`docs/active/product/ROADMAP.md`](../product/ROADMAP.md) |
+| 7 | [`GOVERNANCE_CHECKLIST.md`](GOVERNANCE_CHECKLIST.md) |
+| 8 | [`MASTER_BACKLOG.md`](MASTER_BACKLOG.md) |
 
-# IMPLEMENTATION FLOW
-
-BACKLOG
-→ SPRINT
-→ IMPLEMENT
-→ REGRESSION
-→ UAT
-→ DONE
-→ ARCHIVE
-
-Never skip phases.
+Optional before coding: domain SSOT (`SIGNAL_SYSTEM`, `MATCH_SYSTEM`, `ACTIVE_SURFACE_MAP`), sprint slice from `backlog/archive/`.
 
 ---
 
-# FORBIDDEN AI BEHAVIORS
+## Authority ownership
 
-## DO NOT:
-
-* create parallel constitutions
-* create v2/v3 architecture docs
-* create duplicate roadmap files
-* create temporary migration systems
-* use archive as implementation truth
-* create root markdown files
-* generate speculative future systems
-* mix PHASE2/3/4 implementations
-* create second onboarding flow
-* create second product identity
-* bypass regression
-* bypass UAT
-* leave temporary debug systems
+| Concern | Owner |
+|---------|--------|
+| **Roadmap / phases** | [`ROADMAP.md`](../product/ROADMAP.md) — PHASE1–PHASE7 only |
+| **Planning / what is ACTIVE** | [`MASTER_BACKLOG.md`](MASTER_BACKLOG.md) |
+| **Engineering P0/P1** | Root [`BACKLOG.md`](../../../BACKLOG.md) — not phase law |
+| **Sprint slice detail** | `backlog/archive/BACKLOG_*` + `SPRINT_*` |
+| **Sprint execution boot** | This file + [`AI_TASK_TEMPLATE.md`](AI_TASK_TEMPLATE.md) |
+| **Implementation rules** | [`AI_DEVELOPMENT_CONSTITUTION.md`](../product/AI_DEVELOPMENT_CONSTITUTION.md) |
+| **Precedence map** | [`SSOT_HIERARCHY.md`](SSOT_HIERARCHY.md) |
 
 ---
 
-# REPO DISCIPLINE
+## Implementation authority chain
 
-## ROOT
+```
+ROADMAP (phase law)
+  → MASTER_BACKLOG (ACTIVE row)
+    → BACKLOG/SPRINT slice (backlog/archive/)
+      → IMPLEMENT (docs/active + code)
+        → REGRESSION
+          → UAT
+            → DONE
+              → ARCHIVE
+```
 
-Root is entry only.
-
-Allowed:
-
-* README.md
-* BACKLOG.md
-* SPRINT_LOG.md
-* requirements.txt
-* scripts/config
-
-No other markdown allowed.
-
----
-
-# DOCS
-
-## ACTIVE
-
-# docs/active/
-
-single source of truth
-
-## ARCHIVE
-
-# docs/archive/
-
-historical only
-
-Never use archive as active implementation context.
+Never skip phases. Never implement from archive.
 
 ---
 
-# OPS
+## Archive usage rules
 
-# ops/
+| Allowed | Forbidden |
+|---------|-----------|
+| Post-completion historical reference | Phase inference from `FOX_ROADMAP`, old constitutions |
+| Moving completed slices to `backlog/archive/` | ACTIVE rows only in archive |
+| Reading `SPRINT_LOG_FULL` for history | Using archive UAT as acceptance law |
 
-executable operations only
-
-No product truth inside ops.
-
----
-
-# PRODUCT TRUTH
-
-Only extend:
-
-* PRODUCT_MASTER.md
-* SIGNAL_SYSTEM.md
-* MATCH_SYSTEM.md
-* ROADMAP.md
-
-Never create parallel systems.
+**Archive never overrides** `docs/active/product/` or `docs/active/governance/`.
 
 ---
 
-# PHASE BOUNDARIES
+## FORBIDDEN AI BEHAVIORS
 
-PHASE1:
-local intelligence only
+* create parallel constitutions or v2/v3 architecture docs  
+* create duplicate roadmap files  
+* infer PHASE6/7 (or any phase) from archive  
+* create root markdown files  
+* mix product PHASE2+ into Phase 1 face  
+* bypass regression or UAT  
+* put product truth in `ops/`  
 
-PHASE2:
-persistence layer
+---
 
-PHASE3:
-SNS integration
+## REPO DISCIPLINE
 
-PHASE4:
-graph intelligence
+**Root:** entry only — `README.md`, `BACKLOG.md`, `SPRINT_LOG.md`, requirements, scripts/config.
 
-PHASE5:
-AI scaling
+**docs/active/:** single knowledge layer.  
+**docs/archive/:** historical only.  
+**ops/:** `env`, `flow`, `debug`, `testing` executables only.
 
-Never implement future phases early.
+---
+
+## PRODUCT TRUTH (extend in place only)
+
+* `PRODUCT_MASTER.md`  
+* `SIGNAL_SYSTEM.md`  
+* `MATCH_SYSTEM.md`  
+* `ROADMAP.md`  
+
+Phase detail: **PHASE1–PHASE7** in `ROADMAP.md` only. Never implement future phases early.

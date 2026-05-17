@@ -2,7 +2,16 @@
 
 **Latest sprint logs (full history):** [`docs/archive/legacy/sprint_history/SPRINT_LOG_FULL.md`](docs/archive/legacy/sprint_history/SPRINT_LOG_FULL.md)
 
-**Current:** PHASE1-H6 AI DEVELOPMENT DISCIPLINE
+**Current:** PHASE1-H7 SSOT HIERARCHY
+
+---
+
+## 2026-05-17 — PHASE1-H7
+
+- `SSOT_HIERARCHY.md` — roadmap → planning → sprint → execution map
+- `ROADMAP.md` — PHASE1–PHASE7 canonical boundaries
+- `START_NEW_SPRINT.md` — authority chain + archive rules
+- Regression: `test_ssot_hierarchy_v1.py`
 
 ---
 

@@ -22,8 +22,9 @@ def test_start_new_sprint_exists() -> None:
     text = path.read_text(encoding="utf-8")
     assert "START NEW SPRINT" in text
     assert "PRODUCT_MASTER" in text
-    assert "IMPLEMENTATION FLOW" in text
-    assert "BACKLOG" in text and "SPRINT" in text and "REGRESSION" in text
+    assert "SSOT_HIERARCHY" in text
+    assert "ROADMAP.md" in text
+    assert "IMPLEMENT" in text and "ARCHIVE" in text
     assert "FORBIDDEN AI BEHAVIORS" in text
     assert "parallel constitutions" in text.lower() or "parallel" in text.lower()
 

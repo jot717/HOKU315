@@ -15,10 +15,12 @@ Pre-sprint checks. Law: [`../product/AI_DEVELOPMENT_CONSTITUTION.md`](../product
 - [ ] no archive context used
 - [ ] no duplicate docs created
 - [ ] phase boundary respected
+- [ ] ROADMAP.md (PHASE1-7) checked — not archive
+- [ ] SSOT_HIERARCHY authority map respected
 
 Entropy: [`REPO_ENTROPY_CHECKLIST.md`](REPO_ENTROPY_CHECKLIST.md)
 
 ```bash
 python ops/flow/check_all_flows.py
-python -m pytest tests/regression/test_ai_development_discipline_v1.py -v --tb=short
+python -m pytest tests/regression/test_ssot_hierarchy_v1.py tests/regression/test_ai_development_discipline_v1.py -v --tb=short
 ```

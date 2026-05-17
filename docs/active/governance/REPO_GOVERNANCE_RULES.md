@@ -13,6 +13,8 @@
 | UAT | `docs/active/uat/` (2 files) |
 | Env | `docs/active/env/` |
 | Engineering tasks | Root `BACKLOG.md` (P0/P1 index) |
+| Phase law | `docs/active/product/ROADMAP.md` |
+| Authority map | `docs/active/governance/SSOT_HIERARCHY.md` |
 | Sprint index | `docs/active/governance/MASTER_BACKLOG.md` |
 | Archive | `docs/archive/` |
 | WIP | `wip/` |

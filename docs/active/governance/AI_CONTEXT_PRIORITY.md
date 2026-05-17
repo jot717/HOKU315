@@ -1,5 +1,7 @@
 # AI CONTEXT PRIORITY
 
+**Supplemental only.** Mandatory boot order: [`START_NEW_SPRINT.md`](START_NEW_SPRINT.md) · Authority map: [`SSOT_HIERARCHY.md`](SSOT_HIERARCHY.md).
+
 When loading context for implementation, prefer files in this order.  
 **Do not** treat archive or deprecated paths as product law.
 

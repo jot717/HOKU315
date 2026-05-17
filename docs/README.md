@@ -14,7 +14,7 @@
 | Environment | [`active/env/`](active/env/) |
 | Testing notes | [`active/testing/`](active/testing/) |
 
-**AI boot:** [`active/governance/START_NEW_SPRINT.md`](active/governance/START_NEW_SPRINT.md)
+**AI boot:** [`active/governance/START_NEW_SPRINT.md`](active/governance/START_NEW_SPRINT.md) · **Authority:** [`active/governance/SSOT_HIERARCHY.md`](active/governance/SSOT_HIERARCHY.md)
 
 **Product:** [`active/product/PRODUCT_MASTER.md`](active/product/PRODUCT_MASTER.md)
 

@@ -460,7 +460,7 @@ Product direction is governed by:
 
 Product roadmap moved to:
 
-[`docs/active/product/FOX_ROADMAP.md`](docs/active/product/FOX_ROADMAP.md)
+[`docs/active/product/ROADMAP.md`](docs/active/product/ROADMAP.md)
 
 ---
 

@@ -88,13 +88,14 @@ All implementation must follow:
 
 ## Phase boundaries
 
+**Canonical detail:** [`ROADMAP.md`](ROADMAP.md) (PHASE1–PHASE7). Summary only:
+
 | Phase | Scope |
 |-------|--------|
-| **1** | Local rule-based intelligence (current) |
-| **2** | Persistence and memory |
-| **3** | SNS import |
-| **4** | Social graph intelligence |
-| **5** | AI-scale inference |
+| **1** | Local rule-based intelligence (**current face**) |
+| **2–7** | Persistence → SNS → graph → AI scale → automation → platform |
+
+Do not infer phases from `docs/archive/`. Governance sprints (`PHASE1-H*`) are not product phases.
 
 ---
 

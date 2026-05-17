@@ -1,8 +1,8 @@
 # MASTER BACKLOG
 
-**Canonical phase index.** Detail slices: `backlog/archive/` after completion.
+**Canonical planning index.** Phase law: [`../product/ROADMAP.md`](../product/ROADMAP.md) · Authority map: [`SSOT_HIERARCHY.md`](SSOT_HIERARCHY.md) · Detail slices: `backlog/archive/` after completion.
 
-Product truth: [`../product/PRODUCT_MASTER.md`](../product/PRODUCT_MASTER.md) · Docs: [`../../README.md`](../../README.md) · Engineering P0/P1: [`../../../BACKLOG.md`](../../../BACKLOG.md)
+Product truth: [`../product/PRODUCT_MASTER.md`](../product/PRODUCT_MASTER.md) · Boot: [`START_NEW_SPRINT.md`](START_NEW_SPRINT.md) · Engineering P0/P1: [`../../../BACKLOG.md`](../../../BACKLOG.md)
 
 ---
 
@@ -19,6 +19,7 @@ Product truth: [`../product/PRODUCT_MASTER.md`](../product/PRODUCT_MASTER.md) ·
 
 | Phase | Summary | Key docs |
 |-------|---------|----------|
+| **PHASE1-H7 SSOT hierarchy v1** | `SSOT_HIERARCHY.md`, ROADMAP PHASE1–7, authority chain | `SSOT_HIERARCHY.md` |
 | **PHASE1-H6 AI development discipline v1** | `START_NEW_SPRINT.md`, `AI_TASK_TEMPLATE.md`, regression guard | `START_NEW_SPRINT.md` |
 | **PHASE1-H5 Root consolidation v1** | Root lobby, governance layer in `docs/active/governance/` | `docs/README.md` |
 | **PHASE1-H4 MD highway v1** | `docs/active/` SSOT, archive buckets | `docs/active/product/` |
@@ -41,13 +42,18 @@ Full rows: see `backlog/archive/` and [`../archive/legacy/sprint_history/SPRINT_
 
 ---
 
-## FUTURE PHASES
+## FUTURE PRODUCT PHASES
 
-| Phase | Scope |
+All phase definitions: [`../product/ROADMAP.md`](../product/ROADMAP.md) only. Do not duplicate here.
+
+| Phase | Status |
 |-------|--------|
-| **2** | Longitudinal memory, account utility |
+| **2** | Persistence & memory |
 | **3** | SNS import |
-| **4+** | See [`../product/ROADMAP.md`](../product/ROADMAP.md) |
+| **4** | Social graph intelligence |
+| **5** | AI-scale inference |
+| **6** | Guardian automation & trust |
+| **7** | Platform & ecosystem |
 
 ---
 
