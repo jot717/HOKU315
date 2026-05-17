@@ -40,7 +40,7 @@ def test_readme_indexes_exist() -> None:
 
 def test_deprecated_archive_exists() -> None:
     assert (ROOT / "docs/deprecated/archive/README.md").is_file()
-    assert (ROOT / "docs/deprecated/archive/product").is_dir()
+    assert (ROOT / "docs/archive/phase1_legacy").is_dir()
     assert (ROOT / "backlog/archive").is_dir()
 
 

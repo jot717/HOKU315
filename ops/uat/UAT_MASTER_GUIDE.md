@@ -6,12 +6,12 @@
 
 ## Canonical user journey (30-second understanding)
 
-1. Land on **`/`** — choose **訪客** (start now) or **帳號** (save trends).
-2. **`/profile`** — signal profile.
-3. **`/quiz`** — sensitivity vector.
-4. **`/target`** — observation target (optional but recommended).
-5. **`/insight`** — interaction pressure analysis (one fox observer block).
-6. **`/match`** — social energy cards (requires login + backend data).
+1. Land on **`/`**  Echoose **訪客** (start now) or **帳虁E* (save trends).
+2. **`/profile`**  Esignal profile.
+3. **`/quiz`**  Esensitivity vector.
+4. **`/target`**  Eobservation target (optional but recommended).
+5. **`/insight`**  Einteraction pressure analysis (one fox observer block).
+6. **`/match`**  Esocial energy cards (requires login + backend data).
 
 ---
 
@@ -26,7 +26,7 @@
 | A3 | `/quiz` | Sliders work; result without API shame copy |
 | A4 | `/target` | Target saves locally |
 | A5 | `/insight` | Analysis runs; causal copy; **one** fox block |
-| A6 | — | No SNS/token/sync-failure banners on above routes |
+| A6 |  E| No SNS/token/sync-failure banners on above routes |
 
 ### B. Account path (login)
 
@@ -34,7 +34,6 @@
 |---|-------|----------------|
 | B1 | `/login` | Register/login; calm errors |
 | B2 | `/match` | Cards show rhythm, reply pressure, energy safety, scenario |
-| B3 | `/story` | Optional legacy upload path still works if enabled |
 
 ### C. Regression (automated)
 
@@ -89,10 +88,10 @@ python ops/env/reflex_compile_gate.py
 |-----|-------------|
 | [`PHASE1_PRODUCT_FLOW_UAT.md`](PHASE1_PRODUCT_FLOW_UAT.md) | Full journey wording |
 
-Phase-specific and domain UAT (historical): `docs/archive/uat/` — not release gate.
+Phase-specific and domain UAT (historical): `docs/archive/old_uat/`  Enot release gate.
 
 ---
 
 ## Governance regression
 
-`tests/regression/test_phase1h2_ai_governance_reset_v1.py` — active doc limits, SSOT files, terminology.
+`tests/regression/test_phase1h2_ai_governance_reset_v1.py`  Eactive doc limits, SSOT files, terminology.

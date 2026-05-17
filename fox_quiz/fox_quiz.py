@@ -8,12 +8,10 @@ import asyncio
 import reflex as rx
 
 import db_service
-from fox_quiz.chat_component import chat_page
 from fox_quiz.login_page import login_page
 from fox_quiz.match_wall import MatchWallState, match_wall_page
 from fox_quiz.nav_bar import app_navbar
 from fox_quiz.session_state import SessionState
-from fox_quiz.story_page import story_page
 from fox_quiz.state.app_state import AppState
 from fox_quiz.state.profile_state import ProfileState
 from fox_quiz.state.target_state import TargetState
@@ -21,7 +19,6 @@ from fox_quiz.ui.app_page import app_page
 from fox_quiz.ui.pages.home_page import home_page
 from fox_quiz.ui.pages.target_page import target_page
 from fox_quiz.ui.profile_page import profile_page
-from fox_quiz.unlocks_page import unlocks_page
 from fox_logic import (
     SOCIAL_MINE_DIMENSIONS,
     VECTOR_DIM,
@@ -303,24 +300,11 @@ app = rx.App(theme=rx.theme(appearance="light", accent_color="orange"))
 app.add_page(home_page, route="/", title="HOKU315")
 app.add_page(quiz_page, route="/quiz", title="社交訊號問卷")
 app.add_page(login_page, route="/login", title="登入")
-app.add_page(chat_page, route="/chat", title="狐狸對話室")
-app.add_page(
-    story_page,
-    route="/story",
-    title="我的故事",
-    on_load=SessionState.guard_protected_routes,
-)
 app.add_page(
     match_wall_page,
     route="/match",
     title="適合對象",
     on_load=MatchWallState.load_match_wall,
-)
-app.add_page(
-    unlocks_page,
-    route="/unlocks",
-    title="解鎖",
-    on_load=SessionState.guard_protected_routes,
 )
 app.add_page(
     app_page,

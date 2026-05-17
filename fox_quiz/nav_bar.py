@@ -1,4 +1,4 @@
-"""全域導航列：Story / Match / Unlocks。"""
+"""全域導航列：Phase1 核心迴圈 + 登入。"""
 from __future__ import annotations
 
 import reflex as rx

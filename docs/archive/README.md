@@ -4,19 +4,19 @@ Files under `docs/archive/` are **historical reference**. They must **not**:
 
 - define current product logic
 - be imported by application code
-- be linked from active SSOT docs as authority (link once from SSOT as “annex” only)
+- be linked from active SSOT docs as authority
 - be used by Cursor/AI as implementation law
-- be counted toward active doc limits
 
-**Active law lives in:**
+## Buckets (no loose `.md` at archive root except this README)
 
-- `ops/product/PRODUCT_MASTER.md`
-- `ops/product/SIGNAL_SYSTEM.md`
-- `ops/product/MATCH_SYSTEM.md`
-- `ops/product/ROADMAP.md`
-- `backlog/MASTER_BACKLOG.md`
-- `ops/uat/UAT_MASTER_GUIDE.md`
+| Path | Contents |
+|------|----------|
+| `phase1_legacy/` | Product constitutions, ontologies, positioning |
+| `old_uat/` | Phase/domain UAT scripts |
+| `old_hotfix/` | Compile/state/SNS audit UAT |
+| `dead_routes_reference/` | Removed route modules (`/story`, `/chat`, `/unlocks`) |
+| `dead_components_reference/` | Removed UI widgets |
 
-**Also historical:** `docs/deprecated/`, `backlog/archive/`.
+**Active law:** `ops/product/PRODUCT_MASTER.md`, `ACTIVE_SURFACE_MAP.md`, and SSOT files listed therein.
 
-When archive content conflicts with SSOT, **SSOT wins**. If SSOT is wrong, update SSOT — do not revive archive as parallel truth.
+When archive content conflicts with SSOT, **SSOT wins**.

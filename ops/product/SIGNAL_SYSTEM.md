@@ -1,4 +1,4 @@
-# SIGNAL SYSTEM — Single Source of Truth
+# SIGNAL SYSTEM  ESingle Source of Truth
 
 > **Authority:** [`PRODUCT_MASTER.md`](PRODUCT_MASTER.md) · **Implementation:** `product/signal/`, `product/profile/`, `product/target/`, `fox_quiz/state/app_state.py`
 
@@ -15,17 +15,17 @@ Rule-based **social signal** pipeline only (Phase 1). No LLM inference in produc
 | Target observation | `/target` | `product/target/runtime/target_profile_store.py` |
 | Guardian observation | `/insight` | `infer_signal_risks`, `ux_intelligence_engine`, `relationship_simulation_engine` |
 
-**Official flow order:** `/` → `/profile` → `/quiz` → `/target` → `/insight` → `/match` (see PRODUCT_MASTER).
+**Official flow order:** `/` ↁE`/profile` ↁE`/quiz` ↁE`/target` ↁE`/insight` ↁE`/match` (see PRODUCT_MASTER).
 
 ---
 
 ## Core rules
 
-1. **One onboarding path** — `/profile` + `/quiz`; no second wizard.
-2. **Signal profile, not personality typing** — sliders and local fields describe interaction sensitivity.
-3. **Interaction pressure** — `INTERACTION_PRESSURE_ONTOLOGY` logic lives in `ux_intelligence_engine.py` (annex: `docs/archive/product/`).
-4. **Inference** — `signal_inference_engine.infer_signal_risks` combines profile, mine vector, memory, match score.
-5. **Fox** — max one observer block on `/insight`; see [`CANONICAL_TERMINOLOGY.md`](CANONICAL_TERMINOLOGY.md).
+1. **One onboarding path**  E`/profile` + `/quiz`; no second wizard.
+2. **Signal profile, not personality typing**  Esliders and local fields describe interaction sensitivity.
+3. **Interaction pressure**  E`INTERACTION_PRESSURE_ONTOLOGY` logic lives in `ux_intelligence_engine.py` (annex: `docs/archive/phase1_legacy/`).
+4. **Inference**  E`signal_inference_engine.infer_signal_risks` combines profile, mine vector, memory, match score.
+5. **Fox**  Emax one observer block on `/insight`; see [`CANONICAL_TERMINOLOGY.md`](CANONICAL_TERMINOLOGY.md).
 
 ---
 
@@ -44,6 +44,6 @@ Rule-based **social signal** pipeline only (Phase 1). No LLM inference in produc
 
 Detailed constitutions and ontologies (reference-only, **not** product law):
 
-`docs/archive/product/` — e.g. signal constitution, risk ontology, target schema, relationship models.
+`docs/archive/phase1_legacy/`  Ee.g. signal constitution, risk ontology, target schema, relationship models.
 
 Do not add new parallel docs in `ops/product/`; extend this file or archive annex.

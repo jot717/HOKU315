@@ -3,11 +3,11 @@
 **Highest-priority implementation rule file for humans and AI agents.**  
 Violations block merge until normalization.
 
-**Authority chain:** This file → [`PRODUCT_MASTER.md`](PRODUCT_MASTER.md) → domain SSOT → code.
+**Authority chain:** This file ↁE[`PRODUCT_MASTER.md`](PRODUCT_MASTER.md) ↁEdomain SSOT ↁEcode.
 
 ---
 
-## Section A — Single source of truth
+## Section A  ESingle source of truth
 
 **Only these files may define product logic:**
 
@@ -16,16 +16,16 @@ Violations block merge until normalization.
 | [`PRODUCT_MASTER.md`](PRODUCT_MASTER.md) | Identity, flow, systems, phases |
 | [`SIGNAL_SYSTEM.md`](SIGNAL_SYSTEM.md) | Signal profile, quiz, target, inference |
 | [`MATCH_SYSTEM.md`](MATCH_SYSTEM.md) | Social energy compatibility, match wall |
-| [`ROADMAP.md`](ROADMAP.md) | Phased delivery (Phases 1–5) |
+| [`ROADMAP.md`](ROADMAP.md) | Phased delivery (Phases 1 E) |
 | [`../../backlog/MASTER_BACKLOG.md`](../../backlog/MASTER_BACKLOG.md) | Sprint index |
 | [`../uat/UAT_MASTER_GUIDE.md`](../uat/UAT_MASTER_GUIDE.md) | Acceptance |
 
 **All other docs:** reference-only or **historical archive** (`docs/archive/`).  
-**Governance helpers (this file, terminology, checklist, context priority):** process only — they do not redefine product logic.
+**Governance helpers (this file, terminology, checklist, context priority):** process only  Ethey do not redefine product logic.
 
 ---
 
-## Section B — No second system rule
+## Section B  ENo second system rule
 
 **Forbidden:**
 
@@ -38,7 +38,7 @@ Violations block merge until normalization.
 
 ---
 
-## Section C — Phase enforcement
+## Section C  EPhase enforcement
 
 | Phase | Allowed |
 |-------|---------|
@@ -52,17 +52,17 @@ No phase leakage in UX, copy, or default routes.
 
 ---
 
-## Section D — Document creation rules
+## Section D  EDocument creation rules
 
 **Do not create** new constitution, roadmap, architecture, flow, or phase docs unless SSOT files cannot contain the change.
 
 **Default:** Update `PRODUCT_MASTER.md`, `SIGNAL_SYSTEM.md`, `MATCH_SYSTEM.md`, or `ROADMAP.md`.
 
-New ontologies/schemas → **append to archive annex** under `docs/archive/product/` and link **once** from SSOT.
+New ontologies/schemas ↁE**append to archive annex** under `docs/archive/phase1_legacy/` and link **once** from SSOT.
 
 ---
 
-## Section E — AI implementation workflow
+## Section E  EAI implementation workflow
 
 Every future sprint must state:
 
@@ -81,7 +81,7 @@ Every future sprint must state:
 
 ---
 
-## Section F — Repo entropy rule
+## Section F  ERepo entropy rule
 
 If duplicate meaning, overlapping terminology, archive docs cited as law, or multiple active truths appear:
 
@@ -89,4 +89,30 @@ If duplicate meaning, overlapping terminology, archive docs cited as law, or mul
 2. Run normalization (this constitution + [`GOVERNANCE_CHECKLIST.md`](GOVERNANCE_CHECKLIST.md))  
 3. Resume only when active doc count and terminology pass regression  
 
-See [`AI_CONTEXT_PRIORITY.md`](AI_CONTEXT_PRIORITY.md) for read order.
+See [`ACTIVE_SURFACE_MAP.md`](ACTIVE_SURFACE_MAP.md) for routes, state, and UI law.
+
+---
+
+## Section G  ENo parallel systems
+
+**Never create:**
+
+- Second onboarding
+- Second signal model
+- Second match engine
+- Second UX philosophy
+- Second product identity
+
+**Always** extend canonical systems (`SIGNAL_SYSTEM.md`, `MATCH_SYSTEM.md`, active runtime modules).
+
+---
+
+## Section H  EPhysical entropy rule
+
+Before creating a **new folder**, **route**, **doc category**, or **runtime system**, AI must:
+
+1. Check [`ACTIVE_SURFACE_MAP.md`](ACTIVE_SURFACE_MAP.md)
+2. Check existing canonical system (SSOT + code)
+3. **Extend** instead of duplicate
+
+If the surface is not on the map, stop and update the map + `PRODUCT_MASTER` in a governance sprint  Edo not ship silently.

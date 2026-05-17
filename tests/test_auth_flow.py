@@ -1,12 +1,6 @@
 # -*- coding: utf-8 -*-
 """
 Task 6.5：登入 → access_token → Session（LocalStorage）管線之可重現驗證。
-
-離線／無憑證：
-  - 仍檢查 Reflex 頁面模組可匯入、`SessionState` 具 persist 欄位、`login_page` 可編譯。
-整合（可選）：
-  - 設定環境變數 `AUTH_TEST_EMAIL`、`AUTH_TEST_PASSWORD`（及既有 `SUPABASE_URL`、`SUPABASE_KEY`）
-    時，呼叫 `auth_sign_in_email_password`，斷言 token 可經 `user_id_from_access_token` 解析。
 """
 from __future__ import annotations
 
@@ -23,11 +17,9 @@ load_dotenv(encoding="utf-8-sig")
 
 def _smoke_imports() -> None:
     from fox_quiz import login_page as lp
-    from fox_quiz import story_page as sp
     from fox_quiz.session_state import SessionState
 
     assert lp.login_page is not None
-    assert sp.story_page is not None
     fields = SessionState.get_fields()
     assert "access_token" in fields and "refresh_token" in fields
 

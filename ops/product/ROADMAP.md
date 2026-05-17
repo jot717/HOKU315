@@ -1,14 +1,14 @@
-# ROADMAP — Phased Delivery
+# ROADMAP  EPhased Delivery
 
-> **Authority:** [`PRODUCT_MASTER.md`](PRODUCT_MASTER.md) · Historical detail: `docs/archive/product/FOX_ROADMAP.md`
+> **Authority:** [`PRODUCT_MASTER.md`](PRODUCT_MASTER.md) · Historical detail: `docs/archive/phase1_legacy/FOX_ROADMAP.md`
 
 ---
 
-## Phase 1 — Local signal intelligence (CURRENT FACE)
+## Phase 1  ELocal signal intelligence (CURRENT FACE)
 
 **Goal:** Manual / rule-based social signal and energy analysis on device.
 
-* Routes: `/profile` → `/quiz` → `/target` → `/insight` → `/match`
+* Routes: `/profile` ↁE`/quiz` ↁE`/target` ↁE`/insight` ↁE`/match`
 * Guest mode + optional account
 * Fox as observer only (one block on insight)
 
@@ -16,7 +16,7 @@
 
 ---
 
-## Phase 2 — Persistence & memory
+## Phase 2  EPersistence & memory
 
 **Goal:** Longitudinal memory, cloud profile, cross-device backup.
 
@@ -25,7 +25,7 @@
 
 ---
 
-## Phase 3 — SNS import
+## Phase 3  ESNS import
 
 **Goal:** Consent-based connection to user-chosen surfaces.
 
@@ -33,13 +33,13 @@
 
 ---
 
-## Phase 4 — Social graph intelligence
+## Phase 4  ESocial graph intelligence
 
 **Goal:** Graph-aware guardian signals across opted-in network.
 
 ---
 
-## Phase 5 — AI-scale inference
+## Phase 5  EAI-scale inference
 
 **Goal:** Scalable inference layer **after** signal ontology and energy model are stable.
 

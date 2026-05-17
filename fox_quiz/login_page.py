@@ -70,7 +70,7 @@ class LoginState(rx.State):
             has_custom = await asyncio.to_thread(_route)
         except Exception:
             has_custom = False
-        return rx.redirect("/match" if has_custom else "/story")
+        return rx.redirect("/match" if has_custom else "/profile")
 
     @rx.event
     async def submit_signup(self) -> Any:
@@ -121,7 +121,7 @@ class LoginState(rx.State):
             has_custom = await asyncio.to_thread(_route)
         except Exception:
             has_custom = False
-        return rx.redirect("/match" if has_custom else "/story")
+        return rx.redirect("/match" if has_custom else "/profile")
 
 
 def login_page() -> rx.Component:

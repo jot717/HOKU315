@@ -21,7 +21,7 @@ GOVERNANCE_FILES = (
     "ops/product/AI_DEVELOPMENT_CONSTITUTION.md",
     "ops/product/CANONICAL_TERMINOLOGY.md",
     "ops/product/GOVERNANCE_CHECKLIST.md",
-    "ops/product/AI_CONTEXT_PRIORITY.md",
+    "ops/product/ACTIVE_SURFACE_MAP.md",
 )
 
 SSOT_FILES = (
@@ -31,13 +31,23 @@ SSOT_FILES = (
     "ops/product/ROADMAP.md",
 )
 
+UAT_AUDIT_EXCLUDE = {
+    "DEAD_ROUTE_AUDIT.md",
+    "DEAD_COMPONENT_AUDIT.md",
+    "PHASE1H3_REPO_MINIMIZATION_REPORT.md",
+}
+
 
 def _active_product_docs() -> list[Path]:
     return [p for p in (ROOT / "ops/product").glob("*.md") if p.name != "README.md"]
 
 
 def _active_uat_docs() -> list[Path]:
-    return [p for p in (ROOT / "ops/uat").glob("*.md") if p.name != "README.md"]
+    return [
+        p
+        for p in (ROOT / "ops/uat").glob("*.md")
+        if p.name != "README.md" and p.name not in UAT_AUDIT_EXCLUDE
+    ]
 
 
 def test_governance_constitution_files_exist() -> None:

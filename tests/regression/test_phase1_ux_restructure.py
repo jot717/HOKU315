@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[2]
 
 
 def test_signal_first_product_position_exists() -> None:
-    path = ROOT / "ops" / "product" / "SIGNAL_FIRST_PRODUCT_POSITION.md"
+    path = ROOT / "docs/archive/phase1_legacy/SIGNAL_FIRST_PRODUCT_POSITION.md"
     assert path.is_file()
     text = path.read_text(encoding="utf-8")
     assert "Signal-first UX law" in text
@@ -28,7 +28,7 @@ def test_phase1_product_flow_recovery_backlog_sprint_exist() -> None:
 
 
 def test_deprecated_guardian_constitution_archived() -> None:
-    path = ROOT / "docs" / "deprecated" / "GUARDIAN_UX_CONSTITUTION.md"
+    path = ROOT / "docs/archive/phase1_legacy/GUARDIAN_UX_CONSTITUTION.md"
     assert path.is_file()
     text = path.read_text(encoding="utf-8")
     assert "SIGNAL-FIRST" in text

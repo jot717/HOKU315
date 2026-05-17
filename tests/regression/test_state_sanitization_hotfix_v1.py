@@ -14,7 +14,7 @@ def test_hotfix_docs_exist() -> None:
     for rel in (
         "backlog/archive/BACKLOG_STATE_SANITIZATION_HOTFIX_v1.md",
         "backlog/archive/SPRINT_STATE_SANITIZATION_HOTFIX_v1.md",
-        "docs/deprecated/archive/uat/STATE_SANITIZATION_RUNTIME_UAT.md",
+        "docs/archive/old_hotfix/STATE_SANITIZATION_RUNTIME_UAT.md",
     ):
         assert (ROOT / rel).is_file(), rel
 

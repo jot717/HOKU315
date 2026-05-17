@@ -11,7 +11,7 @@
 
 ## Historical
 
-Phase-specific and domain UAT: `docs/archive/uat/`  
+Phase-specific and domain UAT: `docs/archive/old_uat/`  
 Deprecated audits: `docs/deprecated/archive/uat/`
 
 Product context: [`../product/PRODUCT_MASTER.md`](../product/PRODUCT_MASTER.md)

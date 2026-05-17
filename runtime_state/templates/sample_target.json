@@ -1,0 +1,12 @@
+{
+  "target_name": "Sample Target",
+  "relationship_type": "friend",
+  "observed_traits": ["fast_replies"],
+  "communication_style": ["direct"],
+  "social_patterns": ["late_night_messages"],
+  "pressure_signals": ["urgency"],
+  "instability_level": 3,
+  "attention_demand": 4,
+  "response_consistency": 6,
+  "notes": "Template only — copy to runtime_state/target_profile.json for local dev."
+}

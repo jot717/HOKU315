@@ -1,4 +1,4 @@
-# PRODUCT MASTER — Single Source of Truth
+# PRODUCT MASTER  ESingle Source of Truth
 
 **All product, UAT, and backlog docs must reference this file.**  
 AI implementation: [`AI_DEVELOPMENT_CONSTITUTION.md`](AI_DEVELOPMENT_CONSTITUTION.md) · Governance: [`GOVERNANCE_CHECKLIST.md`](GOVERNANCE_CHECKLIST.md) · Backlog: [`../../backlog/MASTER_BACKLOG.md`](../../backlog/MASTER_BACKLOG.md) · UAT: [`../uat/UAT_MASTER_GUIDE.md`](../uat/UAT_MASTER_GUIDE.md)
@@ -11,7 +11,7 @@ AI implementation: [`AI_DEVELOPMENT_CONSTITUTION.md`](AI_DEVELOPMENT_CONSTITUTIO
 
 Helps users identify **dangerous / high-drain interaction patterns** through rule-based social signal and energy analysis.
 
-**Core value:** Understand interaction pressure, rhythm mismatch, and social energy cost — not who to date or how to heal.
+**Core value:** Understand interaction pressure, rhythm mismatch, and social energy cost  Enot who to date or how to heal.
 
 ### What HOKU315 is NOT
 
@@ -30,7 +30,7 @@ Terminology: [`CANONICAL_TERMINOLOGY.md`](CANONICAL_TERMINOLOGY.md)
 **No second flow allowed.**
 
 ```
-/  →  /profile  →  /quiz  →  /target  →  /insight  →  /match
+/  ↁE /profile  ↁE /quiz  ↁE /target  ↁE /insight  ↁE /match
 ```
 
 | Step | Route | Purpose |
@@ -54,8 +54,8 @@ Detail: [`SIGNAL_SYSTEM.md`](SIGNAL_SYSTEM.md) · Match: [`MATCH_SYSTEM.md`](MAT
 | Interaction pressure system | `ux_intelligence_engine.py` · archive annex |
 | Social energy system | `match_rhythm_engine.py` · [`MATCH_SYSTEM.md`](MATCH_SYSTEM.md) |
 | Match credibility system | `fox_quiz/match_wall.py` · [`MATCH_SYSTEM.md`](MATCH_SYSTEM.md) |
-| Persistence layer | Phase 2 — account/cloud utility |
-| SNS intelligence layer | Phase 3+ — gated |
+| Persistence layer | Phase 2  Eaccount/cloud utility |
+| SNS intelligence layer | Phase 3+  Egated |
 
 **Forbidden:** second signal system, second match narrative, second onboarding, second memory law in active docs.
 
@@ -74,7 +74,7 @@ Detail: [`SIGNAL_SYSTEM.md`](SIGNAL_SYSTEM.md) · Match: [`MATCH_SYSTEM.md`](MAT
 
 ## Fox role
 
-- **北極狐觀察** — one observer block on `/insight` max
+- **北極狐觀寁E*  Eone observer block on `/insight` max
 - Not therapy guidance, not emotional healing copy
 
 ---
@@ -98,4 +98,4 @@ Full phased delivery: [`ROADMAP.md`](ROADMAP.md) · No phase leakage in primary 
 - [`../../DEVELOPMENT_CONSTITUTION.md`](../../DEVELOPMENT_CONSTITUTION.md)
 - [`../../ARCHITECTURE_CONTRACT.md`](../../ARCHITECTURE_CONTRACT.md)
 
-Historical technical annex: `docs/archive/product/` (reference only).
+Historical technical annex: `docs/archive/phase1_legacy/` (reference only).

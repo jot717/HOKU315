@@ -10,8 +10,8 @@ Product truth: [`ops/product/PRODUCT_MASTER.md`](../ops/product/PRODUCT_MASTER.m
 | Phase | Status | Summary | UAT |
 |-------|--------|---------|-----|
 | **APP SHELL REPLACEMENT v1** | WIP / planned | Shell routing & product surface alignment | TBD |
-| **PHASE2 persistence** | FUTURE | Account memory, cross-device backup (utility) | — |
-| **PHASE3 SNS** | FUTURE | Opt-in graph ingestion | — |
+| **PHASE2 persistence** | FUTURE | Account memory, cross-device backup (utility) |  E|
+| **PHASE3 SNS** | FUTURE | Opt-in graph ingestion |  E|
 
 ---
 
@@ -21,6 +21,7 @@ Each row = **one canonical entry**. Sprint files: `backlog/archive/BACKLOG_*` / 
 
 | Phase | Summary | Key docs |
 |-------|---------|----------|
+| **PHASE1-H3 Repo minimization v1** | Active surface map, dead routes/components, archive buckets, WIP quarantine | `ACTIVE_SURFACE_MAP.md`, `DEAD_ROUTE_AUDIT.md` |
 | **PHASE1-H2 AI governance reset v1** | SSOT consolidation, archive enforcement, AI constitution | `AI_DEVELOPMENT_CONSTITUTION.md`, `SIGNAL_SYSTEM.md`, `MATCH_SYSTEM.md` |
 | **PHASE1-G Governance v1** | Product master, backlog/UAT governance, guest/login clarity | `PRODUCT_MASTER.md`, `MASTER_BACKLOG.md`, `UAT_MASTER_GUIDE.md` |
 | **PHASE1-F Match credibility v1** | Social energy match cards, rhythm engine | `MATCH_ARCHETYPE_SYSTEM.md`, `match_rhythm_engine.py` |
@@ -42,8 +43,8 @@ Each row = **one canonical entry**. Sprint files: `backlog/archive/BACKLOG_*` / 
 
 ## ARCHIVED
 
-- All `backlog/archive/BACKLOG_*.md` and `SPRINT_*.md` — historical scope/DoD
-- Product/UAT annex: `docs/archive/product/`, `docs/archive/uat/`
+- All `backlog/archive/BACKLOG_*.md` and `SPRINT_*.md`  Ehistorical scope/DoD
+- Product/UAT annex: `docs/archive/phase1_legacy/`, `docs/archive/old_uat/`
 - Older drift: `docs/deprecated/archive/`
 
 ---
@@ -72,4 +73,4 @@ Each row = **one canonical entry**. Sprint files: `backlog/archive/BACKLOG_*` / 
 1. Add **one row** here (ACTIVE).
 2. Create `BACKLOG_<slug>_v1.md` + `SPRINT_<slug>_v1.md` if slice detail needed.
 3. Link from `PRODUCT_MASTER.md` only if it changes product truth.
-4. On complete → move slice to `backlog/archive/`, move row to COMPLETED.
+4. On complete ↁEmove slice to `backlog/archive/`, move row to COMPLETED.

@@ -16,10 +16,10 @@ ROOT = Path(__file__).resolve().parents[2]
 
 def test_signal_intelligence_docs_exist() -> None:
     for rel in (
-        "docs/archive/product/SIGNAL_INTELLIGENCE_CONSTITUTION.md",
-        "docs/archive/product/SIGNAL_RISK_ONTOLOGY.md",
-        "docs/archive/product/SIGNAL_INFERENCE_MODEL.md",
-        "ops/uat/SIGNAL_INTELLIGENCE_ENGINE_UAT.md",
+        "docs/archive/phase1_legacy/SIGNAL_INTELLIGENCE_CONSTITUTION.md",
+        "docs/archive/phase1_legacy/SIGNAL_RISK_ONTOLOGY.md",
+        "docs/archive/phase1_legacy/SIGNAL_INFERENCE_MODEL.md",
+        "docs/archive/old_uat/SIGNAL_INTELLIGENCE_ENGINE_UAT.md",
         "backlog/archive/BACKLOG_SIGNAL_INTELLIGENCE_ENGINE_v1.md",
         "backlog/archive/SPRINT_SIGNAL_INTELLIGENCE_ENGINE_v1.md",
     ):
@@ -27,7 +27,7 @@ def test_signal_intelligence_docs_exist() -> None:
 
 
 def test_ontology_lists_risk_types() -> None:
-    text = (ROOT / "ops" / "product" / "SIGNAL_RISK_ONTOLOGY.md").read_text(encoding="utf-8")
+    text = (ROOT / "docs/archive/phase1_legacy/SIGNAL_RISK_ONTOLOGY.md").read_text(encoding="utf-8")
     assert "attention_drain_risk" in text
     assert "ghosting_sensitivity" in text
 
