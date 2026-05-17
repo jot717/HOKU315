@@ -27,7 +27,9 @@ def _clean_runtime_artifacts() -> None:
 
 @pytest.fixture(autouse=True)
 def _persistence_test_hygiene() -> None:
+    registry.use_backend(None)
     registry.reset_backend_for_tests()
     yield
+    registry.use_backend(None)
     registry.reset_backend_for_tests()
     _clean_runtime_artifacts()

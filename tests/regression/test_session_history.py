@@ -6,12 +6,8 @@ from product.persistence.runtime.backend import LocalJsonBackend
 from product.persistence.runtime.entities import SESSION_HISTORY
 
 
-def test_session_history_append(tmp_path, monkeypatch) -> None:
-    monkeypatch.setattr(
-        registry,
-        "get_backend",
-        lambda: LocalJsonBackend({SESSION_HISTORY: tmp_path / "session_history.json"}),
-    )
+def test_session_history_append(tmp_path) -> None:
+    registry.use_backend(LocalJsonBackend({SESSION_HISTORY: tmp_path / "session_history.json"}))
 
     session_history.append_history(
         {

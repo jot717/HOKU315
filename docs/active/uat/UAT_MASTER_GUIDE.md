@@ -35,7 +35,13 @@
 | B1 | `/login` | Register/login; calm errors |
 | B2 | `/match` | Cards show rhythm, reply pressure, energy safety, scenario |
 
-### C. Regression (automated)
+### C. Phase 2-A persistence UAT (automated)
+
+```bash
+pytest tests/uat/test_phase2a_persistence_uat.py -v --tb=short
+```
+
+### D. Regression (automated)
 
 ```bash
 python ops/flow/check_all_flows.py

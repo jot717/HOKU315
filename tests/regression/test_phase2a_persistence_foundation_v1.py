@@ -37,10 +37,10 @@ def test_unsupported_backend_raises() -> None:
         registry.reset_backend_for_tests()
 
 
-def test_profile_roundtrip_via_backend(tmp_path, monkeypatch) -> None:
+def test_profile_roundtrip_via_backend(tmp_path) -> None:
     registry.reset_backend_for_tests()
     paths = {k: tmp_path / f"{k}.json" for k in ENTITY_PATHS}
-    monkeypatch.setattr(registry, "get_backend", lambda: LocalJsonBackend(paths))
+    registry.use_backend(LocalJsonBackend(paths))
 
     payload = dict(DEFAULT_PROFILE)
     payload["name"] = "Phase2A Test"

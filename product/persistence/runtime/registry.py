@@ -26,3 +26,9 @@ def reset_backend_for_tests() -> None:
     """Clear cached backend (tests / env changes only)."""
     global _backend
     _backend = None
+
+
+def use_backend(backend: PersistenceBackend | None) -> None:
+    """Inject backend for tests/UAT (does not replace imported get_backend refs)."""
+    global _backend
+    _backend = backend

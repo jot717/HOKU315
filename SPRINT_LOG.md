@@ -2,7 +2,14 @@
 
 **Latest sprint logs (full history):** [`docs/archive/legacy/sprint_history/SPRINT_LOG_FULL.md`](docs/archive/legacy/sprint_history/SPRINT_LOG_FULL.md)
 
-**Current:** PHASE2-A PERSISTENCE FOUNDATION
+**Current:** PHASE2-A PERSISTENCE UAT
+
+---
+
+## 2026-05-17 — PHASE2-A UAT
+
+- Automated persistence UAT: `tests/uat/test_phase2a_persistence_uat.py` (12 cases)
+- `registry.use_backend()` for deterministic test isolation
 
 ---
 
