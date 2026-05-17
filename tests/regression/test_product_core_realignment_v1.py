@@ -37,10 +37,10 @@ def test_deprecated_language_updated() -> None:
 
 def test_roadmap_phases_defined() -> None:
     text = _read("docs/active/product/ROADMAP.md")
-    assert "Phase 1" in text
-    assert "Phase 3" in text and "SNS" in text
-    assert "Phase 4" in text
-    assert "Phase 5" in text
+    assert "PHASE1" in text
+    assert "PHASE3" in text and "SNS" in text
+    assert "PHASE5" in text
+    assert "PHASE7" in text
 
 
 def test_no_primary_route_breakage_in_fox_quiz_app() -> None:

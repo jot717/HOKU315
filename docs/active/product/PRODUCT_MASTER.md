@@ -55,7 +55,7 @@ Detail: [`SIGNAL_SYSTEM.md`](SIGNAL_SYSTEM.md) · [`MATCH_SYSTEM.md`](MATCH_SYST
 | Interaction pressure | `ux_intelligence_engine.py` |
 | Social energy | `match_rhythm_engine.py` |
 | Match credibility | `fox_quiz/match_wall.py` |
-| Persistence | Phase 2 |
+| Persistence | Phase 2 — port: `product/persistence/runtime/` (2-A local JSON) |
 | SNS intelligence | Phase 3+ |
 
 ---

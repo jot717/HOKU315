@@ -1,13 +1,16 @@
 from __future__ import annotations
 
 import product.session.runtime.session_history as session_history
+from product.persistence.runtime import registry
+from product.persistence.runtime.backend import LocalJsonBackend
+from product.persistence.runtime.entities import SESSION_HISTORY
 
 
 def test_session_history_append(tmp_path, monkeypatch) -> None:
     monkeypatch.setattr(
-        session_history,
-        "SESSION_HISTORY_PATH",
-        tmp_path / "session_history.json",
+        registry,
+        "get_backend",
+        lambda: LocalJsonBackend({SESSION_HISTORY: tmp_path / "session_history.json"}),
     )
 
     session_history.append_history(

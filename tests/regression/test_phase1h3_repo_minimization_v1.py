@@ -53,7 +53,14 @@ def test_archive_buckets_no_loose_md() -> None:
 def test_runtime_templates_only() -> None:
     assert (ROOT / "runtime_state/templates/sample_profile.json").is_file()
     assert (ROOT / "runtime_state/templates/sample_target.json").is_file()
-    assert not (ROOT / "runtime_state/target_profile.json").exists()
+    for name in (
+        "target_profile.json",
+        "user_profile.json",
+        "fox_memory.json",
+        "session_history.json",
+        "local_session.json",
+    ):
+        assert not (ROOT / "runtime_state" / name).exists(), name
 
 
 def test_wip_quarantine_exists() -> None:

@@ -1,13 +1,19 @@
 from __future__ import annotations
 
-import product.memory.runtime.fox_memory_store as fox_memory_store
+from product.persistence.runtime import registry
+from product.persistence.runtime.backend import LocalJsonBackend
+from product.persistence.runtime.entities import FOX_MEMORY
 from fox_quiz.ui.components.fox_memory_card import fox_memory_card
 from fox_quiz.ui.insight_panel import insight_panel
 from product.memory.runtime.fox_memory_engine import remember_insight
 
 
 def test_fox_memory_engine_returns_dict(tmp_path, monkeypatch) -> None:
-    monkeypatch.setattr(fox_memory_store, "MEMORY_PATH", tmp_path / "fox_memory.json")
+    monkeypatch.setattr(
+        registry,
+        "get_backend",
+        lambda: LocalJsonBackend({FOX_MEMORY: tmp_path / "fox_memory.json"}),
+    )
     out = remember_insight({"shared_traits": ["quiet"]}, 72.0)
     assert isinstance(out, dict)
     assert "guardian_memory_note" in out

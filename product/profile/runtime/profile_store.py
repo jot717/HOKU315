@@ -1,10 +1,9 @@
 from __future__ import annotations
 
-import json
-from pathlib import Path
 from typing import Any, Dict
 
-PROFILE_PATH = Path("runtime_state/user_profile.json")
+from product.persistence.runtime.entities import USER_PROFILE
+from product.persistence.runtime.registry import get_backend
 
 DEFAULT_PROFILE = {
     "name": "Demo User",
@@ -14,15 +13,12 @@ DEFAULT_PROFILE = {
 
 
 def save_profile(profile: Dict[str, Any]) -> None:
-    PROFILE_PATH.parent.mkdir(parents=True, exist_ok=True)
-
-    with open(PROFILE_PATH, "w", encoding="utf-8") as f:
-        json.dump(profile, f, indent=2)
+    get_backend().write(USER_PROFILE, profile)
 
 
 def load_profile() -> Dict[str, Any]:
-    if not PROFILE_PATH.exists():
+    data = get_backend().read(USER_PROFILE)
+    if data is None:
         save_profile(DEFAULT_PROFILE)
-
-    with open(PROFILE_PATH, "r", encoding="utf-8") as f:
-        return json.load(f)
+        return dict(DEFAULT_PROFILE)
+    return data

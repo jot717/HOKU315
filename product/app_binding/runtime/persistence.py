@@ -1,40 +1,19 @@
 from __future__ import annotations
 
-import json
-from pathlib import Path
 from typing import Any, Dict
 
-SESSION_FILE = Path(
-    "runtime_state/local_session.json",
-)
+from product.persistence.runtime.entities import LOCAL_SESSION
+from product.persistence.runtime.registry import get_backend
 
 
-def persist_session(
-    data: Dict[str, Any],
-) -> None:
-    SESSION_FILE.parent.mkdir(
-        parents=True,
-        exist_ok=True,
-    )
-
-    with open(
-        SESSION_FILE,
-        "w",
-        encoding="utf-8",
-    ) as f:
-        json.dump(
-            data,
-            f,
-            indent=2,
-        )
+def persist_session(data: Dict[str, Any]) -> None:
+    get_backend().write(LOCAL_SESSION, data)
 
 
 def load_session() -> Dict[str, Any]:
-    if not SESSION_FILE.exists():
+    raw = get_backend().read(LOCAL_SESSION)
+    if raw is None:
         return {}
-
-    with open(
-        SESSION_FILE,
-        encoding="utf-8",
-    ) as f:
-        return json.load(f)
+    if isinstance(raw, dict):
+        return raw
+    return {}

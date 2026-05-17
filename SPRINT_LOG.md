@@ -2,7 +2,15 @@
 
 **Latest sprint logs (full history):** [`docs/archive/legacy/sprint_history/SPRINT_LOG_FULL.md`](docs/archive/legacy/sprint_history/SPRINT_LOG_FULL.md)
 
-**Current:** PHASE1-H7 SSOT HIERARCHY
+**Current:** PHASE2-A PERSISTENCE FOUNDATION
+
+---
+
+## 2026-05-17 — PHASE2-A
+
+- `product/persistence/runtime/` — `PersistenceBackend`, `LocalJsonBackend`, entity registry
+- Stores refactored to persistence port; default `HOKU_PERSISTENCE_BACKEND=local`
+- Regression: `test_phase2a_persistence_foundation_v1.py`
 
 ---
 

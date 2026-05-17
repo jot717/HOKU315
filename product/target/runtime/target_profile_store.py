@@ -1,11 +1,10 @@
 from __future__ import annotations
 
-import json
 from copy import deepcopy
-from pathlib import Path
 from typing import Any, Dict, List, MutableMapping
 
-TARGET_PATH = Path("runtime_state/target_profile.json")
+from product.persistence.runtime.entities import TARGET_PROFILE
+from product.persistence.runtime.registry import get_backend
 
 DEFAULT_TARGET: Dict[str, Any] = {
     "target_name": "",
@@ -61,16 +60,14 @@ def normalize_target_profile(raw: Dict[str, Any]) -> Dict[str, Any]:
 
 def save_target_profile(profile: Dict[str, Any]) -> None:
     clean = normalize_target_profile(profile)
-    TARGET_PATH.parent.mkdir(parents=True, exist_ok=True)
-    with open(TARGET_PATH, "w", encoding="utf-8") as f:
-        json.dump(clean, f, indent=2, ensure_ascii=False)
+    get_backend().write(TARGET_PROFILE, clean)
 
 
 def load_target_profile() -> Dict[str, Any]:
-    if not TARGET_PATH.exists():
+    raw = get_backend().read(TARGET_PROFILE)
+    if raw is None:
         save_target_profile(DEFAULT_TARGET)
-    with open(TARGET_PATH, "r", encoding="utf-8") as f:
-        raw = json.load(f)
+        return normalize_target_profile(dict(DEFAULT_TARGET))
     if not isinstance(raw, dict):
         raw = {}
     return normalize_target_profile(raw)

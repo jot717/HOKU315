@@ -35,8 +35,16 @@ def test_target_route_registered() -> None:
 
 
 def test_target_store_roundtrip(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+    from product.persistence.runtime import registry
+    from product.persistence.runtime.backend import LocalJsonBackend
+    from product.persistence.runtime.entities import TARGET_PROFILE
+
     p = tmp_path / "target_profile.json"
-    monkeypatch.setattr(tps, "TARGET_PATH", p)
+    monkeypatch.setattr(
+        registry,
+        "get_backend",
+        lambda: LocalJsonBackend({TARGET_PROFILE: p}),
+    )
     payload = {
         "target_name": "測試對象",
         "relationship_type": "同事",

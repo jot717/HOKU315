@@ -2,7 +2,9 @@
 
 Local JSON used by **profile**, **target**, **session binding**, **insight history**, and **fox memory**. Paths are relative to repo root.
 
-These files are **not** a substitute for cloud auth or Phase-2 persistence; they are the **development / single-user runtime** contract.
+These files are the **Phase 1 / Phase 2-A local runtime** contract. All reads/writes go through `product/persistence/runtime/` (`HOKU_PERSISTENCE_BACKEND=local`).
+
+Phase 2-B+ may add cloud backends; schema keys remain stable.
 
 | File | Purpose | Schema (normative) |
 |------|---------|---------------------|

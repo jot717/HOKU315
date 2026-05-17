@@ -1,11 +1,10 @@
 from __future__ import annotations
 
-import json
 from datetime import datetime, timezone
-from pathlib import Path
 from typing import Any, Dict, List
 
-MEMORY_PATH = Path("runtime_state/fox_memory.json")
+from product.persistence.runtime.entities import FOX_MEMORY
+from product.persistence.runtime.registry import get_backend
 
 DEFAULT_MEMORY: Dict[str, Any] = {
     "recent_patterns": [],
@@ -21,22 +20,20 @@ def _utc_now_iso() -> str:
 
 
 def load_fox_memory() -> Dict[str, Any]:
-    MEMORY_PATH.parent.mkdir(parents=True, exist_ok=True)
-    if not MEMORY_PATH.exists():
+    data = get_backend().read(FOX_MEMORY)
+    if data is None:
         save_fox_memory(dict(DEFAULT_MEMORY))
-    with open(MEMORY_PATH, encoding="utf-8") as f:
-        data = json.load(f)
+        data = dict(DEFAULT_MEMORY)
     merged = dict(DEFAULT_MEMORY)
-    merged.update(data)
+    if isinstance(data, dict):
+        merged.update(data)
     return merged
 
 
 def save_fox_memory(data: Dict[str, Any]) -> None:
-    MEMORY_PATH.parent.mkdir(parents=True, exist_ok=True)
     payload = dict(DEFAULT_MEMORY)
     payload.update(data)
-    with open(MEMORY_PATH, "w", encoding="utf-8") as f:
-        json.dump(payload, f, ensure_ascii=False, indent=2)
+    get_backend().write(FOX_MEMORY, payload)
 
 
 def derive_recurring_note(

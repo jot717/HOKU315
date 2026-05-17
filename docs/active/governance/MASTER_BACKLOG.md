@@ -10,7 +10,7 @@ Product truth: [`../product/PRODUCT_MASTER.md`](../product/PRODUCT_MASTER.md) ·
 
 | Phase | Status | Summary | UAT |
 |-------|--------|---------|-----|
-| **PHASE2 persistence** | FUTURE | Account memory, cross-device backup (utility) | - |
+| **PHASE2-B cloud persistence** | FUTURE | Supabase adapter behind same port (utility) | - |
 | **PHASE3 SNS** | FUTURE | Opt-in graph ingestion | - |
 
 ---
@@ -19,6 +19,7 @@ Product truth: [`../product/PRODUCT_MASTER.md`](../product/PRODUCT_MASTER.md) ·
 
 | Phase | Summary | Key docs |
 |-------|---------|----------|
+| **PHASE2-A Persistence foundation v1** | `PersistenceBackend`, local JSON port, store refactor | `product/persistence/runtime/` |
 | **PHASE1-H7 SSOT hierarchy v1** | `SSOT_HIERARCHY.md`, ROADMAP PHASE1–7, authority chain | `SSOT_HIERARCHY.md` |
 | **PHASE1-H6 AI development discipline v1** | `START_NEW_SPRINT.md`, `AI_TASK_TEMPLATE.md`, regression guard | `START_NEW_SPRINT.md` |
 | **PHASE1-H5 Root consolidation v1** | Root lobby, governance layer in `docs/active/governance/` | `docs/README.md` |

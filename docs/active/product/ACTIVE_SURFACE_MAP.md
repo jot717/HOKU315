@@ -38,6 +38,8 @@ Only files in `docs/active/product/` (8 SSOT files). See [`README.md`](README.md
 
 `AppState`, `ProfileState`, `TargetState`, `MatchWallState`, `SessionState`, `QuizState`
 
+**Persistence (Phase 2-A):** `product/persistence/runtime/` — all `runtime_state/` JSON via `LocalJsonBackend`
+
 ---
 
 ## Active UI surfaces

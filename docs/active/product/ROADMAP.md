@@ -59,7 +59,7 @@ Do not treat `PHASE1-H6` as product PHASE6.
 
 ## PHASE2 — Persistence & memory
 
-**Status:** FUTURE (next product phase)
+**Status:** ACTIVE (foundation in progress)
 
 **Mission:** Longitudinal memory, account-backed profiles, cross-device continuity.
 
@@ -74,6 +74,27 @@ Do not treat `PHASE1-H6` as product PHASE6.
 - SNS surfaces or external graph UI
 - Replacing Phase 1 rule engines with ML inference
 - Second onboarding flow
+
+### PHASE2-A — Persistence foundation v1
+
+**Status:** COMPLETED
+
+**Mission:** One persistence port over existing `runtime_state/` JSON; no UX or cloud headline changes.
+
+**Scope:**
+
+- `product/persistence/runtime/` — entity keys, `PersistenceBackend`, `LocalJsonBackend`, `get_backend()`
+- All runtime stores route through backend (`profile`, `target`, `fox_memory`, `session_history`, `local_session`)
+- Env: `HOKU_PERSISTENCE_BACKEND=local` (default; only supported value in 2-A)
+
+**Non-goals:**
+
+- Supabase / cloud adapter (PHASE2-B+)
+- Login or account UX changes
+- New routes or Phase 1 copy changes
+- SNS or graph persistence
+
+**Code SSOT:** `product/persistence/runtime/entities.py` · Schema: [`../env/RUNTIME_STATE_SCHEMA.md`](../env/RUNTIME_STATE_SCHEMA.md)
 
 ---
 
