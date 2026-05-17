@@ -14,13 +14,13 @@ Interpret **human danger patterns** from existing profile + mine vector + memory
 
 ## DELIVERABLES
 
-* [`ops/product/SIGNAL_INTELLIGENCE_CONSTITUTION.md`](../ops/product/SIGNAL_INTELLIGENCE_CONSTITUTION.md)
-* [`ops/product/SIGNAL_RISK_ONTOLOGY.md`](../ops/product/SIGNAL_RISK_ONTOLOGY.md)
-* [`ops/product/SIGNAL_INFERENCE_MODEL.md`](../ops/product/SIGNAL_INFERENCE_MODEL.md)
+* [`docs/active/product/SIGNAL_INTELLIGENCE_CONSTITUTION.md`](../docs/active/product/SIGNAL_INTELLIGENCE_CONSTITUTION.md)
+* [`docs/active/product/SIGNAL_RISK_ONTOLOGY.md`](../docs/active/product/SIGNAL_RISK_ONTOLOGY.md)
+* [`docs/active/product/SIGNAL_INFERENCE_MODEL.md`](../docs/active/product/SIGNAL_INFERENCE_MODEL.md)
 * [`product/signal/runtime/signal_inference_engine.py`](../product/signal/runtime/signal_inference_engine.py) — `infer_signal_risks`, `collect_signal_profile_for_inference`
 * [`product/memory/runtime/fox_memory_engine.py`](../product/memory/runtime/fox_memory_engine.py) — `apply_inference_memory_tags`
 * Guardian insight integration (`fox_quiz/state/app_state.py`, `fox_quiz/ui/insight_panel.py`)
-* [`ops/uat/SIGNAL_INTELLIGENCE_ENGINE_UAT.md`](../ops/uat/SIGNAL_INTELLIGENCE_ENGINE_UAT.md)
+* [`docs/active/uat/SIGNAL_INTELLIGENCE_ENGINE_UAT.md`](../docs/active/uat/SIGNAL_INTELLIGENCE_ENGINE_UAT.md)
 * Regression: `tests/regression/test_signal_intelligence_engine_v1.py`
 
 ## NON-GOALS

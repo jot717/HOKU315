@@ -11,7 +11,7 @@
 * UAT fail  
 * Production incident（若有）
 
-對齊收集流程見根目錄 [**`DEBUG_GUIDE.md`**](../DEBUG_GUIDE.md)；AI／人工 HOTFIX 行為約束見 [**`DEBUG_POLICY.md`**](../DEBUG_POLICY.md)。
+對齊收集流程見根目錄 [**`ops/debug/DEBUG_GUIDE.md`**](../ops/debug/DEBUG_GUIDE.md)；AI／人工 HOTFIX 行為約束見 [**`ops/debug/DEBUG_POLICY.md`**](../ops/debug/DEBUG_POLICY.md)。
 
 ---
 
@@ -156,4 +156,4 @@ debug_evidence/YYYY-MM-DD-short-slug/
 | 封存證據 | 本目錄新增事故資料夾 + 檔案 |
 | 決策摘要 | [`BACKLOG.md`](../BACKLOG.md) **HOTFIX ARCHIVE** |
 | 進度 | [`SPRINT_LOG.md`](../SPRINT_LOG.md) |
-| 測試勾選 | [`TEST_CHECKLIST.md`](../TEST_CHECKLIST.md) |
+| 測試勾選 | [`ops/testing/TEST_CHECKLIST.md`](../ops/testing/TEST_CHECKLIST.md) |

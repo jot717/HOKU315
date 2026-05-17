@@ -6,6 +6,6 @@
 
 - `debug_evidence/`、`debug_evidence/README.md`
 - `scripts/create_incident.py`、`scripts/collect_runtime.py`、`scripts/generate_patch_context.py`
-- `docs/DEBUG_GUIDE.md`、`DEBUG_POLICY.md`
+- `docs/ops/debug/DEBUG_GUIDE.md`、`ops/debug/DEBUG_POLICY.md`
 
-見 [`REPO_ARCHITECTURE.md`](../../REPO_ARCHITECTURE.md)。
+見 [`ops/governance/REPO_ARCHITECTURE.md`](../../ops/governance/REPO_ARCHITECTURE.md)。

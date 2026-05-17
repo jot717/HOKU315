@@ -18,4 +18,4 @@
 
 Product layer **must NOT** directly import AI modules (`ai/*`).
 
-See also [`REPO_ARCHITECTURE.md`](../REPO_ARCHITECTURE.md), [`ARCHITECTURE_CONTRACT.md`](../ARCHITECTURE_CONTRACT.md).
+See also [`ops/governance/REPO_ARCHITECTURE.md`](../ops/governance/REPO_ARCHITECTURE.md), [`ops/governance/ARCHITECTURE_CONTRACT.md`](../ops/governance/ARCHITECTURE_CONTRACT.md).

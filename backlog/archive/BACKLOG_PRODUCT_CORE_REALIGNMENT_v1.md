@@ -14,11 +14,11 @@ Lock **AI Native SNS Guardian Network** as the true core: social interaction fil
 
 ## SCOPE
 
-* [`ops/product/CORE_PRODUCT_REALIGNMENT.md`](../ops/product/CORE_PRODUCT_REALIGNMENT.md)
-* [`ops/product/SOCIAL_SIGNAL_ARCHITECTURE.md`](../ops/product/SOCIAL_SIGNAL_ARCHITECTURE.md)
-* [`ops/product/HATER_SIGNAL_MODEL.md`](../ops/product/HATER_SIGNAL_MODEL.md)
-* [`ops/uat/PRODUCT_DIRECTION_RESET_NOTES.md`](../ops/uat/PRODUCT_DIRECTION_RESET_NOTES.md)
-* Updates: [`docs/deprecated/DEPRECATED_PRODUCT_LANGUAGE.md`](../docs/deprecated/DEPRECATED_PRODUCT_LANGUAGE.md), [`ops/product/FOX_ROADMAP.md`](../ops/product/FOX_ROADMAP.md)
+* [`docs/active/product/CORE_PRODUCT_REALIGNMENT.md`](../docs/active/product/CORE_PRODUCT_REALIGNMENT.md)
+* [`docs/active/product/SOCIAL_SIGNAL_ARCHITECTURE.md`](../docs/active/product/SOCIAL_SIGNAL_ARCHITECTURE.md)
+* [`docs/active/product/HATER_SIGNAL_MODEL.md`](../docs/active/product/HATER_SIGNAL_MODEL.md)
+* [`docs/active/uat/PRODUCT_DIRECTION_RESET_NOTES.md`](../docs/active/uat/PRODUCT_DIRECTION_RESET_NOTES.md)
+* Updates: [`docs/deprecated/DEPRECATED_PRODUCT_LANGUAGE.md`](../docs/deprecated/DEPRECATED_PRODUCT_LANGUAGE.md), [`docs/active/product/FOX_ROADMAP.md`](../docs/active/product/FOX_ROADMAP.md)
 * Regression: [`tests/regression/test_product_core_realignment_v1.py`](../tests/regression/test_product_core_realignment_v1.py)
 
 ## NON-GOALS

@@ -14,13 +14,13 @@ Begin **interaction intelligence**: simulate **relationship-shaped** risk with a
 
 ## DELIVERABLES
 
-* [`ops/product/RELATIONSHIP_INTELLIGENCE_CONSTITUTION.md`](../ops/product/RELATIONSHIP_INTELLIGENCE_CONSTITUTION.md)
-* [`ops/product/RELATIONSHIP_ARCHETYPE_MODEL.md`](../ops/product/RELATIONSHIP_ARCHETYPE_MODEL.md)
-* [`ops/product/INTERACTION_SIGNAL_ONTOLOGY.md`](../ops/product/INTERACTION_SIGNAL_ONTOLOGY.md)
+* [`docs/active/product/RELATIONSHIP_INTELLIGENCE_CONSTITUTION.md`](../docs/active/product/RELATIONSHIP_INTELLIGENCE_CONSTITUTION.md)
+* [`docs/active/product/RELATIONSHIP_ARCHETYPE_MODEL.md`](../docs/active/product/RELATIONSHIP_ARCHETYPE_MODEL.md)
+* [`docs/active/product/INTERACTION_SIGNAL_ONTOLOGY.md`](../docs/active/product/INTERACTION_SIGNAL_ONTOLOGY.md)
 * [`product/signal/runtime/relationship_simulation_engine.py`](../product/signal/runtime/relationship_simulation_engine.py)
 * [`product/memory/runtime/fox_memory_engine.py`](../product/memory/runtime/fox_memory_engine.py) — `record_relationship_simulation_memory`
 * Insight + home copy / minimal UI strip
-* [`ops/uat/RELATIONSHIP_SIGNAL_SIMULATION_UAT.md`](../ops/uat/RELATIONSHIP_SIGNAL_SIMULATION_UAT.md)
+* [`docs/active/uat/RELATIONSHIP_SIGNAL_SIMULATION_UAT.md`](../docs/active/uat/RELATIONSHIP_SIGNAL_SIMULATION_UAT.md)
 * Regression: `tests/regression/test_relationship_signal_simulation_v1.py`
 
 ## NON-GOALS

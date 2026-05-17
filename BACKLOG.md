@@ -1,11 +1,11 @@
 # HOKU315 BACKLOG
 
-> **Product single source of truth:** [`ops/product/PRODUCT_MASTER.md`](ops/product/PRODUCT_MASTER.md)  
+> **Product single source of truth:** [`docs/active/product/PRODUCT_MASTER.md`](docs/active/product/PRODUCT_MASTER.md)  
 > **Phase backlog index:** [`backlog/MASTER_BACKLOG.md`](backlog/MASTER_BACKLOG.md)  
-> **Official UAT:** [`ops/uat/UAT_MASTER_GUIDE.md`](ops/uat/UAT_MASTER_GUIDE.md)  
-> **Repo governance:** [`ops/product/REPO_GOVERNANCE_RULES.md`](ops/product/REPO_GOVERNANCE_RULES.md)
+> **Official UAT:** [`docs/active/uat/UAT_MASTER_GUIDE.md`](docs/active/uat/UAT_MASTER_GUIDE.md)  
+> **Repo governance:** [`docs/active/product/REPO_GOVERNANCE_RULES.md`](docs/active/product/REPO_GOVERNANCE_RULES.md)
 
-**Workflow（AI-native）**：衝刺計畫見 [`SPRINT_PLAN.md`](SPRINT_PLAN.md)、日誌見 [`SPRINT_LOG.md`](SPRINT_LOG.md)；配對牆驗收見 [`TEST_CHECKLIST.md`](TEST_CHECKLIST.md)；資料庫套用軌跡見 [`sql/DEPLOY_LOG.md`](sql/DEPLOY_LOG.md)；**Debug／UAT 證據收集**見 [**`DEBUG_GUIDE.md`**](DEBUG_GUIDE.md)；**證據資產化目錄**見 [**`debug_evidence/README.md`**](debug_evidence/README.md)；**AI／P0 patch 約束**見 [**`DEBUG_POLICY.md`**](DEBUG_POLICY.md)；**Repo 分層**見 [**`REPO_ARCHITECTURE.md`**](REPO_ARCHITECTURE.md)；**介面契約**見 [**`ARCHITECTURE_CONTRACT.md`**](ARCHITECTURE_CONTRACT.md)；**流程護欄**見 [**`ops/process/RULES.md`**](ops/process/RULES.md)；**治理層級**見 [GOVERNANCE HIERARCHY](#governance-hierarchy)。產品治理仍依根目錄 **`DEVELOPMENT_CONSTITUTION.md`**。
+**Workflow（AI-native）**：衝刺計畫見 [`docs/archive/root_legacy/SPRINT_PLAN.md`](docs/archive/root_legacy/SPRINT_PLAN.md)、日誌見 [`SPRINT_LOG.md`](SPRINT_LOG.md)；配對牆驗收見 [`ops/testing/TEST_CHECKLIST.md`](ops/testing/TEST_CHECKLIST.md)；資料庫套用軌跡見 [`sql/DEPLOY_LOG.md`](sql/DEPLOY_LOG.md)；**Debug／UAT 證據收集**見 [**`ops/debug/DEBUG_GUIDE.md`**](ops/debug/DEBUG_GUIDE.md)；**證據資產化目錄**見 [**`debug_evidence/README.md`**](debug_evidence/README.md)；**AI／P0 patch 約束**見 [**`ops/debug/DEBUG_POLICY.md`**](ops/debug/DEBUG_POLICY.md)；**Repo 分層**見 [**`ops/governance/REPO_ARCHITECTURE.md`**](ops/governance/REPO_ARCHITECTURE.md)；**介面契約**見 [**`ops/governance/ARCHITECTURE_CONTRACT.md`**](ops/governance/ARCHITECTURE_CONTRACT.md)；**流程護欄**見 [**`ops/process/RULES.md`**](ops/process/RULES.md)；**治理層級**見 [GOVERNANCE HIERARCHY](#governance-hierarchy)。產品治理仍依根目錄 **`ops/governance/DEVELOPMENT_CONSTITUTION.md`**。
 
 狀態約定：`[TODO]` · `[WIP]` · `[DONE]` · **`[REMOVED/INTERNAL_ONLY]`**。
 
@@ -16,14 +16,14 @@
 穩定基底與聯調護欄（持續維護，不視為「新功能」）。
 
 - **Supabase / PostgREST**：`PGRST205`／schema cache 暖機；RPC 簽名與部署版本與 `sql/match_logic.sql` 對齊記錄於 `sql/DEPLOY_LOG.md`。
-- **`malformed array literal` 迴歸防線**：RPC 僅傳 pgvector literal、`profiles.vector` 為單一來源；見 **HOTFIX ARCHIVE** 與 `TEST_CHECKLIST.md`。
+- **`malformed array literal` 迴歸防線**：RPC 僅傳 pgvector literal、`profiles.vector` 為單一來源；見 **HOTFIX ARCHIVE** 與 `ops/testing/TEST_CHECKLIST.md`。
 - **Reflex runtime**：禁止在事件處理器中違反 async／`ImmutableStateError` 模式（背景任務見歷史 HOTFIX）。
 - **Reflex compile / `rx.foreach`**：禁止在 foreach 內對項目欄位做 Python 數值比較（會得到 `ObjectItemOperation`）；閾值在載入層預先計算為字串／布林，UI 僅 `rx.cond`／顯示欄位（見 **MATCH WALL COMPILE HOTFIX v1 ACTIVE**）。
 - **環境**：`python-dotenv`、`.env` 與金鑰載入一致；依賴見凍結後之 `requirements.txt`（含 `reflex==0.9.2`、`supabase`、`postgrest`、`python-dotenv`）。
-- **前后端契約**：`get_safe_matches` 回傳欄位與 `match_wall` 渲染鍵一致，避免 RPC／UI mismatch（見 `TEST_CHECKLIST.md`）。
+- **前后端契約**：`get_safe_matches` 回傳欄位與 `match_wall` 渲染鍵一致，避免 RPC／UI mismatch（見 `ops/testing/TEST_CHECKLIST.md`）。
 - **測試閘門**：一鍵 `python -m tests.run_all_tests`；無雲端時 SKIP、exit 0。
-- **除錯 SOP**：HOTFIX／UAT 前先依 [**`DEBUG_GUIDE.md`**](DEBUG_GUIDE.md) 收集 Console／Network／Backend／SQL 證據。
-- **證據資產化**：嚴重／重複性事故將原始證據封存於 **`debug_evidence/YYYY-MM-DD-slug/`**（見 [`debug_evidence/README.md`](debug_evidence/README.md)）；AI patch 遵守 [**`DEBUG_POLICY.md`**](DEBUG_POLICY.md)。
+- **除錯 SOP**：HOTFIX／UAT 前先依 [**`ops/debug/DEBUG_GUIDE.md`**](ops/debug/DEBUG_GUIDE.md) 收集 Console／Network／Backend／SQL 證據。
+- **證據資產化**：嚴重／重複性事故將原始證據封存於 **`debug_evidence/YYYY-MM-DD-slug/`**（見 [`debug_evidence/README.md`](debug_evidence/README.md)）；AI patch 遵守 [**`ops/debug/DEBUG_POLICY.md`**](ops/debug/DEBUG_POLICY.md)。
 
 ### Stabilization Sprint (2026-W01)
 
@@ -40,7 +40,7 @@ Definition of Done:
 * 無 console error
 * Mobile 可正常使用
 
-任務拆解與核銷見 [`SPRINT_PLAN.md`](SPRINT_PLAN.md)；UAT 勾選見 [`TEST_CHECKLIST.md`](TEST_CHECKLIST.md) 之 **MATCH FLOW UAT**；除錯證據流見 [`DEBUG_GUIDE.md`](DEBUG_GUIDE.md)；事故回放目錄見 [`debug_evidence/README.md`](debug_evidence/README.md)。
+任務拆解與核銷見 [`docs/archive/root_legacy/SPRINT_PLAN.md`](docs/archive/root_legacy/SPRINT_PLAN.md)；UAT 勾選見 [`ops/testing/TEST_CHECKLIST.md`](ops/testing/TEST_CHECKLIST.md) 之 **MATCH FLOW UAT**；除錯證據流見 [`ops/debug/DEBUG_GUIDE.md`](ops/debug/DEBUG_GUIDE.md)；事故回放目錄見 [`debug_evidence/README.md`](debug_evidence/README.md)。
 
 ---
 
@@ -56,7 +56,7 @@ Definition of Done:
 - **`[WIP]` Task 9**：支付解鎖、`user_unlocks`、`create_unlock`、配對牆解鎖 dialog（含 `MOCK_UNLOCK`）。
 - **`[TODO]` Task 8**：已解鎖對象之 AI 防雷報告（結構化輸出、付費價值）。
 
-**Sprint 對齊（2026-W01）**：以 [`SPRINT_PLAN.md`](SPRINT_PLAN.md) — **Stabilization**（/story → /match → /unlock）為準；非 P0 項目（Task 8 攻略、Task 9 真實付費串接、成長功能）**暫停至本 Sprint DoD 達成**。每日進度見 [`SPRINT_LOG.md`](SPRINT_LOG.md)。
+**Sprint 對齊（2026-W01）**：以 [`docs/archive/root_legacy/SPRINT_PLAN.md`](docs/archive/root_legacy/SPRINT_PLAN.md) — **Stabilization**（/story → /match → /unlock）為準；非 P0 項目（Task 8 攻略、Task 9 真實付費串接、成長功能）**暫停至本 Sprint DoD 達成**。每日進度見 [`SPRINT_LOG.md`](SPRINT_LOG.md)。
 
 ---
 
@@ -81,12 +81,12 @@ Definition of Done:
 
 端到端骨架：**Observe → Evidence → Replay → Diagnose → Suggest →（Self-heal 預留）**。流程說明見 [`docs/AI_PATCH_FLOW.md`](docs/AI_PATCH_FLOW.md)、回放見 [`docs/REPLAY_GUIDE.md`](docs/REPLAY_GUIDE.md)。
 
-- **Observe**：異常觀測與路由／操作記錄（對齊 [`DEBUG_GUIDE.md`](DEBUG_GUIDE.md)）。
+- **Observe**：異常觀測與路由／操作記錄（對齊 [`ops/debug/DEBUG_GUIDE.md`](ops/debug/DEBUG_GUIDE.md)）。
 - **Evidence**：`debug_evidence/`、`scripts/create_incident.py`、`scripts/collect_runtime.py`。
 - **Replay**：`ai/replay/replay_incident.py`（現為 mock；尚相容 `python replay/replay_incident.py`）、[`docs/REPLAY_GUIDE.md`](docs/REPLAY_GUIDE.md)。
 - **Diagnose**：`ai/taxonomy/error_taxonomy.yaml`、`python -m ai.diagnosis.root_cause_engine`。
 - **Suggest**：`scripts/generate_patch_context.py`、`ai/prompt_templates/`；自動化補丁占位：`ai/self_heal/`（見 **[SELF-HEALING SYSTEM v1](#self-healing-system-v1)**）。
-- **Patch Policy**：`ai/patch_policy/`（占位）、[`DEBUG_POLICY.md`](DEBUG_POLICY.md)、[`docs/AI_PATCH_FLOW.md`](docs/AI_PATCH_FLOW.md)。
+- **Patch Policy**：`ai/patch_policy/`（占位）、[`ops/debug/DEBUG_POLICY.md`](ops/debug/DEBUG_POLICY.md)、[`docs/AI_PATCH_FLOW.md`](docs/AI_PATCH_FLOW.md)。
 
 ### INCIDENT SYSTEM v1-lite
 
@@ -127,7 +127,7 @@ pytest tests/regression/
 
 完成：
 
-- **PRODUCT／AI／OPS** 邏輯分層與目錄對照（見 [`REPO_ARCHITECTURE.md`](REPO_ARCHITECTURE.md)、[`product/`](product/)、[`ops/`](ops/)、[`ai/incident/README.md`](ai/incident/README.md)）。
+- **PRODUCT／AI／OPS** 邏輯分層與目錄對照（見 [`ops/governance/REPO_ARCHITECTURE.md`](ops/governance/REPO_ARCHITECTURE.md)、[`product/`](product/)、[`ops/`](ops/)、[`ai/incident/README.md`](ai/incident/README.md)）。
 - **Replay** 實作歸位 **`ai/replay/`**；根目錄 **`replay/`** 保留 shim。
 - **無搬移** `scripts/`、`tests/`、`docs/`（維持 `pytest`、`python -m tests.*` 與 CI 相容）。
 
@@ -138,8 +138,8 @@ pytest tests/regression/
 完成：
 
 - **product／ai／ops** 三層入口定義：`product/INTERFACE.md`、`ai/INTERFACE.md`、`ops/INTERFACE.md`
-- **不改程式**，僅建立契約層：[`ARCHITECTURE_CONTRACT.md`](ARCHITECTURE_CONTRACT.md)
-- **系統邊界**與 [`REPO_ARCHITECTURE.md`](REPO_ARCHITECTURE.md) 對齊
+- **不改程式**，僅建立契約層：[`ops/governance/ARCHITECTURE_CONTRACT.md`](ops/governance/ARCHITECTURE_CONTRACT.md)
+- **系統邊界**與 [`ops/governance/REPO_ARCHITECTURE.md`](ops/governance/REPO_ARCHITECTURE.md) 對齊
 
 ---
 
@@ -148,7 +148,7 @@ pytest tests/regression/
 System-level rules（詳 [`ops/process/RULES.md`](ops/process/RULES.md)）：
 
 - **BACKLOG** 先於實作規劃新功能／可追蹤條目  
-- **SPRINT** 對應可執行衝刺（見 [`SPRINT_PLAN.md`](SPRINT_PLAN.md)、[`SPRINT_LOG.md`](SPRINT_LOG.md)）  
+- **SPRINT** 對應可執行衝刺（見 [`docs/archive/root_legacy/SPRINT_PLAN.md`](docs/archive/root_legacy/SPRINT_PLAN.md)、[`SPRINT_LOG.md`](SPRINT_LOG.md)）  
 - **REGRESSION** 通過方視為 DONE 門檻之一（`pytest tests/regression/`）  
 - 工作流：**BACKLOG → SPRINT → IMPLEMENT → TEST → LOG**  
 - 輕量檢查：`python ops/hooks/check_process.py`
@@ -181,7 +181,7 @@ System-level rules（詳 [`ops/process/RULES.md`](ops/process/RULES.md)）：
 
 * **修正**：
 
-  建立 **`DEBUG_GUIDE.md`**
+  建立 **`ops/debug/DEBUG_GUIDE.md`**
 
 * **結果**：
 
@@ -197,7 +197,7 @@ System-level rules（詳 [`ops/process/RULES.md`](ops/process/RULES.md)）：
 * **修正**：
 
   建立 **`debug_evidence/`**
-  與 **`DEBUG_POLICY.md`**
+  與 **`ops/debug/DEBUG_POLICY.md`**
 
 * **結果**：
 
@@ -279,7 +279,7 @@ System-level rules（詳 [`ops/process/RULES.md`](ops/process/RULES.md)）：
 
 ### frontend／backend mismatch
 
-- **`get_safe_matches` 回傳欄位演進**：曾有 `matched_user_id`／`blocked_count`／衝突維度與現行 `user_id`／`distance`／`is_blurred`；整合測試與 **`TEST_CHECKLIST.md`** 需對齊。
+- **`get_safe_matches` 回傳欄位演進**：曾有 `matched_user_id`／`blocked_count`／衝突維度與現行 `user_id`／`distance`／`is_blurred`；整合測試與 **`ops/testing/TEST_CHECKLIST.md`** 需對齊。
 - **seed 外鍵**：`profiles.id` 須對 `auth.users`；**`seed_test_users.py`** 改 JWT `sub`（見歷史 FIX）。
 
 ### HOTFIX LOG（全文歸檔）
@@ -329,8 +329,8 @@ System-level rules（詳 [`ops/process/RULES.md`](ops/process/RULES.md)）：
 | 2026-05-08 | **BACKLOG** 分層（P0–P3 + ARCHIVE + DEV LOG）；Workflow 外掛 SPRINT／TEST／`DEPLOY_LOG` |
 | 2026-05-08 | **Stabilization Sprint (2026-W01)** 啟動：凍結 Stripe／coins／growth；P0 DoD 見 **P0 — STABILIZATION** |
 | 2026-05-09 | **HOTFIX**：Reflex nested `<p>`／`rx.callout` hydration；見 **HOTFIX ARCHIVE** |
-| 2026-05-10 | **流程**：建立 **`DEBUG_GUIDE.md`**（標準除錯證據流＋HOTFIX SOP）；見 **HOTFIX ARCHIVE** |
-| 2026-05-11 | **資產化**：建立 **`debug_evidence/`**、`DEBUG_POLICY.md`；見 **HOTFIX ARCHIVE** |
+| 2026-05-10 | **流程**：建立 **`ops/debug/DEBUG_GUIDE.md`**（標準除錯證據流＋HOTFIX SOP）；見 **HOTFIX ARCHIVE** |
+| 2026-05-11 | **資產化**：建立 **`debug_evidence/`**、`ops/debug/DEBUG_POLICY.md`；見 **HOTFIX ARCHIVE** |
 | （rolling） | **MATCH FLOW v1** 產品初始化文件：`backlog/`、`product/match/*.md` |
 
 ### Task 級筆記（精簡保留）
@@ -342,7 +342,7 @@ System-level rules（詳 [`ops/process/RULES.md`](ops/process/RULES.md)）：
 ### 結構調整（本檔）
 
 - **2026-05-08**：BACKLOG 由「連續 HOTFIX 混編」改為 **P0–P3 + HOTFIX ARCHIVE + DEV LOG**；衝刺與測試清單外掛獨立 markdown，以降低 AI 協作與交付混線。
-- **2026-05-08**：啟動 **Stabilization Sprint (2026-W01)**，`SPRINT_PLAN.md`／`TEST_CHECKLIST.md`（MATCH FLOW UAT）對齊；凍結非 P0 新功能直至 DoD。
+- **2026-05-08**：啟動 **Stabilization Sprint (2026-W01)**，`docs/archive/root_legacy/SPRINT_PLAN.md`／`ops/testing/TEST_CHECKLIST.md`（MATCH FLOW UAT）對齊；凍結非 P0 新功能直至 DoD。
 
 ---
 
@@ -352,7 +352,7 @@ System-level rules（詳 [`ops/process/RULES.md`](ops/process/RULES.md)）：
 
 | 層級 | 角色 |
 |------|------|
-| **Constitution** | 理念與原則 — [`DEVELOPMENT_CONSTITUTION.md`](DEVELOPMENT_CONSTITUTION.md) |
+| **Constitution** | 理念與原則 — [`ops/governance/DEVELOPMENT_CONSTITUTION.md`](ops/governance/DEVELOPMENT_CONSTITUTION.md) |
 | **Rules** | 可執行之流程定義 — [`ops/process/RULES.md`](ops/process/RULES.md) |
 | **Hooks** | 機械化檢查（檔案存在、回歸指令）— [`ops/hooks/`](ops/hooks/) |
 
@@ -449,7 +449,7 @@ Legacy engineering/demo shell is being deprecated.
 
 Product direction is governed by:
 
-[`ops/product/PRODUCT_CONSTITUTION.md`](ops/product/PRODUCT_CONSTITUTION.md)
+[`docs/active/product/PRODUCT_CONSTITUTION.md`](docs/active/product/PRODUCT_CONSTITUTION.md)
 
 ---
 
@@ -457,7 +457,7 @@ Product direction is governed by:
 
 Product roadmap moved to:
 
-[`ops/product/FOX_ROADMAP.md`](ops/product/FOX_ROADMAP.md)
+[`docs/active/product/FOX_ROADMAP.md`](docs/active/product/FOX_ROADMAP.md)
 
 ---
 
@@ -489,8 +489,8 @@ Signal guard mechanism (risk evaluation + guardian warning card) — see [`backl
 
 **TYPE:** PRODUCT DIRECTION LOCK — guardian hierarchy + copy only (**SAFE MODE**; historical).  
 Guardian UX constitution **archived** to [`docs/deprecated/GUARDIAN_UX_CONSTITUTION.md`](docs/deprecated/GUARDIAN_UX_CONSTITUTION.md).  
-**Current UX law:** [`ops/product/SIGNAL_FIRST_PRODUCT_POSITION.md`](ops/product/SIGNAL_FIRST_PRODUCT_POSITION.md)  
-**UAT:** [`ops/uat/PHASE1_PRODUCT_FLOW_UAT.md`](ops/uat/PHASE1_PRODUCT_FLOW_UAT.md)  
+**Current UX law:** [`docs/active/product/SIGNAL_FIRST_PRODUCT_POSITION.md`](docs/active/product/SIGNAL_FIRST_PRODUCT_POSITION.md)  
+**UAT:** [`docs/active/uat/PHASE1_PRODUCT_FLOW_UAT.md`](docs/active/uat/PHASE1_PRODUCT_FLOW_UAT.md)  
 **Backlog / sprint (historical):** [`backlog/BACKLOG_PHASE1_UX_RESTRUCTURE_v1.md`](backlog/archive/BACKLOG_PHASE1_UX_RESTRUCTURE_v1.md), [`backlog/SPRINT_PHASE1_UX_RESTRUCTURE_v1.md`](backlog/archive/SPRINT_PHASE1_UX_RESTRUCTURE_v1.md)
 
 ---
@@ -498,8 +498,8 @@ Guardian UX constitution **archived** to [`docs/deprecated/GUARDIAN_UX_CONSTITUT
 ## PHASE1 PRODUCT FLOW RECOVERY v1 ACTIVE
 
 **TYPE:** SAFE MODE — one user journey, signal-first copy, nav + insight simplification (**no** backend/auth/vector changes).  
-**Flow:** [`ops/product/PHASE1_PRODUCT_FLOW.md`](ops/product/PHASE1_PRODUCT_FLOW.md) · **Pages:** [`ops/product/PAGE_PURPOSE_SYSTEM.md`](ops/product/PAGE_PURPOSE_SYSTEM.md) · **Position:** [`ops/product/SIGNAL_FIRST_PRODUCT_POSITION.md`](ops/product/SIGNAL_FIRST_PRODUCT_POSITION.md)  
-**UAT:** [`ops/uat/PHASE1_PRODUCT_FLOW_UAT.md`](ops/uat/PHASE1_PRODUCT_FLOW_UAT.md)  
+**Flow:** [`docs/active/product/PHASE1_PRODUCT_FLOW.md`](docs/active/product/PHASE1_PRODUCT_FLOW.md) · **Pages:** [`docs/active/product/PAGE_PURPOSE_SYSTEM.md`](docs/active/product/PAGE_PURPOSE_SYSTEM.md) · **Position:** [`docs/active/product/SIGNAL_FIRST_PRODUCT_POSITION.md`](docs/active/product/SIGNAL_FIRST_PRODUCT_POSITION.md)  
+**UAT:** [`docs/active/uat/PHASE1_PRODUCT_FLOW_UAT.md`](docs/active/uat/PHASE1_PRODUCT_FLOW_UAT.md)  
 **Deprecation index:** [`docs/deprecated/README.md`](docs/deprecated/README.md)  
 **Backlog / sprint:** [`backlog/BACKLOG_PHASE1_PRODUCT_FLOW_RECOVERY_v1.md`](backlog/archive/BACKLOG_PHASE1_PRODUCT_FLOW_RECOVERY_v1.md), [`backlog/SPRINT_PHASE1_PRODUCT_FLOW_RECOVERY_v1.md`](backlog/archive/SPRINT_PHASE1_PRODUCT_FLOW_RECOVERY_v1.md)
 
@@ -518,8 +518,8 @@ Guardian UX constitution **archived** to [`docs/deprecated/GUARDIAN_UX_CONSTITUT
 
 **TYPE:** PRODUCT REALIGNMENT SPRINT — direction lock (docs + roadmap + deprecated language; **no** removal of guardian UX / fox / insight flow; **no** backend implementation).  
 **Core:** AI-native **SNS guardian network** — social signal intelligence, hater / dangerous interaction detection, interaction risk; fox = persona + guardian UX layer.  
-**Docs:** [`ops/product/CORE_PRODUCT_REALIGNMENT.md`](ops/product/CORE_PRODUCT_REALIGNMENT.md), [`ops/product/SOCIAL_SIGNAL_ARCHITECTURE.md`](ops/product/SOCIAL_SIGNAL_ARCHITECTURE.md), [`ops/product/HATER_SIGNAL_MODEL.md`](ops/product/HATER_SIGNAL_MODEL.md)  
-**UAT:** [`ops/uat/PRODUCT_DIRECTION_RESET_NOTES.md`](ops/uat/PRODUCT_DIRECTION_RESET_NOTES.md)  
+**Docs:** [`docs/active/product/CORE_PRODUCT_REALIGNMENT.md`](docs/active/product/CORE_PRODUCT_REALIGNMENT.md), [`docs/active/product/SOCIAL_SIGNAL_ARCHITECTURE.md`](docs/active/product/SOCIAL_SIGNAL_ARCHITECTURE.md), [`docs/active/product/HATER_SIGNAL_MODEL.md`](docs/active/product/HATER_SIGNAL_MODEL.md)  
+**UAT:** [`docs/active/uat/PRODUCT_DIRECTION_RESET_NOTES.md`](docs/active/uat/PRODUCT_DIRECTION_RESET_NOTES.md)  
 **Backlog / sprint:** [`backlog/BACKLOG_PRODUCT_CORE_REALIGNMENT_v1.md`](backlog/archive/BACKLOG_PRODUCT_CORE_REALIGNMENT_v1.md), [`backlog/SPRINT_PRODUCT_CORE_REALIGNMENT_v1.md`](backlog/archive/SPRINT_PRODUCT_CORE_REALIGNMENT_v1.md)
 
 ---
@@ -527,7 +527,7 @@ Guardian UX constitution **archived** to [`docs/deprecated/GUARDIAN_UX_CONSTITUT
 ## STATE SANITIZATION HOTFIX v1 ACTIVE
 
 **TYPE:** RUNTIME STABILITY HOTFIX — Reflex `@rx.var` / list coercion / session JSON safety; **no** new features or routes.  
-**UAT:** [`ops/uat/STATE_SANITIZATION_RUNTIME_UAT.md`](ops/uat/STATE_SANITIZATION_RUNTIME_UAT.md)  
+**UAT:** [`docs/active/uat/STATE_SANITIZATION_RUNTIME_UAT.md`](docs/active/uat/STATE_SANITIZATION_RUNTIME_UAT.md)  
 **Backlog / sprint:** [`backlog/BACKLOG_STATE_SANITIZATION_HOTFIX_v1.md`](backlog/archive/BACKLOG_STATE_SANITIZATION_HOTFIX_v1.md), [`backlog/SPRINT_STATE_SANITIZATION_HOTFIX_v1.md`](backlog/archive/SPRINT_STATE_SANITIZATION_HOTFIX_v1.md)
 
 ---
@@ -535,7 +535,7 @@ Guardian UX constitution **archived** to [`docs/deprecated/GUARDIAN_UX_CONSTITUT
 ## MATCH WALL COMPILE HOTFIX v1 ACTIVE
 
 **TYPE:** COMPILE STABILITY — Reflex `rx.foreach` item fields are reactive ops; **no** native Python numeric compares on those values inside card renderers. Precompute buckets / labels in `enrich_match_row_for_ui` (loader) or plain Python.  
-**UAT:** [`ops/uat/MATCH_WALL_COMPILE_HOTFIX.md`](ops/uat/MATCH_WALL_COMPILE_HOTFIX.md)  
+**UAT:** [`docs/active/uat/MATCH_WALL_COMPILE_HOTFIX.md`](docs/active/uat/MATCH_WALL_COMPILE_HOTFIX.md)  
 **Backlog / sprint:** [`backlog/BACKLOG_MATCH_WALL_COMPILE_HOTFIX_v1.md`](backlog/archive/BACKLOG_MATCH_WALL_COMPILE_HOTFIX_v1.md), [`backlog/SPRINT_MATCH_WALL_COMPILE_HOTFIX_v1.md`](backlog/archive/SPRINT_MATCH_WALL_COMPILE_HOTFIX_v1.md)
 
 ---
@@ -543,8 +543,8 @@ Guardian UX constitution **archived** to [`docs/deprecated/GUARDIAN_UX_CONSTITUT
 ## TARGET SIGNAL PROFILE v1 ACTIVE
 
 **TYPE:** CORE PRODUCT LOOP FIX — named **target observation entity** (`/target`) + local JSON + user/target overlap in insight; **no** SNS / vectors / auth.  
-**Docs:** [`ops/product/TARGET_SIGNAL_CONSTITUTION.md`](ops/product/TARGET_SIGNAL_CONSTITUTION.md), [`ops/product/TARGET_ANALYSIS_FLOW.md`](ops/product/TARGET_ANALYSIS_FLOW.md), [`ops/product/TARGET_PROFILE_SCHEMA.md`](ops/product/TARGET_PROFILE_SCHEMA.md)  
-**UAT:** [`ops/uat/TARGET_SIGNAL_PROFILE_UAT.md`](ops/uat/TARGET_SIGNAL_PROFILE_UAT.md)  
+**Docs:** [`docs/active/product/TARGET_SIGNAL_CONSTITUTION.md`](docs/active/product/TARGET_SIGNAL_CONSTITUTION.md), [`docs/active/product/TARGET_ANALYSIS_FLOW.md`](docs/active/product/TARGET_ANALYSIS_FLOW.md), [`docs/active/product/TARGET_PROFILE_SCHEMA.md`](docs/active/product/TARGET_PROFILE_SCHEMA.md)  
+**UAT:** [`docs/active/uat/TARGET_SIGNAL_PROFILE_UAT.md`](docs/active/uat/TARGET_SIGNAL_PROFILE_UAT.md)  
 **Backlog / sprint:** [`backlog/BACKLOG_TARGET_SIGNAL_PROFILE_v1.md`](backlog/archive/BACKLOG_TARGET_SIGNAL_PROFILE_v1.md), [`backlog/SPRINT_TARGET_SIGNAL_PROFILE_v1.md`](backlog/archive/SPRINT_TARGET_SIGNAL_PROFILE_v1.md)
 
 ---
@@ -552,8 +552,8 @@ Guardian UX constitution **archived** to [`docs/deprecated/GUARDIAN_UX_CONSTITUT
 ## RELATIONSHIP SIGNAL SIMULATION v1 ACTIVE
 
 **TYPE:** RELATIONSHIP INTELLIGENCE FOUNDATION — synthetic **interaction archetypes** + overlap simulation; **no** SNS / multi-user / vectors / embeddings.  
-**Docs:** [`ops/product/RELATIONSHIP_INTELLIGENCE_CONSTITUTION.md`](ops/product/RELATIONSHIP_INTELLIGENCE_CONSTITUTION.md), [`ops/product/RELATIONSHIP_ARCHETYPE_MODEL.md`](ops/product/RELATIONSHIP_ARCHETYPE_MODEL.md), [`ops/product/INTERACTION_SIGNAL_ONTOLOGY.md`](ops/product/INTERACTION_SIGNAL_ONTOLOGY.md)  
-**UAT:** [`ops/uat/RELATIONSHIP_SIGNAL_SIMULATION_UAT.md`](ops/uat/RELATIONSHIP_SIGNAL_SIMULATION_UAT.md)  
+**Docs:** [`docs/active/product/RELATIONSHIP_INTELLIGENCE_CONSTITUTION.md`](docs/active/product/RELATIONSHIP_INTELLIGENCE_CONSTITUTION.md), [`docs/active/product/RELATIONSHIP_ARCHETYPE_MODEL.md`](docs/active/product/RELATIONSHIP_ARCHETYPE_MODEL.md), [`docs/active/product/INTERACTION_SIGNAL_ONTOLOGY.md`](docs/active/product/INTERACTION_SIGNAL_ONTOLOGY.md)  
+**UAT:** [`docs/active/uat/RELATIONSHIP_SIGNAL_SIMULATION_UAT.md`](docs/active/uat/RELATIONSHIP_SIGNAL_SIMULATION_UAT.md)  
 **Backlog / sprint:** [`backlog/BACKLOG_RELATIONSHIP_SIGNAL_SIMULATION_v1.md`](backlog/archive/BACKLOG_RELATIONSHIP_SIGNAL_SIMULATION_v1.md), [`backlog/SPRINT_RELATIONSHIP_SIGNAL_SIMULATION_v1.md`](backlog/archive/SPRINT_RELATIONSHIP_SIGNAL_SIMULATION_v1.md)
 
 ---
@@ -561,8 +561,8 @@ Guardian UX constitution **archived** to [`docs/deprecated/GUARDIAN_UX_CONSTITUT
 ## SIGNAL INTELLIGENCE ENGINE v1 ACTIVE
 
 **TYPE:** RULE-BASED SIGNAL INTELLIGENCE — first interpretive layer (`infer_signal_risks`); **no** LLM / embeddings / vector search / SNS / agents.  
-**Docs:** [`ops/product/SIGNAL_INTELLIGENCE_CONSTITUTION.md`](ops/product/SIGNAL_INTELLIGENCE_CONSTITUTION.md), [`ops/product/SIGNAL_RISK_ONTOLOGY.md`](ops/product/SIGNAL_RISK_ONTOLOGY.md), [`ops/product/SIGNAL_INFERENCE_MODEL.md`](ops/product/SIGNAL_INFERENCE_MODEL.md)  
-**UAT:** [`ops/uat/SIGNAL_INTELLIGENCE_ENGINE_UAT.md`](ops/uat/SIGNAL_INTELLIGENCE_ENGINE_UAT.md)  
+**Docs:** [`docs/active/product/SIGNAL_INTELLIGENCE_CONSTITUTION.md`](docs/active/product/SIGNAL_INTELLIGENCE_CONSTITUTION.md), [`docs/active/product/SIGNAL_RISK_ONTOLOGY.md`](docs/active/product/SIGNAL_RISK_ONTOLOGY.md), [`docs/active/product/SIGNAL_INFERENCE_MODEL.md`](docs/active/product/SIGNAL_INFERENCE_MODEL.md)  
+**UAT:** [`docs/active/uat/SIGNAL_INTELLIGENCE_ENGINE_UAT.md`](docs/active/uat/SIGNAL_INTELLIGENCE_ENGINE_UAT.md)  
 **Backlog / sprint:** [`backlog/BACKLOG_SIGNAL_INTELLIGENCE_ENGINE_v1.md`](backlog/archive/BACKLOG_SIGNAL_INTELLIGENCE_ENGINE_v1.md), [`backlog/SPRINT_SIGNAL_INTELLIGENCE_ENGINE_v1.md`](backlog/archive/SPRINT_SIGNAL_INTELLIGENCE_ENGINE_v1.md)
 
 ---
@@ -570,8 +570,8 @@ Guardian UX constitution **archived** to [`docs/deprecated/GUARDIAN_UX_CONSTITUT
 ## SIGNAL SYSTEM CONSOLIDATION v1 ACTIVE
 
 **TYPE:** SIGNAL ARCHITECTURE CONSOLIDATION — unify existing `/profile`, `/quiz`, `/insight`, memory, and signal wording (**SAFE MODE**; **no** new onboarding route; **no** SNS / vector / auth implementation).  
-**Docs:** [`ops/product/SIGNAL_SYSTEM_CONSTITUTION.md`](ops/product/SIGNAL_SYSTEM_CONSTITUTION.md), [`ops/product/SIGNAL_PROFILE_SCHEMA.md`](ops/product/SIGNAL_PROFILE_SCHEMA.md), [`ops/product/SIGNAL_FLOW_ARCHITECTURE.md`](ops/product/SIGNAL_FLOW_ARCHITECTURE.md), [`ops/product/SIGNAL_INPUT_AUDIT.md`](ops/product/SIGNAL_INPUT_AUDIT.md), [`ops/product/SIGNAL_STATE_MAPPING.md`](ops/product/SIGNAL_STATE_MAPPING.md)  
-**UAT:** [`ops/uat/SIGNAL_SYSTEM_CONSOLIDATION_UAT.md`](ops/uat/SIGNAL_SYSTEM_CONSOLIDATION_UAT.md)  
+**Docs:** [`docs/active/product/SIGNAL_SYSTEM_CONSTITUTION.md`](docs/active/product/SIGNAL_SYSTEM_CONSTITUTION.md), [`docs/active/product/SIGNAL_PROFILE_SCHEMA.md`](docs/active/product/SIGNAL_PROFILE_SCHEMA.md), [`docs/active/product/SIGNAL_FLOW_ARCHITECTURE.md`](docs/active/product/SIGNAL_FLOW_ARCHITECTURE.md), [`docs/active/product/SIGNAL_INPUT_AUDIT.md`](docs/active/product/SIGNAL_INPUT_AUDIT.md), [`docs/active/product/SIGNAL_STATE_MAPPING.md`](docs/active/product/SIGNAL_STATE_MAPPING.md)  
+**UAT:** [`docs/active/uat/SIGNAL_SYSTEM_CONSOLIDATION_UAT.md`](docs/active/uat/SIGNAL_SYSTEM_CONSOLIDATION_UAT.md)  
 **Backlog / sprint:** [`backlog/BACKLOG_SIGNAL_SYSTEM_CONSOLIDATION_v1.md`](backlog/archive/BACKLOG_SIGNAL_SYSTEM_CONSOLIDATION_v1.md), [`backlog/SPRINT_SIGNAL_SYSTEM_CONSOLIDATION_v1.md`](backlog/archive/SPRINT_SIGNAL_SYSTEM_CONSOLIDATION_v1.md)
 
 ---
@@ -579,5 +579,5 @@ Guardian UX constitution **archived** to [`docs/deprecated/GUARDIAN_UX_CONSTITUT
 ## PHASE1 UAT FLOW FIX v2 ACTIVE
 
 **TYPE:** UX RECOVERY SPRINT — onboarding + journey clarity (not visual polish).  
-See [`backlog/BACKLOG_PHASE1_UAT_FLOW_FIX_v2.md`](backlog/archive/BACKLOG_PHASE1_UAT_FLOW_FIX_v2.md), UAT script [`ops/uat/PHASE1_UAT_SCRIPT.md`](ops/uat/PHASE1_UAT_SCRIPT.md), UX constitution [`ops/product/UAT_EXPERIENCE_CONSTITUTION.md`](ops/product/UAT_EXPERIENCE_CONSTITUTION.md).
+See [`backlog/BACKLOG_PHASE1_UAT_FLOW_FIX_v2.md`](backlog/archive/BACKLOG_PHASE1_UAT_FLOW_FIX_v2.md), UAT script [`docs/active/uat/PHASE1_UAT_SCRIPT.md`](docs/active/uat/PHASE1_UAT_SCRIPT.md), UX constitution [`docs/active/product/UAT_EXPERIENCE_CONSTITUTION.md`](docs/active/product/UAT_EXPERIENCE_CONSTITUTION.md).
 

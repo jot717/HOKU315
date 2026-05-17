@@ -24,7 +24,7 @@ def test_evaluate_signal_risk_returns_dict() -> None:
 
 
 def test_archived_signal_guard_card_exists() -> None:
-    p = ROOT / "docs/archive/dead_components_reference/signal_guard_card.py"
+    p = ROOT / "docs/archive/legacy/dead_components/signal_guard_card.py"
     assert p.is_file()
 
 

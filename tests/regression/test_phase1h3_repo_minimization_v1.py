@@ -22,7 +22,7 @@ DEAD_ROUTES = (
 
 
 def test_active_surface_map_exists() -> None:
-    p = ROOT / "ops/product/ACTIVE_SURFACE_MAP.md"
+    p = ROOT / "docs/active/product/ACTIVE_SURFACE_MAP.md"
     text = p.read_text(encoding="utf-8")
     assert p.is_file()
     assert "/profile" in text and "/match" in text
@@ -37,7 +37,7 @@ def test_only_active_routes_registered() -> None:
 
 
 def test_dead_route_reference_archived() -> None:
-    ref = ROOT / "docs/archive/dead_routes_reference"
+    ref = ROOT / "docs/archive/dead_routes"
     for name in ("story_page.py", "chat_component.py", "unlocks_page.py"):
         assert (ref / name).is_file(), name
 
@@ -45,9 +45,9 @@ def test_dead_route_reference_archived() -> None:
 def test_archive_buckets_no_loose_md() -> None:
     root_md = [p for p in (ROOT / "docs/archive").glob("*.md")]
     assert len(root_md) == 1 and root_md[0].name == "README.md"
-    assert (ROOT / "docs/archive/phase1_legacy").is_dir()
-    assert (ROOT / "docs/archive/old_uat").is_dir()
-    assert (ROOT / "docs/archive/old_hotfix").is_dir()
+    assert (ROOT / "docs/archive/product").is_dir()
+    assert (ROOT / "docs/archive/uat").is_dir()
+    assert (ROOT / "docs/archive/hotfix").is_dir()
 
 
 def test_runtime_templates_only() -> None:
@@ -59,3 +59,4 @@ def test_runtime_templates_only() -> None:
 def test_wip_quarantine_exists() -> None:
     assert (ROOT / "wip/README.md").is_file()
     assert not (ROOT / "product/shell").exists()
+    assert (ROOT / "docs/active/product/PRODUCT_MASTER.md").is_file()

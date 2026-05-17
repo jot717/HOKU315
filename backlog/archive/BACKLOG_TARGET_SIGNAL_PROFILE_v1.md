@@ -14,13 +14,13 @@ Remove loop fragmentation: user signal profile + **target observation entity** +
 
 ## DELIVERABLES
 
-* [`ops/product/TARGET_SIGNAL_CONSTITUTION.md`](../ops/product/TARGET_SIGNAL_CONSTITUTION.md)
-* [`ops/product/TARGET_ANALYSIS_FLOW.md`](../ops/product/TARGET_ANALYSIS_FLOW.md)
-* [`ops/product/TARGET_PROFILE_SCHEMA.md`](../ops/product/TARGET_PROFILE_SCHEMA.md)
+* [`docs/active/product/TARGET_SIGNAL_CONSTITUTION.md`](../docs/active/product/TARGET_SIGNAL_CONSTITUTION.md)
+* [`docs/active/product/TARGET_ANALYSIS_FLOW.md`](../docs/active/product/TARGET_ANALYSIS_FLOW.md)
+* [`docs/active/product/TARGET_PROFILE_SCHEMA.md`](../docs/active/product/TARGET_PROFILE_SCHEMA.md)
 * [`product/target/runtime/target_profile_store.py`](../product/target/runtime/target_profile_store.py)
 * [`fox_quiz/ui/pages/target_page.py`](../fox_quiz/ui/pages/target_page.py) — route `/target`
 * Insight simplification + target-aware guardian strings
-* [`ops/uat/TARGET_SIGNAL_PROFILE_UAT.md`](../ops/uat/TARGET_SIGNAL_PROFILE_UAT.md)
+* [`docs/active/uat/TARGET_SIGNAL_PROFILE_UAT.md`](../docs/active/uat/TARGET_SIGNAL_PROFILE_UAT.md)
 * Regression: `tests/regression/test_target_signal_profile_v1.py`
 
 ## NON-GOALS

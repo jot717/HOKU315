@@ -12,8 +12,8 @@ HOME → `/profile` → `/quiz` → `/target` → `/insight` → `/match`
 
 - [x] Home, profile, quiz, target, insight, match copy and structure  
 - [x] Nav cleanup (core six + login)  
-- [x] Docs: `ops/product/PHASE1_PRODUCT_FLOW.md`, `PAGE_PURPOSE_SYSTEM.md`, `SIGNAL_FIRST_PRODUCT_POSITION.md`  
-- [x] UAT: `ops/uat/PHASE1_PRODUCT_FLOW_UAT.md`  
+- [x] Docs: `docs/active/product/PHASE1_PRODUCT_FLOW.md`, `PAGE_PURPOSE_SYSTEM.md`, `SIGNAL_FIRST_PRODUCT_POSITION.md`  
+- [x] UAT: `docs/active/uat/PHASE1_PRODUCT_FLOW_UAT.md`  
 - [x] Deprecation record: `docs/deprecated/` + `README.md`  
 - [x] Regression: `pytest tests/regression/`; `python ops/flow/check_all_flows.py`
 

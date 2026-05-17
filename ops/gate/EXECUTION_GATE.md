@@ -19,7 +19,7 @@ BACKLOG → SPRINT → IMPLEMENT → REGRESSION → DONE
 ```
 
 - **BACKLOG**: spec file under `backlog/BACKLOG_<FEATURE>.md` (or equivalent traceability in root `BACKLOG.md`).
-- **SPRINT**: sprint spec under `backlog/SPRINT_<FEATURE>.md` (or sprint section in `SPRINT_LOG.md` / `SPRINT_PLAN.md`).
+- **SPRINT**: sprint spec under `backlog/SPRINT_<FEATURE>.md` (or sprint section in `SPRINT_LOG.md` / `docs/archive/root_legacy/SPRINT_PLAN.md`).
 - **IMPLEMENT**: code or integration exists in the repo (human / review judgment; not fully automatable here).
 - **REGRESSION**: `pytest tests/regression/` passes (or `python scripts/run_regression.py`).
 - **DONE**: recorded in [`SPRINT_LOG.md`](../../SPRINT_LOG.md) (and item closed in [`BACKLOG.md`](../../BACKLOG.md) as appropriate).

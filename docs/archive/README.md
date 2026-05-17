@@ -1,22 +1,16 @@
-# Archive — Historical Only
+# Archive — historical only
 
-Files under `docs/archive/` are **historical reference**. They must **not**:
+**Never** define product logic, **never** link as authority from active docs (plain-text annex pointer only).
 
-- define current product logic
-- be imported by application code
-- be linked from active SSOT docs as authority
-- be used by Cursor/AI as implementation law
+| Folder | Contents |
+|--------|----------|
+| [`product/`](product/) | Legacy constitutions, ontologies |
+| [`uat/`](uat/) | Phase/domain UAT scripts |
+| [`hotfix/`](hotfix/) | Compile/state/SNS audits |
+| [`legacy/`](legacy/) | Drift, phase reports, dead components |
+| [`dead_routes/`](dead_routes/) | Removed `/story`, `/chat`, `/unlocks` |
+| [`root_legacy/`](root_legacy/) | Former root planning docs |
 
-## Buckets (no loose `.md` at archive root except this README)
+**Active law:** [`../active/product/PRODUCT_MASTER.md`](../active/product/PRODUCT_MASTER.md)
 
-| Path | Contents |
-|------|----------|
-| `phase1_legacy/` | Product constitutions, ontologies, positioning |
-| `old_uat/` | Phase/domain UAT scripts |
-| `old_hotfix/` | Compile/state/SNS audit UAT |
-| `dead_routes_reference/` | Removed route modules (`/story`, `/chat`, `/unlocks`) |
-| `dead_components_reference/` | Removed UI widgets |
-
-**Active law:** `ops/product/PRODUCT_MASTER.md`, `ACTIVE_SURFACE_MAP.md`, and SSOT files listed therein.
-
-When archive content conflicts with SSOT, **SSOT wins**.
+**Next:** [`../README.md`](../README.md)

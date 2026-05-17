@@ -27,5 +27,5 @@ Fix user confusion and restore correct **FOX GUARDIAN SYSTEM** onboarding: profi
 
 ## REFERENCES
 
-* [`ops/uat/PHASE1_UAT_SCRIPT.md`](../ops/uat/PHASE1_UAT_SCRIPT.md)
-* [`ops/product/UAT_EXPERIENCE_CONSTITUTION.md`](../ops/product/UAT_EXPERIENCE_CONSTITUTION.md)
+* [`docs/active/uat/PHASE1_UAT_SCRIPT.md`](../docs/active/uat/PHASE1_UAT_SCRIPT.md)
+* [`docs/active/product/UAT_EXPERIENCE_CONSTITUTION.md`](../docs/active/product/UAT_EXPERIENCE_CONSTITUTION.md)

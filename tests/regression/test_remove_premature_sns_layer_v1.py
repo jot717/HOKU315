@@ -5,7 +5,7 @@ from pathlib import Path
 import pytest
 
 ROOT = Path(__file__).resolve().parents[2]
-ARCHIVED_STORY = ROOT / "docs/archive/dead_routes_reference/story_page.py"
+ARCHIVED_STORY = ROOT / "docs/archive/dead_routes/story_page.py"
 
 _FORBIDDEN_SUBSTRINGS = (
     "同步失敗",

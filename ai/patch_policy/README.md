@@ -4,7 +4,7 @@
 
 目前請以根目錄：
 
-- [`DEBUG_POLICY.md`](../DEBUG_POLICY.md)
+- [`ops/debug/DEBUG_POLICY.md`](../ops/debug/DEBUG_POLICY.md)
 - [`docs/AI_PATCH_FLOW.md`](../docs/AI_PATCH_FLOW.md)
 
 為準。

@@ -18,17 +18,17 @@ FORBIDDEN_IN_ACTIVE = (
 )
 
 GOVERNANCE_FILES = (
-    "ops/product/AI_DEVELOPMENT_CONSTITUTION.md",
-    "ops/product/CANONICAL_TERMINOLOGY.md",
-    "ops/product/GOVERNANCE_CHECKLIST.md",
-    "ops/product/ACTIVE_SURFACE_MAP.md",
+    "docs/active/product/AI_DEVELOPMENT_CONSTITUTION.md",
+    "docs/active/product/CANONICAL_TERMINOLOGY.md",
+    "docs/active/governance/GOVERNANCE_CHECKLIST.md",
+    "docs/active/product/ACTIVE_SURFACE_MAP.md",
 )
 
 SSOT_FILES = (
-    "ops/product/PRODUCT_MASTER.md",
-    "ops/product/SIGNAL_SYSTEM.md",
-    "ops/product/MATCH_SYSTEM.md",
-    "ops/product/ROADMAP.md",
+    "docs/active/product/PRODUCT_MASTER.md",
+    "docs/active/product/SIGNAL_SYSTEM.md",
+    "docs/active/product/MATCH_SYSTEM.md",
+    "docs/active/product/ROADMAP.md",
 )
 
 UAT_AUDIT_EXCLUDE = {
@@ -39,13 +39,13 @@ UAT_AUDIT_EXCLUDE = {
 
 
 def _active_product_docs() -> list[Path]:
-    return [p for p in (ROOT / "ops/product").glob("*.md") if p.name != "README.md"]
+    return [p for p in (ROOT / "docs/active/product").glob("*.md") if p.name != "README.md"]
 
 
 def _active_uat_docs() -> list[Path]:
     return [
         p
-        for p in (ROOT / "ops/uat").glob("*.md")
+        for p in (ROOT / "docs/active/uat").glob("*.md")
         if p.name != "README.md" and p.name not in UAT_AUDIT_EXCLUDE
     ]
 
@@ -58,7 +58,7 @@ def test_governance_constitution_files_exist() -> None:
 def test_archive_readme_exists() -> None:
     text = (ROOT / "docs/archive/README.md").read_text(encoding="utf-8")
     assert "historical" in text.lower()
-    assert "must not" in text.lower() or "must **not**" in text
+    assert "never" in text.lower()
 
 
 def test_active_product_doc_count_within_limit() -> None:
@@ -72,7 +72,7 @@ def test_active_uat_doc_count_within_limit() -> None:
 
 
 def test_product_master_official_identity_and_flow() -> None:
-    text = (ROOT / "ops/product/PRODUCT_MASTER.md").read_text(encoding="utf-8")
+    text = (ROOT / "docs/active/product/PRODUCT_MASTER.md").read_text(encoding="utf-8")
     assert "AI social signal intelligence" in text or "social signal intelligence" in text
     assert "dangerous" in text.lower() or "high-drain" in text.lower()
     assert "/profile" in text and "/quiz" in text and "/target" in text
@@ -117,7 +117,7 @@ def test_active_docs_avoid_forbidden_terminology() -> None:
 
 
 def test_ai_constitution_lists_ssot_only() -> None:
-    text = (ROOT / "ops/product/AI_DEVELOPMENT_CONSTITUTION.md").read_text(encoding="utf-8")
+    text = (ROOT / "docs/active/product/AI_DEVELOPMENT_CONSTITUTION.md").read_text(encoding="utf-8")
     assert "PRODUCT_MASTER.md" in text
     assert "SIGNAL_SYSTEM.md" in text
     assert "MATCH_SYSTEM.md" in text

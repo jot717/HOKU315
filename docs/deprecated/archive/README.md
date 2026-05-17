@@ -1,7 +1,7 @@
 # Archive (read-only history)
 
 Documents moved here are **not** current product law.  
-**Current truth:** [`ops/product/PRODUCT_MASTER.md`](../../ops/product/PRODUCT_MASTER.md)
+**Current truth:** [`docs/active/product/PRODUCT_MASTER.md`](../../docs/active/product/PRODUCT_MASTER.md)
 
 ## Subfolders
 

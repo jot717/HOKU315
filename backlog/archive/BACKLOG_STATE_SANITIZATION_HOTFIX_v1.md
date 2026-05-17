@@ -15,7 +15,7 @@ Stabilize frontend runtime: `@rx.var` outputs JSON-safe primitives only, list fi
 ## DELIVERABLES
 
 * Code: `fox_quiz/state/app_state.py`, `target_state.py`, `profile_state.py`, `product/session/runtime/session_history.py`, `fox_quiz/ui/components/session_history.py`
-* [`ops/uat/STATE_SANITIZATION_RUNTIME_UAT.md`](../ops/uat/STATE_SANITIZATION_RUNTIME_UAT.md)
+* [`docs/active/uat/STATE_SANITIZATION_RUNTIME_UAT.md`](../docs/active/uat/STATE_SANITIZATION_RUNTIME_UAT.md)
 * Regression: `tests/regression/test_state_sanitization_hotfix_v1.py`
 
 ## NON-GOALS

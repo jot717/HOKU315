@@ -1,7 +1,7 @@
 # MASTER BACKLOG
 
 **Canonical phase index.** Detail slices live in `backlog/archive/` after completion.  
-Product truth: [`ops/product/PRODUCT_MASTER.md`](../ops/product/PRODUCT_MASTER.md) · P0/P1 engineering: [`../BACKLOG.md`](../BACKLOG.md)
+Product truth: [`docs/active/product/PRODUCT_MASTER.md`](../docs/active/product/PRODUCT_MASTER.md) · Doc highway: [`docs/README.md`](../docs/README.md) · P0/P1 engineering: [`../BACKLOG.md`](../BACKLOG.md)
 
 ---
 
@@ -21,6 +21,7 @@ Each row = **one canonical entry**. Sprint files: `backlog/archive/BACKLOG_*` / 
 
 | Phase | Summary | Key docs |
 |-------|---------|----------|
+| **PHASE1-H4 MD highway v1** | Root minimal, `docs/active/` SSOT, archive buckets, navigation READMEs | `docs/README.md`, `docs/active/product/` |
 | **PHASE1-H3 Repo minimization v1** | Active surface map, dead routes/components, archive buckets, WIP quarantine | `ACTIVE_SURFACE_MAP.md`, `DEAD_ROUTE_AUDIT.md` |
 | **PHASE1-H2 AI governance reset v1** | SSOT consolidation, archive enforcement, AI constitution | `AI_DEVELOPMENT_CONSTITUTION.md`, `SIGNAL_SYSTEM.md`, `MATCH_SYSTEM.md` |
 | **PHASE1-G Governance v1** | Product master, backlog/UAT governance, guest/login clarity | `PRODUCT_MASTER.md`, `MASTER_BACKLOG.md`, `UAT_MASTER_GUIDE.md` |
@@ -44,7 +45,7 @@ Each row = **one canonical entry**. Sprint files: `backlog/archive/BACKLOG_*` / 
 ## ARCHIVED
 
 - All `backlog/archive/BACKLOG_*.md` and `SPRINT_*.md`  Ehistorical scope/DoD
-- Product/UAT annex: `docs/archive/phase1_legacy/`, `docs/archive/old_uat/`
+- Product/UAT annex: `docs/archive/product/`, `docs/archive/uat/`
 - Older drift: `docs/deprecated/archive/`
 
 ---
@@ -64,7 +65,7 @@ Each row = **one canonical entry**. Sprint files: `backlog/archive/BACKLOG_*` / 
 |-------|--------|
 | **2** | Longitudinal memory, account utility, cloud backup UX |
 | **3** | SNS import, external graph, interaction ingestion |
-| **4+** | See [`ops/product/ROADMAP.md`](../ops/product/ROADMAP.md) |
+| **4+** | See [`docs/active/product/ROADMAP.md`](../docs/active/product/ROADMAP.md) |
 
 ---
 

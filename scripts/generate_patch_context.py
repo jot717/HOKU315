@@ -22,7 +22,7 @@ KEYWORD_FILES: list[tuple[str, frozenset[str], str]] = [
     ("vector / match RPC", frozenset({"vector", "malformed array", "pgvector", "get_safe_matches"}), "db_service.py, sql/match_logic.sql, fox_logic.py"),
     ("hydration / DOM", frozenset({"hydration", "<p>", "descendant", "nested"}), "fox_quiz/, match_wall.py, Reflex layout components"),
     ("RPC / PostgREST", frozenset({"pgrst", "postgrest", "rpc", "function"}), "db_service.py, sql/match_logic.sql, sql/DEPLOY_LOG.md"),
-    ("async / state", frozenset({"immutablestate", "asyncio", "await", "coroutine"}), "fox_quiz/ state handlers, DEBUG_GUIDE.md §7"),
+    ("async / state", frozenset({"immutablestate", "asyncio", "await", "coroutine"}), "fox_quiz/ state handlers, ops/debug/DEBUG_GUIDE.md §7"),
 ]
 
 
@@ -53,7 +53,7 @@ def build_context(incident: Path, root: Path) -> str:
             matched.append(f"- **{label}** → `{files}`")
 
     if not matched:
-        matched.append("- (no keyword hit) → review full incident + DEBUG_GUIDE.md manually")
+        matched.append("- (no keyword hit) → review full incident + ops/debug/DEBUG_GUIDE.md manually")
 
     backlog_path = root / "BACKLOG.md"
     backlog = read_text(backlog_path)

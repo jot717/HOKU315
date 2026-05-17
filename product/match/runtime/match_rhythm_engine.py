@@ -2,7 +2,7 @@
 Match credibility: social energy compatibility (rhythm, cost, pressure).
 
 Rule-based only — not dating score, personality typing, therapy, or astrology.
-See ops/product/MATCH_ARCHETYPE_SYSTEM.md and SOCIAL_ENERGY_MODEL.md.
+See docs/active/product/MATCH_ARCHETYPE_SYSTEM.md and SOCIAL_ENERGY_MODEL.md.
 """
 from __future__ import annotations
 

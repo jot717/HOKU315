@@ -14,12 +14,12 @@ Unify **existing** profile, quiz sliders, insight, memory, and signal wording un
 
 ## DELIVERABLES
 
-* [`ops/product/SIGNAL_SYSTEM_CONSTITUTION.md`](../ops/product/SIGNAL_SYSTEM_CONSTITUTION.md)
-* [`ops/product/SIGNAL_PROFILE_SCHEMA.md`](../ops/product/SIGNAL_PROFILE_SCHEMA.md)
-* [`ops/product/SIGNAL_FLOW_ARCHITECTURE.md`](../ops/product/SIGNAL_FLOW_ARCHITECTURE.md)
-* [`ops/product/SIGNAL_INPUT_AUDIT.md`](../ops/product/SIGNAL_INPUT_AUDIT.md)
-* [`ops/product/SIGNAL_STATE_MAPPING.md`](../ops/product/SIGNAL_STATE_MAPPING.md)
-* [`ops/uat/SIGNAL_SYSTEM_CONSOLIDATION_UAT.md`](../uat/SIGNAL_SYSTEM_CONSOLIDATION_UAT.md)
+* [`docs/active/product/SIGNAL_SYSTEM_CONSTITUTION.md`](../docs/active/product/SIGNAL_SYSTEM_CONSTITUTION.md)
+* [`docs/active/product/SIGNAL_PROFILE_SCHEMA.md`](../docs/active/product/SIGNAL_PROFILE_SCHEMA.md)
+* [`docs/active/product/SIGNAL_FLOW_ARCHITECTURE.md`](../docs/active/product/SIGNAL_FLOW_ARCHITECTURE.md)
+* [`docs/active/product/SIGNAL_INPUT_AUDIT.md`](../docs/active/product/SIGNAL_INPUT_AUDIT.md)
+* [`docs/active/product/SIGNAL_STATE_MAPPING.md`](../docs/active/product/SIGNAL_STATE_MAPPING.md)
+* [`docs/active/uat/SIGNAL_SYSTEM_CONSOLIDATION_UAT.md`](../uat/SIGNAL_SYSTEM_CONSOLIDATION_UAT.md)
 * Home + profile (+ optional quiz intro) copy alignment
 * [`GUARDIAN_UX_CONSTITUTION.md`](../../docs/deprecated/GUARDIAN_UX_CONSTITUTION.md) — historical SIGNAL-FIRST section (archived)
 * [`FOX_ROADMAP.md`](../product/FOX_ROADMAP.md) — consolidation pointer

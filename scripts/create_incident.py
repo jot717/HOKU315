@@ -33,7 +33,7 @@ ROOT_CAUSE_MD = """# Root Cause
 哪些功能受影響
 """
 
-CONSOLE_TXT = """# Browser Console — paste full errors / warnings below (see DEBUG_GUIDE.md §6)
+CONSOLE_TXT = """# Browser Console — paste full errors / warnings below (see ops/debug/DEBUG_GUIDE.md §6)
 
 
 """
@@ -44,7 +44,7 @@ NETWORK_JSON = """{
 }
 """
 
-BACKEND_TXT = """# reflex run terminal — paste traceback / DEBUG_VECTOR / errors below (see DEBUG_GUIDE.md §6)
+BACKEND_TXT = """# reflex run terminal — paste traceback / DEBUG_VECTOR / errors below (see ops/debug/DEBUG_GUIDE.md §6)
 
 
 """

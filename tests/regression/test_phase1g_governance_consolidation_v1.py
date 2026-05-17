@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[2]
 
 
 def test_product_master_exists() -> None:
-    p = ROOT / "ops/product/PRODUCT_MASTER.md"
+    p = ROOT / "docs/active/product/PRODUCT_MASTER.md"
     text = p.read_text(encoding="utf-8")
     assert p.is_file()
     assert "Guest" in text or "訪客" in text
@@ -26,13 +26,13 @@ def test_master_backlog_exists() -> None:
 
 
 def test_uat_master_guide_exists() -> None:
-    assert (ROOT / "ops/uat/UAT_MASTER_GUIDE.md").is_file()
+    assert (ROOT / "docs/active/uat/UAT_MASTER_GUIDE.md").is_file()
 
 
 def test_readme_indexes_exist() -> None:
     for rel in (
-        "ops/product/README.md",
-        "ops/uat/README.md",
+        "docs/active/product/README.md",
+        "docs/active/uat/README.md",
         "backlog/README.md",
     ):
         assert (ROOT / rel).is_file(), rel
@@ -45,7 +45,7 @@ def test_deprecated_archive_exists() -> None:
 
 
 def test_repo_governance_rules_exist() -> None:
-    text = (ROOT / "ops/product/REPO_GOVERNANCE_RULES.md").read_text(encoding="utf-8")
+    text = (ROOT / "docs/active/product/REPO_GOVERNANCE_RULES.md").read_text(encoding="utf-8")
     assert "PRODUCT_MASTER" in text
     assert "no duplicate" in text.lower() or "Duplicate" in text
 
@@ -65,10 +65,10 @@ def test_login_guest_clarity() -> None:
 
 def test_core_ssot_docs_not_deleted() -> None:
     for rel in (
-        "ops/product/SIGNAL_SYSTEM.md",
-        "ops/product/MATCH_SYSTEM.md",
-        "ops/product/ROADMAP.md",
-        "DEVELOPMENT_CONSTITUTION.md",
+        "docs/active/product/SIGNAL_SYSTEM.md",
+        "docs/active/product/MATCH_SYSTEM.md",
+        "docs/active/product/ROADMAP.md",
+        "ops/governance/DEVELOPMENT_CONSTITUTION.md",
     ):
         assert (ROOT / rel).is_file(), rel
 

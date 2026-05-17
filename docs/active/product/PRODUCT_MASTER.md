@@ -1,0 +1,98 @@
+# PRODUCT MASTER - Single Source of Truth
+
+**All product, UAT, and backlog docs must reference this file.**
+
+AI: [`AI_DEVELOPMENT_CONSTITUTION.md`](AI_DEVELOPMENT_CONSTITUTION.md) · Checklist: [`../governance/GOVERNANCE_CHECKLIST.md`](../governance/GOVERNANCE_CHECKLIST.md) · Backlog: [`../../../backlog/MASTER_BACKLOG.md`](../../../backlog/MASTER_BACKLOG.md) · UAT: [`../uat/UAT_MASTER_GUIDE.md`](../uat/UAT_MASTER_GUIDE.md)
+
+---
+
+## Official product identity
+
+**HOKU315 = AI social signal intelligence system**
+
+Helps users identify **dangerous / high-drain interaction patterns** through rule-based social signal and energy analysis.
+
+**Core value:** Interaction pressure, rhythm mismatch, and social energy cost - not dating scores or therapy.
+
+### What HOKU315 is NOT
+
+- Not a therapy app or emotional healing AI
+- Not an AI companion or life coach SKU
+- Not a dating score or compatibility-percent product
+- Not a personality analyzer (MBTI, attachment labels as identity)
+- Not SNS-connected in **Phase 1 face**
+
+Terminology: [`CANONICAL_TERMINOLOGY.md`](CANONICAL_TERMINOLOGY.md)
+
+---
+
+## Official user flow
+
+**No second flow allowed.**
+
+```
+/ -> /profile -> /quiz -> /target -> /insight -> /match
+```
+
+| Step | Route | Purpose |
+|------|-------|---------|
+| Home | `/` | Guest vs account entry |
+| Signal profile | `/profile` | Local signal profile |
+| Mine questionnaire | `/quiz` | Sensitivity vector |
+| Target observation | `/target` | Named target (local) |
+| Guardian observation | `/insight` | Interaction pressure + rhythm |
+| Match wall | `/match` | Social energy compatibility |
+
+Detail: [`SIGNAL_SYSTEM.md`](SIGNAL_SYSTEM.md) · [`MATCH_SYSTEM.md`](MATCH_SYSTEM.md) · [`../uat/PHASE1_PRODUCT_FLOW_UAT.md`](../uat/PHASE1_PRODUCT_FLOW_UAT.md)
+
+---
+
+## Official systems (only)
+
+| System | SSOT / code |
+|--------|-------------|
+| Signal system | [`SIGNAL_SYSTEM.md`](SIGNAL_SYSTEM.md) |
+| Interaction pressure | `ux_intelligence_engine.py` |
+| Social energy | `match_rhythm_engine.py` |
+| Match credibility | `fox_quiz/match_wall.py` |
+| Persistence | Phase 2 |
+| SNS intelligence | Phase 3+ |
+
+---
+
+## Guest vs account
+
+| Mode | Promise |
+|------|---------|
+| **Guest** | Analyze signals now (local JSON) |
+| **Account** | Save trends across time |
+
+`/login` is optional utility. Phases: [`ROADMAP.md`](ROADMAP.md)
+
+---
+
+## Fox role
+
+- **北極狐觀察** - one observer block on `/insight` max
+- Not therapy guidance
+
+---
+
+## Phase boundaries
+
+| Phase | Scope |
+|-------|--------|
+| **1** | Local rule-based intelligence (current) |
+| **2** | Persistence and memory |
+| **3** | SNS import |
+| **4** | Social graph intelligence |
+| **5** | AI-scale inference |
+
+---
+
+## Engineering (non-product SSOT)
+
+- [`../../../ops/governance/DEVELOPMENT_CONSTITUTION.md`](../../../ops/governance/DEVELOPMENT_CONSTITUTION.md)
+- [`../../../ops/governance/ARCHITECTURE_CONTRACT.md`](../../../ops/governance/ARCHITECTURE_CONTRACT.md)
+
+Historical annex: `docs/archive/product/` (reference only).

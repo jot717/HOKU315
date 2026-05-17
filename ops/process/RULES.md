@@ -1,6 +1,6 @@
 # PROCESS ENFORCEMENT RULES v1
 
-Workflow guardrails for AI-native development. See [`ARCHITECTURE_CONTRACT.md`](../../ARCHITECTURE_CONTRACT.md), [`BACKLOG.md`](../../BACKLOG.md), [`SPRINT_LOG.md`](../../SPRINT_LOG.md).
+Workflow guardrails for AI-native development. See [`ops/governance/ARCHITECTURE_CONTRACT.md`](../../ops/governance/ARCHITECTURE_CONTRACT.md), [`BACKLOG.md`](../../BACKLOG.md), [`SPRINT_LOG.md`](../../SPRINT_LOG.md).
 
 ---
 
@@ -20,7 +20,7 @@ Suggested item shape: [`backlog_template.md`](backlog_template.md)
 
 ## RULE 2 — SPRINT REQUIRED
 
-No BACKLOG item should be **executed as planned work** without being tied to a **sprint** (e.g. [`SPRINT_PLAN.md`](../../SPRINT_PLAN.md) / sprint section in log).
+No BACKLOG item should be **executed as planned work** without being tied to a **sprint** (e.g. [`docs/archive/root_legacy/SPRINT_PLAN.md`](../../docs/archive/root_legacy/SPRINT_PLAN.md) / sprint section in log).
 
 Sprint shape: [`sprint_template.md`](sprint_template.md)
 
@@ -85,7 +85,7 @@ On Unix / Git Bash: [`ops/hooks/check_regression.sh`](../hooks/check_regression.
 
 ## SOURCE OF TRUTH
 
-- **Conceptual**: [`DEVELOPMENT_CONSTITUTION.md`](../../DEVELOPMENT_CONSTITUTION.md)
+- **Conceptual**: [`ops/governance/DEVELOPMENT_CONSTITUTION.md`](../../ops/governance/DEVELOPMENT_CONSTITUTION.md)
 - **Execution**: [`ops/process/RULES.md`](RULES.md) (this file)
 - **Enforcement**: [`ops/hooks/`](../hooks/)、[`ops/gate/`](../gate/)（執行閘門）
 

@@ -26,4 +26,4 @@ Lock **北極狐守護世界** UX: remove AI-report feeling; enforce guardian hi
 ## REFERENCES
 
 * [`docs/deprecated/GUARDIAN_UX_CONSTITUTION.md`](../docs/deprecated/GUARDIAN_UX_CONSTITUTION.md)
-* [`ops/uat/PHASE1_PRODUCT_FLOW_UAT.md`](../ops/uat/PHASE1_PRODUCT_FLOW_UAT.md)（取代舊 UAT 筆記時請以此為準）
+* [`docs/active/uat/PHASE1_PRODUCT_FLOW_UAT.md`](../docs/active/uat/PHASE1_PRODUCT_FLOW_UAT.md)（取代舊 UAT 筆記時請以此為準）

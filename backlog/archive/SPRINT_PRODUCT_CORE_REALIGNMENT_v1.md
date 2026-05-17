@@ -18,4 +18,4 @@ PRODUCT REALIGNMENT SPRINT
 
 ## EXPLICITLY OUT OF SCOPE
 
-Implementation of SNS ingestion, graph analysis, or new ML — see [`ops/product/SOCIAL_SIGNAL_ARCHITECTURE.md`](../ops/product/SOCIAL_SIGNAL_ARCHITECTURE.md) for future phases only.
+Implementation of SNS ingestion, graph analysis, or new ML — see [`docs/active/product/SOCIAL_SIGNAL_ARCHITECTURE.md`](../docs/active/product/SOCIAL_SIGNAL_ARCHITECTURE.md) for future phases only.

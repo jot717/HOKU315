@@ -6,4 +6,4 @@
 
 - `fox_quiz/chat_component.py`、`fox_quiz/fox_quiz.py`（`/chat` route）
 
-此目錄為分類占位；見 [`REPO_ARCHITECTURE.md`](../../REPO_ARCHITECTURE.md)。
+此目錄為分類占位；見 [`ops/governance/REPO_ARCHITECTURE.md`](../../ops/governance/REPO_ARCHITECTURE.md)。

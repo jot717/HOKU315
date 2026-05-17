@@ -13,8 +13,8 @@ UX RECOVERY SPRINT
 * [ ] Profile: signal-file framing + helpers + save success + CTA
 * [ ] Insight: intro card + guardian loading + result explanation + next steps
 * [ ] Home: not-a-dating-app clarity + guardian tone
-* [ ] `ops/uat/PHASE1_UAT_SCRIPT.md`
-* [ ] `ops/product/UAT_EXPERIENCE_CONSTITUTION.md`
+* [ ] `docs/active/uat/PHASE1_UAT_SCRIPT.md`
+* [ ] `docs/active/product/UAT_EXPERIENCE_CONSTITUTION.md`
 * [ ] Regression: `tests/regression/test_phase1_uat_flow_fix.py`
 
 ## DONE CRITERIA

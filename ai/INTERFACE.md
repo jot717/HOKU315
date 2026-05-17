@@ -26,4 +26,4 @@
 
 AI layer **must NOT** depend on product business logic or UI implementation.
 
-See also [`REPO_ARCHITECTURE.md`](../REPO_ARCHITECTURE.md), [`ARCHITECTURE_CONTRACT.md`](../ARCHITECTURE_CONTRACT.md).
+See also [`ops/governance/REPO_ARCHITECTURE.md`](../ops/governance/REPO_ARCHITECTURE.md), [`ops/governance/ARCHITECTURE_CONTRACT.md`](../ops/governance/ARCHITECTURE_CONTRACT.md).
