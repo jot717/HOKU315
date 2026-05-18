@@ -10,7 +10,6 @@ Product truth: [`../product/PRODUCT_MASTER.md`](../product/PRODUCT_MASTER.md) ·
 
 | Phase | Status | Summary | UAT |
 |-------|--------|---------|-----|
-| **PHASE2-B-IMPL cloud persistence** | FUTURE | Supabase adapter per `PHASE2B_CLOUD_PERSISTENCE_PLAN.md` | - |
 | **PHASE3 SNS** | FUTURE | Opt-in graph ingestion | - |
 
 ---
@@ -19,6 +18,7 @@ Product truth: [`../product/PRODUCT_MASTER.md`](../product/PRODUCT_MASTER.md) ·
 
 | Phase | Summary | Key docs |
 |-------|---------|----------|
+| **PHASE2-B-IMPL Cloud persistence v1** | Dual-write cloud mirror, LWW, sync status, mock + Supabase boundary | `PHASE2B_CLOUD_PERSISTENCE_IMPL_REPORT_v1.md` |
 | **PHASE2-B Cloud persistence planning v1** | Local/cloud ownership, sync, conflict, dual-write spec | `PHASE2B_CLOUD_PERSISTENCE_PLAN.md` |
 | **PHASE2-AH Persistence hardening v1** | R1/R2/R3/R7 fixes; atomic writes; schema_version | `docs/archive/reviews/PHASE2AH_PERSISTENCE_HARDENING_REPORT_v1.md` |
 | **PHASE2-A Persistence architecture review v1** | Review scorecard WARN; ownership map; 2-B risks | `docs/archive/reviews/PHASE2A_PERSISTENCE_ARCHITECTURE_REVIEW_v1.md` |

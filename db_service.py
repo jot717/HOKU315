@@ -13,6 +13,7 @@ Supabase：lru_cache 單例連線；profiles 向量、user_memories（RAG Lite�
 from __future__ import annotations
 
 import ast
+import json
 import os
 import re
 import time
@@ -620,3 +621,124 @@ def get_safe_matches_current_user(access_token: str) -> list[dict[str, Any]]:
 
     res = _retry_on_stale_schema(_op)
     return list(getattr(res, "data", None) or [])
+
+
+# --- PHASE2-B: JSON entity snapshots (persistence port cloud mirror) ---
+
+_PERSISTENCE_TABLE = os.getenv("HOKU_PERSISTENCE_TABLE", "hoku_entity_snapshots")
+_MOCK_CLOUD_ROOT = _ROOT / "runtime_state" / "cloud_mock"
+
+
+def _use_persistence_mock() -> bool:
+    flag = (os.getenv("HOKU_CLOUD_PERSISTENCE_MOCK") or "").strip().lower()
+    if flag in ("1", "true", "yes"):
+        return True
+    if flag in ("0", "false", "no"):
+        return False
+    return not (os.getenv("SUPABASE_URL") or "").strip()
+
+
+def _mock_snapshot_path(user_id: str, entity_key: str) -> Path:
+    safe_uid = re.sub(r"[^\w\-]", "_", user_id)
+    safe_key = re.sub(r"[^\w\-]", "_", entity_key)
+    return _MOCK_CLOUD_ROOT / safe_uid / f"{safe_key}.json"
+
+
+def persistence_fetch_entity(
+    *,
+    user_id: str,
+    entity_key: str,
+    access_token: str,
+) -> dict[str, Any] | None:
+    """Fetch cloud snapshot: {updated_at, payload, schema_version}."""
+    if _use_persistence_mock():
+        path = _mock_snapshot_path(user_id, entity_key)
+        if not path.exists():
+            return None
+        try:
+            with path.open(encoding="utf-8") as f:
+                raw = json.load(f)
+        except (OSError, json.JSONDecodeError):
+            return None
+        if not isinstance(raw, dict):
+            return None
+        return raw
+
+    try:
+        cli = get_user_scoped_client(access_token)
+
+        def _op():
+            return (
+                cli.table(_PERSISTENCE_TABLE)
+                .select("updated_at,payload,schema_version")
+                .eq("user_id", user_id)
+                .eq("entity_key", entity_key)
+                .limit(1)
+                .execute()
+            )
+
+        res = _retry_on_stale_schema(_op)
+        rows = list(getattr(res, "data", None) or [])
+        if not rows:
+            return None
+        row = rows[0]
+        return {
+            "updated_at": str(row.get("updated_at") or ""),
+            "payload": row.get("payload"),
+            "schema_version": int(row.get("schema_version") or 1),
+        }
+    except Exception:
+        return None
+
+
+def persistence_upsert_entity(
+    *,
+    user_id: str,
+    entity_key: str,
+    payload: Any,
+    access_token: str,
+) -> str:
+    """Upsert entity snapshot. Returns ISO updated_at string."""
+    from datetime import datetime, timezone
+
+    updated_at = datetime.now(timezone.utc).replace(microsecond=0).isoformat()
+    schema_version = 1
+    if isinstance(payload, dict) and "schema_version" in payload:
+        try:
+            schema_version = int(payload["schema_version"])
+        except (TypeError, ValueError):
+            schema_version = 1
+
+    row = {
+        "user_id": user_id,
+        "entity_key": entity_key,
+        "schema_version": schema_version,
+        "updated_at": updated_at,
+        "payload": payload,
+    }
+
+    if _use_persistence_mock():
+        path = _mock_snapshot_path(user_id, entity_key)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        doc = {
+            "updated_at": updated_at,
+            "payload": payload,
+            "schema_version": schema_version,
+        }
+        tmp = path.with_suffix(".json.tmp")
+        with tmp.open("w", encoding="utf-8") as f:
+            json.dump(doc, f, indent=2, ensure_ascii=False)
+        tmp.replace(path)
+        return updated_at
+
+    cli = get_user_scoped_client(access_token)
+
+    def _op():
+        return (
+            cli.table(_PERSISTENCE_TABLE)
+            .upsert(row, on_conflict="user_id,entity_key")
+            .execute()
+        )
+
+    _retry_on_stale_schema(_op)
+    return updated_at

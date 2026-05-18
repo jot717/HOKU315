@@ -22,6 +22,8 @@ runtime_state/user_profile.json
 runtime_state/session_history.json
 runtime_state/fox_memory.json
 runtime_state/target_profile.json
+runtime_state/sync_status.json
+runtime_state/cloud_mock/
 
 # Self-healing v1 generated artifacts (regenerate locally)
 ai/self_heal/patches/*.json

@@ -96,17 +96,18 @@ Do not treat `PHASE1-H6` as product PHASE6.
 
 **Code SSOT:** `product/persistence/runtime/entities.py` · Schema: [`../env/RUNTIME_STATE_SCHEMA.md`](../env/RUNTIME_STATE_SCHEMA.md)
 
-### PHASE2-B — Cloud persistence planning v1
+### PHASE2-B — Cloud persistence v1
 
-**Status:** PLANNING COMPLETE (no code)
+**Status:** IMPLEMENTATION COMPLETE (feature-flagged; default local-only)
 
-**Mission:** Define cloud/local ownership, sync, conflict, auth, dual-write, failure, and anti-desync rules.
+**Mission:** Cloud mirror behind `PersistenceBackend` — local-first dual-write, LWW by `updated_at`, offline-safe.
 
-**Canonical plan:** [`../governance/PHASE2B_CLOUD_PERSISTENCE_PLAN.md`](../governance/PHASE2B_CLOUD_PERSISTENCE_PLAN.md)
+**Plan:** [`../governance/PHASE2B_CLOUD_PERSISTENCE_PLAN.md`](../governance/PHASE2B_CLOUD_PERSISTENCE_PLAN.md)  
+**Report:** [`../../archive/reviews/PHASE2B_CLOUD_PERSISTENCE_IMPL_REPORT_v1.md`](../../archive/reviews/PHASE2B_CLOUD_PERSISTENCE_IMPL_REPORT_v1.md)
 
-**Implementation:** FUTURE sprint `PHASE2-B-IMPL` — Supabase adapter + `DualWriteBackend` per plan.
+**Env:** `HOKU_PERSISTENCE_BACKEND=local` (default) · `dual` + `HOKU_CLOUD_SYNC_ENABLED=1` for cloud leg · mock via `HOKU_CLOUD_PERSISTENCE_MOCK=1`
 
-**Non-goals (planning slice):** Supabase DDL, adapter code, realtime, SNS, new routes.
+**Non-goals:** Realtime sync, SNS, graph/vector, embeddings, new routes, background workers.
 
 ---
 

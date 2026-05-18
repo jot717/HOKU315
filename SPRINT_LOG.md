@@ -2,7 +2,18 @@
 
 **Latest sprint logs (full history):** [`docs/archive/legacy/sprint_history/SPRINT_LOG_FULL.md`](docs/archive/legacy/sprint_history/SPRINT_LOG_FULL.md)
 
-**Current:** PHASE2-B-IMPL (cloud adapter — not started)
+**Current:** PHASE3 SNS (FUTURE)
+
+---
+
+## 2026-05-17 — PHASE2-B-IMPL Cloud Persistence
+
+- `CloudPersistenceBackend`, `DualWriteBackend`, sync status, LWW read
+- `db_service.persistence_fetch_entity` / `persistence_upsert_entity` + mock store
+- Flags: `HOKU_CLOUD_SYNC_ENABLED`, `HOKU_PERSISTENCE_BACKEND=dual`
+- Regression 6 + UAT 3 (PHASE2-B); full UAT 18 pass
+- Report: `docs/archive/reviews/PHASE2B_CLOUD_PERSISTENCE_IMPL_REPORT_v1.md`
+- Assessment: **PASS** (reflex compile gate WARN on host Python 3.14 without `.venv`)
 
 ---
 

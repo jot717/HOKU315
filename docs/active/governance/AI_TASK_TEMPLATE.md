@@ -23,21 +23,14 @@ RULES:
 * archive immediately after completion
 
 CURRENT TARGET:
-**PHASE2-B Cloud Persistence Planning v1** (COMPLETE — see plan)
+**PHASE3 SNS** (FUTURE — see ROADMAP)
 
-DELIVERABLES:
+LAST COMPLETED:
+**PHASE2-B-IMPL Cloud Persistence v1** — see `PHASE2B_CLOUD_PERSISTENCE_IMPL_REPORT_v1.md`
 
-* `docs/active/governance/PHASE2B_CLOUD_PERSISTENCE_PLAN.md`
-* ROADMAP PHASE2-B planning slice
-* `backlog/archive/BACKLOG_PHASE2B_CLOUD_PERSISTENCE_PLANNING_v1.md`
-* `tests/regression/test_phase2b_cloud_persistence_planning_v1.py`
+NON-GOALS (PHASE2-B closed):
 
-NON-GOALS:
-
-* Supabase adapter implementation
-* Realtime / SNS / graph / embeddings expansion
-* Auth UX redesign
-* New product routes
+* Realtime sync, SNS, graph/vector, embeddings, new routes, onboarding drift
 
 VALIDATION:
 

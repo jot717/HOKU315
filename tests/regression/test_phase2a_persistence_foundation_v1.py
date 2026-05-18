@@ -29,6 +29,7 @@ def test_default_backend_is_local() -> None:
 def test_unsupported_backend_raises() -> None:
     registry.reset_backend_for_tests()
     os.environ["HOKU_PERSISTENCE_BACKEND"] = "supabase"
+    os.environ.pop("HOKU_CLOUD_SYNC_ENABLED", None)
     try:
         with pytest.raises(ValueError, match="unsupported"):
             registry.get_backend()

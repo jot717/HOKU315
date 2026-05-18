@@ -15,6 +15,7 @@ RUNTIME_ARTIFACTS = (
     "fox_memory.json",
     "session_history.json",
     "local_session.json",
+    "sync_status.json",
 )
 
 
@@ -23,6 +24,11 @@ def _clean_runtime_artifacts() -> None:
         path = RUNTIME_DIR / name
         if path.is_file():
             path.unlink()
+    cloud_mock = RUNTIME_DIR / "cloud_mock"
+    if cloud_mock.is_dir():
+        import shutil
+
+        shutil.rmtree(cloud_mock, ignore_errors=True)
 
 
 @pytest.fixture(autouse=True)

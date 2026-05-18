@@ -29,6 +29,7 @@ def test_phase2b_plan_exists() -> None:
     assert "LocalStorage" in text
 
 
-def test_no_cloud_backend_module_yet() -> None:
-    assert not (ROOT / "product/persistence/runtime/cloud_backend.py").exists()
-    assert not (ROOT / "product/persistence/runtime/dual_write_backend.py").exists()
+def test_cloud_backend_modules_exist() -> None:
+    assert (ROOT / "product/persistence/runtime/cloud_backend.py").is_file()
+    assert (ROOT / "product/persistence/runtime/dual_write_backend.py").is_file()
+    assert (ROOT / "product/persistence/runtime/sync_status.py").is_file()
