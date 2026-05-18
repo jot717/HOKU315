@@ -23,23 +23,23 @@ RULES:
 * archive immediately after completion
 
 CURRENT TARGET:
-**PHASE2-AH Persistence Hardening v1** (COMPLETE — see hardening report)
+**PHASE2-B Cloud Persistence Planning v1** (COMPLETE — see plan)
 
 DELIVERABLES:
 
-* `docs/archive/reviews/PHASE2A_PERSISTENCE_ARCHITECTURE_REVIEW_v1.md`
-* Scorecard, ownership map, PHASE2-B risk analysis
-* Validation gates run (regression + UAT)
+* `docs/active/governance/PHASE2B_CLOUD_PERSISTENCE_PLAN.md`
+* ROADMAP PHASE2-B planning slice
+* `backlog/archive/BACKLOG_PHASE2B_CLOUD_PERSISTENCE_PLANNING_v1.md`
+* `tests/regression/test_phase2b_cloud_persistence_planning_v1.py`
 
 NON-GOALS:
 
-* Cloud / Supabase / sync / realtime implementation
-* Product behavior changes
-* PHASE2-B adapter code
+* Supabase adapter implementation
+* Realtime / SNS / graph / embeddings expansion
+* Auth UX redesign
+* New product routes
 
 VALIDATION:
 
 * python ops/flow/check_all_flows.py
-* python ops/env/reflex_compile_gate.py
-* pytest tests/regression/ -v --tb=short
-* pytest tests/uat/ -v --tb=short
+* pytest tests/regression/test_phase2b_cloud_persistence_planning_v1.py -v --tb=short

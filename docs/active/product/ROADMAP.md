@@ -59,7 +59,7 @@ Do not treat `PHASE1-H6` as product PHASE6.
 
 ## PHASE2 — Persistence & memory
 
-**Status:** ACTIVE (foundation in progress)
+**Status:** ACTIVE (2-A/AH complete; 2-B planning complete; 2-B impl FUTURE)
 
 **Mission:** Longitudinal memory, account-backed profiles, cross-device continuity.
 
@@ -95,6 +95,18 @@ Do not treat `PHASE1-H6` as product PHASE6.
 - SNS or graph persistence
 
 **Code SSOT:** `product/persistence/runtime/entities.py` · Schema: [`../env/RUNTIME_STATE_SCHEMA.md`](../env/RUNTIME_STATE_SCHEMA.md)
+
+### PHASE2-B — Cloud persistence planning v1
+
+**Status:** PLANNING COMPLETE (no code)
+
+**Mission:** Define cloud/local ownership, sync, conflict, auth, dual-write, failure, and anti-desync rules.
+
+**Canonical plan:** [`../governance/PHASE2B_CLOUD_PERSISTENCE_PLAN.md`](../governance/PHASE2B_CLOUD_PERSISTENCE_PLAN.md)
+
+**Implementation:** FUTURE sprint `PHASE2-B-IMPL` — Supabase adapter + `DualWriteBackend` per plan.
+
+**Non-goals (planning slice):** Supabase DDL, adapter code, realtime, SNS, new routes.
 
 ---
 

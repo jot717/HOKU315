@@ -3,6 +3,7 @@
 | File | Role |
 |------|------|
 | [`SSOT_HIERARCHY.md`](SSOT_HIERARCHY.md) | Roadmap → planning → execution authority map |
+| [`PHASE2B_CLOUD_PERSISTENCE_PLAN.md`](PHASE2B_CLOUD_PERSISTENCE_PLAN.md) | PHASE2-B cloud sync/conflict spec (planning) |
 | [`START_NEW_SPRINT.md`](START_NEW_SPRINT.md) | **Mandatory AI boot sequence** |
 | [`AI_TASK_TEMPLATE.md`](AI_TASK_TEMPLATE.md) | Per-task sprint template |
 | [`MASTER_BACKLOG.md`](MASTER_BACKLOG.md) | Canonical phase index |

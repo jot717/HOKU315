@@ -2,7 +2,15 @@
 
 **Latest sprint logs (full history):** [`docs/archive/legacy/sprint_history/SPRINT_LOG_FULL.md`](docs/archive/legacy/sprint_history/SPRINT_LOG_FULL.md)
 
-**Current:** PHASE2-B planning (cloud persistence — not started)
+**Current:** PHASE2-B-IMPL (cloud adapter — not started)
+
+---
+
+## 2026-05-17 — PHASE2-B Planning
+
+- Plan: `docs/active/governance/PHASE2B_CLOUD_PERSISTENCE_PLAN.md`
+- Local/cloud ownership, sync, conflict, dual-write, auth, anti-desync defined
+- No Supabase code
 
 ---
 

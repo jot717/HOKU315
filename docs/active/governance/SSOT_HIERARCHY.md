@@ -39,6 +39,7 @@
 | [`ARCHITECTURE_CONTRACT.md`](ARCHITECTURE_CONTRACT.md) | Interface contracts |
 | [`REPO_ARCHITECTURE.md`](REPO_ARCHITECTURE.md) | Repo layering |
 | [`AI_TASK_TEMPLATE.md`](AI_TASK_TEMPLATE.md) | Per-sprint task shell |
+| [`PHASE2B_CLOUD_PERSISTENCE_PLAN.md`](PHASE2B_CLOUD_PERSISTENCE_PLAN.md) | PHASE2-B cloud boundaries (planning; pre-impl) |
 
 **Supplemental (not precedence law):** [`AI_CONTEXT_PRIORITY.md`](AI_CONTEXT_PRIORITY.md) — load hints only; if conflict, use this file + `START_NEW_SPRINT.md`.
 
